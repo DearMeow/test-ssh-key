@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<style>
+			html,body {
+				background-color: #efeff4;
+			}
+			
+		</style>
+		
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<br/><br/>
+<button id="dizhi">获取地址</button>
+<div id="msg"></div>
+		
+		</div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	
+	<script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		
+	
+
+document.getElementById("dizhi").onclick = function(){
+
+	plus.geolocation.getCurrentPosition(function(p){
+		document.getElementById("msg").innerHTML = "<br/><br/>"+p.address.province+"-"+p.address.city+"-"+p.address.district+"-"+p.address.street+"\n"+p.address.poiName+'<br/><br/> 经度' + p.coords.latitude + '\n纬度' + p.coords.longitude;
+		
+	}, function(e){
+		console.log('Gelocation Error: code - ' + e.code + '; message - ' + e.message);
+				alert('Gelocation Error: code - ' + e.code + '; message - ' + e.message);
+        switch(e.code) {
+          case e.PERMISSION_DENIED:
+              alert('User denied the request for Geolocation.');
+              break;
+          case e.POSITION_UNAVAILABLE:
+              alert('Location information is unavailable.');
+              break;
+          case e.TIMEOUT:
+              alert('The request to get user location timed out.');
+              break;
+          case e.UNKNOWN_ERROR:
+              alert('An unknown error occurred.');
+              break;
+          }
+	} );
+}
+
+
+		
+	</script>
+</html>
