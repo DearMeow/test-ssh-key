@@ -11,416 +11,79 @@
 		<link rel="stylesheet" href="../css/mui.min.css">
 		<style>
 			html,
-			body {
+			body,
+			.mui-content {
+				font-family: "微软雅黑";
 				background-color: #efeff4;
 			}
-			
-			.fleft {
-				float: left;
+			.bgc{
+				background-color: red;
 			}
-			.fright {
-				float: right;
+			input[type="search"]{
+				background-color: #FFFFFF;
 			}
-			
-			.btm-border {
-				border-color: cadetblue;
-				border-style: solid;
-				border-width: 0 0 1px 0;
+			a{
+				color: #000000;
+			}
+			 li{
+				list-style: none;
 			}
 		</style>
 	</head>
 
 	<body>
+		<header class="mui-bar mui-bar-nav">
+			<div class="mui-row">
+				<div class="mui-col-sm-1 mui-col-xs-1" style="padding-right: 50px;">
+            <li class="mui-table-view-cell">
+                <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            </li>
+        </div>
+        <div class="mui-col-sm-7 mui-col-xs-7">
+            <li class="mui-table-view-cell">
+                <div class="mui-input-row mui-search">
+    <input type="search" class="mui-input-clear" placeholder="">
+</div>
+            </li>
+        </div>
+        <div class="mui-col-sm-3 mui-col-xs-3">
+            <li class="mui-table-view-cell">
+                <label>搜索</label>
+            </li>
+        </div>
+    </div>
+		    
+		    
+		</header>
 		<div class="mui-content">
 			
-			<!--card-->
-			<div class="mui-card">
-				<!--页眉，放置标题-->
-				<div class="mui-card-header">配送完成</div>
-				<!--内容区-->
-				<div class="mui-card-content mui-list-unstyled">
-					<!--div01-->
-					<div class="btm-border">
-						<div class="mui-row">
-							<div class="mui-col-sm-12 mui-col-xs-7">
-								<li class="mui-table-view-cell">
-									单号：
-									201808290000028
-								</li>
-							</div>
-							<div class="mui-col-sm-12 mui-col-xs-5">
-								<li class="mui-table-view-cell">
-									下单：17:00
-								</li>
-							</div>
-						</div>
-						<div class="mui-row">
-							<div class="mui-col-sm-12 mui-col-xs-7">
-								<li class="mui-table-view-cell">
-									订单状态：配送完成
-								</li>
-							</div>
-							<div class="mui-col-sm-12 mui-col-xs-5">
-								<li class="mui-table-view-cell">
-									送达：17:20
-								</li>
-							</div>
-						</div>
-					</div>
-					<!--div01-->
-<!--div02-->
-					<div class="btm-border">
-						<div class="mui-row">
-							<div class="mui-col-sm-12 mui-col-xs-12">
-								<li class="mui-table-view-cell">
-									<h4>王先生</h4>
-								</li>
-							</div>
-							
-						</div>
-						<div class="mui-row">
-							<div class="mui-col-sm-12 mui-col-xs-12">
-								<li class="mui-table-view-cell">
-									地址:深圳市坂田岗头大厦804号
-								</li>
-							</div>
-							<div class="mui-col-sm-12 mui-col-xs-12">
-								<li class="mui-table-view-cell">
-									距离:21588m
-								</li>
-							</div>
-						</div>
-					</div>
-					<!--div02-->
-					<!--div03-->
-					<div class="btm-border">
-						<div class="mui-row">
-							<div class="mui-col-sm-6 mui-col-xs-6">
-								<li class="mui-table-view-cell">
-									<div class="fleft">名称</div>
-									<div class="fright">数量</div>
-								</li>
-							</div>
-							<div class="mui-col-sm-3 mui-col-xs-3">
-								<li class="mui-table-view-cell">
-									单价
-								</li>
-							</div>
-							<div class="mui-col-sm-3 mui-col-xs-3">
-								<li class="mui-table-view-cell">
-									总价
-								</li>
-							</div>
-						</div>
-						
-						<div class="mui-row">
-							<div class="mui-col-sm-6 mui-col-xs-6">
-								<li class="mui-table-view-cell">
-									热干面<span class="mui-badge mui-badge-primary">20</span>
-								</li>
-							</div>
-							<div class="mui-col-sm-3 mui-col-xs-3">
-								<li class="mui-table-view-cell">
-									188.00
-								</li>
-							</div>
-							<div class="mui-col-sm-3 mui-col-xs-3">
-								<li class="mui-table-view-cell">
-									1968:00
-								</li>
-							</div>
-						</div>
-						<div class="mui-row">
-							<div class="mui-col-sm-6 mui-col-xs-6">
-								<li class="mui-table-view-cell">
-									冰淇淋<span class="mui-badge mui-badge-primary">5</span>
-								</li>
-							</div>
-							<div class="mui-col-sm-3 mui-col-xs-3">
-								<li class="mui-table-view-cell">
-									12.00
-								</li>
-							</div>
-							<div class="mui-col-sm-3 mui-col-xs-3">
-								<li class="mui-table-view-cell">
-									168:00
-								</li>
-							</div>
-						</div>
-						<div class="mui-row">
-							<div class="mui-col-sm-6 mui-col-xs-6">
-								<li class="mui-table-view-cell">
-									火龙果<span class="mui-badge mui-badge-primary">7</span>
-								</li>
-							</div>
-							<div class="mui-col-sm-3 mui-col-xs-3">
-								<li class="mui-table-view-cell">
-									58.00
-								</li>
-							</div>
-							<div class="mui-col-sm-3 mui-col-xs-3">
-								<li class="mui-table-view-cell">
-									200:00
-								</li>
-							</div>
-						</div>
-					</div>
-					<!--div03-->
-					<!--div04-->
-					<div>
-						<div class="mui-row">
-							<div class="mui-col-sm-12 mui-col-xs-12">
-								<li class="mui-table-view-cell">
-									<div>取货点：深圳坂田岗头快快煲仔饭</div>
-							<div>餐厅电话:13088763433</div>
-								</li>
-							</div>
-						</div>
-					</div>
-<!--div04-->
-				</div>
-				<!--内容区-->
-
-			</div>	<!--card-->
-			
-			<!--card-->
-			<div class="mui-card">
-				<!--页眉，放置标题-->
-				<div class="mui-card-header">待受理</div>
-				<!--内容区-->
-				<div class="mui-card-content mui-list-unstyled">
-					<!--div01-->
-					<div class="btm-border">
-						<div class="mui-row">
-							<div class="mui-col-sm-12 mui-col-xs-7">
-								<li class="mui-table-view-cell">
-									单号：
-									201808290000028
-								</li>
-							</div>
-							<div class="mui-col-sm-12 mui-col-xs-5">
-								<li class="mui-table-view-cell">
-									下单：17:00
-								</li>
-							</div>
-						</div>
-						<div class="mui-row">
-							<div class="mui-col-sm-12 mui-col-xs-7">
-								<li class="mui-table-view-cell">
-									订单状态：已受理
-								</li>
-							</div>
-							<div class="mui-col-sm-12 mui-col-xs-5">
-								<li class="mui-table-view-cell">
-									送达：17:20
-								</li>
-							</div>
-						</div>
-					</div>
-					<!--div01-->
-<!--div02-->
-					<div class="btm-border">
-						<div class="mui-row">
-							<div class="mui-col-sm-12 mui-col-xs-12">
-								<li class="mui-table-view-cell">
-									<h4>王先生</h4>
-								</li>
-							</div>
-							
-						</div>
-						<div class="mui-row">
-							<div class="mui-col-sm-12 mui-col-xs-12">
-								<li class="mui-table-view-cell">
-									地址:深圳市坂田岗头大厦804号
-								</li>
-							</div>
-							<div class="mui-col-sm-12 mui-col-xs-12">
-								<li class="mui-table-view-cell">
-									距离:21588m
-								</li>
-							</div>
-						</div>
-					</div>
-					<!--div02-->
-					<!--div03-->
-					<div class="btm-border">
-						<div class="mui-row">
-							<div class="mui-col-sm-6 mui-col-xs-6">
-								<li class="mui-table-view-cell">
-									<div class="fleft">名称</div>
-									<div class="fright">数量</div>
-								</li>
-							</div>
-							<div class="mui-col-sm-3 mui-col-xs-3">
-								<li class="mui-table-view-cell">
-									单价
-								</li>
-							</div>
-							<div class="mui-col-sm-3 mui-col-xs-3">
-								<li class="mui-table-view-cell">
-									总价
-								</li>
-							</div>
-						</div>
-						
-						<div class="mui-row">
-							<div class="mui-col-sm-6 mui-col-xs-6">
-								<li class="mui-table-view-cell">
-									热干面<span class="mui-badge mui-badge-primary">20</span>
-								</li>
-							</div>
-							<div class="mui-col-sm-3 mui-col-xs-3">
-								<li class="mui-table-view-cell">
-									188.00
-								</li>
-							</div>
-							<div class="mui-col-sm-3 mui-col-xs-3">
-								<li class="mui-table-view-cell">
-									1968:00
-								</li>
-							</div>
-						</div>
-					</div>
-					<!--div03-->
-					<!--div04-->
-					<div>
-						<div class="mui-row">
-							<div class="mui-col-sm-9 mui-col-xs-9">
-								<li class="mui-table-view-cell">
-									<div>取货点：深圳坂田岗头快快煲仔饭</div>
-							<div>餐厅电话:13088763433</div>
-								</li>
-							</div>
-							<div class="mui-col-sm-3 mui-col-xs-3" style="margin-top: 1rem;">
-									<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">取消配送</button>
-							</div>
-						</div>
-					</div>
-<!--div04-->
-				</div>
-				<!--内容区-->
-
-			</div>	<!--card-->
-			
-			<!--card-->
-			<div class="mui-card">
-				<!--页眉，放置标题-->
-				<div class="mui-card-header">待受理</div>
-				<!--内容区-->
-				<div class="mui-card-content mui-list-unstyled">
-					<!--div01-->
-					<div class="btm-border">
-						<div class="mui-row">
-							<div class="mui-col-sm-12 mui-col-xs-7">
-								<li class="mui-table-view-cell">
-									单号：
-									201808290000028
-								</li>
-							</div>
-							<div class="mui-col-sm-12 mui-col-xs-5">
-								<li class="mui-table-view-cell">
-									下单：17:00
-								</li>
-							</div>
-						</div>
-						<div class="mui-row">
-							<div class="mui-col-sm-12 mui-col-xs-7">
-								<li class="mui-table-view-cell">
-									订单状态：已受理
-								</li>
-							</div>
-							<div class="mui-col-sm-12 mui-col-xs-5">
-								<li class="mui-table-view-cell">
-									送达：17:20
-								</li>
-							</div>
-						</div>
-					</div>
-					<!--div01-->
-<!--div02-->
-					<div class="btm-border">
-						<div class="mui-row">
-							<div class="mui-col-sm-12 mui-col-xs-12">
-								<li class="mui-table-view-cell">
-									<h4>王先生</h4>
-								</li>
-							</div>
-							
-						</div>
-						<div class="mui-row">
-							<div class="mui-col-sm-12 mui-col-xs-12">
-								<li class="mui-table-view-cell">
-									地址:深圳市坂田岗头大厦804号
-								</li>
-							</div>
-							<div class="mui-col-sm-12 mui-col-xs-12">
-								<li class="mui-table-view-cell">
-									距离:21588m
-								</li>
-							</div>
-						</div>
-					</div>
-					<!--div02-->
-					<!--div03-->
-					<div class="btm-border">
-						<div class="mui-row">
-							<div class="mui-col-sm-6 mui-col-xs-6">
-								<li class="mui-table-view-cell">
-									<div class="fleft">名称</div>
-									<div class="fright">数量</div>
-								</li>
-							</div>
-							<div class="mui-col-sm-3 mui-col-xs-3">
-								<li class="mui-table-view-cell">
-									单价
-								</li>
-							</div>
-							<div class="mui-col-sm-3 mui-col-xs-3">
-								<li class="mui-table-view-cell">
-									总价
-								</li>
-							</div>
-						</div>
-						
-						<div class="mui-row">
-							<div class="mui-col-sm-6 mui-col-xs-6">
-								<li class="mui-table-view-cell">
-									热干面<span class="mui-badge mui-badge-primary">20</span>
-								</li>
-							</div>
-							<div class="mui-col-sm-3 mui-col-xs-3">
-								<li class="mui-table-view-cell">
-									188.00
-								</li>
-							</div>
-							<div class="mui-col-sm-3 mui-col-xs-3">
-								<li class="mui-table-view-cell">
-									1968:00
-								</li>
-							</div>
-						</div>
-					</div>
-					<!--div03-->
-					<!--div04-->
-					<div>
-						<div class="mui-row">
-							<div class="mui-col-sm-9 mui-col-xs-9">
-								<li class="mui-table-view-cell">
-									<div>取货点：深圳坂田岗头快快煲仔饭</div>
-							<div>餐厅电话:13088763433</div>
-								</li>
-							</div>
-							<div class="mui-col-sm-3 mui-col-xs-3" style="margin-top: 1rem;">
-									<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">受理</button>
-							</div>
-						</div>
-					</div>
-<!--div04-->
-				</div>
-				<!--内容区-->
-
-			</div>	<!--card-->
-			
+			<div class="mui-slider">
+	<!--选项卡标题区-->
+	<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+	  <a class="mui-control-item" href="#item1">待办公文</a>
+	  <a class="mui-control-item" href="#item2">已办公文</a>
+	  <a class="mui-control-item" href="#item3">全部公文</a>
+	</div>
+	<div class="mui-slider-progress-bar mui-col-xs-4"></div>
+	<div class="mui-slider-group">
+	  <!--第一个选项卡内容区-->
+	  <div id="item1" class="mui-slider-item mui-control-content mui-active">
+	    <ul class="mui-table-view">
+	      <li class="mui-table-view-cell">待办公文1</li>
+	      <li class="mui-table-view-cell">待办公文2</li>
+	      <li class="mui-table-view-cell">待办公文3</li>
+	    </ul>
+	  </div>
+	  <!--第二个选项卡内容区，页面加载时为空-->
+	  <div id="item2" class="mui-slider-item mui-control-content"><ul class="mui-table-view">
+	      <li class="mui-table-view-cell">待办公文1</li>
+	      <li class="mui-table-view-cell">待办公文2</li>
+	      <li class="mui-table-view-cell">待办公文3</li>
+	    </ul></div>
+	  <!--第三个选项卡内容区，页面加载时为空-->
+	  <div id="item3" class="mui-slider-item mui-control-content"></div>
+	</div>
+</div>
 			
 		</div>
 	</body>
@@ -429,6 +92,26 @@
 		mui.init({
 			swipeBack: true //启用右滑关闭功能
 		});
+		var item2Show = false,item3Show = false;//子选项卡是否显示标志
+document.querySelector('.mui-slider').addEventListener('slide', function(event) {
+  if (event.detail.slideNumber === 1&&!item2Show) {
+    //切换到第二个选项卡
+    //根据具体业务，动态获得第二个选项卡内容；
+    var content = 'er';
+    //显示内容
+    document.getElementById("item2").innerHTML = content;
+    //改变标志位，下次直接显示
+    item2Show = true;
+  } else if (event.detail.slideNumber === 2&&!item3Show) {
+    //切换到第三个选项卡
+    //根据具体业务，动态获得第三个选项卡内容；
+    var content = 'san';
+    //显示内容
+    document.getElementById("item3").innerHTML = content;
+    //改变标志位，下次直接显示
+    item3Show = true;
+  }
+});
 	</script>
 
 </html>
