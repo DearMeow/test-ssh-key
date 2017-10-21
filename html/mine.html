@@ -18,26 +18,20 @@
 	</head>
 
 	<body>
-		<div class="mui-content">
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">账户安全</li>
-				<li class="mui-table-view-cell">通用</li>
-				<li class="mui-table-view-cell">账户安全</li>
-				<li class="mui-table-view-cell">退出系统</li>
-			</ul>
-		</div>
+		
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title"><input type="search" name="" id="" style="width: 80%;margin-right: 1rem;"  /><span>搜索</span></h1>
+		</header>
+		
+		
 	</body>
 	<script src="../js/mui.min.js"></script>
 	<script>
 		mui.init({
 			swipeBack: true //启用右滑关闭功能
 		});
-		document.getElementById("about").addEventListener('tap', function() {
-			//获得主页面的webview
-			var main = plus.webview.currentWebview().parent();
-			//触发主页面的gohome事件
-			mui.fire(main, 'gohome');
-		});
+		
 	</script>
 
 </html>
