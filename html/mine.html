@@ -18,20 +18,73 @@
 	</head>
 
 	<body>
-		
+
 		<header class="mui-bar mui-bar-nav">
-		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		    <h1 class="mui-title"><input type="search" name="" id="" style="width: 80%;margin-right: 1rem;"  /><span>搜索</span></h1>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title"><input type="search" name="" id="" style="width: 80%;margin-right: 1rem;"  /><span>搜索</span></h1>
 		</header>
-		
-		
+		<div class="mui-content">
+			<div id="app">
+				<p style="white-space: pre-line;">{{ message }}</p>
+			</div>
+		</div>
 	</body>
 	<script src="../js/mui.min.js"></script>
+	<script src="../js/vue.js"></script>
+	<script src="../js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
 	<script>
-		mui.init({
-			swipeBack: true //启用右滑关闭功能
+		var _this;
+		var app = new Vue({
+			el: '#app',
+			data: {
+				message: ''
+			},
+			created() {
+				this.initListData();
+				_this = this;
+			},
+			methods: {
+				initListData() {
+
+					var rh = new Object();
+					rh.ReqId = "ls123";
+					rh.Salt = "sssseee";
+
+					var rb = new Object();
+					rb.CatId = "00001";
+
+					var jn = new Object();
+					jn.ReqHead = rh;
+					jn.ReqBody = rb;
+
+					var sendData = JSON.stringify(jn);
+
+					console.log("------", sendData);
+
+					mui.ajax("http://123.207.88.84:8080/zdm/AppApi/Search/CategoryList", {
+						data: sendData,
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						success: function(data) {
+							//服务器返回响应，根据响应结果，分析是否登录成功；
+							_this.message = data;
+						},
+						error: function(xhr, type, errorThrown) {
+							//异常处理；
+							console.log(type);
+							alert(type);
+						}
+					});
+
+				} //initListData
+
+			}
 		});
-		
 	</script>
+	</body>
 
 </html>
