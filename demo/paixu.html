@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>已受理订单</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<style>
+			html,
+			body,
+			.mui-content {
+				font-family: "微软雅黑";
+				background-color: #efeff4;
+			}
+			
+			.bgc {
+				background-color: red;
+			}
+			
+			input[type="search"] {
+				background-color: #FFFFFF;
+			}
+			
+			a {
+				color: #000000;
+			}
+			
+			li {
+				list-style: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title"><div class=" mui-search">
+							<input type="search" class="mui-input-clear" placeholder="">
+						</div></h1>
+
+		</header>
+		<div class="mui-content">
+
+			<div class="mui-slider">
+				<!--选项卡标题区-->
+				<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<a class="mui-control-item" href="#item1">综合排序</a>
+					<a class="mui-control-item" href="#item2" style="color: rgb(255,241,0);">销量最高</a>
+					<a class="mui-control-item" href="#item3">距离最近</a>
+				</div>
+				<div class="mui-slider-progress-bar mui-col-xs-4"></div>
+				<div class="mui-slider-group">
+					<!--第一个选项卡内容区-->
+					<div id="item1" class="mui-slider-item mui-control-content mui-active">
+
+						<div style="background-color:#FFFFFF;padding: 1rem 0.5rem 1rem 0.5rem;">
+							<div class="mui-row">
+								<div class="mui-col-sm-3 mui-col-xs-3">
+									<img src="../images/businessmen.png" style="width:70px;" />
+								</div>
+								<!--mui-col-sm-3-->
+								<div class="mui-col-sm-9 mui-col-xs-9">
+									<div class="mui-row">
+										<div class="mui-col-sm-9 mui-col-xs-9">
+											<span style="font-size: 1rem;">
+											武汉蔡林记
+										</span><br/>
+											<img src="../images/love.png" style="width: 20px;" />
+											<img src="../images/love.png" style="width: 20px;" />
+											<img src="../images/love.png" style="width: 20px;" />
+											<img src="../images/love.png" style="width: 20px;" />
+											<img src="../images/love.png" style="width: 20px;" />
+											<span style="color: rgb(153,153,153);font-size: 1.2rem;">127好评</span>
+											<br/>
+											<span style="color: rgb(209,37,34);font-size: 1.2rem;">
+	￥9
+</span>
+										</div>
+										<!--mui-col-sm-9-->
+										<div class="mui-col-sm-3 mui-col-xs-3" style="color: rgb(209,37,34);font-size: 1.2rem;padding-top: 1rem;text-align: right;">
+											17分钟
+										</div>
+										<!--mui-col-sm-3-->
+									</div>
+									<!--mui-row-->
+								</div>
+								<!--mui-col-sm-9-->
+							</div>
+							<!--mui-row-->
+						</div>
+						<!--#FFFFFF-->
+					</div>
+					<!--第二个选项卡内容区，页面加载时为空-->
+					<div id="item2" class="mui-slider-item mui-control-content">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell">待办公文1</li>
+							<li class="mui-table-view-cell">待办公文2</li>
+							<li class="mui-table-view-cell">待办公文3</li>
+						</ul>
+					</div>
+					<!--第三个选项卡内容区，页面加载时为空-->
+					<div id="item3" class="mui-slider-item mui-control-content"></div>
+				</div>
+			</div>
+
+		</div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script>
+		mui.init({
+			swipeBack: true //启用右滑关闭功能
+		});
+		var item2Show = false,
+			item3Show = false; //子选项卡是否显示标志
+		document.querySelector('.mui-slider').addEventListener('slide', function(event) {
+			if(event.detail.slideNumber === 1 && !item2Show) {
+				//切换到第二个选项卡
+				//根据具体业务，动态获得第二个选项卡内容；
+				var content = 'er';
+				//显示内容
+				document.getElementById("item2").innerHTML = content;
+				//改变标志位，下次直接显示
+				item2Show = true;
+			} else if(event.detail.slideNumber === 2 && !item3Show) {
+				//切换到第三个选项卡
+				//根据具体业务，动态获得第三个选项卡内容；
+				var content = 'san';
+				//显示内容
+				document.getElementById("item3").innerHTML = content;
+				//改变标志位，下次直接显示
+				item3Show = true;
+			}
+		});
+	</script>
+
+</html>

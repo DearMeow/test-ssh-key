@@ -8,7 +8,9 @@ body,
 .bgc {
 	background-color: red;
 }
-
+.white{
+	background-color: #FFFFFF;
+}
 a {
 	color: #000000;
 }
