@@ -42,76 +42,21 @@
 		</div>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/vue.js"></script>
-		<script src="../js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script>
-			var _this;
-			var app = new Vue({
-				el: '#app',
-				data: {
-					todos: []
-				},
-				created() {
-					this.initListData();
-					_this = this;
-				},
-				methods: {
-					initListData() {
-
-						//						mui.get('http://192.168.1.109:8080/d2', { //请求接口地址
-						//							ok: 'haliluya1000'
-						//						}, function(data) { // data为服务器端返回数据
-						//							//获得服务器响应 ... 
-						//							_this.todos = data.Colors;
-						//						}, 'json');
-
-						$(document).ready(function() {
-							$.ajax({
-								url: "http://123.207.88.84/zdm/AppApi/Search/GoodList",
-								data: {
-									id: 90,
-									name:'luyouqi'
-								},
-								type: "POST",
-								dataType: "json",
-							}).done(function(json) {
-
-								_this.todos = json.Colors;
-								console.log(json);
-								console.log(json.ID);
-								console.log(json.Name);
-								console.log(_this.todos[0]);
-
-							}).fail(function(xhr, status, errorThrown) {
-								alert("Sorry, there was a problem!");
-								console.log("Error: " + errorThrown);
-								console.log("Status: " + status);
-								console.dir(xhr);
-							}).always(function(xhr, status) {
-								console.log("The request is complete!");
-							});
-
-							// Your code here.
-
-						}); //ready
-
-					} //initListData
-
+			mui.init({
+				swipeBack: false,
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						style: 'circle',
+						callback: pulldownRefresh
+					},
+					up: {
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
 				}
 			});
-			//			mui.init({
-			//				swipeBack: false,
-			//				pullRefresh: {
-			//					container: '#pullrefresh',
-			//					down: {
-			//						style: 'circle',
-			//						callback: pulldownRefresh
-			//					},
-			//					up: {
-			//						contentrefresh: '正在加载...',
-			//						callback: pullupRefresh
-			//					}
-			//				}
-			//			});
 			/**
 			 * 下拉刷新具体业务实现
 			 */
