@@ -31,7 +31,7 @@
 			</div>
 		</header>
 		<div class="mui-content">
-			<img src="../images/index/index.png" width="100%" />
+			<img src="../images/index.png" width="100%" />
 			<div class="mui-row catagory" id="app">
 				<div class="mui-col-sm-4 mui-col-xs-4" v-for="dlm in daleimu">
 					<li class="mui-table-view-cell" v-on:click="detail(dlm.catid)">
@@ -39,9 +39,9 @@
 						<div>{{dlm.catname}}</div>
 					</li>
 				</div>
-				<div>
-					<!--{{msg}}-->
-				</div>
+				<!--<div>
+					{{msg}}
+				</div>-->
 			</div>
 			<!--mui-row-->
 		</div>
@@ -89,7 +89,7 @@
 						},
 						success: function(data) {
 							_this.daleimu = data.RespBody;
-							_this.msg = data.RespBody;
+							
 						},
 						error: function(xhr, type, errorThrown) {
 							//异常处理；
@@ -193,10 +193,15 @@
 			plus.geolocation.getCurrentPosition(function(p) {
 				document.getElementById("msg").innerHTML = p.address.street + "\n" + p.address.poiName;
 
+
+
+
+//_this.msg = p.address.country+"_"+p.address.province+"_"+p.address.city+"_"+p.address.district+"_"+p.address.street+"_"+p.address.streetNum+"_"+p.address.poiName+"_"+p.address.postalCode+"_"+p.address.cityCode;
 			}, function(e) {
 				//		alert('定位失败，请检查是否开启GPS和网络');
+				
 				//		console.log('Gelocation Error: code - ' + e.code + '; message - ' + e.message);
-				alert('Gelocation Error: code - ' + e.code + '; message - ' + e.message);
+				alert('定位失败，请检查是否开启GPS和网络Gelocation Error: code - ' + e.code + '; message - ' + e.message);
 				switch(e.code) {
 					case e.PERMISSION_DENIED:
 						alert('User denied the request for Geolocation.  001');

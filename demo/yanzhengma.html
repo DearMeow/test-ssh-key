@@ -11,42 +11,44 @@
 		<link rel="stylesheet" href="../css/mui.min.css">
 		<link rel="stylesheet" type="text/css" href="../css/layout.css" />
 		<style>
-
+.juzhong{
+	padding-left: 1rem;padding-right: 1rem;margin-top: 1rem;
+}
 		</style>
 	</head>
 
 	<body>
 
-		<head>
-			<meta charset="utf-8" />
-			<title>用户登录</title>
-		</head>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">用户登录</h1>
+		</header>
 		<div class="mui-content">
-			<div class="mui-row">
+			<div class="mui-row white">
 				<div class="mui-col-sm-8 mui-col-xs-8">
-					<input type="text" id="mobile" value="13137870099" />
+					<input type="text" id="mobile" value="13137870099" style="margin-top: 1rem;border: none;font-weight: bold;font-size: 1.2rem;"/>
 				</div>
 				<div class="mui-col-sm-4 mui-col-xs-4">
-					<input type="button" id="getCheckCode" value="获取验证码" />
+					<input type="button" id="getCheckCode" value="获取验证码" style="margin-top: 1.1rem;background-color: rgb(192,0,2);color: #FFFFFF;"/>
+				</div>
+			</div>
+			<!--mui-row-->
+			<div class="mui-row white" style="margin-top: 0.1rem;">
+				<div class="mui-col-sm-12 mui-col-xs-12">
+					<input type="text" id="checkCode" placeholder="请输入验证码" style="margin-top: 1rem;border:none;font-weight: bold;font-size: 1.2rem;"/>
 				</div>
 			</div>
 			<!--mui-row-->
 			<div class="mui-row">
-				<div class="mui-col-sm-12 mui-col-xs-12">
-					<input type="text" id="checkCode" />
-				</div>
-			</div>
-			<!--mui-row-->
-			<div class="mui-row">
-				<div class="mui-col-sm-12 mui-col-xs-12">
+				<div class="mui-col-sm-12 mui-col-xs-12 juzhong">
 					<p>温馨提示：</p>
-					<p>温馨提示：</p>
+					<p>未注册准点猫的手机号，登陆时自动注册，并且代表您已同意<span id="zhucexieyi">《用户注册协议》</span></p>
 				</div>
 			</div>
 			<!--mui-row-->
 			<div class="mui-row">
-				<div class="mui-col-sm-12 mui-col-xs-12">
-					<input type="button" id="loginBtn" value="登录" />
+				<div class="mui-col-sm-12 mui-col-xs-12 juzhong">
+					<input type="button" id="loginBtn" value="登录" style="width: 100%;height: 3rem;background-color: rgb(192,0,2);color: #FFFFFF;font-size: 1.2rem;" />
 				</div>
 			</div>
 			<!--mui-row-->
@@ -56,7 +58,7 @@
 	<script src="../js/vue.js"></script>
 	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script>
-		var verifyCode = 0; //短信验证码
+		var verifyCode; //短信验证码
 		document.getElementById("getCheckCode").onclick = function() {
 			var rh = new Object();
 			rh.ReqId = "ls123";
@@ -82,7 +84,7 @@
 				success: function(data) {
 					var result = data.RespBody;
 					if(result.SendOk == 1) {
-						verifyCode = data.VerifyCode;
+						verifyCode = result.VerifyCode;
 						mui.toast('已发送', {
 							duration: 'long',
 							type: 'div'
@@ -116,7 +118,7 @@
 
 			var rb = new Object();
 			rb.Mobile = document.getElementById("mobile").value.replace(/\s+/g, "");
-			rb.VerifyCode = verifyCode;
+			rb.VerifyCode = verifyCode.toString();
 
 			var jn = new Object();
 			jn.ReqHead = rh;
@@ -133,7 +135,8 @@
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
-					if(data.RespHead != 0) {
+					alert("success");
+					if(data.RespHead.ResponseCode != 0) {
 						//打开新窗口
 						mui.openWindow({
 							url: 'shouye.html', //需要打开页面的url地址 
@@ -169,13 +172,13 @@
 
 					switch(result.VerifyStat) {
 						case 0:
-							mui.toast('验证失败，请重试', {
+							mui.toast('验证失败，请重试0', {
 								duration: 'long',
 								type: 'div'
 							})
 							break;
 						case 1: //验证通过
-
+alert("验证通过");
 							break;
 
 						case 2:
@@ -186,29 +189,22 @@
 							break;
 
 						case 3:
-							mui.toast('验证失败，请重试', {
+							mui.toast('验证失败，请重试3', {
 								duration: 'long',
 								type: 'div'
 							})
 							break;
 						case 4: //登录成功
+						alert("登录成功");
 							break;
 
-					}
-					if(result.SendOk == 1) {
-						verifyCode = data.VerifyCode;
-						mui.toast('已发送', {
-							duration: 'long',
-							type: 'div'
-						})
-						return;
 					}
 
 				},
 				error: function(xhr, type, errorThrown) {
 					//异常处理；
 					console.log(type);
-					alert(type);
+					alert("err_"+errorThrown);
 				}
 			});
 		}

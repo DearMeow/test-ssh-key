@@ -28,11 +28,11 @@
 			<h1 class="mui-title">汤水</h1>
 		</header>
 		<div class="mui-content">
-			<img src="../images/tangshui/tangshui.png" width="100%" />
+			<img src="../images/tangshui.png" width="100%" />
 			<div class="mui-row catagory" id="app">
 				<div class="mui-col-sm-4 mui-col-xs-4" v-for="xlm in xiaoleimu">
 					<li class="mui-table-view-cell">
-						<img src="../images/index/tangshui.png" v-on:click="detail(xlm.catid)"/>
+						<img :src="xlm.FilePath" v-on:click="detail(xlm.catid)" style="width: 60%;height: 60%;"/>
 						<div>{{xlm.catname}}</div>
 					</li>
 				</div>
@@ -100,8 +100,8 @@
 				detail: function(catid) { //跳转到小分类页面
 					//打开新窗口
 					mui.openWindow({
-						url: 'shouye.html', //需要打开页面的url地址 
-						id: 'shouye', //需要打开页面的url页面id
+						url: 'sousuo.html', //需要打开页面的url地址 
+						id: 'sousuo', //需要打开页面的url页面id
 						styles: {
 							top: '0px', //新页面顶部位置 
 							bottom: '51px', //新页面底部位置 
