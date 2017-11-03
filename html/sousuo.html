@@ -39,33 +39,33 @@
 
 						<div style="background-color:#FFFFFF;padding: 1rem 0.5rem 1rem 0.5rem;">
 							<div  id="sousuo">
+								<div>
+									{{msg}}
+								</div>
 							<div class="mui-row" v-for="ss in sousuo">
 								<div class="mui-col-sm-3 mui-col-xs-3">
-									<img src="../images/love.png" style="width:70px;" />
+									<img :src="ss.FilePath" style="width:70px;" />
 								</div>
 								<!--mui-col-sm-3-->
 								<div class="mui-col-sm-9 mui-col-xs-9">
 									<div class="mui-row">
-										<div class="mui-col-sm-9 mui-col-xs-9">
+										<div class="mui-col-sm-12 mui-col-xs-12">
 											<span style="font-size: 1rem;">
-											{{ss.}}
+											{{ss.goodsname}}
 										</span><br/>
 											<img src="../images/love.png" style="width: 20px;" />
 											<img src="../images/love.png" style="width: 20px;" />
 											<img src="../images/love.png" style="width: 20px;" />
 											<img src="../images/love.png" style="width: 20px;" />
 											<img src="../images/love.png" style="width: 20px;" />
-											<span style="color: rgb(153,153,153);font-size: 1.2rem;">127好评</span>
+											<span style="color: rgb(153,153,153);font-size: 1.2rem;">销量{{ss.monthsalesvol}}</span>
 											<br/>
 											<span style="color: rgb(209,37,34);font-size: 1.2rem;">
-	￥9
+	￥{{ss.price}}
 </span>
 										</div>
-										<!--mui-col-sm-9-->
-										<div class="mui-col-sm-3 mui-col-xs-3" style="color: rgb(209,37,34);font-size: 1.2rem;padding-top: 1rem;text-align: right;">
-											17分钟
-										</div>
-										<!--mui-col-sm-3-->
+										<!--mui-col-sm-12-->
+										
 									</div>
 									<!--mui-row-->
 								</div>
@@ -92,6 +92,8 @@
 		</div>
 	</body>
 	<script src="../js/mui.min.js"></script>
+	<script src="../js/vue.js"></script>
+	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		mui.init({
 			swipeBack: true //启用右滑关闭功能
@@ -126,7 +128,8 @@
 			var app = new Vue({
 				el: '#sousuo',
 				data: {
-					sousuo: []
+					sousuo: [],
+					msg:''
 				},
 				created() {
 					this.initListData();
@@ -139,6 +142,9 @@
 						rh.Salt = "sssseee";
 
 						var rb = new Object();
+						rb.curPage = 1;
+						rb.pageSize = 2;
+						rb.qryName = "";
 						rb.CatId = catid;
 
 						var jn = new Object();
@@ -147,7 +153,7 @@
 
 						var sendData = JSON.stringify(jn);
 
-						mui.ajax(baseUrl + "zdm/AppApi/Search/CategoryList", {
+						mui.ajax(baseUrl + "zdm/AppApi/Search/GoodList", {
 							data: sendData,
 							dataType: 'json', //服务器返回json格式数据
 							type: 'post', //HTTP请求类型
@@ -156,7 +162,8 @@
 								'Content-Type': 'application/json'
 							},
 							success: function(data) {
-								_this.sousuo = data.RespBody;
+								_this.sousuo = data.RespBody.Recs;
+								_this.msg = data.RespBody;
 							},
 							error: function(xhr, type, errorThrown) {
 								//异常处理；
