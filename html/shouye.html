@@ -35,9 +35,12 @@
 			<div class="mui-row catagory" id="app">
 				<div class="mui-col-sm-4 mui-col-xs-4" v-for="dlm in daleimu">
 					<li class="mui-table-view-cell" v-on:click="detail(dlm.catid)">
-						<img src="../images/index/tangshui.png" />
+						<img :src="dlm.FilePath"/>
 						<div>{{dlm.catname}}</div>
 					</li>
+				</div>
+				<div>
+					<!--{{msg}}-->
 				</div>
 			</div>
 			<!--mui-row-->
@@ -48,92 +51,13 @@
 	<script src="../js/vue.js"></script>
 	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script>
-		mui.init({
-			swipeBack: true, //启用右滑关闭功能
-			pullRefresh: {
-				container: "#app", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-				down: {
-					style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
-					color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
-					height: '50px', //可选,默认50px.下拉刷新控件的高度,
-					range: '100px', //可选 默认100px,控件可下拉拖拽的范围
-					offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
-					auto: false, //可选,默认false.首次加载自动上拉刷新一次
-					callback: pulldownRefresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-				}
-			}
-		});
-
-		function pulldownRefresh() {
-			setTimeout(function() {
-				var rh = new Object();
-				rh.ReqId = "ls123";
-				rh.Salt = "sssseee";
-
-				var rb = new Object();
-				rb.CatId = "0000100001";
-
-				var jn = new Object();
-				jn.ReqHead = rh;
-				jn.ReqBody = rb;
-
-				var sendData = JSON.stringify(jn);
-
-				mui.ajax(baseUrl + "zdm/AppApi/Search/CategoryList", {
-					data: sendData,
-					dataType: 'json', //服务器返回json格式数据
-					type: 'post', //HTTP请求类型
-					timeout: 10000, //超时时间设置为10秒；
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					success: function(data) {
-						_this.daleimu = data.RespBody;
-					},
-					error: function(xhr, type, errorThrown) {
-						//异常处理；
-						console.log(type);
-						alert(type);
-					}
-				}); //ajax
-				mui('#app').pullRefresh().endPulldownToRefresh(); //这行代码会隐藏掉 正在加载... 容器
-				mui.toast('下拉刷新成功');
-			}, 2000);
-		} //pulldownRefresh
-
-		mui.plusReady(function() {
-
-			//打开APP获取定位
-			plus.geolocation.getCurrentPosition(function(p) {
-				document.getElementById("msg").innerHTML = p.address.street + "\n" + p.address.poiName;
-
-			}, function(e) {
-				//		alert('定位失败，请检查是否开启GPS和网络');
-				//		console.log('Gelocation Error: code - ' + e.code + '; message - ' + e.message);
-				alert('Gelocation Error: code - ' + e.code + '; message - ' + e.message);
-				switch(e.code) {
-					case e.PERMISSION_DENIED:
-						alert('User denied the request for Geolocation.  001');
-						break;
-					case e.POSITION_UNAVAILABLE:
-						alert('Location information is unavailable.002');
-						break;
-					case e.TIMEOUT:
-						alert('The request to get user location timed out.003');
-						break;
-					case e.UNKNOWN_ERROR:
-						alert('An unknown error occurred. 004');
-						break;
-				}
-			});
-
-		}); //plusReady
-
+		
 		var _this;
 		var app = new Vue({
 			el: '#app',
 			data: {
-				daleimu: []
+				daleimu: [],
+				msg:''
 			},
 			created() {
 				this.initListData();
@@ -165,11 +89,11 @@
 						},
 						success: function(data) {
 							_this.daleimu = data.RespBody;
+							_this.msg = data.RespBody;
 						},
 						error: function(xhr, type, errorThrown) {
 							//异常处理；
 							console.log(type);
-							alert(type);
 						}
 					}); //ajax
 
@@ -208,6 +132,90 @@
 
 			} //methods
 		}); //vue
+		
+		
+		mui.init({
+			swipeBack: true, //启用右滑关闭功能
+			pullRefresh: {
+				container: "#app", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+				down: {
+					style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+					color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+					height: '50px', //可选,默认50px.下拉刷新控件的高度,
+					range: '100px', //可选 默认100px,控件可下拉拖拽的范围
+					offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
+					auto: false, //可选,默认false.首次加载自动上拉刷新一次
+					callback: pulldownRefresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+				}
+			}
+		});
+
+		function pulldownRefresh() {
+			setTimeout(function() {
+				var rh = new Object();
+				rh.ReqId = "ls123";
+				rh.Salt = "sssseee";
+
+				var rb = new Object();
+				rb.CatId = "00001";
+
+				var jn = new Object();
+				jn.ReqHead = rh;
+				jn.ReqBody = rb;
+
+				var sendData = JSON.stringify(jn);
+
+				mui.ajax(baseUrl + "zdm/AppApi/Search/CategoryList", {
+					data: sendData,
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					success: function(data) {
+						_this.daleimu = data.RespBody;
+					},
+					error: function(xhr, type, errorThrown) {
+						//异常处理；
+						console.log(type);
+						
+					}
+				}); //ajax
+				mui('#app').pullRefresh().endPulldownToRefresh(); //这行代码会隐藏掉 正在加载... 容器
+				mui.toast('下拉刷新成功');
+			}, 2000);
+		} //pulldownRefresh
+
+		mui.plusReady(function() {
+
+			//打开APP获取定位
+			plus.geolocation.getCurrentPosition(function(p) {
+				document.getElementById("msg").innerHTML = p.address.street + "\n" + p.address.poiName;
+
+			}, function(e) {
+				//		alert('定位失败，请检查是否开启GPS和网络');
+				//		console.log('Gelocation Error: code - ' + e.code + '; message - ' + e.message);
+				alert('Gelocation Error: code - ' + e.code + '; message - ' + e.message);
+				switch(e.code) {
+					case e.PERMISSION_DENIED:
+						alert('User denied the request for Geolocation.  001');
+						break;
+					case e.POSITION_UNAVAILABLE:
+						alert('Location information is unavailable.002');
+						break;
+					case e.TIMEOUT:
+						alert('The request to get user location timed out.003');
+						break;
+					case e.UNKNOWN_ERROR:
+						alert('An unknown error occurred. 004');
+						break;
+				}
+			});
+
+		}); //plusReady
+
+		
 
 		//获取定位地址
 		document.getElementById("dizhi").onclick = function() {
