@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>详情页</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/layout.css" />
+		<style>
+			
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		</header>
+		<div class="mui-content">
+			<div>
+				<img src="../images/1.png" style="width: 100%;" id="zhutu"/>
+			</div>
+			<div style="margin-top: 2rem;line-height: 2rem;margin-left: 1rem;margin-right: 1rem;">
+				<h4 id="sname"></h4>
+				<span style="color: #555555;" id="sale"></span>
+			</div>
+			<div>
+				<div class="mui-row" style="margin-left: 1rem;margin-right: 1rem;">
+					<div class="mui-col-sm-8 mui-col-xs-8" style="color: red;" id="sprice"></div>
+					<div id="addtoshopcar" class="mui-col-sm-4 mui-col-xs-4" style="padding-top:0.15rem;text-align:center;border-radius:1rem;background-color: red;color: white;">加入购物车</div>
+				</div>
+
+			</div>
+			<!--<div id="msg">
+				kkk
+			</div>-->
+		</div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		var goodid="";
+		mui.plusReady(function() {
+			var self = plus.webview.currentWebview(); //获得当前页面的对象
+			goodid = self.goodsId;
+			showDetail(goodid);
+			
+		});//plusReady
+		
+		//显示商品详情
+		function showDetail(goodid){
+			var rh = new Object();
+			rh.ReqId = "ls123";
+			rh.Salt = "sssseee";
+
+			var rb = new Object();
+			rb.GoodsId = goodid;
+			
+
+			var jn = new Object();
+			jn.ReqHead = rh;
+			jn.ReqBody = rb;
+
+			var sendData = JSON.stringify(jn);
+
+			mui.ajax(baseUrl + "zdm/AppApi/Search/GetGoodsInfo", {
+				data: sendData,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+					var result = data.RespBody;
+					document.getElementById("zhutu").src = result.FilePath.bigimg;
+					document.getElementById("sname").textContent = result.goods_name;
+					document.getElementById("sale").textContent = "月售"+result.month_sales_volume+"份  "+result.critic_count+"好评";
+					document.getElementById("sprice").textContent = "￥"+result.mprice;
+					
+//					document.getElementById("msg").innerHTML = document.getElementById("msg").innerHTML + data.RespBody.goods_name;
+					
+
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					console.log(type);
+					document.getElementById("msg").innerHTML =document.getElementById("msg").innerHTML+ xhr +"__"+type+"____"+errorThrown;
+				}
+			}); //ajax
+		}//显示商品详情
+		
+		
+		
+		
+		//点击加入购物车
+		document.getElementById("addtoshopcar").onclick = function() {
+			
+			var sesid= localStorage.getItem("sesid");
+			alert("sesid= "+sesid);
+			
+			
+			var rh = new Object();
+			rh.ReqId = "ls123";
+			rh.Salt = "sssseee";
+			rh.SesId = sesid;
+
+			var rb = new Object();
+			rb.goods_id = "餐品编号3";
+			rb.buy_count = 112;
+			rb.pic_id = "bf6b5d67-11bf-4f68-91a9-fcf90d9a6cfb";
+			rb.work_id = "商家变哈3";
+			rb.work_name = "商家名称3";
+			rb.goods_price = 120;
+			rb.goods_name = "餐品名称3";
+			rb.express_money = 15;
+
+			var jn = new Object();
+			jn.ReqHead = rh;
+			jn.ReqBody = rb;
+
+			var sendData = JSON.stringify(jn);
+
+			mui.ajax(baseUrl + "zdm/AppApi/ShopCart/SaveGoods2Cart", {
+				data: sendData,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+					document.getElementById("msg").innerHTML = document.getElementById("msg").innerHTML + data.RespBody.succ;
+					if(data.RespBody.succ == 0) {
+						mui.toast('请重试', {
+							duration: 'long',
+							type: 'div'
+						})
+					}
+					if(data.RespBody.succ == 1) {
+						mui.toast('成功加入购物车', {
+							duration: 'long',
+							type: 'div'
+						})
+					}
+
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					console.log(type);
+					document.getElementById("msg").innerHTML =document.getElementById("msg").innerHTML+ xhr +"__"+type+"____"+errorThrown;
+				}
+			}); //ajax
+		} //点击加入购物车
+		
+//		mui.init({
+//			swipeBack: true, //启用右滑关闭功能
+//			pullRefresh: {
+//				container: "#msg", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+//				down: {
+//					style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+//					color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+//					height: '50px', //可选,默认50px.下拉刷新控件的高度,
+//					range: '100px', //可选 默认100px,控件可下拉拖拽的范围
+//					offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
+//					auto: false, //可选,默认false.首次加载自动上拉刷新一次
+//					callback: pulldownRefresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+//				}
+//			}
+//		});
+		//下拉刷新
+		function pulldownRefresh() {
+			setTimeout(function() {
+				showDetail();
+				mui('#msg').pullRefresh().endPulldownToRefresh(); //这行代码会隐藏掉 正在加载... 容器
+				mui.toast('下拉刷新成功');
+			}, 1000);
+		} //pulldownRefresh
+		
+		
+	</script>
+
+</html>

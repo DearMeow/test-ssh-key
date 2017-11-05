@@ -3,136 +3,112 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>已受理订单</title>
+		<title>购物车</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
 		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/layout.css" />
 		<style>
-			html,
-			body,
-			.mui-content {
-				font-family: "微软雅黑";
-				background-color: #efeff4;
-			}
-			
-			.bgc {
-				background-color: red;
-			}
-			
-			input[type="search"] {
-				background-color: #FFFFFF;
-			}
-			
-			a {
-				color: #000000;
-			}
-			
-			li {
-				list-style: none;
-			}
+
 		</style>
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title"><div class=" mui-search">
-							<input type="search" class="mui-input-clear" placeholder="">
-						</div></h1>
-
+			<h1 class="mui-title">购物车</h1>
 		</header>
-		<div class="mui-content">
+		<div class="mui-content" id="bodydiv">
 
-			<div class="mui-slider">
-				<!--选项卡标题区-->
-				<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-					<a class="mui-control-item" href="#item1">综合排序</a>
-					<a class="mui-control-item" href="#item2" style="color: rgb(255,241,0);">销量最高</a>
-					<a class="mui-control-item" href="#item3">距离最近</a>
-				</div>
-				<div class="mui-slider-progress-bar mui-col-xs-4"></div>
-				<div class="mui-slider-group">
-					<!--第一个选项卡内容区-->
-					<div id="item1" class="mui-slider-item mui-control-content mui-active">
-						
-						<div style="background-color:#FFFFFF;padding: 1rem 0.5rem 1rem 0.5rem;">
-							<div class="mui-row">
-									<div class="mui-col-sm-3 mui-col-xs-3">
-										<img src="../images/businessmen.png" style="width:70px;" />
-									</div>
-									<div class="mui-col-sm-9 mui-col-xs-9">
-										<span style="font-size: 1rem;">
-											武汉蔡林记
-										</span>
-										<div>
-									<img src="../images/love.png" style="width: 20px;"/>
-									<img src="../images/love.png" style="width: 20px;"/>
-									<img src="../images/love.png" style="width: 20px;"/>
-									<img src="../images/love.png" style="width: 20px;"/>
-									<img src="../images/love.png" style="width: 20px;"/>
-									<span>127好评</span>
-										</div>
-										<div class="mui-row" style="font-size: 1.2rem;">
-											<div class="mui-col-sm-8 mui-col-xs-8" style="color: rgb(209,37,34);">
-										￥9</div>
-										<div class="mui-col-sm-4 mui-col-xs-4" style="text-align: right;color: rgb(251,137,25);">
-										17分钟</div>
-										</div>
-										
-										
-									</div>
-								</div>
-
-						</div>
-						
-					
-						
-						
-						
-					</div>
-					<!--第二个选项卡内容区，页面加载时为空-->
-					<div id="item2" class="mui-slider-item mui-control-content">
-						<ul class="mui-table-view">
-							<li class="mui-table-view-cell">待办公文1</li>
-							<li class="mui-table-view-cell">待办公文2</li>
-							<li class="mui-table-view-cell">待办公文3</li>
-						</ul>
-					</div>
-					<!--第三个选项卡内容区，页面加载时为空-->
-					<div id="item3" class="mui-slider-item mui-control-content"></div>
-				</div>
-			</div>
-
+			
 		</div>
+		<!--mbody-->
+		<div id="msg">
+				kkk
+			</div>
 	</body>
 	<script src="../js/mui.min.js"></script>
+	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script>
+		window.onload = shuaxin();
+
+		function shuaxin() {
+			var sesid = localStorage.getItem("sesid");
+
+			var rh = new Object();
+			rh.ReqId = "ls123";
+			rh.Salt = "sssseee";
+			rh.SesId = sesid;
+
+			var rb = new Object();
+
+			var jn = new Object();
+			jn.ReqHead = rh;
+			jn.ReqBody = rb;
+
+			var sendData = JSON.stringify(jn);
+
+			mui.ajax(baseUrl + "zdm/AppApi/ShopCart/GetMyGoodsInCart", {
+				data: sendData,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+					var result = data.RespBody;
+					for(var i = 0; i < result.length; i++) {
+						document.getElementById("msg").innerHTML +=result[i].FilePath;
+						document.getElementById("bodydiv").innerHTML += "<div class='mui-row' style='background-color: white;padding-top: 0.5rem;margin-bottom: 0.2rem;'><div class='mui-col-sm-7 mui-col-xs-7'><div class='mui-row'><div class='mui-col-sm-4 mui-col-xs-4 mui-text-right'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-col-sm-8 mui-col-xs-8' style='padding-left: 1rem;padding-top: 0.5rem;'>" + result[i].goods_name + "<h4 style='color: red;'>￥" + result[i].goods_price + "</h4></div></div></div><div class='mui-col-sm-5 mui-col-xs-5 mui-text-right' style='padding-right: 0.5rem;padding-top: 0.7rem;'><span class='mui-icon mui-icon mui-icon-minus' onclick='jian()'></span><input style='width: 50%;' type='number' value='" + result[i].buy_count + "' /><span class='mui-icon mui-icon mui-icon mui-icon-plus' onclick='jia()'></span></div></div>";
+					}
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					console.log(type);
+					document.getElementById("msg").innerHTML = document.getElementById("msg").innerHTML + "_0000错误信息00000_" + xhr + "__" + type + "____" + errorThrown;
+				}
+			}); //ajax
+		} //shuaxin
+
 		mui.init({
-			swipeBack: true //启用右滑关闭功能
-		});
-		var item2Show = false,
-			item3Show = false; //子选项卡是否显示标志
-		document.querySelector('.mui-slider').addEventListener('slide', function(event) {
-			if(event.detail.slideNumber === 1 && !item2Show) {
-				//切换到第二个选项卡
-				//根据具体业务，动态获得第二个选项卡内容；
-				var content = 'er';
-				//显示内容
-				document.getElementById("item2").innerHTML = content;
-				//改变标志位，下次直接显示
-				item2Show = true;
-			} else if(event.detail.slideNumber === 2 && !item3Show) {
-				//切换到第三个选项卡
-				//根据具体业务，动态获得第三个选项卡内容；
-				var content = 'san';
-				//显示内容
-				document.getElementById("item3").innerHTML = content;
-				//改变标志位，下次直接显示
-				item3Show = true;
+			swipeBack: true, //启用右滑关闭功能
+			pullRefresh: {
+				container: "#msg", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+				down: {
+					style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+					color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+					height: '50px', //可选,默认50px.下拉刷新控件的高度,
+					range: '100px', //可选 默认100px,控件可下拉拖拽的范围
+					offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
+					auto: false, //可选,默认false.首次加载自动上拉刷新一次
+					callback: pulldownRefresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+				}
 			}
 		});
+		//下拉刷新
+		function pulldownRefresh() {
+			setTimeout(function() {
+				document.getElementById("bodydiv").innerHTML="";
+				shuaxin();
+				mui('#msg').pullRefresh().endPulldownToRefresh(); //这行代码会隐藏掉 正在加载... 容器
+				mui.toast('下拉刷新成功');
+			}, 1000);
+		} //pulldownRefresh
+		
+		//减少数量
+		function jian(){
+			
+//			alert(this.getElementsByTagName("input").value.trim());
+//			if(document.getElementById("shuliang").value.trim() > 1){
+//				document.getElementById("shuliang").value = document.getElementById("shuliang").value.trim() - 1;
+//			}
+		}//减少数量
+		//增加数量
+		function jia(){
+//				document.getElementById("shuliang").value = parseInt(document.getElementById("shuliang").value.trim()) + 1;
+		}//增加数量
 	</script>
 
 </html>

@@ -53,11 +53,26 @@
 			</div>
 			<!--mui-row-->
 		</div>
+		<div id="result"></div>
 	</body>
 	<script src="../js/mui.min.js"></script>
 	<script src="../js/vue.js"></script>
 	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script>
+		window.onload = function(){
+					// Check browser support
+if (typeof(Storage) !== "undefined") {
+    // Store
+    localStorage.setItem("lastname", "Gates");
+    // Retrieve
+    document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+} else {
+    document.getElementById("result").innerHTML = "抱歉！您的浏览器不支持 Web Storage ...";
+}
+		}
+
+
+
 		var verifyCode; //短信验证码
 		document.getElementById("getCheckCode").onclick = function() {
 			var rh = new Object();
@@ -135,7 +150,7 @@
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
-					alert("success");
+					
 					if(data.RespHead.ResponseCode != 0) {
 						//打开新窗口
 						mui.openWindow({
@@ -195,7 +210,8 @@ alert("验证通过");
 							})
 							break;
 						case 4: //登录成功
-						alert("登录成功");
+						localStorage.setItem("sesid", result.SesId);
+						alert("登录成功_"+result.SesId);
 							break;
 
 					}
