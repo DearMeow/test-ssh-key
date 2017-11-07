@@ -19,9 +19,11 @@
 		<header class="mui-bar mui-bar-nav">
 			<h1 class="mui-title">购物车</h1>
 		</header>
-		<div class="mui-content" id="bodydiv">
-
-			
+		<div class="mui-content">
+<div id="bodydiv"></div>
+			<div id="jiesuan" class="mui-text-right">
+				<input type="button" name="jiesuanbtn" id="jiesuanbtn" value="去结算" style="margin-right:1rem;background-color: red;color: #FFFFFF;margin-top: 1.5rem;" />
+			</div>
 		</div>
 		<!--mbody-->
 		<div id="msg">
@@ -31,46 +33,7 @@
 	<script src="../js/mui.min.js"></script>
 	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script>
-		window.onload = shuaxin();
-
-		function shuaxin() {
-			var sesid = localStorage.getItem("sesid");
-
-			var rh = new Object();
-			rh.ReqId = "ls123";
-			rh.Salt = "sssseee";
-			rh.SesId = sesid;
-
-			var rb = new Object();
-
-			var jn = new Object();
-			jn.ReqHead = rh;
-			jn.ReqBody = rb;
-
-			var sendData = JSON.stringify(jn);
-
-			mui.ajax(baseUrl + "zdm/AppApi/ShopCart/GetMyGoodsInCart", {
-				data: sendData,
-				dataType: 'json', //服务器返回json格式数据
-				type: 'post', //HTTP请求类型
-				timeout: 10000, //超时时间设置为10秒；
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				success: function(data) {
-					var result = data.RespBody;
-					for(var i = 0; i < result.length; i++) {
-						document.getElementById("msg").innerHTML +=result[i].FilePath;
-						document.getElementById("bodydiv").innerHTML += "<div class='mui-row' style='background-color: white;padding-top: 0.5rem;margin-bottom: 0.2rem;'><div class='mui-col-sm-7 mui-col-xs-7'><div class='mui-row'><div class='mui-col-sm-4 mui-col-xs-4 mui-text-right'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-col-sm-8 mui-col-xs-8' style='padding-left: 1rem;padding-top: 0.5rem;'>" + result[i].goods_name + "<h4 style='color: red;'>￥" + result[i].goods_price + "</h4></div></div></div><div class='mui-col-sm-5 mui-col-xs-5 mui-text-right' style='padding-right: 0.5rem;padding-top: 0.7rem;'><span class='mui-icon mui-icon mui-icon-minus' onclick='jian()'></span><input style='width: 50%;' type='number' value='" + result[i].buy_count + "' /><span class='mui-icon mui-icon mui-icon mui-icon-plus' onclick='jia()'></span></div></div>";
-					}
-				},
-				error: function(xhr, type, errorThrown) {
-					//异常处理；
-					console.log(type);
-					document.getElementById("msg").innerHTML = document.getElementById("msg").innerHTML + "_0000错误信息00000_" + xhr + "__" + type + "____" + errorThrown;
-				}
-			}); //ajax
-		} //shuaxin
+		
 
 		mui.init({
 			swipeBack: true, //启用右滑关闭功能
@@ -98,17 +61,166 @@
 		} //pulldownRefresh
 		
 		//减少数量
-		function jian(){
-			
-//			alert(this.getElementsByTagName("input").value.trim());
-//			if(document.getElementById("shuliang").value.trim() > 1){
-//				document.getElementById("shuliang").value = document.getElementById("shuliang").value.trim() - 1;
-//			}
+		function jian(idPrice){
+			var idp = idPrice.split("_");
+			var id =idp[0];
+			var price = idp[1];
+			if(document.getElementById(id).value.trim() > 1){
+				document.getElementById(id).value -= 1;
+					document.getElementById("price"+id).textContent = price * parseInt(document.getElementById(id).value);
+					changeShopcar(id, parseInt(document.getElementById(id).value), parseInt(document.getElementById("price"+id).textContent));
+			}
 		}//减少数量
 		//增加数量
-		function jia(){
-//				document.getElementById("shuliang").value = parseInt(document.getElementById("shuliang").value.trim()) + 1;
+		function jia(idPrice){
+			var idp = idPrice.split("_");
+			var id =idp[0];
+			var price = idp[1];
+				document.getElementById(id).value = parseInt(document.getElementById(id).value.trim()) + 1;
+				document.getElementById("price"+id).textContent = price * parseInt(document.getElementById(id).value);
+				changeShopcar(id, parseInt(document.getElementById(id).value), parseInt(document.getElementById("price"+id).textContent));
 		}//增加数量
+		
+		//修改购物车
+		function changeShopcar(cartId, buyCount, goodsPrice) {
+			var sesid = localStorage.getItem("sesid");
+			var rh = new Object();
+			rh.ReqId = "ls123";
+			rh.Salt = "sssseee";
+			rh.SesId = sesid;
+
+			var rb = new Object();
+			rb.CartId = cartId;
+			rb.buy_count = buyCount;
+			rb.goods_price = goodsPrice;
+			
+
+			var jn = new Object();
+			jn.ReqHead = rh;
+			jn.ReqBody = rb;
+
+			var sendData = JSON.stringify(jn);
+
+			mui.ajax(baseUrl + "zdm/AppApi/ShopCart/UpdateGoods2Cart", {
+				data: sendData,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+					if (data.RespBody.succ == 0) {
+						mui.toast('请重试');
+					}
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					console.log(type);
+					alert(type);
+				}
+			}); //ajax
+
+		} //修改购物车
+		
+		//去结算
+		document.getElementById("jiesuanbtn").onclick = function(){
+			var sesid = localStorage.getItem("sesid");
+			var rh = new Object();
+			rh.ReqId = "ls123";
+			rh.Salt = "sssseee";
+			rh.SesId = sesid;
+
+
+			var od = new Array();
+			
+			var dd = new Object();
+			dd.work_id = "101";
+			dd.work_name = "月亮披萨";
+			dd.order_total = "659.20";
+			dd.remark = "";
+			dd.address = "王家墩一号cbd";
+			dd.consignee = "张飞";
+			dd.mobile = "13100718823";
+			dd.postcode = "430000";
+			dd.expressamount = 5;
+			dd.booktime = "2017-10-10 7:00:00";
+			
+			var dt = new Array();
+			
+			var dt2 = new Object();
+			dt2.FilePath="http://localhost:8080/zdm//uploadFiles/uploadImgs/20171013/0d6e6965-759d-4cbd-bb23-fcf4d38865e2small.jpg";
+			dt2.del_flag = 0;
+			dt2.work_id = 101;
+			dt2.goods_name = "秋刀鱼";
+			dt2.prdid = "071f60fa-ae12-4248-8bc2-097f01377612";
+			
+			var crt = new Object();
+			crt.date=26;
+			crt.hours=21;
+			crt.seconds=24;
+			crt.month=9;
+			crt.nanos=0;
+			crt.timezoneOffset=-480;
+			crt.year=117;
+			crt.minutes=26;
+			crt.time=1509023604000;
+			crt.day=4;
+			
+			dt2.create_time = crt;
+			dt2.pic_id = "0d6e6965-759d-4cbd-bb23-fcf4d38865e2";
+			dt2.work_name = "月亮披萨";
+			dt2.goods_price = 14.8;
+			dt2.buy_count = 4;
+			dt2.goods_id = "071f60fa-ae12-4248-8bc2-097f01377612";
+			dt2.express_money = 4.0;
+			dt2.json_prop = "";
+			dt2.specs = "";
+			dt2.goods_price_total = 59.2;
+			dt2.user_ddid = "10003";
+			dt2.id = 72;
+			dt2.create_user = "10003";
+			dt2.price_mode = 0;
+			
+			dt.push(dt2);
+			dd.detail = dt;
+		
+			od.push(dd);
+			
+
+
+			var rb = new Object();
+			rb.Orders = od;
+			rb.Total = 0;
+			
+
+			var jn = new Object();
+			jn.ReqHead = rh;
+			jn.ReqBody = rb;
+
+			var sendData = JSON.stringify(jn);
+
+			mui.ajax(baseUrl + "zdm/AppApi/ShopOrder/MakeOrders", {
+				data: sendData,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+					if (data.RespBody.succ == 0) {
+						mui.toast('请重试');
+					}
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					document.getElementById("msg").innerHTML += "_0000错误信息00000_" + xhr + "__" + type + "____" + errorThrown;
+				}
+			}); //ajax
+
+		}//去结算
+
 	</script>
 
 </html>
