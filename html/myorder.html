@@ -11,19 +11,48 @@
 		<link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/layout.css" />
 		<style>
-			
+			.eachOrder{
+				background-color: #FFFFFF;
+				margin-bottom: 0.5rem;
+				padding: 0.5rem;
+			}
+			.eachOrder img{
+				width: 4rem;
+			}
+			.huise{
+				color: rgb(153,153,153);
+				font-size: 0.8rem;
+			}
+			.dianpu{
+				line-height: 2rem;
+				margin-left: 0.5rem;
+				font-size: 1.1rem;
+			}
+			.workname{
+				display: block;
+				width: 6rem;
+				height: 2rem;
+				overflow: hidden;
+			}
 		</style>
 	</head>
 
 	<body>
+		<header class="mui-bar mui-bar-nav" style="background-color: darkred;color: #FFFFFF;">
+		    <h1 class="mui-title" style="color: #FFFFFF;">我的订单</h1>
+		    <div id="" class="mui-text-right" style="font-size: 0.8rem;padding-top: 0.7rem;">
+		    	全部订单
+		    </div>
+		</header>
 		<div class="mui-content">
 			
-			<h1>dingdan</h1>
-			<div id="msg">
-				
-			</div>
 			
-		</div>
+			
+			
+			
+			
+			<div id="msg"></div>
+		</div><!--mui-content-->
 	</body>
 	<script src="../js/mui.min.js"></script>
 		<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
@@ -109,12 +138,35 @@
 					return;
 					}//请求失败
 					var result = data.RespBody;
-										document.getElementById("msg").innerHTML += result.Recs[0].Detail[0].goods_name;
-
-//					document.getElementById("msg").innerHTML += result.Recs[0].Detail[0].FilePath+"_"+qryName+"_"+month+"_"+return_amount+"_"+OrderStatus;
-//					for(var i = 0; i < result.Recs[0].Detail.length; i++) {
-//						document.getElementById("msg").innerHTML += result.Recs[0].Detail[i].FilePath+"_";
-//					}
+					
+//										alert(result.Recs[0].Detail[0].goods_name+"_"+result.Recs[1].Detail[0].goods_name+"_"+result.Recs[0].work_name);
+					var zs = result.Recs[0].state;
+					var state = "";
+					switch (zs){
+						case 1:
+						state = "等待支付";
+							break;
+							case 11:
+						state = "已支付";
+							break;
+							case 2:
+						state = "待配送 ";
+							break;
+							case 3:
+						state = "待收货";
+							break;
+							case 4:
+						state = "待评价";
+							break;
+							case 5:
+						state = "已完成";
+							break;
+						
+					}
+					for(var i = 0; i < result.Recs.length; i++) {
+						document.getElementById("msg").innerHTML += "<div class='eachOrder'><div class='mui-row'><div class='mui-col-sm-9 mui-col-xs-9'><div class='mui-pull-left'><img src='../images/logo.png'/></div><div class='mui-pull-left dianpu'><span class='workname'>"+result.Recs[i].work_name+</span>￥"+result.Recs[i].amount+"</div></div><div class='mui-col-sm-3 mui-col-xs-3 huise'>"+state+"</div></div><input type='button' class='mui-pull-right' value='再来一单' style='color: rgb(201,36,38);border: 0.03rem solid rgb(201,36,38);' /><div class='mui-clearfix'></div></div>";
+//						document.getElementById("msg").innerHTML += "<div class='eachOrder'><div class='mui-row'><div class='mui-col-sm-9 mui-col-xs-9'><div class='mui-pull-left'><img src='../images/logo.png'/></div><div class='mui-pull-left dianpu'>"+result.Recs[i].work_name+"&nbsp;&nbsp;&nbsp;&nbsp;><br/>￥"+result.Recs[i].amount+"</div></div><div class='mui-col-sm-3 mui-col-xs-3 huise'>"+state+"</div></div><input type='button' class='mui-pull-right' value='再来一单' style='color: rgb(201,36,38);border: 0.03rem solid rgb(201,36,38);' /><div class='mui-clearfix'></div></div>" ;
+					}
 				},
 				error: function(xhr, type, errorThrown) {
 					document.getElementById("msg").innerHTML += "_0000错误信息00000_" + xhr + "__" + type + "____" + errorThrown;

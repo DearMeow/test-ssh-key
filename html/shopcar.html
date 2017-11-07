@@ -33,12 +33,78 @@
 	<script src="../js/mui.min.js"></script>
 	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script>
-		
+			window.onload = shuaxin();
+ 
+			function shuaxin() {
+			var sesid = localStorage.getItem("sesid");
+
+			var rh = new Object();
+			rh.ReqId = "ls123";
+			rh.Salt = "sssseee";
+			rh.SesId = sesid;
+ 
+			var rb = new Object();
+
+ 
+			var jn = new Object();
+ 
+			jn.ReqHead = rh;
+ 
+			jn.ReqBody = rb;
+ 
+
+ 
+			var sendData = JSON.stringify(jn);
+ 
+
+ 
+			mui.ajax(baseUrl + "zdm/AppApi/ShopCart/GetMyGoodsInCart", {
+ 
+				data: sendData,
+ 
+				dataType: 'json', //服务器返回json格式数据
+ 
+				type: 'post', //HTTP请求类型
+ 
+				timeout: 10000, //超时时间设置为10秒；
+ 
+				headers: {
+ 
+					'Content-Type': 'application/json'
+ 
+				},
+ 
+				success: function(data) {
+ 
+					var result = data.RespBody;
+ 
+					for(var i = 0; i < result.length; i++) {
+ 
+ 
+						document.getElementById("bodydiv").innerHTML += "<div class='mui-row' style='background-color: white;padding-top: 0.5rem;margin-bottom: 0.2rem;'><div class='mui-col-sm-7 mui-col-xs-7'><div class='mui-row'><div class='mui-col-sm-4 mui-col-xs-4 mui-text-right'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-col-sm-8 mui-col-xs-8' style='padding-left: 1rem;padding-top: 0.5rem;'>" + result[i].goods_name + "<h4 style='color: red;'>￥" + result[i].goods_price + "</h4></div></div></div><div class='mui-col-sm-5 mui-col-xs-5 mui-text-right' style='padding-right: 0.5rem;padding-top: 0.7rem;'><span class='mui-icon mui-icon mui-icon-minus' onclick='jian()'></span><input style='width: 50%;' type='number' value='" + result[i].buy_count + "' /><span class='mui-icon mui-icon mui-icon mui-icon-plus' onclick='jia()'></span></div></div>";
+ 
+					}
+ 
+				},
+ 
+				error: function(xhr, type, errorThrown) {
+ 
+					//异常处理；
+ 
+					console.log(type);
+ 
+					document.getElementById("msg").innerHTML += "_0000错误信息00000_" + xhr + "__" + type + "____" + errorThrown;
+ 
+				}
+ 
+			}); //ajax
+ 
+		} //shuaxin
 
 		mui.init({
 			swipeBack: true, //启用右滑关闭功能
 			pullRefresh: {
-				container: "#msg", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+				container: "#bodydiv", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
 				down: {
 					style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
 					color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
@@ -55,7 +121,7 @@
 			setTimeout(function() {
 				document.getElementById("bodydiv").innerHTML="";
 				shuaxin();
-				mui('#msg').pullRefresh().endPulldownToRefresh(); //这行代码会隐藏掉 正在加载... 容器
+				mui('#bodydiv').pullRefresh().endPulldownToRefresh(); //这行代码会隐藏掉 正在加载... 容器
 				mui.toast('下拉刷新成功');
 			}, 1000);
 		} //pulldownRefresh
@@ -136,14 +202,14 @@
 			
 			var dd = new Object();
 			dd.work_id = "101";
-			dd.work_name = "月亮披萨";
-			dd.order_total = "659.20";
+			dd.work_name = "武汉蔡林记"+Math.random();
+			dd.order_total = parseInt(Math.random()*100);
 			dd.remark = "";
-			dd.address = "王家墩一号cbd";
+			dd.address = "商家地址"+Math.random();
 			dd.consignee = "张飞";
 			dd.mobile = "13100718823";
 			dd.postcode = "430000";
-			dd.expressamount = 5;
+			dd.expressamount = parseInt(Math.random()*10);
 			dd.booktime = "2017-10-10 7:00:00";
 			
 			var dt = new Array();
@@ -152,7 +218,7 @@
 			dt2.FilePath="http://localhost:8080/zdm//uploadFiles/uploadImgs/20171013/0d6e6965-759d-4cbd-bb23-fcf4d38865e2small.jpg";
 			dt2.del_flag = 0;
 			dt2.work_id = 101;
-			dt2.goods_name = "秋刀鱼";
+			dt2.goods_name = "商品名称"+Math.random();
 			dt2.prdid = "071f60fa-ae12-4248-8bc2-097f01377612";
 			
 			var crt = new Object();
@@ -169,9 +235,9 @@
 			
 			dt2.create_time = crt;
 			dt2.pic_id = "0d6e6965-759d-4cbd-bb23-fcf4d38865e2";
-			dt2.work_name = "月亮披萨";
-			dt2.goods_price = 14.8;
-			dt2.buy_count = 4;
+			dt2.work_name = "商家地址"+Math.random();
+			dt2.goods_price = parseInt(Math.random()*100);
+			dt2.buy_count = parseInt(Math.random()*10);
 			dt2.goods_id = "071f60fa-ae12-4248-8bc2-097f01377612";
 			dt2.express_money = 4.0;
 			dt2.json_prop = "";
@@ -211,6 +277,9 @@
 				success: function(data) {
 					if (data.RespBody.succ == 0) {
 						mui.toast('请重试');
+					}
+					if (data.RespBody.succ == 1) {
+						mui.toast('已生成订单');
 					}
 				},
 				error: function(xhr, type, errorThrown) {
