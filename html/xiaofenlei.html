@@ -18,6 +18,12 @@
 			.catagory div {
 				text-align: center;
 			}
+			#leibie{
+				color: darkgoldenrod;
+				font-size: 2rem;
+				margin-top: -7rem;
+				text-align: center;
+			}
 		</style>
 
 	</head>
@@ -28,7 +34,9 @@
 			<h1 class="mui-title">汤水</h1>
 		</header>
 		<div class="mui-content">
-			<img src="../images/tangshui.png" width="100%" />
+			<img src="../images/1.png" width="100%"/>
+			<div id="leibie"></div>
+			<div style="height: 7rem;"></div>
 			<div class="mui-row catagory" id="app">
 				<div class="mui-col-sm-4 mui-col-xs-4" v-for="xlm in xiaoleimu">
 					<li class="mui-table-view-cell">
@@ -52,6 +60,8 @@
 		mui.plusReady(function() {
 			var self = plus.webview.currentWebview(); //获得当前页面的对象
 			var catid = self.catid;
+			var catname = self.catname
+document.getElementById("leibie").innerHTML = catname;
 
 			var _this;
 			var app = new Vue({

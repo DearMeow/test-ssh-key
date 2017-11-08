@@ -22,7 +22,7 @@
 		</style>
 	</head>
 	<body>
-		<header class="mui-bar mui-bar-nav" style="background-color: #000000;color: #FFFFFF;">
+		<header class="mui-bar mui-bar-nav">
 			<div class="mui-row">
 				<div class="mui-col-sm-6 mui-col-xs-6" id="msg" style="font-size: 12px;"></div>
 				<div class="mui-col-sm-6 mui-col-xs-6" id="dizhi" style="font-size: 12px;text-align: right;line-height: 50%;padding-top: 1rem;">从新获取</div>
@@ -32,7 +32,7 @@
 			<img src="../images/index.png" width="100%" />
 			<div class="mui-row catagory" id="app">
 				<div class="mui-col-sm-4 mui-col-xs-4" v-for="dlm in daleimu">
-					<li class="mui-table-view-cell" v-on:click="detail(dlm.catid)">
+					<li class="mui-table-view-cell" v-on:click="detail(dlm.catid,dlm.catname)">
 						<img :src="dlm.FilePath"/>
 						<div>{{dlm.catname}}</div>
 					</li>
@@ -92,7 +92,7 @@
 					}); //ajax
 
 				}, //initListData
-				detail: function(catid) { //跳转到小分类页面
+				detail: function(catid,catname) { //跳转到小分类页面
 					//打开新窗口
 					mui.openWindow({
 						url: 'xiaofenlei.html', //需要打开页面的url地址 
@@ -105,6 +105,7 @@
 						},
 						extras: {
 							catid: catid,
+							catname:catname
 							//					.....//自定义扩展参数，可以用来处理页面间传值 
 						},
 						show: { //控制打开页面的类型

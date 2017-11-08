@@ -34,7 +34,9 @@
 				height: 2rem;
 				overflow: hidden;
 			}
-			#shopCar{position:absolute;right:5px;bottom:20px;width:50px; height:50px; border-radius:25px;padding-top:15px;padding-left:7px;font-size:12px;color:#FFFFFF;background:#06c;  }
+			#shopCar{position:absolute;right:0.5rem;bottom:1rem;width:1.6rem; height:1.6rem;}
+			#shopCar img{width:1.6rem; height:1.6rem;}
+
 		</style>
 	</head>
 
@@ -46,10 +48,6 @@
 		    </div>
 		</header>
 		<div class="mui-content">
-			
-			
-			
-			
 			
 			
 			<div id="msg"></div>
@@ -141,7 +139,6 @@
 					}//请求失败
 					var result = data.RespBody;
 					
-//										alert(result.Recs[0].Detail[0].goods_name+"_"+result.Recs[1].Detail[0].goods_name+"_"+result.Recs[0].work_name);
 					var zs = result.Recs[0].state;
 					var state = "";
 					switch (zs){
@@ -165,8 +162,9 @@
 							break;
 						
 					}
+					
 					for(var i = 0; i < result.Recs.length; i++) {
-						document.getElementById("msg").innerHTML += "<div class='eachOrder'><div class='mui-row'><div class='mui-col-sm-9 mui-col-xs-9'><div class='mui-pull-left'><img src='../images/logo.png'/></div><div class='mui-pull-left dianpu'><span class='workname'>"+result.Recs[i].work_name+</span>￥"+result.Recs[i].amount+"</div></div><div class='mui-col-sm-3 mui-col-xs-3 huise'>"+state+"</div></div><input type='button' class='mui-pull-right' value='再来一单' style='color: rgb(201,36,38);border: 0.03rem solid rgb(201,36,38);' /><div class='mui-clearfix'></div></div>";
+						document.getElementById("msg").innerHTML += "<div class='eachOrder'><div class='mui-row'><div class='mui-col-sm-9 mui-col-xs-9'><div class='mui-pull-left'><img src='../images/logo.png'/></div><div class='mui-pull-left dianpu'><span class='workname'>"+result.Recs[i].work_name+"</span>￥"+result.Recs[i].amount+"</div></div><div class='mui-col-sm-3 mui-col-xs-3 huise'>"+state+"</div></div><input type='button' class='mui-pull-right' value='再来一单' style='color: rgb(201,36,38);border: 0.03rem solid rgb(201,36,38);' /><div class='mui-clearfix'></div></div>";
 //						document.getElementById("msg").innerHTML += "<div class='eachOrder'><div class='mui-row'><div class='mui-col-sm-9 mui-col-xs-9'><div class='mui-pull-left'><img src='../images/logo.png'/></div><div class='mui-pull-left dianpu'>"+result.Recs[i].work_name+"&nbsp;&nbsp;&nbsp;&nbsp;><br/>￥"+result.Recs[i].amount+"</div></div><div class='mui-col-sm-3 mui-col-xs-3 huise'>"+state+"</div></div><input type='button' class='mui-pull-right' value='再来一单' style='color: rgb(201,36,38);border: 0.03rem solid rgb(201,36,38);' /><div class='mui-clearfix'></div></div>" ;
 					}
 				},

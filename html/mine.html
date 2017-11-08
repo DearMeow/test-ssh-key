@@ -11,31 +11,33 @@
 		<link rel="stylesheet" href="../css/mui.min.css">
 		<link rel="stylesheet" type="text/css" href="../css/layout.css" />
 		<style>
-.juzhong{
-	padding-left: 1rem;padding-right: 1rem;margin-top: 1rem;
-}
+			.juzhong {
+				padding-left: 1rem;
+				padding-right: 1rem;
+				margin-top: 1rem;
+			}
 		</style>
 	</head>
 
 	<body>
 
 		<header class="mui-bar mui-bar-nav">
-		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		    <h1 class="mui-title">用户登录</h1>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">用户登录</h1>
 		</header>
 		<div class="mui-content">
 			<div class="mui-row white">
 				<div class="mui-col-sm-8 mui-col-xs-8">
-					<input type="text" id="mobile" value="13137870099" style="margin-top: 1rem;border: none;font-weight: bold;font-size: 1.2rem;"/>
+					<input type="text" id="mobile" value="13137870099" style="margin-top: 1rem;border: none;font-weight: bold;font-size: 1.2rem;" />
 				</div>
 				<div class="mui-col-sm-4 mui-col-xs-4">
-					<input type="button" id="getCheckCode" value="获取验证码" style="margin-top: 1.1rem;background-color: rgb(192,0,2);color: #FFFFFF;"/>
+					<input type="button" id="getCheckCode" value="获取验证码" style="margin-top: 1.1rem;background-color: rgb(192,0,2);color: #FFFFFF;" />
 				</div>
 			</div>
 			<!--mui-row-->
 			<div class="mui-row white" style="margin-top: 0.1rem;">
 				<div class="mui-col-sm-12 mui-col-xs-12">
-					<input type="text" id="checkCode" placeholder="请输入验证码" style="margin-top: 1rem;border:none;font-weight: bold;font-size: 1.2rem;"/>
+					<input type="text" id="checkCode" placeholder="请输入验证码" style="margin-top: 1rem;border:none;font-weight: bold;font-size: 1.2rem;" />
 				</div>
 			</div>
 			<!--mui-row-->
@@ -53,25 +55,11 @@
 			</div>
 			<!--mui-row-->
 		</div>
-		<div id="result"></div>
 	</body>
 	<script src="../js/mui.min.js"></script>
 	<script src="../js/vue.js"></script>
 	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script>
-		window.onload = function(){
-					// Check browser support
-if (typeof(Storage) !== "undefined") {
-    // Store
-    localStorage.setItem("lastname", "Gates");
-    // Retrieve
-    document.getElementById("result").innerHTML = localStorage.getItem("lastname");
-} else {
-    document.getElementById("result").innerHTML = "抱歉！您的浏览器不支持 Web Storage ...";
-}
-		}
-
-
 
 		var verifyCode; //短信验证码
 		document.getElementById("getCheckCode").onclick = function() {
@@ -150,7 +138,7 @@ if (typeof(Storage) !== "undefined") {
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
-					
+
 					if(data.RespHead.ResponseCode != 0) {
 						//打开新窗口
 						mui.openWindow({
@@ -193,7 +181,7 @@ if (typeof(Storage) !== "undefined") {
 							})
 							break;
 						case 1: //验证通过
-alert("验证通过");
+							alert("验证通过");
 							break;
 
 						case 2:
@@ -210,8 +198,8 @@ alert("验证通过");
 							})
 							break;
 						case 4: //登录成功
-						localStorage.setItem("sesid", result.SesId);
-						alert("登录成功_"+result.SesId);
+							localStorage.setItem("sesid", result.SesId);
+							alert("登录成功_" + result.SesId);
 							break;
 
 					}
@@ -220,7 +208,7 @@ alert("验证通过");
 				error: function(xhr, type, errorThrown) {
 					//异常处理；
 					console.log(type);
-					alert("err_"+errorThrown);
+					alert("err_" + errorThrown);
 				}
 			});
 		}
