@@ -11,15 +11,10 @@
 		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
 		<link rel="stylesheet" type="text/css" href="../../css/layout.css" />
 		<style type="text/css">
-			.xin{
+			.ty{
 				background-color: #FFFFFF;
-				padding: 0.5rem 0.5rem 0.3rem 0.5rem;
-				margin-top: 0.2rem;
-			}
-			.xconnect{
-				color: #ACACB4;
-				font-size: 0.8rem;
-				
+				padding: 1rem;
+				margin-top: 1rem;
 			}
 		</style>
 	</head>
@@ -30,12 +25,16 @@
 		    <h1 class="mui-title" style="color: #FFFFFF;">通用</h1>
 		</header>
 		<div class="mui-content">
-		   
+		   <div class="ty" onclick="qingchu()">
+		   	清除缓存
+		   </div>
 		</div><!--mui-content-->
 	</body>
 <script src="../../js/mui.min.js"></script>
 <script src="../../js/domain.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-			mui.init()
+			function qingchu(){
+				mui.toast("缓存已清除");
+			}/*qingchu*/
 		</script>
 </html>
