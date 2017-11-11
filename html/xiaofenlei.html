@@ -31,11 +31,11 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">汤水</h1>
+			<h1 class="mui-title leibie"></h1>
 		</header>
 		<div class="mui-content">
 			<img src="../images/1.png" width="100%"/>
-			<div id="leibie"></div>
+			<div class="leibie" id="leibie"></div>
 			<div style="height: 7rem;"></div>
 			<div class="mui-row catagory" id="app">
 				<div class="mui-col-sm-4 mui-col-xs-4" v-for="xlm in xiaoleimu">
@@ -61,7 +61,11 @@
 			var self = plus.webview.currentWebview(); //获得当前页面的对象
 			var catid = self.catid;
 			var catname = self.catname
-document.getElementById("leibie").innerHTML = catname;
+//document.getElementById("leibie").innerHTML = catname;
+var res = document.getElementsByClassName("leibie");
+for (var i = 0; i < res.length; i++) {
+	res[i].innerHTML = catname;
+}
 
 			var _this;
 			var app = new Vue({
