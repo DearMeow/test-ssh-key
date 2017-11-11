@@ -39,9 +39,6 @@
 			function shuaxin() {
 			var sesid = localStorage.getItem("sesid");
 
-			var rh = new Object();
-			rh.ReqId = "ls123";
-			rh.Salt = "sssseee";
 			rh.SesId = sesid;
 			
 			var rb = new Object();
@@ -150,9 +147,6 @@
 		//修改购物车
 		function changeShopcar(cartId, buyCount, goodsPrice) {
 			var sesid = localStorage.getItem("sesid");
-			var rh = new Object();
-			rh.ReqId = "ls123";
-			rh.Salt = "sssseee";
 			rh.SesId = sesid;
 
 			var rb = new Object();
@@ -192,11 +186,7 @@
 		//去结算
 		document.getElementById("jiesuanbtn").onclick = function(){
 			var sesid = localStorage.getItem("sesid");
-			var rh = new Object();
-			rh.ReqId = "ls123";
-			rh.Salt = "sssseee";
 			rh.SesId = sesid;
-
 
 			var od = new Array();
 			

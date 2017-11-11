@@ -28,7 +28,7 @@
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">
-							<input type="text" id="mySearch" style="width: 75%;">
+							<input type="text" name="soushuo" id="mySearch" style="width: 75%;">
 							<input type="button" id="searchbtn" value="搜索" style="background-color:cornflowerblue;color:white;padding-top:0.6rem;height:2.5rem;margin-left: 0px;margin-top: 0.1rem;" />
 						</h1>
 
@@ -54,6 +54,7 @@
 			</div>
 
 		</div>
+		<div id="ceshi9"></div>
 	</body>
 	<script src="../js/mui.min.js"></script>
 	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
@@ -141,13 +142,9 @@
 			}); //querySelector
 
 		}); //plusReady
-
+var id = "item1";
 		//排序
 		function paixu(curPage, catid, slide, Jd, Wd, sortField, sortDirct, qryName) {
-
-			var rh = new Object();
-			rh.ReqId = "ls123";
-			rh.Salt = "sssseee";
 
 			var rb = new Object();
 			rb.curPage = curPage;
@@ -174,7 +171,7 @@
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
-					var id = "item1";
+					
 					switch(slide) {
 						case 0:
 							id = "item1";
@@ -190,10 +187,14 @@
 					var result = data.RespBody.Recs;
 
 					var content = "";
+					var cs  ="";
 					for(var i = 0; i < result.length; i++) {
+						cs += result[i].goodsname+"_";
 						content += "<div class='mui-row sousuobg' onclick='goDetailPage(&quot;" + result[i].goodid + "&quot;)'><div class='mui-col-sm-3 mui-col-xs-3'><img src='" + result[i].FilePath + "' style='width:70px;' /></div><div class='mui-col-sm-9 mui-col-xs-9'><span style='font-size: 1rem;'>" + result[i].goodsname + "</span><br/><img src='../images/love.png' style='width: 15px;' /><span style='color: rgb(153,153,153);'>销量" + result[i].salsvolume + "</span><br/><span style='color: rgb(209,37,34);font-size: 1.2rem;'>" + result[i].price + "</span></div></div>"
 					}
-					document.getElementById(id).innerHTML = document.getElementById(id).innerHTML + content;
+					document.getElementById(id).innerHTML = content;
+					document.getElementById("ceshi9").innerHTML = cs;
+//					mui.toast(cs);
 				},
 				error: function(xhr, type, errorThrown) {
 					//异常处理；
@@ -227,6 +228,8 @@
 		document.getElementById("searchbtn").onclick = function() {
 
 			qryName = document.getElementById("mySearch").value.trim();
+			
+			document.getElementById(id).innerHTML = "";
 			paixu(curPage, catid, slide, Jd, Wd, sortField, sortDirct, qryName);
 
 		} //searchbtn

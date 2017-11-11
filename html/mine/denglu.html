@@ -62,9 +62,6 @@
 
 		var verifyCode; //短信验证码
 		document.getElementById("getCheckCode").onclick = function() {
-			var rh = new Object();
-			rh.ReqId = "ls123";
-			rh.Salt = "sssseee";
 
 			var rb = new Object();
 			rb.Mobile = document.getElementById("mobile").value.replace(/\s+/g, "");
@@ -114,9 +111,6 @@
 		//		}
 		//登录
 		document.getElementById("loginBtn").onclick = function() {
-			var rh = new Object();
-			rh.ReqId = "ls123";
-			rh.Salt = "sssseee";
 
 			var rb = new Object();
 			rb.Mobile = document.getElementById("mobile").value.replace(/\s+/g, "");
