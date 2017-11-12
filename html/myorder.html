@@ -8,54 +8,70 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-		<link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/layout.css" />
 		<style>
-			.eachOrder{
+			.eachOrder {
 				background-color: #FFFFFF;
 				margin-bottom: 0.5rem;
 				padding: 0.5rem;
 			}
-			.eachOrder img{
+			
+			.eachOrder img {
 				width: 4rem;
 			}
-			.huise{
-				color: rgb(153,153,153);
+			
+			.huise {
+				color: rgb(153, 153, 153);
 				font-size: 0.8rem;
 			}
-			.dianpu{
+			
+			.dianpu {
 				line-height: 2rem;
 				margin-left: 0.5rem;
 				font-size: 1.1rem;
 			}
-			.workname{
+			
+			.workname {
 				display: block;
 				width: 6rem;
 				height: 2rem;
 				overflow: hidden;
 			}
-			#shopCar{position:absolute;right:0.5rem;bottom:1rem;width:1.6rem; height:1.6rem;}
-			#shopCar img{width:1.6rem; height:1.6rem;}
-
+			
+			#shopCar {
+				position: absolute;
+				right: 0.5rem;
+				bottom: 1rem;
+				width: 1.6rem;
+				height: 1.6rem;
+			}
+			
+			#shopCar img {
+				width: 1.6rem;
+				height: 1.6rem;
+			}
 		</style>
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav" style="background-color: darkred;color: #FFFFFF;">
-		    <h1 class="mui-title" style="color: #FFFFFF;">我的订单</h1>
-		    <div id="" class="mui-text-right" style="font-size: 0.8rem;padding-top: 0.7rem;">
-		    	全部订单
-		    </div>
+			<h1 class="mui-title" style="color: #FFFFFF;">我的订单</h1>
+			<div id="" class="mui-text-right" style="font-size: 0.8rem;padding-top: 0.7rem;">
+				全部订单
+			</div>
 		</header>
 		<div class="mui-content">
-			
-			
+
+			<div id="msg2"></div>
 			<div id="msg"></div>
-			<div id="shopCar"><img src="../images/shopCar.png"/></div>
-		</div><!--mui-content-->
+
+			<div id="shopCar"><img src="../images/shopCar.png" /></div>
+		</div>
+		<!--mui-content-->
 	</body>
 	<script src="../js/mui.min.js"></script>
-		<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		mui.init({
 			swipeBack: true, //启用右滑关闭功能
@@ -76,14 +92,14 @@
 
 		function dingdan() {
 			var sesid = localStorage.getItem("sesid");
-			
+
 			rh.SesId = sesid;
 
 			var rb = new Object();
-			rb.curPage=1;
-			rb.pageSize=2;
-			rb.qryName="";
-			rb.OrderStatus=1;
+			rb.curPage = 1;
+			rb.pageSize = 20;
+			rb.qryName = "";
+			rb.OrderStatus = 1;
 
 			var jn = new Object();
 			jn.ReqHead = rh;
@@ -100,68 +116,66 @@
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
-					
-					if (data.RespHead.ResponseCode == 1) {//请求失败
+
+					if(data.RespHead.ResponseCode == 1) { //请求失败
 						//打开新窗口
-					mui.openWindow({
-						url: 'xiaofenlei.html', //需要打开页面的url地址 
-						id: 'xiaofenlei', //需要打开页面的url页面id
-						styles: {
-							top: '0px', //新页面顶部位置 
-							bottom: '0px', //新页面底部位置 
-							//					width:newpage-width,//新页面宽度，默认为100% 
-							//					height:newpage-height,//新页面高度，默认为100% ...... 
-						},
-						extras: {
-							catid: catid,
-							//					.....//自定义扩展参数，可以用来处理页面间传值 
-						},
-						show: { //控制打开页面的类型
-							autoShow: true,
-							//					//页面loaded事件发生后自动显示，默认为true 
-							aniShow: 'zoom-fade-out', //页面显示动画，默认为”slide-in-right“；  页面出现的方式 左右上下
-							duration: '300' //页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒； 
-						},
-						waiting: { // 控制 弹出转圈框的信息
-							autoShow: true, //自动显示等待框，默认为true 
-							title: '正在加载...', //等待对话框上显示的提示内容 
-							options: {
-								width: '300px', //等待框背景区域宽度，默认根据内容自动计算合适宽度 
-								height: '300px', //等待框背景区域高度，默认根据内容自动计算合适高度 ...... 
+						mui.openWindow({
+							url: 'xiaofenlei.html', //需要打开页面的url地址 
+							id: 'xiaofenlei', //需要打开页面的url页面id
+							styles: {
+								top: '0px', //新页面顶部位置 
+								bottom: '0px', //新页面底部位置 
+								//					width:newpage-width,//新页面宽度，默认为100% 
+								//					height:newpage-height,//新页面高度，默认为100% ...... 
+							},
+							extras: {
+								catid: catid,
+								//					.....//自定义扩展参数，可以用来处理页面间传值 
+							},
+							show: { //控制打开页面的类型
+								autoShow: true,
+								//					//页面loaded事件发生后自动显示，默认为true 
+								aniShow: 'zoom-fade-out', //页面显示动画，默认为”slide-in-right“；  页面出现的方式 左右上下
+								duration: '300' //页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒； 
+							},
+							waiting: { // 控制 弹出转圈框的信息
+								autoShow: true, //自动显示等待框，默认为true 
+								title: '正在加载...', //等待对话框上显示的提示内容 
+								options: {
+									width: '300px', //等待框背景区域宽度，默认根据内容自动计算合适宽度 
+									height: '300px', //等待框背景区域高度，默认根据内容自动计算合适高度 ...... 
+								}
 							}
-						}
-					}); //openWindow
-					return;
-					}//请求失败
+						}); //openWindow
+						return;
+					} //请求失败
 					var result = data.RespBody;
-					
+
 					var zs = result.Recs[0].state;
 					var state = "";
-					switch (zs){
+					switch(zs) {
 						case 1:
-						state = "等待支付";
+							state = "等待支付";
 							break;
-							case 11:
-						state = "已支付";
+						case 11:
+							state = "已支付";
 							break;
-							case 2:
-						state = "待配送 ";
+						case 2:
+							state = "待配送 ";
 							break;
-							case 3:
-						state = "待收货";
+						case 3:
+							state = "待收货";
 							break;
-							case 4:
-						state = "待评价";
+						case 4:
+							state = "待评价";
 							break;
-							case 5:
-						state = "已完成";
+						case 5:
+							state = "已完成";
 							break;
-						
+
 					}
-					
 					for(var i = 0; i < result.Recs.length; i++) {
-						document.getElementById("msg").innerHTML += "<div class='eachOrder'><div class='mui-row'><div class='mui-col-sm-9 mui-col-xs-9'><div class='mui-pull-left'><img src='../images/logo.png'/></div><div class='mui-pull-left dianpu'><span class='workname'>"+result.Recs[i].work_name+"</span>￥"+result.Recs[i].amount+"</div></div><div class='mui-col-sm-3 mui-col-xs-3 huise'>"+state+"</div></div><input type='button' class='mui-pull-right' value='再来一单' style='color: rgb(201,36,38);border: 0.03rem solid rgb(201,36,38);' /><div class='mui-clearfix'></div></div>";
-//						document.getElementById("msg").innerHTML += "<div class='eachOrder'><div class='mui-row'><div class='mui-col-sm-9 mui-col-xs-9'><div class='mui-pull-left'><img src='../images/logo.png'/></div><div class='mui-pull-left dianpu'>"+result.Recs[i].work_name+"&nbsp;&nbsp;&nbsp;&nbsp;><br/>￥"+result.Recs[i].amount+"</div></div><div class='mui-col-sm-3 mui-col-xs-3 huise'>"+state+"</div></div><input type='button' class='mui-pull-right' value='再来一单' style='color: rgb(201,36,38);border: 0.03rem solid rgb(201,36,38);' /><div class='mui-clearfix'></div></div>" ;
+						document.getElementById("msg").innerHTML += "<div class='eachOrder' onclick='orderDetail(&quot;" + result.Recs[i].Detail[0].t_order_id + "&quot;)'><div class='mui-row'><div class='mui-col-sm-9 mui-col-xs-9'><div class='mui-pull-left'><img src='../images/logo.png'/></div><div class='mui-pull-left dianpu'><span class='workname'>" + result.Recs[i].work_name + "</span>￥" + result.Recs[i].amount + "</div></div><div class='mui-col-sm-3 mui-col-xs-3 huise'>" + state + "</div></div><input type='button' class='mui-pull-right' value='再来一单' style='color: rgb(201,36,38);border: 0.03rem solid rgb(201,36,38);' /><div class='mui-clearfix'></div></div>";
 					}
 				},
 				error: function(xhr, type, errorThrown) {
@@ -169,16 +183,50 @@
 				}
 			}); //ajax
 		} //dingdan
-		
+
 		//下拉刷新
 		function pulldownRefresh() {
 			setTimeout(function() {
-				document.getElementById("msg").innerHTML="";
+				document.getElementById("msg").innerHTML = "";
 				dingdan();
 				mui('#msg').pullRefresh().endPulldownToRefresh(); //这行代码会隐藏掉 正在加载... 容器
 				mui.toast('下拉刷新成功');
 			}, 1000);
 		} //pulldownRefresh
+
+		function orderDetail(orderId) {
+			
+			
+			//打开新窗口
+			mui.openWindow({
+				url: 'orderDetail.html', //需要打开页面的url地址 
+				id: 'orderDetail', //需要打开页面的url页面id
+				styles: {
+					top: '0px', //新页面顶部位置 
+					bottom: '0px', //新页面底部位置 
+					//					width:newpage-width,//新页面宽度，默认为100% 
+					//					height:newpage-height,//新页面高度，默认为100% ...... 
+				},
+				extras: {
+					orderId:orderId
+					//					.....//自定义扩展参数，可以用来处理页面间传值 
+				},
+				show: { //控制打开页面的类型
+					autoShow: true,
+					//					//页面loaded事件发生后自动显示，默认为true 
+					aniShow: 'zoom-fade-out', //页面显示动画，默认为”slide-in-right“；  页面出现的方式 左右上下
+					duration: '300' //页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒； 
+				},
+				waiting: { // 控制 弹出转圈框的信息
+					autoShow: true, //自动显示等待框，默认为true 
+					title: '正在加载...', //等待对话框上显示的提示内容 
+					options: {
+						width: '300px', //等待框背景区域宽度，默认根据内容自动计算合适宽度 
+						height: '300px', //等待框背景区域高度，默认根据内容自动计算合适高度 ...... 
+					}
+				}
+			}); //openWindow
+		} //orderid
 	</script>
 
 </html>
