@@ -132,34 +132,34 @@
 					"prerendered": true, /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/
 					"auto": "", /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
 					"iphone": {
-						"normal": "",/*iPhone普通屏幕程序图标，分辨率：57x57*/
-						"retina": "",/*iPhone高分屏程序图标，分辨率：114x114*/
-						"retina7": "",/*iPhone iOS7高分屏程序图标，分辨率：120x120*/
-						"spotlight-normal": "", /*iPhone Spotlight搜索程序图标，分辨率：29x29*/
-						"spotlight-retina": "", /*iPhone高分屏Spotlight搜索程序图标，分辨率：58x58*/
-						"spotlight-retina7": "",/*iPhone iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
-						"settings-normal": "", /*iPhone设置页面程序图标，分辨率：29x29*/
-						"settings-retina": ""
+						"normal": "unpackage/res/icons/57x57.png",/*iPhone普通屏幕程序图标，分辨率：57x57*/
+						"retina": "unpackage/res/icons/114x114.png",/*iPhone高分屏程序图标，分辨率：114x114*/
+						"retina7": "unpackage/res/icons/120x120.png",/*iPhone iOS7高分屏程序图标，分辨率：120x120*/
+						"spotlight-normal": "unpackage/res/icons/29x29.png", /*iPhone Spotlight搜索程序图标，分辨率：29x29*/
+						"spotlight-retina": "unpackage/res/icons/58x58.png", /*iPhone高分屏Spotlight搜索程序图标，分辨率：58x58*/
+						"spotlight-retina7": "unpackage/res/icons/80x80.png",/*iPhone iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						"settings-normal": "unpackage/res/icons/29x29.png", /*iPhone设置页面程序图标，分辨率：29x29*/
+						"settings-retina": "unpackage/res/icons/58x58.png","retina8":"unpackage/res/icons/180x180.png","settings-retina8":"unpackage/res/icons/87x87.png"
 					},
 					"ipad": {
-						"normal": "", /*iPad普通屏幕程序图标，分辨率：72x72*/
-						"retina": "", /*iPad高分屏程序图标，分辨率：144x144*/
-						"normal7": "", /*iPad iOS7程序图标，分辨率：76x76*/
-						"retina7": "", /*iPad iOS7高分屏程序图标，分辨率：152x152*/
-						"spotlight-normal": "", /*iPad Spotlight搜索程序图标，分辨率：50x50*/
-						"spotlight-retina": "", /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/
-						"spotlight-normal7": "",/*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/
-						"spotlight-retina7": "",/*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
-						"settings-normal": "",/*iPad设置页面程序图标，分辨率：29x29*/
-						"settings-retina": ""
+						"normal": "unpackage/res/icons/72x72.png", /*iPad普通屏幕程序图标，分辨率：72x72*/
+						"retina": "unpackage/res/icons/144x144.png", /*iPad高分屏程序图标，分辨率：144x144*/
+						"normal7": "unpackage/res/icons/76x76.png", /*iPad iOS7程序图标，分辨率：76x76*/
+						"retina7": "unpackage/res/icons/152x152.png", /*iPad iOS7高分屏程序图标，分辨率：152x152*/
+						"spotlight-normal": "unpackage/res/icons/50x50.png", /*iPad Spotlight搜索程序图标，分辨率：50x50*/
+						"spotlight-retina": "unpackage/res/icons/100x100.png", /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/
+						"spotlight-normal7": "unpackage/res/icons/40x40.png",/*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/
+						"spotlight-retina7": "unpackage/res/icons/80x80.png",/*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						"settings-normal": "unpackage/res/icons/29x29.png",/*iPad设置页面程序图标，分辨率：29x29*/
+						"settings-retina": "unpackage/res/icons/58x58.png"
 					}
 				},
 				"android": {
-					"mdpi": "", /*普通屏程序图标，分辨率：48x48*/
-					"ldpi": "", /*大屏程序图标，分辨率：48x48*/
-					"hdpi": "", /*高分屏程序图标，分辨率：72x72*/
-					"xhdpi": "",/*720P高分屏程序图标，分辨率：96x96*/
-					"xxhdpi": ""
+					"mdpi": "unpackage/res/icons/48x48.png", /*普通屏程序图标，分辨率：48x48*/
+					"ldpi": "unpackage/res/icons/48x48.png", /*大屏程序图标，分辨率：48x48*/
+					"hdpi": "unpackage/res/icons/72x72.png", /*高分屏程序图标，分辨率：72x72*/
+					"xhdpi": "unpackage/res/icons/96x96.png",/*720P高分屏程序图标，分辨率：96x96*/
+					"xxhdpi": "unpackage/res/icons/144x144.png","xxxhdpi":"unpackage/res/icons/192x192.png"
 				}
 			},
 			"splashscreen": {
@@ -188,6 +188,211 @@
 					"xxhdpi": ""
 				}
 			}
+		}
+	},
+	"dependencies":{
+		"pages": {
+			"html/mine/denglu.html": {
+				"href": "html/mine/denglu.html",
+				"resources": [
+					"js/mui.min.js",
+					"js/domain.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/layout.css"
+				],
+				"priority": 0
+			},
+			"html/xiangqing.html": {
+				"href": "html/xiangqing.html",
+				"resources": [
+					"js/mui.min.js",
+					"js/domain.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/layout.css"
+				],
+				"refer": [
+					"html/mine/denglu.html"
+				],
+				"priority": 0
+			},
+			"html/sousuo.html": {
+				"href": "html/sousuo.html",
+				"resources": [
+					"js/mui.min.js",
+					"js/domain.js",
+					"images/love.png",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/layout.css"
+				],
+				"refer": [
+					"html/xiangqing.html"
+				],
+				"priority": 0
+			},
+			"html/xiaofenlei.html": {
+				"href": "html/xiaofenlei.html",
+				"resources": [
+					"js/mui.min.js",
+					"js/vue.js",
+					"js/domain.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/layout.css",
+					"images/1.png"
+				],
+				"refer": [
+					"html/sousuo.html"
+				],
+				"priority": 0
+			},
+			"html/myorder.html": {
+				"href": "html/myorder.html",
+				"resources": [
+					"js/mui.min.js",
+					"js/domain.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/layout.css",
+					"images/shopCar.png"
+				],
+				"refer": [
+					"html/xiaofenlei.html"
+				],
+				"priority": 0
+			},
+			"html/mine.html": {
+				"href": "html/mine.html",
+				"resources": [
+					"js/mui.min.js",
+					"js/domain.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/layout.css",
+					"css/font-awesome-4.7.0/css/font-awesome.min.css",
+					"css/font-awesome-4.7.0/fonts/fontawesome-webfont.eot",
+					"css/font-awesome-4.7.0/fonts/fontawesome-webfont.woff2",
+					"css/font-awesome-4.7.0/fonts/fontawesome-webfont.woff",
+					"css/font-awesome-4.7.0/fonts/fontawesome-webfont.ttf",
+					"css/font-awesome-4.7.0/fonts/fontawesome-webfont.svg",
+					"images/setting.png",
+					"images/msg.png",
+					"images/touxiang.png",
+					"images/shouji.png"
+				],
+				"priority": 1
+			},
+			"html/shouye.html": {
+				"href": "html/shouye.html",
+				"resources": [
+					"js/mui.min.js",
+					"js/vue.js",
+					"js/domain.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/layout.css",
+					"images/index.png"
+				],
+				"refer": [
+					"html/xiaofenlei.html"
+				],
+				"priority": 2
+			},
+			"html/shopcar.html": {
+				"href": "html/shopcar.html",
+				"resources": [
+					"js/mui.min.js",
+					"js/domain.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/layout.css"
+				],
+				"priority": 3
+			},
+			"index.html": {
+				"href": "index.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"js/mui.min.js"
+				],
+				"refer": [
+					"html/myorder.html",
+					"html/mine.html",
+					"html/shouye.html",
+					"html/shopcar.html"
+				],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"html/mine/shezhi.html",
+				"html/mine/denglumima.html",
+				"css/font-awesome-4.7.0/less/animated.less",
+				"html/mine/shouchang.html",
+				"html/mine/userSafe.html",
+				"js/util.js",
+				"css/font-awesome-4.7.0/scss/_variables.scss",
+				"css/font-awesome-4.7.0/less/core.less",
+				"images/60x60.gif",
+				"html/mine/xinzeng.html",
+				"css/font-awesome-4.7.0/scss/_animated.scss",
+				"fonts/iconfont.ttf",
+				"js/mui.js",
+				"images/分类页面－传统粥类.png",
+				"images/分类页面－清蒸类.png",
+				"README.md",
+				"css/font-awesome-4.7.0/less/screen-reader.less",
+				"demo/lianjie_db.html",
+				"css/mui.css",
+				"css/font-awesome-4.7.0/scss/_stacked.scss",
+				"html/mine/zhifumima.html",
+				"css/font-awesome-4.7.0/less/variables.less",
+				"css/font-awesome-4.7.0/scss/_path.scss",
+				"css/font-awesome-4.7.0/less/fixed-width.less",
+				"css/font-awesome-4.7.0/scss/_rotated-flipped.scss",
+				"css/font-awesome-4.7.0/scss/_core.scss",
+				"images/分类页面－煎炸类.png",
+				"css/font-awesome-4.7.0/scss/_fixed-width.scss",
+				"images/分类页面－饮品类.png",
+				"css/font-awesome-4.7.0/less/mixins.less",
+				"html/mine/dizhi.html",
+				"images/bg.png",
+				"demo/yanzhengma.html",
+				"css/font-awesome-4.7.0/scss/_bordered-pulled.scss",
+				"html/mine/tongyong.html",
+				"images/分类页面－养生类.png",
+				"html/mine/xinxi.html",
+				"css/font-awesome-4.7.0/fonts/FontAwesome.otf",
+				"css/font-awesome-4.7.0/less/stacked.less",
+				"demo/paixu.html",
+				"css/font-awesome-4.7.0/scss/_list.scss",
+				"images/logo.png",
+				"demo/db.html",
+				"css/font-awesome-4.7.0/less/font-awesome.less",
+				"css/font-awesome-4.7.0/less/rotated-flipped.less",
+				"css/font-awesome-4.7.0/less/list.less",
+				"css/font-awesome-4.7.0/scss/font-awesome.scss",
+				"css/font-awesome-4.7.0/less/bordered-pulled.less",
+				"css/font-awesome-4.7.0/scss/_larger.scss",
+				"demo/dizhi.html",
+				"css/font-awesome-4.7.0/less/larger.less",
+				"css/font-awesome-4.7.0/scss/_icons.scss",
+				"css/font-awesome-4.7.0/scss/_screen-reader.scss",
+				"css/font-awesome-4.7.0/less/path.less",
+				"css/font-awesome-4.7.0/css/font-awesome.css",
+				"css/font-awesome-4.7.0/HELP-US-OUT.txt",
+				"images/tangshui.png",
+				"images/heart.png",
+				"images/ma.png",
+				"css/font-awesome-4.7.0/less/icons.less",
+				"html/sousuojieguo.html",
+				"html/mine/kehu.html",
+				"css/font-awesome-4.7.0/scss/_mixins.scss"
+			]
 		}
 	}
 }
