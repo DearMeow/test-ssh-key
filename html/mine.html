@@ -76,9 +76,10 @@
 		//打开新窗口
 		function openPage(page){
 			var goPage = page+".html";
+			mui.toast(goPage);
 			//打开新窗口
 					mui.openWindow({
-						url: "mine/"+goPage, //需要打开页面的url地址 
+						url: "myinfo/"+goPage, //需要打开页面的url地址 
 						id: page, //需要打开页面的url页面id
 						styles: {
 							top: '0px', //新页面顶部位置 
