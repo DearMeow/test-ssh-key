@@ -28,7 +28,7 @@
 		<div class="mui-content">
 			<div class="mui-row white">
 				<div class="mui-col-sm-8 mui-col-xs-8">
-					<input type="text" id="mobile" value="13137870099" style="margin-top: 1rem;border: none;font-weight: bold;font-size: 1.2rem;" />
+					<input type="text" id="mobile" placeholder="请输入手机号码" style="margin-top: 1rem;border: none;font-weight: bold;font-size: 1.2rem;" />
 				</div>
 				<div class="mui-col-sm-4 mui-col-xs-4">
 					<input type="button" id="getCheckCode" value="获取验证码" style="margin-top: 1.1rem;background-color: rgb(192,0,2);color: #FFFFFF;" />
@@ -174,7 +174,8 @@
 							})
 							break;
 						case 1: //验证通过
-							alert("验证通过");
+//							alert("验证通过");
+							mui.toast("登录成功");
 							break;
 
 						case 2:
@@ -192,7 +193,8 @@
 							break;
 						case 4: //登录成功
 							localStorage.setItem("sesid", result.SesId);
-							alert("登录成功_" + result.SesId);
+//							alert("登录成功_" + result.SesId);
+mui.toast("登录成功");
 							break;
 
 					}
