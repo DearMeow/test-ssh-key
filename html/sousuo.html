@@ -251,8 +251,23 @@ if (yxiaoliang > 200) {
 					var result = data.RespBody.Recs;
 
 					var content = "";
-					for(var i = 0; i < result.length; i++) {
-						content += "<div class='beijing' onclick='goDetailPage(&quot;" + result[i].goodid + "&quot;)'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-pull-left ml'><div class='gname'>" + result[i].goodsname + "</div><img src='../images/heart.png' style='width: 4rem;'/><span class='yxl'>&nbsp;&nbsp;月销量" + result[i].salsvolume + "</span><br/><span class='gprice'>￥" + result[i].price + "</span></div><div class='mui-clearfix'></div></div>";
+										for(var i = 0; i < result.length; i++) {
+						
+var yxiaoliang = result[i].salsvolume;
+var ht="";
+
+if (yxiaoliang > 200) {
+	ht= "<img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/>";
+}else if(yxiaoliang > 150){
+	ht= "<img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/>";
+}else if(yxiaoliang > 100){
+	ht= "<img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/>";
+}else if(yxiaoliang > 50){
+	ht= "<img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/>";
+}else{
+	ht= "<img src='../images/love.png' style='width:1rem'/>";
+}
+						content += "<div class='beijing' onclick='goDetailPage(&quot;" + result[i].goodid + "&quot;)'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-pull-left ml'><div class='gname'>" + result[i].goodsname + "</div>"+ht+"<span class='yxl'>&nbsp;&nbsp;月销量" + result[i].salsvolume + "</span><br/><span class='gprice'>￥" + result[i].price + "</span></div><div class='mui-clearfix'></div></div>";
 					}
 					if(shangla == 1) {
 						document.getElementById("item2").innerHTML += content;
@@ -300,8 +315,23 @@ if (yxiaoliang > 200) {
 					var result = data.RespBody.Recs;
 
 					var content = "";
-					for(var i = 0; i < result.length; i++) {
-						content += "<div class='beijing' onclick='goDetailPage(&quot;" + result[i].goodid + "&quot;)'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-pull-left ml'><div class='gname'>" + result[i].goodsname + "</div><img src='../images/heart.png' style='width: 4rem;'/><span class='yxl'>&nbsp;&nbsp;月销量" + result[i].salsvolume + "</span><br/><span class='gprice'>￥" + result[i].price + "</span></div><div class='mui-clearfix'></div></div>";
+										for(var i = 0; i < result.length; i++) {
+						
+var yxiaoliang = result[i].salsvolume;
+var ht="";
+
+if (yxiaoliang > 200) {
+	ht= "<img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/>";
+}else if(yxiaoliang > 150){
+	ht= "<img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/>";
+}else if(yxiaoliang > 100){
+	ht= "<img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/>";
+}else if(yxiaoliang > 50){
+	ht= "<img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/>";
+}else{
+	ht= "<img src='../images/love.png' style='width:1rem'/>";
+}
+						content += "<div class='beijing' onclick='goDetailPage(&quot;" + result[i].goodid + "&quot;)'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-pull-left ml'><div class='gname'>" + result[i].goodsname + "</div>"+ht+"<span class='yxl'>&nbsp;&nbsp;月销量" + result[i].salsvolume + "</span><br/><span class='gprice'>￥" + result[i].price + "</span></div><div class='mui-clearfix'></div></div>";
 					}
 					if(shangla == 1) {
 						document.getElementById("item3").innerHTML += content;
@@ -432,8 +462,23 @@ if (yxiaoliang > 200) {
 					var result = data.RespBody.Recs;
 
 					var content = "";
-					for(var i = 0; i < result.length; i++) {
-						content += "<div class='beijing' onclick='goDetailPage(&quot;" + result[i].goodid + "&quot;)'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-pull-left ml'><div class='gname'>" + result[i].goodsname + "</div><img src='../images/heart.png' style='width: 4rem;'/><span class='yxl'>&nbsp;&nbsp;月销量" + result[i].salsvolume + "</span><br/><span class='gprice'>￥" + result[i].price + "</span></div><div class='mui-clearfix'></div></div>";
+										for(var i = 0; i < result.length; i++) {
+						
+var yxiaoliang = result[i].salsvolume;
+var ht="";
+
+if (yxiaoliang > 200) {
+	ht= "<img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/>";
+}else if(yxiaoliang > 150){
+	ht= "<img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/>";
+}else if(yxiaoliang > 100){
+	ht= "<img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/>";
+}else if(yxiaoliang > 50){
+	ht= "<img src='../images/love.png' style='width:1rem'/><img src='../images/love.png' style='width:1rem'/>";
+}else{
+	ht= "<img src='../images/love.png' style='width:1rem'/>";
+}
+						content += "<div class='beijing' onclick='goDetailPage(&quot;" + result[i].goodid + "&quot;)'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-pull-left ml'><div class='gname'>" + result[i].goodsname + "</div>"+ht+"<span class='yxl'>&nbsp;&nbsp;月销量" + result[i].salsvolume + "</span><br/><span class='gprice'>￥" + result[i].price + "</span></div><div class='mui-clearfix'></div></div>";
 					}
 					if(shangla == 1) {
 						document.getElementById("item1").innerHTML += content;
@@ -456,8 +501,8 @@ if (yxiaoliang > 200) {
 
 			//打开新窗口
 			mui.openWindow({
-				url: 'xiangqing.html', //需要打开页面的url地址 
-				id: 'xiangqing', //需要打开页面的url页面id
+				url: 'shangjia.html', //需要打开页面的url地址 
+				id: 'shangjia', //需要打开页面的url页面id
 				styles: {
 					top: '0px', //新页面顶部位置 
 					bottom: '0px', //新页面底部位置 

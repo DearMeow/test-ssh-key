@@ -393,6 +393,13 @@
 	  "images/heart.png",
 	  "images/logo.png",
 	  "js/mui.js",
-	  "js/util.js"
+	  "js/util.js",
+	  "demo/db.html",
+	  "demo/dizhi.html",
+	  "demo/lianjie_db.html",
+	  "demo/paixu.html",
+	  "demo/yanzhengma.html",
+	  "images/ma.png",
+	  "README.md"
 	]
 }
