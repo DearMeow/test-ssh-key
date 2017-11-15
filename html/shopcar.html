@@ -32,86 +32,20 @@
 .jiesuan{
 	padding-bottom: 1rem;margin-bottom: 0.5rem;
 }
-
+.fw{
+	font-weight: bold;
+}
+.jiesuan input{
+	margin-right:1rem;background-color: green;color: #FFFFFF;margin-top: 1.5rem;
+}
 		</style>
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav" style="background-color: darkred;color: #FFFFFF;">
-		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF;"></a>
 		    <h1 class="mui-title" style="color: #FFFFFF;">购物车</h1>
 		</header>
-		<div class="mui-content" id="bodydiv">
-<div class="dianpu">
-	<div class="mui-pull-left">
-		叫了个炸鸡（恒大绿洲店）
-	</div>
-	<div class="mui-pull-right rig">
-		<span class="mui-icon mui-icon-trash"></span>
-	</div>
-	<div class="mui-clearfix"></div>
-	<div  class="mt">
-	<div class="mui-pull-left">
-		<img src="../images/logo2.png" style="width: 4rem;"/>
-	</div>
-	<div class="mui-pull-left ml pt1">
-		卤鸡腿
-	</div>
-	<div class="mui-pull-right rig pt1">
-		<span class="redprice">￥25</span>
-	</div>
-	<div class="mui-clearfix"></div>
-	</div><div  class="mt">
-	<div class="mui-pull-left">
-		餐盒
-	</div>
-	<div class="mui-pull-right rig">
-		<span class="redprice">￥25</span>
-	</div>
-	<div class="mui-clearfix"></div></div>
-	<div class="mui-text-right jiesuan">
-				<input type="button" name="jiesuanbtn" onclick="qujiesuan()" value="去结算" style="margin-right:1rem;background-color: green;color: #FFFFFF;margin-top: 1.5rem;" />
-			</div>
-</div><!--dianpu-->
-
-
-
-<div class="dianpu">
-	<div class="mui-pull-left">
-		叫了个炸鸡（恒大绿洲店）
-	</div>
-	<div class="mui-pull-right rig">
-		<span class="mui-icon mui-icon-trash"></span>
-	</div>
-	<div class="mui-clearfix"></div>
-	<div  class="mt">
-	<div class="mui-pull-left">
-		<img src="../images/logo2.png" style="width: 4rem;"/>
-	</div>
-	<div class="mui-pull-left ml pt1">
-		卤鸡腿
-	</div>
-	<div class="mui-pull-right rig pt1">
-		<span class="redprice">￥25</span>
-	</div>
-	<div class="mui-clearfix"></div>
-	</div><div  class="mt">
-	<div class="mui-pull-left">
-		餐盒
-	</div>
-	<div class="mui-pull-right rig">
-		<span class="redprice">￥25</span>
-	</div>
-	<div class="mui-clearfix"></div></div>
-	<div class="mui-text-right jiesuan">
-				<input type="button" name="jiesuanbtn" onclick="qujiesuan()" value="去结算" style="margin-right:1rem;background-color: green;color: #FFFFFF;margin-top: 1.5rem;" />
-			</div>
-</div><!--dianpu-->
-
-
-
-			
-		</div>
+		<div class="mui-content" id="bodydiv"></div>
 		<!--mbody-->
 		<!--<div id="msg">
 				kkk
@@ -120,11 +54,10 @@
 	<script src="../js/mui.min.js"></script>
 	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script>
-//			window.onload = shuaxin();
+			window.onload = shuaxin();
  
 			function shuaxin() {
 			var sesid = localStorage.getItem("sesid");
- console.log("-sesid-------"+sesid);
 			rh.SesId = sesid;
 			
 			var rb = new Object();
@@ -160,12 +93,11 @@
 				success: function(data) {
  
 					var result = data.RespBody;
- 
+					
 					for(var i = 0; i < result.length; i++) {
  
- 
-						document.getElementById("bodydiv").innerHTML += "<div class='mui-row' style='background-color: white;padding-top: 0.5rem;margin-bottom: 0.2rem;'><div class='mui-col-sm-7 mui-col-xs-7'><div class='mui-row'><div class='mui-col-sm-4 mui-col-xs-4 mui-text-right'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-col-sm-8 mui-col-xs-8' style='padding-left: 1rem;padding-top: 0.5rem;'>" + result[i].goods_name + "<h4 style='color: red;'>￥" + result[i].goods_price + "</h4></div></div></div><div class='mui-col-sm-5 mui-col-xs-5 mui-text-right' style='padding-right: 0.5rem;padding-top: 0.7rem;'><span class='mui-icon mui-icon mui-icon-minus' onclick='jian()'></span><input style='width: 50%;' type='number' value='" + result[i].buy_count + "' /><span class='mui-icon mui-icon mui-icon mui-icon-plus' onclick='jia()'></span></div></div>";
- console.log("---"+i);
+//						document.getElementById("bodydiv").innerHTML += "<div class='dianpu'><div class='mui-pull-left fw'>"+result[i].work_name+"</div><div class='mui-pull-right rig'><span class='mui-icon mui-icon-trash'></span></div><div class='mui-clearfix'></div><div  class='mt'><div class='mui-pull-left'><img src='"+result[i].FilePath+"' style='width: 4rem;'/></div><div class='mui-pull-left ml pt1'>"+result[i].goods_name+"</div><div class='mui-pull-right rig pt1'><span class='redprice'>￥"+result[2].goods_price+"</span></div><div class='mui-clearfix'></div></div><div class='mt'><div class='mui-pull-left'>餐盒</div><div class='mui-pull-right rig'><span class='redprice'>￥"+result[i].express_money+"</span></div><div class='mui-clearfix'></div></div><div class='mui-text-right jiesuan'><input type='button' name='jiesuanbtn' onclick='qujiesuan()' value='去结算'/></div></div>";
+						document.getElementById("bodydiv").innerHTML += "<div class='dianpu'><div class='fw'>"+result[i].work_name+"</div><div class='mt'><div class='mui-pull-left'><img src='"+result[i].FilePath+"' style='width: 4rem;'/></div><div class='mui-pull-left ml pt1'>"+result[i].goods_name+"</div><div class='mui-pull-right rig pt1'><span class='redprice'>￥"+result[2].goods_price+"</span></div><div class='mui-clearfix'></div></div><div class='mt'><div class='mui-pull-left'>餐盒</div><div class='mui-pull-right rig'><span class='redprice'>￥"+result[i].express_money+"</span></div><div class='mui-clearfix'></div></div><div class='mui-text-right jiesuan'><input type='button' name='jiesuanbtn' onclick='qujiesuan()' value='去结算'/></div></div>";
 					}
  
 				},
@@ -404,6 +336,8 @@
 			}); //ajax
 
 		}//去结算
+		
+		
 
 	</script>
 
