@@ -25,7 +25,7 @@
 		<header class="mui-bar mui-bar-nav">
 			<div class="mui-row">
                                 <div class="mui-col-sm-9 mui-col-xs-9" id="msg" style="font-size: 12px;line-height: 50%;padding-top: 1.2rem;"></div>
-                                <div class="mui-col-sm-3 mui-col-xs-3" id="dizhi" style="font-size: 12px;text-align: right;margin-top: 0.7rem;border:1px solid #6D6D72;border-radius: 0.5rem;text-align: center;">从新获取</div>
+                                <div class="mui-col-sm-3 mui-col-xs-3" id="dizhi" style="font-size: 12px;text-align: right;margin-top: 0.7rem;border:1px solid #6D6D72;border-radius: 0.5rem;text-align: center;">重新定位</div>
                         </div>
 		</header>
 		<div class="mui-content">
@@ -46,7 +46,7 @@
 	<script src="../js/vue.js"></script>
 	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script>
-		
+		alert("xin3");
 		var _this;
 		var app = new Vue({
 			el: '#app',
@@ -181,14 +181,11 @@
 				document.getElementById("msg").innerHTML = p.address.street + "\n" + p.address.poiName;
 			}, function(e) {
 				//e.code错误码
-				mui.toast('定位失败，请开启GPS和网络',{ duration:'long', type:'div' }) 
+					alert("错误码 "+e.code);
+//				mui.toast('定位失败，请开启GPS和网络',{ duration:'long', type:'div' }) 
 			});
-
-		}); //plusReady
-
-		
-
-		//获取定位地址
+			
+			//获取定位地址
 		document.getElementById("dizhi").onclick = function() {
 
 			plus.geolocation.getCurrentPosition(function(p) {
@@ -196,9 +193,16 @@
 
 			}, function(e) {
 				//		e.code 错误码
-				mui.toast('定位失败，请开启GPS和网络',{ duration:'long', type:'div' }) 
+			alert("错误码 "+e.code);
+//				mui.toast('定位失败，请开启GPS和网络',{ duration:'long', type:'div' });
 			});
 		}
+
+		}); //plusReady
+
+		
+
+		
 	</script>
 
 </html>
