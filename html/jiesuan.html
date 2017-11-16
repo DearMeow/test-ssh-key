@@ -34,6 +34,11 @@
 			.ptop {
 				padding-top: 1.5rem;
 			}
+			.gn{
+				width: 14rem;
+				height: 1.4rem;
+				overflow: hidden;
+			}
 		</style>
 	</head>
 
@@ -149,7 +154,7 @@
 					var rs = data.RespBody.Detail;
 					var con = "";
 					for(var i = 0; i < rs.length; i++) {
-						con += "<div class='dingdanxiangqing'><div class='mui-pull-left'>" + rs[i].goods_name + "</div><div class='mui-pull-right'><span class='mui-icon mui-icon-closeempty'></span>" + rs[i].COUNT + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='scolor'>￥" + rs[i].unitprice + "</span></div><div class='mui-clearfix'></div></div>";
+						con += "<div class='dingdanxiangqing'><div class='mui-pull-left gn'>" + rs[i].goods_name + "</div><div class='mui-pull-right'><span class='mui-icon mui-icon-closeempty'></span>" + rs[i].COUNT + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='scolor'>￥" + rs[i].unitprice + "</span></div><div class='mui-clearfix'></div></div>";
 
 					}
 					document.getElementById("ddxq").innerHTML = con;
