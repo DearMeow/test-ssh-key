@@ -267,7 +267,7 @@ if (yxiaoliang > 200) {
 }else{
 	ht= "<img src='../images/love.png' style='width:1rem'/>";
 }
-						content += "<div class='beijing' onclick='goDetailPage(&quot;" + result[i].goodid + "&quot;)'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-pull-left ml'><div class='gname'>" + result[i].goodsname + "</div>"+ht+"<span class='yxl'>&nbsp;&nbsp;月销量" + result[i].salsvolume + "</span><br/><span class='gprice'>￥" + result[i].price + "</span></div><div class='mui-clearfix'></div></div>";
+						content += "<div class='beijing' onclick='goDetailPage(&quot;" + result[i].workshopid + "&quot;)'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-pull-left ml'><div class='gname'>" + result[i].goodsname + "</div>"+ht+"<span class='yxl'>&nbsp;&nbsp;月销量" + result[i].salsvolume + "</span><br/><span class='gprice'>￥" + result[i].price + "</span></div><div class='mui-clearfix'></div></div>";
 					}
 					if(shangla == 1) {
 						document.getElementById("item2").innerHTML += content;
@@ -331,7 +331,7 @@ if (yxiaoliang > 200) {
 }else{
 	ht= "<img src='../images/love.png' style='width:1rem'/>";
 }
-						content += "<div class='beijing' onclick='goDetailPage(&quot;" + result[i].goodid + "&quot;)'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-pull-left ml'><div class='gname'>" + result[i].goodsname + "</div>"+ht+"<span class='yxl'>&nbsp;&nbsp;月销量" + result[i].salsvolume + "</span><br/><span class='gprice'>￥" + result[i].price + "</span></div><div class='mui-clearfix'></div></div>";
+						content += "<div class='beijing' onclick='goDetailPage(&quot;" + result[i].workshopid + "&quot;)'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-pull-left ml'><div class='gname'>" + result[i].goodsname + "</div>"+ht+"<span class='yxl'>&nbsp;&nbsp;月销量" + result[i].salsvolume + "</span><br/><span class='gprice'>￥" + result[i].price + "</span></div><div class='mui-clearfix'></div></div>";
 					}
 					if(shangla == 1) {
 						document.getElementById("item3").innerHTML += content;
@@ -478,7 +478,7 @@ if (yxiaoliang > 200) {
 }else{
 	ht= "<img src='../images/love.png' style='width:1rem'/>";
 }
-						content += "<div class='beijing' onclick='goDetailPage(&quot;" + result[i].goodid + "&quot;)'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-pull-left ml'><div class='gname'>" + result[i].goodsname + "</div>"+ht+"<span class='yxl'>&nbsp;&nbsp;月销量" + result[i].salsvolume + "</span><br/><span class='gprice'>￥" + result[i].price + "</span></div><div class='mui-clearfix'></div></div>";
+						content += "<div class='beijing' onclick='goDetailPage(&quot;" + result[i].workshopid + "&quot;)'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-pull-left ml'><div class='gname'>" + result[i].goodsname + "</div>"+ht+"<span class='yxl'>&nbsp;&nbsp;月销量" + result[i].salsvolume + "</span><br/><span class='gprice'>￥" + result[i].price + "</span></div><div class='mui-clearfix'></div></div>";
 					}
 					if(shangla == 1) {
 						document.getElementById("item1").innerHTML += content;
@@ -497,10 +497,8 @@ if (yxiaoliang > 200) {
 		} //sousuo
 
 		//点击去详情页
-		function goDetailPage(gid) {
+		function goDetailPage(workshopid) {
 			
-			mui.toast("--- "+gid);
-
 			//打开新窗口
 			mui.openWindow({
 				url: 'shangjia.html', //需要打开页面的url地址 
@@ -512,7 +510,7 @@ if (yxiaoliang > 200) {
 					//					height:newpage-height,//新页面高度，默认为100% ...... 
 				},
 				extras: {
-					goodsId: gid
+					workshopid: workshopid
 				},
 				show: { //控制打开页面的类型
 					autoShow: true,
