@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d4243ac9-3fb3-403c-9152-3bcc71614d68" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/html/myinfo/zhucexieyi.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/jiesuan.html" afterPath="$PROJECT_DIR$/html/jiesuan.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/myorder.html" afterPath="$PROJECT_DIR$/html/myorder.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/shopcar.html" afterPath="$PROJECT_DIR$/html/shopcar.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/mine.html" afterPath="$PROJECT_DIR$/html/mine.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/myinfo/denglu.html" afterPath="$PROJECT_DIR$/html/myinfo/denglu.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/myinfo/tongyong.html" afterPath="$PROJECT_DIR$/html/myinfo/tongyong.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -53,6 +54,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -65,7 +67,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
       <pane id="AndroidView" />
     </panes>
@@ -186,7 +187,8 @@
       <workItem from="1510920270365" duration="274000" />
       <workItem from="1510996794516" duration="6000" />
       <workItem from="1510997250109" duration="110000" />
-      <workItem from="1511013993092" duration="11000" />
+      <workItem from="1511013993092" duration="143000" />
+      <workItem from="1511050902389" duration="18000" />
     </task>
     <task id="LOCAL-00001" summary="777">
       <created>1510789415826</created>
@@ -209,11 +211,18 @@
       <option name="project" value="LOCAL" />
       <updated>1510997321946</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="登陆后，购物车和订单，立马显示数据">
+      <created>1511014021057</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1511014021057</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="652000" />
+    <option name="totallyTimeSpent" value="802000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -256,7 +265,8 @@
     <MESSAGE value="777" />
     <MESSAGE value="更新结算页面" />
     <MESSAGE value="添加商家页面；&#10;完善购物车和订单页面" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加商家页面；&#10;完善购物车和订单页面" />
+    <MESSAGE value="登陆后，购物车和订单，立马显示数据" />
+    <option name="LAST_COMMIT_MESSAGE" value="登陆后，购物车和订单，立马显示数据" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />

@@ -8,10 +8,10 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/layout.css" />
 		<style type="text/css">
-			.ty{
+			.ty {
 				background-color: #FFFFFF;
 				padding: 1rem;
 				margin-top: 1rem;
@@ -21,20 +21,24 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav" style="background-color: darkred;color: #FFFFFF;">
-		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF;"></a>
-		    <h1 class="mui-title" style="color: #FFFFFF;">通用</h1>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF;"></a>
+			<h1 class="mui-title" style="color: #FFFFFF;">通用</h1>
 		</header>
 		<div class="mui-content">
-		   <div class="ty" onclick="qingchu()">
-		   	清除缓存
-		   </div>
-		</div><!--mui-content-->
+			<div class="ty" onclick="qingchu()" id="qingchu">
+				清除缓存
+			</div>
+		</div>
+		<!--mui-content-->
 	</body>
-<script src="../../js/mui.min.js"></script>
-<script src="../../js/domain.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
-			function qingchu(){
-				mui.toast("缓存已清除");
-			}/*qingchu*/
-		</script>
+	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/domain.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+
+		function qingchu() {
+			plus.cache.clear();
+			mui.toast("缓存已清除");
+		} /*qingchu*/
+	</script>
+
 </html>
