@@ -265,12 +265,12 @@
 				"resources": [
 					"css/mui.min.css",
 					"fonts/mui.ttf",
-					"js/mui.min.js"
+					"js/mui.min.js",
+					"html/shouye.html"
 				],
 				"refer": [
 					"html/myorder.html",
 					"html/mine.html",
-					"html/shouye.html",
 					"html/shopcar.html"
 				],
 				"priority": 0

@@ -18,7 +18,9 @@
 			.catagory div {
 				text-align: center;
 			}
-			
+			li{
+				font-size: 0.8rem;
+			}
 		</style>
 	</head>
 	<body>
@@ -33,7 +35,7 @@
 			<div class="mui-row catagory" id="app">
 				<div class="mui-col-sm-4 mui-col-xs-4" v-for="dlm in daleimu">
 					<li class="mui-table-view-cell" v-on:click="detail(dlm.catid,dlm.catname)">
-						<img :src="dlm.FilePath"/>
+						<img :src="dlm.FilePath" style="width: 4rem;"/>
 						<div>{{dlm.catname}}</div>
 					</li>
 				</div>

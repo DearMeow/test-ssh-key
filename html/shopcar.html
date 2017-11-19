@@ -78,6 +78,7 @@
 			shuaxin();
 		}, false);
 
+
 		function shuaxin() {
 
 			var sesid = localStorage.getItem("sesid");
@@ -121,21 +122,13 @@
 					var result = data.RespBody;
 
 					for(var i = 0; i < result.length; i++) {
-
-						//						document.getElementById("bodydiv").innerHTML += "<div class='dianpu'><div class='mui-pull-left fw'>"+result[i].work_name+"</div><div class='mui-pull-right rig'><span class='mui-icon mui-icon-trash'></span></div><div class='mui-clearfix'></div><div  class='mt'><div class='mui-pull-left'><img src='"+result[i].FilePath+"' style='width: 4rem;'/></div><div class='mui-pull-left ml pt1'>"+result[i].goods_name+"</div><div class='mui-pull-right rig pt1'><span class='redprice'>￥"+result[2].goods_price+"</span></div><div class='mui-clearfix'></div></div><div class='mt'><div class='mui-pull-left'>餐盒</div><div class='mui-pull-right rig'><span class='redprice'>￥"+result[i].express_money+"</span></div><div class='mui-clearfix'></div></div><div class='mui-text-right jiesuan'><input type='button' name='jiesuanbtn' onclick='qujiesuan()' value='去结算'/></div></div>";
-						document.getElementById("bodydiv").innerHTML += "<div class='dianpu'><div class='fw'>" + result[i].work_name + "</div><div class='mt'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-pull-left ml pt1'>" + result[i].goods_name + "</div><div class='mui-pull-right rig pt1'><span class='redprice'>￥" + result[2].goods_price + "</span></div><div class='mui-clearfix'></div></div><div class='mt'><div class='mui-pull-left'>餐盒</div><div class='mui-pull-right rig'><span class='redprice'>￥" + result[i].express_money + "</span></div><div class='mui-clearfix'></div></div><div class='mui-text-right jiesuan'><input type='button' name='jiesuanbtn' onclick='qujiesuan()' value='去结算'/></div></div>";
+						document.getElementById("bodydiv").innerHTML += "<div class='dianpu'><div class='fw'>" + result[i].work_name + "</div><div class='mt'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-pull-left ml pt1'>" + result[i].goods_name + "</div><div class='mui-pull-right rig pt1'><span class='redprice'>￥" + result[2].goods_price + "</span></div><div class='mui-clearfix'></div></div><div class='mt'><div class='mui-pull-left'>餐盒</div><div class='mui-pull-right rig'><span class='redprice'>￥" + result[i].express_money + "</span></div><div class='mui-clearfix'></div></div><div class='mui-text-right jiesuan'><input type='button' name='jiesuanbtn' onclick='qujiesuan(&quot;"+result[i].work_id+","+result[i].work_name+",100"+","+result[i].work_name+"&quot;)' value='去结算'/></div></div>";
 					}
-
 				},
 
 				error: function(xhr, type, errorThrown) {
-
 					//异常处理；
-
 					console.log(type);
-
-					document.getElementById("msg").innerHTML += "_0000错误信息00000_" + xhr + "__" + type + "____" + errorThrown;
-
 				}
 
 			}); //ajax
@@ -172,6 +165,7 @@
 				}
 			}); //openWindow
 		} //nologin
+		
 		mui.init({
 			swipeBack: true, //启用右滑关闭功能
 			pullRefresh: {
@@ -197,36 +191,69 @@
 			}, 1000);
 		} //pulldownRefresh
 
-		//减少数量
-		function jian(idPrice) {
-			var idp = idPrice.split("_");
-			var id = idp[0];
-			var price = idp[1];
-			if(document.getElementById(id).value.trim() > 1) {
-				document.getElementById(id).value -= 1;
-				document.getElementById("price" + id).textContent = price * parseInt(document.getElementById(id).value);
-				changeShopcar(id, parseInt(document.getElementById(id).value), parseInt(document.getElementById("price" + id).textContent));
-			}
-		} //减少数量
-		//增加数量
-		function jia(idPrice) {
-			var idp = idPrice.split("_");
-			var id = idp[0];
-			var price = idp[1];
-			document.getElementById(id).value = parseInt(document.getElementById(id).value.trim()) + 1;
-			document.getElementById("price" + id).textContent = price * parseInt(document.getElementById(id).value);
-			changeShopcar(id, parseInt(document.getElementById(id).value), parseInt(document.getElementById("price" + id).textContent));
-		} //增加数量
+		
 
-		//修改购物车
-		function changeShopcar(cartId, buyCount, goodsPrice) {
+
+
+
+
+		//去结算
+		function qujiesuan(cs) {
+			
+			var canshu = cs.split(",");
+			
+			
+			var work_id = canshu[0];
+var work_name = canshu[1];
+var order_total = "";
+var address = "";
+var consignee = "";
+var mobile = "";
+var expressamount = "";
+var booktime = "";
+var buy_count = "";
+var goods_id = "";
+var id = "";
+
+
+
+mui.toast(cs);
+
+return ;
+
+//生成订单
 			var sesid = localStorage.getItem("sesid");
 			rh.SesId = sesid;
 
+			var od = new Array();
+
+			var dd = new Object();
+			dd.work_id = "101";
+			dd.work_name = Math.random();
+			dd.order_total = parseInt(Math.random() * 100);
+			dd.remark = "";
+			dd.address = "商家地址" + Math.random();
+			dd.consignee = "张飞";
+			dd.mobile = "13100718823";
+			
+			dd.expressamount = parseInt(Math.random() * 10);
+			dd.booktime = "2017-10-10 7:00:00";
+
+			var dt = new Array();
+
+			var dt2 = new Object();
+			dt2.buy_count = parseInt(Math.random() * 10);
+			dt2.goods_id = "071f60fa-ae12-4248-8bc2-097f01377612";
+			dt2.id = 72;
+
+			dt.push(dt2);
+			dd.detail = dt;
+
+			od.push(dd);
+
 			var rb = new Object();
-			rb.CartId = cartId;
-			rb.buy_count = buyCount;
-			rb.goods_price = goodsPrice;
+			rb.Orders = od;
+			rb.Total = 0;
 
 			var jn = new Object();
 			jn.ReqHead = rh;
@@ -234,7 +261,7 @@
 
 			var sendData = JSON.stringify(jn);
 
-			mui.ajax(baseUrl + "zdm/AppApi/ShopCart/UpdateGoods2Cart", {
+			mui.ajax(baseUrl + "zdm/AppApi/ShopOrder/MakeOrders", {
 				data: sendData,
 				dataType: 'json', //服务器返回json格式数据
 				type: 'post', //HTTP请求类型
@@ -246,19 +273,19 @@
 					if(data.RespBody.succ == 0) {
 						mui.toast('请重试');
 					}
+					if(data.RespBody.succ == 1) {
+						mui.toast('已生成订单 89');
+
+					} //已生成订单
 				},
 				error: function(xhr, type, errorThrown) {
 					//异常处理；
-					console.log(type);
-					alert(type);
+					document.getElementById("msg").innerHTML += "_0000错误信息00000_" + xhr + "__" + type + "____" + errorThrown;
 				}
 			}); //ajax
-
-		} //修改购物车
-
-		//去结算
-		function qujiesuan() {
-
+			
+			return;
+			
 			//打开新窗口
 			mui.openWindow({
 				url: 'jiesuan.html', //需要打开页面的url地址 
@@ -289,99 +316,8 @@
 					}
 				}
 			}); //openWindow
-
-			return;
-
-			var sesid = localStorage.getItem("sesid");
-			rh.SesId = sesid;
-
-			var od = new Array();
-
-			var dd = new Object();
-			dd.work_id = "101";
-			dd.work_name = "武汉蔡林记" + Math.random();
-			dd.order_total = parseInt(Math.random() * 100);
-			dd.remark = "";
-			dd.address = "商家地址" + Math.random();
-			dd.consignee = "张飞";
-			dd.mobile = "13100718823";
-			dd.postcode = "430000";
-			dd.expressamount = parseInt(Math.random() * 10);
-			dd.booktime = "2017-10-10 7:00:00";
-
-			var dt = new Array();
-
-			var dt2 = new Object();
-			dt2.FilePath = "http://localhost:8080/zdm//uploadFiles/uploadImgs/20171013/0d6e6965-759d-4cbd-bb23-fcf4d38865e2small.jpg";
-			dt2.del_flag = 0;
-			dt2.work_id = 101;
-			dt2.goods_name = "商品名称" + Math.random();
-			dt2.prdid = "071f60fa-ae12-4248-8bc2-097f01377612";
-
-			var crt = new Object();
-			crt.date = 26;
-			crt.hours = 21;
-			crt.seconds = 24;
-			crt.month = 9;
-			crt.nanos = 0;
-			crt.timezoneOffset = -480;
-			crt.year = 117;
-			crt.minutes = 26;
-			crt.time = 1509023604000;
-			crt.day = 4;
-
-			dt2.create_time = crt;
-			dt2.pic_id = "0d6e6965-759d-4cbd-bb23-fcf4d38865e2";
-			dt2.work_name = "商家地址" + Math.random();
-			dt2.goods_price = parseInt(Math.random() * 100);
-			dt2.buy_count = parseInt(Math.random() * 10);
-			dt2.goods_id = "071f60fa-ae12-4248-8bc2-097f01377612";
-			dt2.express_money = 4.0;
-			dt2.json_prop = "";
-			dt2.specs = "";
-			dt2.goods_price_total = 59.2;
-			dt2.user_ddid = "10003";
-			dt2.id = 72;
-			dt2.create_user = "10003";
-			dt2.price_mode = 0;
-
-			dt.push(dt2);
-			dd.detail = dt;
-
-			od.push(dd);
-
-			var rb = new Object();
-			rb.Orders = od;
-			rb.Total = 0;
-
-			var jn = new Object();
-			jn.ReqHead = rh;
-			jn.ReqBody = rb;
-
-			var sendData = JSON.stringify(jn);
-
-			mui.ajax(baseUrl + "zdm/AppApi/ShopOrder/MakeOrders", {
-				data: sendData,
-				dataType: 'json', //服务器返回json格式数据
-				type: 'post', //HTTP请求类型
-				timeout: 10000, //超时时间设置为10秒；
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				success: function(data) {
-					if(data.RespBody.succ == 0) {
-						mui.toast('请重试');
-					}
-					if(data.RespBody.succ == 1) {
-						mui.toast('已生成订单');
-
-					} //已生成订单
-				},
-				error: function(xhr, type, errorThrown) {
-					//异常处理；
-					document.getElementById("msg").innerHTML += "_0000错误信息00000_" + xhr + "__" + type + "____" + errorThrown;
-				}
-			}); //ajax
+			
+			
 
 		} //去结算
 	</script>
