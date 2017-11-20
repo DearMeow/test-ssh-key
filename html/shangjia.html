@@ -7,10 +7,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-
 		<link rel="stylesheet" href="../css/mui.min.css">
 		<link rel="stylesheet" type="text/css" href="../css/layout.css" />
-		<!--<link rel="stylesheet" type="text/css" href="../css/font-awesome-4.7.0/css/font-awesome.min.css" />-->
+		<link rel="stylesheet" type="text/css" href="../css/font-awesome-4.7.0/css/font-awesome.min.css" />
 		<style>
 			.jiesao {
 				padding: 1rem 1rem 0.5rem 1rem;
@@ -73,7 +72,12 @@
 		<div class="mui-content">
 			<div class="jiesao">
 				<div class="mui-pull-left" id="logo"></div>
-				<div class="mui-pull-left" style="margin-left: 1rem;"><span id="dmingcheng" style="font-size: 1.2rem;"></span><br/><span style="font-size: 0.8rem;color:rgb(153,153,153);">欢迎光临，用餐高峰请提前下单。</span></div>
+				<div class="mui-pull-left" style="margin-left: 1rem;">
+					<span id="dmingcheng" style="font-size: 1.2rem;"></span>
+					<span id="Collection"><i class="fa fa-star-o" style="color:red;"></i></span>
+					<!--<i class="fa fa-star-o" style="color:red;"></i>-->
+					<!--<i class="fa fa-star" style="color:red;"></i>-->
+					<br/><span style="font-size: 0.8rem;color:rgb(153,153,153);">欢迎光临，用餐高峰请提前下单。</span></div>
 				<div class="mui-clearfix"></div>
 			</div>
 			<!--jiesao-->
@@ -403,6 +407,43 @@ function xuanzhe(catid){
 			}); //openWindow
 
 		} //jiesuan
+		
+		//收藏
+		document.getElementById("Collection").onclick = function(){
+			
+			
+				var sesid = localStorage.getItem("sesid");
+			rh.SesId = sesid;
+alert("ok"+sesid);
+			var rb = new Object();
+			rb.WorkId = workshopid;
+			
+
+			var jn = new Object();
+			jn.ReqHead = rh;
+			jn.ReqBody = rb;
+
+			var sendData = JSON.stringify(jn);
+
+			mui.ajax(baseUrl + "zdm/AppApi/Merchant/CollectMerchants", {
+				data: sendData,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+					if (data.RespBody.succ == 0) {
+						mui.toast('收藏成功');
+					}
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					alert(errorThrown);
+				}
+			}); //ajax
+		}//Collection
 	</script>
 	</body>
 

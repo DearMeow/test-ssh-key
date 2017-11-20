@@ -125,6 +125,40 @@
 <script src="../../js/mui.min.js"></script>
 <script src="../../js/domain.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-			mui.init()
+			mui.init();
+			window.onload = function(){
+				var sesid = localStorage.getItem("sesid");
+			rh.SesId = sesid;
+
+			var rb = new Object();
+			rb.curPage = 1;
+			rb.pageSize=20;
+			rb.workname="";
+			
+
+			var jn = new Object();
+			jn.ReqHead = rh;
+			jn.ReqBody = rb;
+
+			var sendData = JSON.stringify(jn);
+
+			mui.ajax(baseUrl + "zdm/AppApi/Merchant/getCollectMerchants", {
+				data: sendData,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+						mui.toast('收藏成功'+data.RespBody.Recs.length);
+				
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					alert(errorThrown);
+				}
+			}); //ajax
+			}//onload
 		</script>
 </html>
