@@ -37,7 +37,7 @@
 			<!--mui-row-->
 			<div class="mui-row white" style="margin-top: 0.1rem;">
 				<div class="mui-col-sm-12 mui-col-xs-12">
-					<input type="text" id="checkCode" placeholder="请输入验证码" value="734477" style="margin-top: 1rem;border:none;font-weight: bold;font-size: 1.2rem;" />
+					<input type="text" id="checkCode" placeholder="请输入验证码" style="margin-top: 1rem;border:none;font-weight: bold;font-size: 1.2rem;" />
 				</div>
 			</div>
 			<!--mui-row-->
@@ -59,18 +59,14 @@
 	<script src="../../js/mui.min.js"></script>
 	<script src="../../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script>
-		
 		mui.init({
-    beforeback: function() {
-　　　　 //获得父页面的webview
-        var list = plus.webview.currentWebview().opener();
-　　　　 //触发父页面的自定义事件(refresh),从而进行刷新
-        mui.fire(list, 'minerefresh');
-        //返回true,继续页面关闭逻辑
-        return true;
-    }
-});
-
+			beforeback: function() {　　　　 //获得父页面的webview
+				var list = plus.webview.currentWebview().opener();　　　　 //触发父页面的自定义事件(refresh),从而进行刷新
+				mui.fire(list, 'minerefresh');
+				//返回true,继续页面关闭逻辑
+				return true;
+			}
+		});
 
 		//60秒倒计时
 		var wait = 60;
@@ -96,7 +92,7 @@
 			sendcode(this);
 		} //getCheckCode
 
-		var verifyCode="734477"; //短信验证码
+		var verifyCode = ""; //短信验证码
 		function sendcode(t) {
 
 			var mobile = document.getElementById("mobile").value.replace(/\s+/g, "");
@@ -148,15 +144,20 @@
 
 		} //onclick
 
-//		document.getElementById("loginBtn90").onclick = function() {
-//			
-//			mui.back();
-//
-//
-//		}
+		//		document.getElementById("loginBtn90").onclick = function() {
+		//			
+		//			mui.back();
+		//
+		//
+		//		}
 		//登录
 		document.getElementById("loginBtn").onclick = function() {
 
+			if(verifyCode == "") {
+				mui.toast("请填写验证码");
+				return;
+			}
+			
 			var mob = document.getElementById("mobile").value.replace(/\s+/g, "");
 			var rb = new Object();
 			rb.Mobile = mob;
@@ -214,7 +215,7 @@
 
 					switch(result.VerifyStat) {
 						case 0:
-							mui.toast('验证失败，请重试0', {
+							mui.toast('验证失败，请重试', {
 								duration: 'long',
 								type: 'div'
 							})
@@ -233,7 +234,7 @@
 							break;
 
 						case 3:
-							mui.toast('验证失败，请重试3', {
+							mui.toast('验证失败，请重试', {
 								duration: 'long',
 								type: 'div'
 							})
@@ -241,10 +242,9 @@
 						case 4: //登录成功
 							localStorage.setItem("sesid", result.SesId);
 							localStorage.setItem("mob", mob);
-							
 
-						mui.back();
-						
+							mui.back();
+
 							break;
 
 					}

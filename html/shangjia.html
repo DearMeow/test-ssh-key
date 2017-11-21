@@ -74,10 +74,7 @@
 				<div class="mui-pull-left" id="logo"></div>
 				<div class="mui-pull-left" style="margin-left: 1rem;">
 					<span id="dmingcheng" style="font-size: 1.2rem;"></span>
-					<span id="Collection"><i class="fa fa-star-o" style="color:red;"></i></span>
-					<!--<i class="fa fa-star-o" style="color:red;"></i>-->
-					<!--<i class="fa fa-star" style="color:red;"></i>-->
-					<br/><span style="font-size: 0.8rem;color:rgb(153,153,153);">欢迎光临，用餐高峰请提前下单。</span></div>
+					<span id="Collection"></span><br/><span style="font-size: 0.8rem;color:rgb(153,153,153);">欢迎光临，用餐高峰请提前下单。</span></div>
 				<div class="mui-clearfix"></div>
 			</div>
 			<!--jiesao-->
@@ -95,17 +92,23 @@
 	<script src="../js/mui.min.js"></script>
 	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script>
+		
+		
+		
+		
+		
 		var workshopid = "";
 		mui.plusReady(function() {
 			var self = plus.webview.currentWebview(); //获得当前页面的对象
 			 workshopid = self.workshopid;
 
 			var sesid = localStorage.getItem("sesid");
-
+	alert(sesid);
 			rh.SesId = sesid;
 
 			var rb = new Object();
-			rb.workid = workshopid;
+//			rb.workid = workshopid;
+			
 			rb.CatId = 1;
 
 			var jn = new Object();
@@ -114,7 +117,7 @@
 
 			var sendData = JSON.stringify(jn);
 
-			mui.ajax(baseUrl + "/zdm/AppApi/Merchant/GetWorkshopInfo", {
+			mui.ajax(baseUrl + "/zdm/AppApi/Merchant/GetWorkshopInfo999", {
 				data: sendData,
 				dataType: 'json', //服务器返回json格式数据
 				type: 'post', //HTTP请求类型
@@ -166,10 +169,10 @@
 
 			}); //ajax
 			
-			xuanzhe('000010000400002');
+//			xuanzhe('000010000400002');
 
 			//获取分类
-			mui.ajax(baseUrl + "zdm/AppApi/Search/CategoryList", {
+			mui.ajax(baseUrl + "zdm/AppApi/Search/CategoryList999", {
 				data: sendData,
 				dataType: 'json', //服务器返回json格式数据
 				type: 'post', //HTTP请求类型
@@ -227,6 +230,33 @@
 			}); //ajax
 			
 			
+		
+			
+			//判断店铺是否收藏
+rb.WorkId = workshopid;
+			mui.ajax(baseUrl + "zdm/AppApi/Merchant/BeenCollected", {
+				data: sendData,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+					alert(data.RespBody);
+					if (data.RespBody.stat == 1) {
+						document.getElementById("Collection").innerHTML = "<i class='fa fa-star' style='color:red;'></i>"
+						mui.toast('收藏');
+					}else if (data.RespBody.stat == 0) {
+						document.getElementById("Collection").innerHTML = "<i class='fa fa-star-o' style='color:red;'></i>"
+						mui.toast('没 收藏');
+					}
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					alert("---"+errorThrown);
+				}
+			}); //ajax
 
 		}); //plusReady
 		
@@ -414,7 +444,6 @@ function xuanzhe(catid){
 			
 				var sesid = localStorage.getItem("sesid");
 			rh.SesId = sesid;
-alert("ok"+sesid);
 			var rb = new Object();
 			rb.WorkId = workshopid;
 			
@@ -425,7 +454,7 @@ alert("ok"+sesid);
 
 			var sendData = JSON.stringify(jn);
 
-			mui.ajax(baseUrl + "zdm/AppApi/Merchant/CollectMerchants", {
+			mui.ajax(baseUrl + "zdm/AppApi/Merchant/CollectMerchant", {
 				data: sendData,
 				dataType: 'json', //服务器返回json格式数据
 				type: 'post', //HTTP请求类型
@@ -434,8 +463,13 @@ alert("ok"+sesid);
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
-					if (data.RespBody.succ == 0) {
+					
+					if (data.RespBody.succ == 1) {
+						document.getElementById("Collection").innerHTML = "<i class='fa fa-star' style='color:red;'></i>"
 						mui.toast('收藏成功');
+					}else if (data.RespBody.succ == 0) {
+						document.getElementById("Collection").innerHTML = "<i class='fa fa-star-o' style='color:red;'></i>"
+						mui.toast('已经取消收藏');
 					}
 				},
 				error: function(xhr, type, errorThrown) {

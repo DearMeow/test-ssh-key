@@ -94,7 +94,7 @@
 		//获取当前状态
 		function currentstats(){
 			var sesid = localStorage.getItem("sesid");
-			if (sesid == null) {
+			if (sesid == null || sesid == "") {
 				document.getElementById("zhuangtai").innerHTML = "未登录";
 			} else{
 				document.getElementById("zhuangtai").innerHTML = "<img src='../images/shouji.png' width='10rem'/>&nbsp;"+localStorage.getItem("mob");

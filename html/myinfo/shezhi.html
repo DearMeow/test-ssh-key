@@ -43,9 +43,7 @@
 				<div class="mui-clearfix"></div>
 			</div>
 			<!--sz-->
-			<div class=" mui-text-center sz tuichu" onclick="safe('../mine')">
-				退出登录
-			</div>
+			<div class=" mui-text-center" id="tuichu"></div>
 			<!--sz-->
 		</div>
 		<!--mui-content-->
@@ -53,6 +51,23 @@
 	<script src="../../js/mui.min.js"></script>
 	<script src="../../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
+		mui.init({
+			beforeback: function() {　　　　 //获得父页面的webview
+				var list = plus.webview.currentWebview().opener();　　　　 //触发父页面的自定义事件(refresh),从而进行刷新
+				mui.fire(list, 'minerefresh');
+				//返回true,继续页面关闭逻辑
+				return true;
+			}
+		});
+		
+		window.onload = function(){
+			
+			var sesid = localStorage.getItem("sesid");
+			
+			if(sesid != ""){
+				document.getElementById("tuichu").innerHTML = "<div class='sz tuichu' onclick='houtui()'>退出登录</div>";
+			}
+		}//onload
 		function safe(page) {
 			var goPage = page + ".html";
 			//打开新窗口
@@ -84,6 +99,47 @@
 				}
 			}); //openWindow			
 		} //openPage
+		
+		//退出登录
+		function houtui(){
+			
+			
+			var sesid = localStorage.getItem("sesid");
+
+			rh.SesId = sesid;
+
+			var rb = new Object();
+			
+
+			var jn = new Object();
+			jn.ReqHead = rh;
+			jn.ReqBody = rb;
+
+			var sendData = JSON.stringify(jn);
+
+			mui.ajax(baseUrl + "zdm/AppApi/UserAuth/logout", {
+				data: sendData,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+					if(data.RespBody.succ == 1) { //成功退出
+						localStorage.setItem("sesid", "");
+							localStorage.setItem("mob", "");
+							mui.back();
+					}
+
+				},
+				error: function(xhr, type, errorThrown) {
+					mui.toast("请重试");
+				}
+			}); //ajax
+			
+
+		}//houtui
 	</script>
 
 </html>
