@@ -122,7 +122,7 @@
 					var result = data.RespBody;
 
 					for(var i = 0; i < result.length; i++) {
-						document.getElementById("bodydiv").innerHTML += "<div class='dianpu'><div class='fw'>" + result[i].work_name + "</div><div class='mt'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-pull-left ml pt1'>" + result[i].goods_name + "</div><div class='mui-pull-right rig pt1'><span class='redprice'>￥" + result[2].goods_price + "</span></div><div class='mui-clearfix'></div></div><div class='mt'><div class='mui-pull-left'>餐盒</div><div class='mui-pull-right rig'><span class='redprice'>￥" + result[i].express_money + "</span></div><div class='mui-clearfix'></div></div><div class='mui-text-right jiesuan'><input type='button' name='jiesuanbtn' onclick='qujiesuan(&quot;"+result[i].work_id+","+result[i].work_name+",100"+","+result[i].work_name+"&quot;)' value='去结算'/></div></div>";
+						document.getElementById("bodydiv").innerHTML += "<div class='dianpu'><div class='fw'>" + result[i].work_name + "</div><div class='mt'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-pull-left ml pt1'>" + result[i].goods_name + "</div><div class='mui-pull-right rig pt1'><span class='redprice'>￥" + result[2].goods_price + "</span></div><div class='mui-clearfix'></div></div><div class='mt'><div class='mui-pull-left'>餐盒</div><div class='mui-pull-right rig'><span class='redprice'>￥" + result[i].express_money + "</span></div><div class='mui-clearfix'></div></div><div class='mui-text-right jiesuan'><input type='button' name='jiesuanbtn' onclick='qujiesuan(&quot;"+result[i].work_id+"&quot;)' value='去结算'/></div></div>";
 					}
 				},
 
@@ -198,98 +198,12 @@
 
 
 		//去结算
-		function qujiesuan(cs) {
-			
-			var canshu = cs.split(",");
-			
-			
-			var work_id = canshu[0];
-var work_name = canshu[1];
-var order_total = "";
-var address = "";
-var consignee = "";
-var mobile = "";
-var expressamount = "";
-var booktime = "";
-var buy_count = "";
-var goods_id = "";
-var id = "";
-
-
-
-mui.toast(cs);
-
-return ;
-
-//生成订单
-			var sesid = localStorage.getItem("sesid");
-			rh.SesId = sesid;
-
-			var od = new Array();
-
-			var dd = new Object();
-			dd.work_id = "101";
-			dd.work_name = Math.random();
-			dd.order_total = parseInt(Math.random() * 100);
-			dd.remark = "";
-			dd.address = "商家地址" + Math.random();
-			dd.consignee = "张飞";
-			dd.mobile = "13100718823";
-			
-			dd.expressamount = parseInt(Math.random() * 10);
-			dd.booktime = "2017-10-10 7:00:00";
-
-			var dt = new Array();
-
-			var dt2 = new Object();
-			dt2.buy_count = parseInt(Math.random() * 10);
-			dt2.goods_id = "071f60fa-ae12-4248-8bc2-097f01377612";
-			dt2.id = 72;
-
-			dt.push(dt2);
-			dd.detail = dt;
-
-			od.push(dd);
-
-			var rb = new Object();
-			rb.Orders = od;
-			rb.Total = 0;
-
-			var jn = new Object();
-			jn.ReqHead = rh;
-			jn.ReqBody = rb;
-
-			var sendData = JSON.stringify(jn);
-
-			mui.ajax(baseUrl + "zdm/AppApi/ShopOrder/MakeOrders", {
-				data: sendData,
-				dataType: 'json', //服务器返回json格式数据
-				type: 'post', //HTTP请求类型
-				timeout: 10000, //超时时间设置为10秒；
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				success: function(data) {
-					if(data.RespBody.succ == 0) {
-						mui.toast('请重试');
-					}
-					if(data.RespBody.succ == 1) {
-						mui.toast('已生成订单 89');
-
-					} //已生成订单
-				},
-				error: function(xhr, type, errorThrown) {
-					//异常处理；
-					document.getElementById("msg").innerHTML += "_0000错误信息00000_" + xhr + "__" + type + "____" + errorThrown;
-				}
-			}); //ajax
-			
-			return;
+		function qujiesuan(workid) {
 			
 			//打开新窗口
 			mui.openWindow({
-				url: 'jiesuan.html', //需要打开页面的url地址 
-				id: 'jiesuan', //需要打开页面的url页面id
+				url: 'querendingdan.html', //需要打开页面的url地址 
+				id: 'querendingdan', //需要打开页面的url页面id
 				styles: {
 					top: '0px', //新页面顶部位置 
 					bottom: '0px', //新页面底部位置 
@@ -297,7 +211,7 @@ return ;
 					//					height:newpage-height,//新页面高度，默认为100% ...... 
 				},
 				extras: {
-					//catid: catid,
+					workid: workid
 					//catname:catname
 					//					.....//自定义扩展参数，可以用来处理页面间传值 
 				},

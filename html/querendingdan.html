@@ -11,24 +11,170 @@
 		<link rel="stylesheet" href="../css/mui.min.css">
 		<link rel="stylesheet" type="text/css" href="../css/layout.css" />
 		<style>
+			.mdi {
+				margin-bottom: 0.3rem;
+				background-color: #FFFFFF;
+				padding: 0.5rem 0.5rem 0.2rem 0.5rem;
+			}
 			
+			.mdi img {
+				width: 3rem;
+			}
+			
+			#recommend {
+				height: 1.3rem;
+				width: 17rem;
+				overflow: hidden;
+				font-size: 0.8rem;
+				color: #323232;
+			}
 		</style>
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav" style="background-color: darkred;color: #FFFFFF;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF;"></a>
 			<h1 class="mui-title" style="color: #FFFFFF;">确认订单</h1>
 		</header>
 		<div class="mui-content">
-			
+			<div class="mdi">
+				<div id="address"></div>
+				<span id="userName"></span>&nbsp;&nbsp;<span id="mobile"></span>
+			</div>
+			<div class="mdi" id="shop">
+				<div class="mui-pull-left"><img src="../images/logo2.png" /></div>
+				<div class="mui-pull-left" style="margin-left: 1rem;">
+					<div id="shopName"></div>
+					<div id="recommend"></div>
+				</div>
+				<div class="mui-clearfix"></div>
+			</div>
+			<div class="mdi" class="products">
+				<div class="myprot">
+					<div class="mui-pull-left">
+						<img src="../images/logo2.png" />
+					</div>
+					<div class="mui-pull-left">
+						<div class="mui-pull-left">
+							商品名称<br/>￥ 90
+						</div>
+						<div class="mui-pull-left">
+							3
+						</div>
+					</div>
+					<div class="mui-clearfix"></div>
+				</div>
+				<!--myprot-->
+			</div>
+			<!--products-->
 		</div>
 		<!--mbody-->
-		
+
 	</body>
 	<script src="../js/mui.min.js"></script>
 	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script>
-		
+		mui.plusReady(function() {
+			var self = plus.webview.currentWebview(); //获得当前页面的对象
+			workid = self.workid;
+
+			var sesid = localStorage.getItem("sesid");
+
+			rh.SesId = sesid;
+
+			var rb = new Object();
+			rb.workid = workid;
+
+			var jn = new Object();
+			jn.ReqHead = rh;
+			jn.ReqBody = rb;
+
+			var sendData = JSON.stringify(jn);
+
+//						mui.ajax(baseUrl + "zdm/AppApi/UserAddress/GetUserDefaultAddress", {
+//							data: sendData,
+//							dataType: 'json', //服务器返回json格式数据
+//							type: 'post', //HTTP请求类型
+//							timeout: 10000, //超时时间设置为10秒；
+//							headers: {
+//								'Content-Type': 'application/json'
+//							},
+//							success: function(data) {
+//								var result = data.RespBody[0];
+//								document.getElementById("address").innerHTML = result.address;
+//								document.getElementById("userName").innerHTML = result.consignee;
+//								document.getElementById("mobile").innerHTML = result.mobile;
+//							},
+//							error: function(xhr, type, errorThrown) {
+//								mui.toast("请重试");
+//							}
+//						}); //ajax  获取默认地址
+
+			//十五、获取店家信息详细信息
+//			mui.ajax(baseUrl + "zdm/AppApi/Merchant/GetWorkshopInfo", {
+//				data: sendData,
+//				dataType: 'json', //服务器返回json格式数据
+//				type: 'post', //HTTP请求类型
+//				timeout: 10000, //超时时间设置为10秒；
+//				headers: {
+//					'Content-Type': 'application/json'
+//				},
+//				success: function(data) {
+//					document.getElementById("shopName").innerHTML = data.RespBody.workship_name;
+//					document.getElementById("recommend").innerHTML = data.RespBody.recommend;
+//
+//					//					mui.toast();
+//
+//				},
+//				error: function(xhr, type, errorThrown) {
+//					mui.toast("请重试");
+//				}
+//			}); //ajax
+//十五、获取店家信息详细信息
+
+
+
+//获取这次在这家店铺购买的商品
+			mui.ajax(baseUrl + "zdm/AppApi/ShopCart/GetMyGoodsInCart", {
+				data: sendData,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+					var rs = data.RespBody;
+					for (var i = 0; i < rs.length; i++) {
+						if (rs[i].work_id = workid) {
+							mui.toast(rs[i].goods_name+"_"+workid);
+							return;
+						}
+						
+					}
+					
+//					document.getElementById("shopName").innerHTML = data.RespBody.workship_name;
+//					document.getElementById("recommend").innerHTML = data.RespBody.recommend;
+
+
+										
+
+				},
+				error: function(xhr, type, errorThrown) {
+					mui.toast("请重试");
+				}
+			}); //ajax
+
+
+
+
+
+
+
+
+
+
+		}); //plusReady
 
 		function shuaxin() {
 
@@ -38,7 +184,7 @@
 			if(sesid == null) {
 				document.getElementById("bodydiv").innerHTML = "<div id='nologin'>请登录</div>";
 				return;
-			}else{
+			} else {
 				document.getElementById("bodydiv").innerHTML = "";
 			}
 
@@ -73,7 +219,7 @@
 					var result = data.RespBody;
 
 					for(var i = 0; i < result.length; i++) {
-						document.getElementById("bodydiv").innerHTML += "<div class='dianpu'><div class='fw'>" + result[i].work_name + "</div><div class='mt'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-pull-left ml pt1'>" + result[i].goods_name + "</div><div class='mui-pull-right rig pt1'><span class='redprice'>￥" + result[2].goods_price + "</span></div><div class='mui-clearfix'></div></div><div class='mt'><div class='mui-pull-left'>餐盒</div><div class='mui-pull-right rig'><span class='redprice'>￥" + result[i].express_money + "</span></div><div class='mui-clearfix'></div></div><div class='mui-text-right jiesuan'><input type='button' name='jiesuanbtn' onclick='qujiesuan(&quot;"+result[i].work_id+","+result[i].work_name+",100"+","+result[i].work_name+"&quot;)' value='去结算'/></div></div>";
+						document.getElementById("bodydiv").innerHTML += "<div class='dianpu'><div class='fw'>" + result[i].work_name + "</div><div class='mt'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-pull-left ml pt1'>" + result[i].goods_name + "</div><div class='mui-pull-right rig pt1'><span class='redprice'>￥" + result[2].goods_price + "</span></div><div class='mui-clearfix'></div></div><div class='mt'><div class='mui-pull-left'>餐盒</div><div class='mui-pull-right rig'><span class='redprice'>￥" + result[i].express_money + "</span></div><div class='mui-clearfix'></div></div><div class='mui-text-right jiesuan'><input type='button' name='jiesuanbtn' onclick='qujiesuan(&quot;" + result[i].work_id + "," + result[i].work_name + ",100" + "," + result[i].work_name + "&quot;)' value='去结算'/></div></div>";
 					}
 				},
 
@@ -86,19 +232,10 @@
 
 		} //shuaxin
 
-		
-		
-		
-
-
-
-
-
 		//去结算
 		function qujiesuan(cs) {
-		
 
-//生成订单
+			//生成订单
 			var sesid = localStorage.getItem("sesid");
 			rh.SesId = sesid;
 
@@ -112,7 +249,7 @@
 			dd.address = "商家地址" + Math.random();
 			dd.consignee = "张飞";
 			dd.mobile = "13100718823";
-			
+
 			dd.expressamount = parseInt(Math.random() * 10);
 			dd.booktime = "2017-10-10 7:00:00";
 
@@ -160,9 +297,9 @@
 					alert(type);
 				}
 			}); //ajax
-			
+
 			return;
-			
+
 			//打开新窗口
 			mui.openWindow({
 				url: 'jiesuan.html', //需要打开页面的url地址 
@@ -193,8 +330,6 @@
 					}
 				}
 			}); //openWindow
-			
-			
 
 		} //去结算
 	</script>
