@@ -84,8 +84,8 @@
 			var sesid = localStorage.getItem("sesid");
 			rh.SesId = sesid;
 
-			if(sesid == null) {
-				document.getElementById("bodydiv").innerHTML = "<div id='nologin'>请登录</div>";
+			if(sesid == null || sesid == "") {
+				document.getElementById("bodydiv").innerHTML = "<div id='nologin' onclick='login()'>请登录</div>";
 				return;
 			}else{
 				document.getElementById("bodydiv").innerHTML = "";
@@ -135,7 +135,7 @@
 
 		} //shuaxin
 
-		document.getElementById("nologin").onclick = function() {
+		function login() {
 			//打开新窗口
 			mui.openWindow({
 				url: 'myinfo/denglu.html', //需要打开页面的url地址 
