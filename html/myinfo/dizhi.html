@@ -55,7 +55,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav" style="background-color: darkred;color: #FFFFFF;">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF;"></a>
-			<h1 class="mui-title" style="color: #FFFFFF;">收货地址</h1>
+			<h1 class="mui-title" style="color: #FFFFFF;">收货地址<a href='../querendingdan.html'>确定</a></h1>
 			<div class="mui-pull-right" id="sure"></div>
 		</header>
 		<div class="mui-content" id="address">
@@ -79,12 +79,22 @@
 	<script src="../../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../../js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
+		
+		mui.init({
+			beforeback: function() {　　　　 //获得父页面的webview
+				var list = plus.webview.currentWebview().opener();　　　　 //触发父页面的自定义事件(refresh),从而进行刷新
+				mui.fire(list, 'querenrefresh');
+				//返回true,继续页面关闭逻辑
+				return true;
+			}
+		});
+		
 		mui.plusReady(function() {
 			var self = plus.webview.currentWebview(); //获得当前页面的对象
 			ca = self.ca;
 
 			if(ca == 1) {
-				document.getElementById("sure").innerHTML = "<span>确定</span>";
+				document.getElementById("sure").innerHTML = "<span><a href='querendingdan.html'>确定</a></span>";
 			}
 
 			var sesid = localStorage.getItem("sesid");
@@ -133,13 +143,14 @@
 		//点击确定按钮，到  确认订单  页面
 		$(function(){
 			
-			$("#sure").click(function(){
+			$("#sure5").click(function(){
 				
 				var checkedId=$('input:radio[name="adress"]:checked').val();
 				
-				var list = plus.webview.currentWebview().opener();　　　　 //触发父页面的自定义事件(refresh),从而进行刷新
-				mui.fire(list, 'querenrefresh');
-				
+//				var list = plus.webview.currentWebview().opener();　　　　 //触发父页面的自定义事件(refresh),从而进行刷新
+//				mui.fire(list, 'querenrefresh');
+//				
+//				alert(checkedId);
 				
 					//打开新窗口
 			mui.openWindow({
@@ -152,7 +163,7 @@
 					//					height:newpage-height,//新页面高度，默认为100% ...... 
 				},
 				extras: {
-					cid:checkedId
+					cid:63
 					//					.....//自定义扩展参数，可以用来处理页面间传值 
 				},
 				show: { //控制打开页面的类型

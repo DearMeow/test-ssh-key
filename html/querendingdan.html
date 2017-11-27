@@ -63,9 +63,9 @@
 					<div id="address"></div>
 					<span id="userName"></span>&nbsp;&nbsp;<span id="mobile"></span>
 				</div>
-				<div class="mui-pull-right" id="changeAddress">
+				<!--<div class="mui-pull-right" id="changeAddress">
 					<i class="fa fa-angle-right fa-2x"></i>
-				</div>
+				</div>-->
 				<div class="mui-clearfix"></div>
 
 			</div>
@@ -85,6 +85,16 @@
 	<script src="../js/mui.min.js"></script>
 	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script>
+		
+		mui.plusReady(function() {
+			shuaxin();
+		}); //plusReady
+		
+//		window.onload = function(){
+//			alert("ooo");
+//		}
+		
+		
 		window.addEventListener('querenrefresh', function() {
 			shauxin();
 		}, false);
@@ -97,18 +107,15 @@
 		var mobile = "";
 		var expressamount = "";
 		var gds = new Array();
-		mui.plusReady(function() {
-			shuaxin();
-
-		}); //plusReady
+		
 
 		function shuaxin() {
-			alert("ppppp ");
+//			alert("ppppp ");
 			var self = plus.webview.currentWebview(); //获得当前页面的对象
 			workid = self.workid;
 			var cid = self.cid;
 
-			alert("cid= " + cid);
+//			alert("cid= " + cid);
 
 			var sesid = localStorage.getItem("sesid");
 
