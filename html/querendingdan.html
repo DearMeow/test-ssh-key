@@ -63,9 +63,9 @@
 					<div id="address"></div>
 					<span id="userName"></span>&nbsp;&nbsp;<span id="mobile"></span>
 				</div>
-				<!--<div class="mui-pull-right" id="changeAddress">
+				<div class="mui-pull-right" id="changeAddress">
 					<i class="fa fa-angle-right fa-2x"></i>
-				</div>-->
+				</div>
 				<div class="mui-clearfix"></div>
 
 			</div>
@@ -90,13 +90,8 @@
 			shuaxin();
 		}); //plusReady
 		
-//		window.onload = function(){
-//			alert("ooo");
-//		}
-		
-		
 		window.addEventListener('querenrefresh', function() {
-			shauxin();
+			shuaxin();
 		}, false);
 
 		var workid = "";
@@ -110,27 +105,33 @@
 		
 
 		function shuaxin() {
-//			alert("ppppp ");
 			var self = plus.webview.currentWebview(); //获得当前页面的对象
 			workid = self.workid;
-			var cid = self.cid;
-
-//			alert("cid= " + cid);
-
+			
 			var sesid = localStorage.getItem("sesid");
 
 			rh.SesId = sesid;
 
 			var rb = new Object();
 			rb.workid = workid;
+			
+			
+			var address = "zdm/AppApi/UserAddress/GetUserDefaultAddress";
+			var cid="";
+			cid = localStorage.getItem("cid");
+			if(cid != ""){
+				rb.id=cid; 
+				address = "zdm/AppApi/UserAddress/GetAUserAddress";
+			}
 
 			var jn = new Object();
 			jn.ReqHead = rh;
 			jn.ReqBody = rb;
 
 			var sendData = JSON.stringify(jn);
+			
 			//获取默认地址
-			mui.ajax(baseUrl + "zdm/AppApi/UserAddress/GetUserDefaultAddress", {
+			mui.ajax(baseUrl + address, {
 				data: sendData,
 				dataType: 'json', //服务器返回json格式数据
 				type: 'post', //HTTP请求类型
@@ -139,7 +140,14 @@
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
-					var result = data.RespBody[0];
+					
+					var result = "";
+					if(cid != ""){ 
+					 result = data.RespBody;
+					}else{
+					 result = data.RespBody[0];
+					}
+					
 					consignee = result.consignee;
 					mobile = result.mobile;
 					document.getElementById("address").innerHTML = result.address;
