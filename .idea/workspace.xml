@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d4243ac9-3fb3-403c-9152-3bcc71614d68" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    <list default="true" id="d4243ac9-3fb3-403c-9152-3bcc71614d68" name="Default" comment="777">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -48,6 +48,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -59,13 +61,11 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../highway-pc" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../lulian" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
   </component>
   <component name="RunDashboard">
@@ -97,6 +97,9 @@
       <workItem from="1511137484702" duration="17000" />
       <workItem from="1511779330286" duration="51000" />
       <workItem from="1511779383876" duration="18000" />
+      <workItem from="1511790596045" duration="11000" />
+      <workItem from="1511831420248" duration="49000" />
+      <workItem from="1511865202019" duration="53000" />
     </task>
     <task id="LOCAL-00001" summary="777">
       <created>1510789415826</created>
@@ -116,7 +119,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="351000" />
+    <option name="totallyTimeSpent" value="464000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
