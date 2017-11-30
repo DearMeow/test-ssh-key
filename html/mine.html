@@ -103,10 +103,20 @@
 		
 		//打开新窗口
 		function openPage(page) {
-			var goPage = page + ".html";
+			
+			
+			var sesid = localStorage.getItem("sesid");
+
+			var url = "myinfo/denglu.html";
+			
+			if(sesid != null && sesid != "") {
+				var goPage = page + ".html";
+				url = "myinfo/" + goPage;
+			}
+			
 			//打开新窗口
 			mui.openWindow({
-				url: "myinfo/" + goPage, //需要打开页面的url地址 
+				url: url, //需要打开页面的url地址 
 				id: page, //需要打开页面的url页面id
 				styles: {
 					top: '0px', //新页面顶部位置 
