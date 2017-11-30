@@ -79,21 +79,26 @@
 	<script src="../../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../../js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
+		window.addEventListener('dizhirefresh', function() {
+			addressList();
+		}, false);
 		var ca = 0;
 		mui.plusReady(function() {
 			var self = plus.webview.currentWebview(); //获得当前页面的对象
 			ca = self.ca;
 
-			if(ca == 1) {
-				document.getElementById("sure").innerHTML = "确定";
-			}else{
-				document.getElementById("sure").innerHTML = "删除";
-			}
+			
 				addressList();
 			
 		}); //plusRead
 		//显示地址列表
 		function addressList(){
+			if(ca == 1) {
+				document.getElementById("sure").innerHTML = "确定";
+			}else{
+				document.getElementById("sure").innerHTML = "删除";
+			}
+			
 			var sesid = localStorage.getItem("sesid");
 
 			rh.SesId = sesid;
@@ -226,7 +231,7 @@
 		
 		//修改地址
 		function xiugai(id){
-			alert("ceshi"+id);
+//			alert("ceshi"+id);
 							//打开新窗口
 			mui.openWindow({
 				url: 'xinzeng.html', //需要打开页面的url地址 
@@ -238,7 +243,7 @@
 					//					height:newpage-height,//新页面高度，默认为100% ...... 
 				},
 				extras: {
-					id:id
+					'aid':id
 					//					.....//自定义扩展参数，可以用来处理页面间传值 
 				},
 				show: { //控制打开页面的类型

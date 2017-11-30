@@ -64,9 +64,56 @@
 	<script src="../../js/mui.min.js"></script>
 	<script src="../../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
-		mui.init();
+		mui.init({
+			beforeback: function() {　　　　 //获得父页面的webview
+				var list = plus.webview.currentWebview().opener();　　　　 //触发父页面的自定义事件(refresh),从而进行刷新
+				mui.fire(list, 'dizhirefresh');
+				//返回true,继续页面关闭逻辑
+				return true;
+			}
+		});
+		var aid = "";
+		mui.plusReady(function() {
+			var self = plus.webview.currentWebview(); //获得当前页面的对象
+			aid = self.aid;
 
-		//新增地址
+			if (aid != "" && aid != undefined) {
+			var sesid = localStorage.getItem("sesid");
+
+			rh.SesId = sesid;
+
+			var rb = new Object();
+			rb.id = aid;
+
+			var jn = new Object();
+			jn.ReqHead = rh;
+			jn.ReqBody = rb;
+
+			var sendData = JSON.stringify(jn);
+
+			mui.ajax(baseUrl + "zdm/AppApi/UserAddress/GetAUserAddress", {
+				data: sendData,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+					var result = data.RespBody;
+					document.getElementById("lianxiren").value=result.consignee;
+					document.getElementById("phone").value=result.mobile;
+					document.getElementById("adress").value=result.address;
+				},
+				error: function(xhr, type, errorThrown) {
+					mui.toast("请重试");
+				}
+			}); //ajax
+			}//if aid
+			
+		}); //plusRead
+
+		//新增地址  修改地址
 		document.getElementById("ok").onclick = function() {
 
 			var adddress = document.getElementById("adress").value.trim();
@@ -82,6 +129,7 @@
 			rh.SesId = sesid;
 
 			var rb = new Object();
+			rb.id = aid;
 			rb.address = adddress;
 			rb.consignee = consignee;
 			rb.mobile = mobile;
@@ -93,8 +141,13 @@
 			jn.ReqBody = rb;
 
 			var sendData = JSON.stringify(jn);
+			
+			var url = "zdm/AppApi/UserAddress/SaveUserAddress";
+			if (aid != "" && aid != undefined) {
+				url = "zdm/AppApi/UserAddress/UpdateUserAddress";
+			}
 
-			mui.ajax(baseUrl + "zdm/AppApi/UserAddress/SaveUserAddress", {
+			mui.ajax(baseUrl + url, {
 				data: sendData,
 				dataType: 'json', //服务器返回json格式数据
 				type: 'post', //HTTP请求类型
@@ -104,69 +157,10 @@
 				},
 				success: function(data) {
 
-					if(data.RespHead.ResponseCode == 1) { //请求失败
-						//打开新窗口
-						mui.openWindow({
-							url: 'xiaofenlei.html', //需要打开页面的url地址 
-							id: 'xiaofenlei', //需要打开页面的url页面id
-							styles: {
-								top: '0px', //新页面顶部位置 
-								bottom: '0px', //新页面底部位置 
-								//					width:newpage-width,//新页面宽度，默认为100% 
-								//					height:newpage-height,//新页面高度，默认为100% ...... 
-							},
-							extras: {
-								//					.....//自定义扩展参数，可以用来处理页面间传值 
-							},
-							show: { //控制打开页面的类型
-								autoShow: true,
-								//					//页面loaded事件发生后自动显示，默认为true 
-								aniShow: 'zoom-fade-out', //页面显示动画，默认为”slide-in-right“；  页面出现的方式 左右上下
-								duration: '300' //页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒； 
-							},
-							waiting: { // 控制 弹出转圈框的信息
-								autoShow: true, //自动显示等待框，默认为true 
-								title: '正在加载...', //等待对话框上显示的提示内容 
-								options: {
-									width: '300px', //等待框背景区域宽度，默认根据内容自动计算合适宽度 
-									height: '300px', //等待框背景区域高度，默认根据内容自动计算合适高度 ...... 
-								}
-							}
-						}); //openWindow
-						return;
-					} //请求失败
-
 					if(data.RespBody.succ == 1) { //添加成功
-						//打开新窗口
-						mui.openWindow({
-							url: 'dizhi.html', //需要打开页面的url地址 
-							id: 'dizhi', //需要打开页面的url页面id
-							styles: {
-								top: '0px', //新页面顶部位置 
-								bottom: '0px', //新页面底部位置 
-								//					width:newpage-width,//新页面宽度，默认为100% 
-								//					height:newpage-height,//新页面高度，默认为100% ...... 
-							},
-							extras: {
-								//					.....//自定义扩展参数，可以用来处理页面间传值 
-							},
-							show: { //控制打开页面的类型
-								autoShow: true,
-								//					//页面loaded事件发生后自动显示，默认为true 
-								aniShow: 'zoom-fade-out', //页面显示动画，默认为”slide-in-right“；  页面出现的方式 左右上下
-								duration: '300' //页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒； 
-							},
-							waiting: { // 控制 弹出转圈框的信息
-								autoShow: true, //自动显示等待框，默认为true 
-								title: '正在加载...', //等待对话框上显示的提示内容 
-								options: {
-									width: '300px', //等待框背景区域宽度，默认根据内容自动计算合适宽度 
-									height: '300px', //等待框背景区域高度，默认根据内容自动计算合适高度 ...... 
-								}
-							}
-						}); //openWindow
+						mui.back();
 					} else {
-						mui.toast("请重新添加！");
+						mui.toast("请重试！");
 					}
 
 				},
