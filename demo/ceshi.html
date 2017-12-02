@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>我的</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/layout.css" />
+		<!--<link rel="stylesheet" type="text/css" href="../css/font-awesome-4.7.0/css/font-awesome.min.css" />-->
+		<style>
+
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">标题</h1>
+		</header>
+		
+		<div id="d1" style="background-color: red;height:20rem"></div>
+		<div id="d2" style="background-color: blue;height:20rem"></div>
+		<div id="d3" style="background-color: green;height:20rem"></div>
+		<div id="d4" style="background-color: goldenrod;height:20rem"></div>
+		
+		
+		
+		
+		<div id="ok">
+
+		</div>
+		<h1><a href="#10d89668-b8ac-449d-a073-0047f1b39510">哈利路亚</a></h1>
+		<div id="ok2">
+
+		</div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		var gid = "";
+		mui.plusReady(function() {
+			var self = plus.webview.currentWebview(); //获得当前页面的对象
+			gid = self.gid;
+			console.log("1111111111111111111111111111");
+		}); //plusReady
+		
+//		window.onload = function() {
+function uu() {
+			var sesid = localStorage.getItem("sesid");
+			rh.SesId = sesid;
+
+			var rb = new Object();
+			rb.WorkId = 100;
+			rb.curPage = 1;
+			rb.pageSize = 1000;
+			rb.qryName = "";
+
+			var jn = new Object();
+			jn.ReqHead = rh;
+			jn.ReqBody = rb;
+
+			var sendData = JSON.stringify(jn);
+
+			mui.ajax(baseUrl + "zdm/AppApi/Search/GoodList", {
+				data: sendData,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+
+					//					alert(data);
+					var result = data.RespBody.Recs
+
+					var con = "";
+					for(var i = 1; i < result.length; i++) {
+						
+//						if (result[i-1].catid == result[i].catid) {
+//							con += "<div>" + result[i].goodsname+ "<br/></div>";
+//						}else{
+						con += "<a href='' id='" + result[i].goodid + "'>" + result[i].goodsname+"_"+result[i].catid + "<br/></a>";
+//						}
+
+						
+					}//for
+					document.getElementById("ok").innerHTML = con;
+					console.error("------888---");
+					console.info("------888---");
+					console.debug("------888---");
+//					alert(result[20].goodid);
+					document.getElementById("ok2").innerHTML = result[3].goodid;
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					alert(errorThrown);
+				}
+			}); //ajax
+		} //onload
+	</script>
+	</body>
+
+</html>
