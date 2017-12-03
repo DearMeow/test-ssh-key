@@ -292,6 +292,7 @@ function xuanzhe(catid){
 		}//减少数量
 		//增加数量
 		function jia(idPrice){
+			
 			var idp = idPrice.split("_");
 			var id =idp[0];
 			var price = idp[1];
@@ -300,17 +301,24 @@ function xuanzhe(catid){
 				document.getElementById(id).innerHTML = parseInt(document.getElementById(id).innerHTML)+1;
 					document.getElementById("price"+id).innerHTML = price * document.getElementById(id).innerHTML.trim();
 				changeShopcar(catid, parseInt(document.getElementById(id).innerHTML), parseInt(document.getElementById("price"+id).innerHTML));
+		
 		}//增加数量
 
 //修改购物车
 		function changeShopcar(cartId, buyCount, goodsPrice) {
 			var sesid = localStorage.getItem("sesid");
 			rh.SesId = sesid;
+			
+			if (sesid == null || sesid == "") {
+				mui.toast("请先登录！");
+				return;
+			}
 
 			var rb = new Object();
 			rb.CartId = cartId;
 			rb.buy_count = buyCount;
 			rb.goods_price = goodsPrice;
+			
 			
 
 			var jn = new Object();
@@ -331,9 +339,9 @@ function xuanzhe(catid){
 					if (data.RespBody.succ == 0) {
 						mui.toast('请重试');
 					}
-//					if (data.RespBody.succ == 1) {
-//						mui.toast('哈利路亚');
-//					}
+					if (data.RespBody.succ == 1) {
+						mui.toast('哈利路亚');
+					}
 				},
 				error: function(xhr, type, errorThrown) {
 					//异常处理；

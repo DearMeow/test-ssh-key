@@ -141,6 +141,10 @@
 				},
 				success: function(data) {
 					
+					if (data.RespBody==undefined) {
+						document.getElementById("address").innerHTML = "<span style='color:red'>请选择地址</span>";
+						return;
+					}
 					var result = "";
 					if(cid != ""){ 
 					 result = data.RespBody;
@@ -194,6 +198,11 @@
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
+					
+					if (data.RespBody == "") {
+						alert("kong");
+					}
+					return;
 					var rs = data.RespBody;
 					var spp = "";
 					for(var i = 0; i < rs.length; i++) {

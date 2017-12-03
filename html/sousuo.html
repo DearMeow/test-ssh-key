@@ -164,12 +164,12 @@
 			zonghe(1, 0);
 
 			//定位
-			plus.geolocation.getCurrentPosition(function(p) {
-				Jd = p.coords.latitude;
-				Wd = p.coords.longitude;
-			}, function(e) {
-				mui.toast("定位失败，请开启GPS和网络");
-			}); //定位
+//			plus.geolocation.getCurrentPosition(function(p) {
+//				Jd = p.coords.latitude;
+//				Wd = p.coords.longitude;
+//			}, function(e) {
+//				mui.toast("定位失败，请开启GPS和网络");
+//			}); //定位
 
 			var item2Show = false,
 				item3Show = false; //子选项卡是否显示标志
@@ -247,7 +247,13 @@
 						} else {
 							ht = "<div style='margin-top:0.5rem'><img src='../images/love.png' style='width:1rem'/></div>";
 						}
-						content += "<div class='beijing' onclick='goDetailPage(&quot;" + result[i].workshopid + "&quot;)'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;height:4rem;'/></div><div class='mui-pull-left ml'><div class='mui-pull-left'><div class='gname yxl' style='font-size:0.9rem;color:#000000;'>" + result[i].goodsname + "</div>" + ht + "<div class='yxl'>月销量" + result[i].salsvolume + "</div></div><div class='mui-pull-right gprice'>￥" + result[i].price + "</div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";
+//						var workshopid = res[0];
+//			var goodid = res[1];
+//			var work_name = res[2];
+//			var goods_name = res[3];
+//			var pic_id = res[4];
+//			var goods_price = res[5];
+						content += "<div class='beijing' onclick='goDetailPage(&quot;" + result[i].workshopid+","+result[i].goodid+","+result[i].workname+","+result[i].goods_name + "&quot;)'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;height:4rem;'/></div><div class='mui-pull-left ml'><div class='mui-pull-left'><div class='gname yxl' style='font-size:0.9rem;color:#000000;'>" + result[i].goodsname + "</div>" + ht + "<div class='yxl'>月销量" + result[i].salsvolume + "</div></div><div class='mui-pull-right gprice'>￥" + result[i].price + "</div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";
 					}
 
 					if(shangla == 1) {
@@ -543,11 +549,78 @@
 			}); //ajax
 		} //sousuo
 
-		//点击去详情页
-		function goDetailPage(workshopid) {
+		//点击商品 先加入购物车，再去详情页
+		function goDetailPage(id) {
+			var res = id.split(",");
+			var workshopid = res[0];
+//			var goodid = res[1];
+//			var work_name = res[2];
+//			var goods_name = res[3];
+//			var pic_id = res[4];
+//			var goods_price = res[5];
+//			
+//				alert(work_name+"，"+goods_name);
+//			return;
+//			
+//			var sesid = localStorage.getItem("sesid");
+//			rh.SesId = sesid;
+//
+//			var rb = new Object();
+//			rb.goods_id = goodid;
+//			rb.buy_count = 1;
+//			rb.work_id = workshopid;
+//			rb.work_name = goodid;
+//			rb.express_money = 0;
+//			rb.goods_name = goods_name;
+//			rb.goods_price = goods_price;
+//			rb.pic_id = pic_id;
+//				
+//
+//			var jn = new Object();
+//
+//			jn.ReqHead = rh;
+//
+//			jn.ReqBody = rb;
+//
+//			var sendData = JSON.stringify(jn);
+//
+//			mui.ajax(baseUrl + "zdm/AppApi/ShopCart/GetMyGoodsInCart", {
+//
+//				data: sendData,
+//
+//				dataType: 'json', //服务器返回json格式数据
+//
+//				type: 'post', //HTTP请求类型
+//
+//				timeout: 10000, //超时时间设置为10秒；
+//
+//				headers: {
+//
+//					'Content-Type': 'application/json'
+//
+//				},
+//
+//				success: function(data) {
+//
+//					var result = data.RespBody;
+//
+//					for(var i = 0; i < result.length; i++) {
+//						document.getElementById("bodydiv").innerHTML += "<div class='dianpu'><div class='fw'>" + result[i].work_name + "</div><div class='mt'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-pull-left ml pt1'>" + result[i].goods_name + "</div><div class='mui-pull-right rig pt1'><span class='redprice'>￥" + result[2].goods_price + "</span></div><div class='mui-clearfix'></div></div><div class='mt'><div class='mui-pull-left'>餐盒</div><div class='mui-pull-right rig'><span class='redprice'>￥" + result[i].express_money + "</span></div><div class='mui-clearfix'></div></div><div class='mui-text-right jiesuan'><input type='button' name='jiesuanbtn' onclick='qujiesuan(&quot;"+result[i].work_id+"&quot;)' value='去结算'/></div></div>";
+//					}
+//				},
+//
+//				error: function(xhr, type, errorThrown) {
+//					//异常处理；
+//					console.log(type);
+//				}
+//
+//			}); //ajax
+			
+		
 
 			//打开新窗口
 			mui.openWindow({
+				
 				url: 'shangjia.html', //需要打开页面的url地址 
 				id: 'shangjia', //需要打开页面的url页面id
 				styles: {
