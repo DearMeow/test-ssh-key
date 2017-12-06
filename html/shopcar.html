@@ -22,7 +22,7 @@
 			}
 			
 			.mt {
-				margin-top: 1rem;
+				margin-top: 0.5rem;
 			}
 			
 			.ml {
@@ -34,12 +34,12 @@
 			}
 			
 			.pt1 {
-				padding-top: 1.5rem;
+				padding-top: 1rem;
 			}
 			
 			.jiesuan {
-				padding-bottom: 1rem;
-				margin-bottom: 0.5rem;
+				padding-bottom: 0.2rem;
+				margin-bottom: 0.2rem;
 			}
 			
 			.fw {
@@ -50,7 +50,7 @@
 				margin-right: 1rem;
 				background-color: green;
 				color: #FFFFFF;
-				margin-top: 1.5rem;
+				margin-top: 0.5rem;
 			}
 			
 			#nologin {
@@ -74,7 +74,6 @@
 			shuaxin();
 		}, false);
 
-
 		function shuaxin() {
 
 			var sesid = localStorage.getItem("sesid");
@@ -83,7 +82,7 @@
 			if(sesid == null || sesid == "") {
 				document.getElementById("bodydiv").innerHTML = "<div id='nologin' onclick='login()'>请登录</div>";
 				return;
-			}else{
+			} else {
 				document.getElementById("bodydiv").innerHTML = "";
 			}
 
@@ -114,19 +113,15 @@
 				},
 
 				success: function(data) {
-
 					var result = data.RespBody;
-
 					for(var i = 0; i < result.length; i++) {
-						document.getElementById("bodydiv").innerHTML += "<div class='dianpu'><div class='fw'>" + result[i].work_name + "</div><div class='mt'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-pull-left ml pt1'>" + result[i].goods_name + "</div><div class='mui-pull-right rig pt1'><span class='redprice'>￥" + result[2].goods_price + "</span></div><div class='mui-clearfix'></div></div><div class='mt'><div class='mui-pull-left'>餐盒</div><div class='mui-pull-right rig'><span class='redprice'>￥" + result[i].express_money + "</span></div><div class='mui-clearfix'></div></div><div class='mui-text-right jiesuan'><input type='button' name='jiesuanbtn' onclick='qujiesuan(&quot;"+result[i].work_id+"&quot;)' value='去结算'/></div></div>";
+						document.getElementById("bodydiv").innerHTML += "<div class='dianpu'><div class='fw'>" + result[i].work_name + "</div><div class='mt'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-pull-left ml pt1'>" + result[i].goods_name + "</div><div class='mui-pull-right rig pt1'>数量 " + result[i].buy_count + "&nbsp;&nbsp;&nbsp;&nbsp;<span class='redprice'>￥" + result[i].goods_price + "</span></div><div class='mui-clearfix'></div></div><div class='mt'><div class='mui-pull-left'>餐盒</div><div class='mui-pull-right rig'><span class='redprice'>￥" + result[i].express_money + "</span></div><div class='mui-clearfix'></div></div><div class='mui-text-right jiesuan'><input type='button' name='jiesuanbtn' onclick='qujiesuan(&quot;" + result[i].work_id + "&quot;)' value='去结算'/></div></div>";
 					}
 				},
-
 				error: function(xhr, type, errorThrown) {
 					//异常处理；
 					console.log(type);
 				}
-
 			}); //ajax
 
 		} //shuaxin
@@ -161,7 +156,7 @@
 				}
 			}); //openWindow
 		} //nologin
-		
+
 		mui.init({
 			swipeBack: true, //启用右滑关闭功能
 			pullRefresh: {
@@ -187,15 +182,9 @@
 			}, 1000);
 		} //pulldownRefresh
 
-		
-
-
-
-
-
 		//去结算
 		function qujiesuan(workid) {
-			
+
 			//打开新窗口
 			mui.openWindow({
 				url: 'querendingdan.html', //需要打开页面的url地址 
@@ -226,8 +215,6 @@
 					}
 				}
 			}); //openWindow
-			
-			
 
 		} //去结算
 	</script>

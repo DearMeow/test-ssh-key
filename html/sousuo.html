@@ -164,12 +164,12 @@
 			zonghe(1, 0);
 
 			//定位
-//			plus.geolocation.getCurrentPosition(function(p) {
-//				Jd = p.coords.latitude;
-//				Wd = p.coords.longitude;
-//			}, function(e) {
-//				mui.toast("定位失败，请开启GPS和网络");
-//			}); //定位
+			//			plus.geolocation.getCurrentPosition(function(p) {
+			//				Jd = p.coords.latitude;
+			//				Wd = p.coords.longitude;
+			//			}, function(e) {
+			//				mui.toast("定位失败，请开启GPS和网络");
+			//			}); //定位
 
 			var item2Show = false,
 				item3Show = false; //子选项卡是否显示标志
@@ -247,13 +247,7 @@
 						} else {
 							ht = "<div style='margin-top:0.5rem'><img src='../images/love.png' style='width:1rem'/></div>";
 						}
-//						var workshopid = res[0];
-//			var goodid = res[1];
-//			var work_name = res[2];
-//			var goods_name = res[3];
-//			var pic_id = res[4];
-//			var goods_price = res[5];
-						content += "<div class='beijing' onclick='goDetailPage(&quot;" + result[i].workshopid+","+result[i].goodid+","+result[i].workname+","+result[i].goods_name + "&quot;)'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;height:4rem;'/></div><div class='mui-pull-left ml'><div class='mui-pull-left'><div class='gname yxl' style='font-size:0.9rem;color:#000000;'>" + result[i].goodsname + "</div>" + ht + "<div class='yxl'>月销量" + result[i].salsvolume + "</div></div><div class='mui-pull-right gprice'>￥" + result[i].price + "</div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";
+						content += "<div class='beijing' onclick='goDetailPage(&quot;" + result[i].workshopid + "," + result[i].goodid + "&quot;)'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;height:4rem;'/></div><div class='mui-pull-left ml'><div class='mui-pull-left'><div class='gname yxl' style='font-size:0.9rem;color:#000000;'>" + result[i].goodsname + "</div>" + ht + "<div class='yxl'>月销量" + result[i].salsvolume + "</div></div><div class='mui-pull-right gprice'>￥" + result[i].price + "</div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";
 					}
 
 					if(shangla == 1) {
@@ -318,7 +312,7 @@
 						} else {
 							ht = "<div style='margin-top:0.5rem'><img src='../images/love.png' style='width:1rem'/></div>";
 						}
-						content += "<div class='beijing' onclick='goDetailPage(&quot;" + result[i].workshopid + "&quot;)'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;height:4rem;'/></div><div class='mui-pull-left ml'><div class='mui-pull-left'><div class='gname yxl' style='font-size:0.9rem;color:#000000;'>" + result[i].goodsname + "</div>" + ht + "<div class='yxl'>月销量" + result[i].salsvolume + "</div></div><div class='mui-pull-right gprice'>￥" + result[i].price + "</div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";
+						content += "<div class='beijing' onclick='goDetailPage(&quot;" + result[i].workshopid + "," + result[i].goodid + "&quot;)'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;height:4rem;'/></div><div class='mui-pull-left ml'><div class='mui-pull-left'><div class='gname yxl' style='font-size:0.9rem;color:#000000;'>" + result[i].goodsname + "</div>" + ht + "<div class='yxl'>月销量" + result[i].salsvolume + "</div></div><div class='mui-pull-right gprice'>￥" + result[i].price + "</div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";
 					}
 					if(shangla == 1) {
 						document.getElementById("item2").innerHTML += content;
@@ -382,7 +376,7 @@
 						} else {
 							ht = "<div style='margin-top:0.5rem'><img src='../images/love.png' style='width:1rem'/></div>";
 						}
-						content += "<div class='beijing' onclick='goDetailPage(&quot;" + result[i].workshopid + "&quot;)'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;height:4rem;'/></div><div class='mui-pull-left ml'><div class='mui-pull-left'><div class='gname yxl' style='font-size:0.9rem;color:#000000;'>" + result[i].goodsname + "</div>" + ht + "<div class='yxl'>月销量" + result[i].salsvolume + "</div></div><div class='mui-pull-right gprice'>￥" + result[i].price + "</div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";
+						content += "<div class='beijing' onclick='goDetailPage(&quot;" + result[i].workshopid + "," + result[i].goodid + "&quot;)'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;height:4rem;'/></div><div class='mui-pull-left ml'><div class='mui-pull-left'><div class='gname yxl' style='font-size:0.9rem;color:#000000;'>" + result[i].goodsname + "</div>" + ht + "<div class='yxl'>月销量" + result[i].salsvolume + "</div></div><div class='mui-pull-right gprice'>￥" + result[i].price + "</div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";
 					}
 					if(shangla == 1) {
 						document.getElementById("item3").innerHTML += content;
@@ -531,7 +525,7 @@
 						} else {
 							ht = "<img src='../images/love.png' style='width:1rem'/>";
 						}
-						content += "<div class='beijing' onclick='goDetailPage(&quot;" + result[i].workshopid + "&quot;)'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-pull-left ml'><div class='gname'>" + result[i].goodsname + "</div>" + ht + "<span class='yxl'>&nbsp;&nbsp;月销量" + result[i].salsvolume + "</span><br/><span class='gprice'>￥" + result[i].price + "</span></div><div class='mui-clearfix'></div></div>";
+						content += "<div class='beijing' onclick='goDetailPage(&quot;" + result[i].workshopid + "," + result[i].goodid + "&quot;)'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;height:4rem;'/></div><div class='mui-pull-left ml'><div class='mui-pull-left'><div class='gname yxl' style='font-size:0.9rem;color:#000000;'>" + result[i].goodsname + "</div>" + ht + "<div class='yxl'>月销量" + result[i].salsvolume + "</div></div><div class='mui-pull-right gprice'>￥" + result[i].price + "</div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";
 					}
 					if(shangla == 1) {
 						document.getElementById("item1").innerHTML += content;
@@ -553,100 +547,71 @@
 		function goDetailPage(id) {
 			var res = id.split(",");
 			var workshopid = res[0];
-//			var goodid = res[1];
-//			var work_name = res[2];
-//			var goods_name = res[3];
-//			var pic_id = res[4];
-//			var goods_price = res[5];
-//			
-//				alert(work_name+"，"+goods_name);
-//			return;
-//			
-//			var sesid = localStorage.getItem("sesid");
-//			rh.SesId = sesid;
-//
-//			var rb = new Object();
-//			rb.goods_id = goodid;
-//			rb.buy_count = 1;
-//			rb.work_id = workshopid;
-//			rb.work_name = goodid;
-//			rb.express_money = 0;
-//			rb.goods_name = goods_name;
-//			rb.goods_price = goods_price;
-//			rb.pic_id = pic_id;
-//				
-//
-//			var jn = new Object();
-//
-//			jn.ReqHead = rh;
-//
-//			jn.ReqBody = rb;
-//
-//			var sendData = JSON.stringify(jn);
-//
-//			mui.ajax(baseUrl + "zdm/AppApi/ShopCart/GetMyGoodsInCart", {
-//
-//				data: sendData,
-//
-//				dataType: 'json', //服务器返回json格式数据
-//
-//				type: 'post', //HTTP请求类型
-//
-//				timeout: 10000, //超时时间设置为10秒；
-//
-//				headers: {
-//
-//					'Content-Type': 'application/json'
-//
-//				},
-//
-//				success: function(data) {
-//
-//					var result = data.RespBody;
-//
-//					for(var i = 0; i < result.length; i++) {
-//						document.getElementById("bodydiv").innerHTML += "<div class='dianpu'><div class='fw'>" + result[i].work_name + "</div><div class='mt'><div class='mui-pull-left'><img src='" + result[i].FilePath + "' style='width: 4rem;'/></div><div class='mui-pull-left ml pt1'>" + result[i].goods_name + "</div><div class='mui-pull-right rig pt1'><span class='redprice'>￥" + result[2].goods_price + "</span></div><div class='mui-clearfix'></div></div><div class='mt'><div class='mui-pull-left'>餐盒</div><div class='mui-pull-right rig'><span class='redprice'>￥" + result[i].express_money + "</span></div><div class='mui-clearfix'></div></div><div class='mui-text-right jiesuan'><input type='button' name='jiesuanbtn' onclick='qujiesuan(&quot;"+result[i].work_id+"&quot;)' value='去结算'/></div></div>";
-//					}
-//				},
-//
-//				error: function(xhr, type, errorThrown) {
-//					//异常处理；
-//					console.log(type);
-//				}
-//
-//			}); //ajax
-			
-		
+			var goodid = res[1];
 
-			//打开新窗口
-			mui.openWindow({
-				
-				url: 'shangjia.html', //需要打开页面的url地址 
-				id: 'shangjia', //需要打开页面的url页面id
-				styles: {
-					top: '0px', //新页面顶部位置 
-					bottom: '0px', //新页面底部位置 
-					//					width:newpage-width,//新页面宽度，默认为100% 
-					//					height:newpage-height,//新页面高度，默认为100% ...... 
+			var sesid = localStorage.getItem("sesid");
+			rh.SesId = sesid;
+
+			var rb = new Object();
+			rb.goods_id = goodid;
+			rb.buy_count = 1;
+
+			var jn = new Object();
+			jn.ReqHead = rh;
+			jn.ReqBody = rb;
+			var sendData = JSON.stringify(jn);
+			mui.ajax(baseUrl + "zdm/AppApi/ShopCart/SaveGoods2Cart", {
+				data: sendData,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
 				},
-				extras: {
-					workshopid: workshopid
-				},
-				show: { //控制打开页面的类型
-					autoShow: true,
-					//					//页面loaded事件发生后自动显示，默认为true 
-					aniShow: 'zoom-fade-out', //页面显示动画，默认为”slide-in-right“；  页面出现的方式 左右上下
-					duration: '300' //页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒； 
-				},
-				waiting: { // 控制 弹出转圈框的信息
-					autoShow: true, //自动显示等待框，默认为true 
-					title: '正在加载...', //等待对话框上显示的提示内容 
-					options: {
-						width: '300px', //等待框背景区域宽度，默认根据内容自动计算合适宽度 
-						height: '300px', //等待框背景区域高度，默认根据内容自动计算合适高度 ...... 
+				success: function(data) {
+					if(data.RespBody.succ == 1) {
+						//打开新窗口
+						mui.openWindow({
+
+							url: 'shangjia.html', //需要打开页面的url地址 
+							id: 'shangjia', //需要打开页面的url页面id
+							styles: {
+								top: '0px', //新页面顶部位置 
+								bottom: '0px', //新页面底部位置 
+								//					width:newpage-width,//新页面宽度，默认为100% 
+								//					height:newpage-height,//新页面高度，默认为100% ...... 
+							},
+							extras: {
+								workshopid: workshopid
+							},
+							show: { //控制打开页面的类型
+								autoShow: true,
+								//					//页面loaded事件发生后自动显示，默认为true 
+								aniShow: 'zoom-fade-out', //页面显示动画，默认为”slide-in-right“；  页面出现的方式 左右上下
+								duration: '300' //页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒； 
+							},
+							waiting: { // 控制 弹出转圈框的信息
+								autoShow: true, //自动显示等待框，默认为true 
+								title: '正在加载...', //等待对话框上显示的提示内容 
+								options: {
+									width: '300px', //等待框背景区域宽度，默认根据内容自动计算合适宽度 
+									height: '300px', //等待框背景区域高度，默认根据内容自动计算合适高度 ...... 
+								}
+							}
+						}); //openWindow
+
+					} else {
+						mui.toast("请重试！");
 					}
+
+				},
+
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					console.log(type);
 				}
-			}); //openWindow
+
+			}); //ajax
 
 		} //点击去详情页
 	</script>

@@ -41,25 +41,38 @@
 				width: 5rem;
 				height: 2rem;
 				overflow: hidden;
-				font-size:0.8rem ;
+				font-size: 0.8rem;
 			}
-			.nr{
-				padding: 0rem 0.5rem 0.3rem 0.2rem;margin-left: 0.3rem;width: 75%;background-color: #FFFFFF;margin-bottom: 4rem;
+			
+			.nr {
+				padding: 0rem 0.5rem 0.3rem 0.2rem;
+				margin-left: 0.3rem;
+				width: 75%;
+				background-color: #FFFFFF;
+				margin-bottom: 4rem;
 			}
-			.pt05{
+			
+			.pt05 {
 				padding-top: 0.5rem;
 			}
-			.pt05 div img{
+			
+			.pt05 div img {
 				width: 4rem;
 			}
-			.wid{
-				margin-left: 0.5rem;width: 70%;
+			
+			.wid {
+				margin-left: 0.5rem;
+				width: 70%;
 			}
-			.fc{
-				font-size: 0.8rem;color: rgb(153,153,153);
+			
+			.fc {
+				font-size: 0.8rem;
+				color: rgb(153, 153, 153);
 			}
-			.xname{
-				height: 1.3rem;overflow: hidden;
+			
+			.xname {
+				height: 1.3rem;
+				overflow: hidden;
 			}
 		</style>
 	</head>
@@ -69,7 +82,7 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF;"></a>
 			<h1 class="mui-title" style="color: #FFFFFF;">餐厅</h1>
 			<!--<h1 class="mui-title" style="color: #FFFFFF;" id="canting"><a href="../demo/ceshi.html#d2">餐厅</a></h1>-->
-			
+
 		</header>
 		<div class="mui-content">
 			<div class="jiesao">
@@ -94,23 +107,16 @@
 	<script src="../js/mui.min.js"></script>
 	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script>
-		
-		
-		
-		
-		
 		var workshopid = "";
 		mui.plusReady(function() {
 			var self = plus.webview.currentWebview(); //获得当前页面的对象
-			 workshopid = self.workshopid;
+			workshopid = self.workshopid;
 
 			var sesid = localStorage.getItem("sesid");
-	
 			rh.SesId = sesid;
 
 			var rb = new Object();
 			rb.workid = workshopid;
-			
 			rb.CatId = 1;
 
 			var jn = new Object();
@@ -138,9 +144,8 @@
 				}
 
 			}); //ajax
-			
-			xuanzhe('000010000400002');
 
+			xuanzhe('000010000400002');
 			//获取分类
 			mui.ajax(baseUrl + "zdm/AppApi/Search/CategoryList", {
 				data: sendData,
@@ -188,7 +193,7 @@
 
 					var fl = "";
 					for(var i = 0; i < res.length; i++) {
-						fl += "<div onclick='xuanzhe(&quot;"+res[i].catid+"&quot;)'>" + res[i].catname + "</div>";
+						fl += "<div onclick='xuanzhe(&quot;" + res[i].catid + "&quot;)'>" + res[i].catname + "</div>";
 					}
 					document.getElementById("xiaofenlei").innerHTML = fl;
 
@@ -198,55 +203,49 @@
 				}
 
 			}); //ajax
-			
-			
-		
-			
+
 			//判断店铺是否收藏
-//rb.WorkId = workshopid;
-//			mui.ajax(baseUrl + "zdm/AppApi/Merchant/BeenCollected", {
-//				data: sendData,
-//				dataType: 'json', //服务器返回json格式数据
-//				type: 'post', //HTTP请求类型
-//				timeout: 10000, //超时时间设置为10秒；
-//				headers: {
-//					'Content-Type': 'application/json'
-//				},
-//				success: function(data) {
-//					alert(data.RespBody);
-//					if (data.RespBody.stat == 1) {
-//						document.getElementById("Collection").innerHTML = "<i class='fa fa-star' style='color:red;'></i>"
-//						mui.toast('收藏');
-//					}else if (data.RespBody.stat == 0) {
-//						document.getElementById("Collection").innerHTML = "<i class='fa fa-star-o' style='color:red;'></i>"
-//						mui.toast('没 收藏');
-//					}
-//				},
-//				error: function(xhr, type, errorThrown) {
-//					//异常处理；
-//					alert("---"+errorThrown);
-//				}
-//			}); //ajax
+//			rb.WorkId = workshopid;
+//			alert("---"+workshopid);
+//						mui.ajax(baseUrl + "zdm/AppApi/Merchant/BeenCollected", {
+//							data: sendData,
+//							dataType: 'json', //服务器返回json格式数据
+//							type: 'post', //HTTP请求类型
+//							timeout: 10000, //超时时间设置为10秒；
+//							headers: {
+//								'Content-Type': 'application/json'
+//							},
+//							success: function(data) {
+//								alert(data.RespBody);
+//								if (data.RespBody.stat == 1) {
+//									document.getElementById("Collection").innerHTML = "<i class='fa fa-star' style='color:red;'></i>"
+//									mui.toast('收藏');
+//								}else if (data.RespBody.stat == 0) {
+//									document.getElementById("Collection").innerHTML = "<i class='fa fa-star-o' style='color:red;'></i>"
+//									mui.toast('没 收藏');
+//								}
+//							},
+//							error: function(xhr, type, errorThrown) {
+//								//异常处理；
+//								alert("---"+errorThrown);
+//							}
+//						}); //ajax
 
 		}); //plusReady
-		
-//点击左侧小分类
-function xuanzhe(catid){
-	
+
+		//获取购物车餐品列表
+		function gouwuche() {
+
 			var rb = new Object();
-			rb.workid = workshopid;
-			rb.CatId = catid;
-			rb.curPage=1;
-			rb.pageSize=30;
-			rb.qryName="";
 
 			var jn = new Object();
+
 			jn.ReqHead = rh;
+
 			jn.ReqBody = rb;
 
 			var sendData = JSON.stringify(jn);
-							//获取分类下的餐品列表
-			mui.ajax(baseUrl + "zdm/AppApi/Search/GoodList", {
+			mui.ajax(baseUrl + "zdm/AppApi/ShopCart/GetMyGoodsInCart", {
 				data: sendData,
 				dataType: 'json', //服务器返回json格式数据
 				type: 'post', //HTTP请求类型
@@ -255,61 +254,114 @@ function xuanzhe(catid){
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
+					shops = data.RespBody;
+					alert("1列表 " + data.RespBody);
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					console.log(type);
+				}
+			}); //ajax
+		} //gouwuche
 
-					var res = data.RespBody.Recs;
+		//点击左侧小分类
+		function xuanzhe(catid) {
+			var rb = new Object();
+			rb.workid = workshopid;
+			rb.CatId = catid;
+			rb.curPage = 1;
+			rb.pageSize = 50;
+			rb.qryName = "";
 
-					var flx = "";
-					for(var i = 0; i < res.length; i++) {
-						
-						flx += "<div><div class='pt05'><div class='mui-pull-left'><img src='"+res[i].FilePath+"'/></div><div class='mui-pull-left wid'><div class='xname'>"+res[i].goodsname+"</div><div class='mui-pull-left'><span style='font-size: 0.8rem;color: rgb(209,37,34);'>￥<span id='price"+res[i].goodid+"'>"+res[i].price+"</span></span></div><div class='mui-pull-right'><span class='mui-icon mui-icon-minus' style='color: rgb(209,37,34);' onclick='jian(&quot;"+res[i].goodid+"_"+res[i].price+"_"+catid+"&quot;)' ></span><span style='font-size: 1rem;color: #000000;' id='"+res[i].goodid+"'>0</span><span class='mui-icon mui-icon-plus' style='color: rgb(209,37,34);'  onclick='jia(&quot;"+res[i].goodid+"_"+res[i].price+"_"+catid+"&quot;)'></span></div></div><div class='mui-clearfix'></div></div></div>";
+			var jn = new Object();
+			jn.ReqHead = rh;
+			jn.ReqBody = rb;
+
+			var sendData = JSON.stringify(jn);
+
+			//获取分类下的餐品列表
+			mui.ajax(baseUrl + "zdm/AppApi/Search/GoodList", {
+				data: sendData,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data1) {
+
+					mui.ajax(baseUrl + "zdm/AppApi/ShopCart/GetMyGoodsInCart", {
+						data: sendData,
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						success: function(data2) {
+							var shops = data2.RespBody;
+							var res = data1.RespBody.Recs;
+							var flx = "";
+							for(var i = 0; i < res.length; i++) {
+								var number = 0;
+								for(var j = 0; j < shops.length; j++) {
+									if(res[i].goodid == shops[j].goods_id) {
+										number = shops[j].buy_count;
+									}
+								}
+								flx += "<div><div class='pt05'><div class='mui-pull-left'><img src='" + res[i].FilePath + "'/></div><div class='mui-pull-left wid'><div class='xname'>" + res[i].goodsname + "</div><div class='mui-pull-left'><span style='font-size: 0.8rem;color: rgb(209,37,34);'>￥<span id='price" + res[i].goodid + "'>" + res[i].price + "</span></span></div><div class='mui-pull-right'><span class='mui-icon mui-icon-minus' style='color: rgb(209,37,34);' onclick='jian(&quot;" + res[i].goodid + "_" + res[i].price + "_" + catid + "&quot;)' ></span><span style='font-size: 1rem;color: #000000;' id='" + res[i].goodid + "'>" + number + "</span><span class='mui-icon mui-icon-plus' style='color: rgb(209,37,34);'  onclick='jia(&quot;" + res[i].goodid + "_" + res[i].price + "_" + catid + "&quot;)'></span></div></div><div class='mui-clearfix'></div></div></div>";
+							}
+							document.getElementById("xflneirong").innerHTML = flx;
+						},
+						error: function(xhr, type, errorThrown) {
+							//异常处理；
+							console.log(type);
 						}
-					document.getElementById("xflneirong").innerHTML = flx;
+					}); //ajax
 
 				},
 				error: function(xhr, type, errorThrown) {
 					mui.toast("请重试");
 				}
-
 			}); //ajax
-			}//xuanzhe
-			
-			
-			//减少数量
-		function jian(idPrice){
-			var idp = idPrice.split("_");
-			var id =idp[0];
-			var price = idp[1];
-			var catid = idp[2];
-			
-			if(document.getElementById(id).innerHTML.trim() > 0){
-				document.getElementById(id).innerHTML -= 1;
-				if(document.getElementById(id).innerHTML > 0){
-					document.getElementById("price"+id).innerHTML = price * document.getElementById(id).innerHTML.trim();
-				}
-					
-					changeShopcar(catid, parseInt(document.getElementById(id).innerHTML), parseInt(document.getElementById("price"+id).innerHTML));
-			}
-		}//减少数量
-		//增加数量
-		function jia(idPrice){
-			
-			var idp = idPrice.split("_");
-			var id =idp[0];
-			var price = idp[1];
-			var catid = idp[2];
-			
-				document.getElementById(id).innerHTML = parseInt(document.getElementById(id).innerHTML)+1;
-					document.getElementById("price"+id).innerHTML = price * document.getElementById(id).innerHTML.trim();
-				changeShopcar(catid, parseInt(document.getElementById(id).innerHTML), parseInt(document.getElementById("price"+id).innerHTML));
-		
-		}//增加数量
+		} //xuanzhe
 
-//修改购物车
+		//减少数量
+		function jian(idPrice) {
+			var idp = idPrice.split("_");
+			var id = idp[0];
+			var price = idp[1];
+			var catid = idp[2];
+
+			if(document.getElementById(id).innerHTML.trim() > 0) {
+				document.getElementById(id).innerHTML -= 1;
+				if(document.getElementById(id).innerHTML > 0) {
+					document.getElementById("price" + id).innerHTML = price * document.getElementById(id).innerHTML.trim();
+				}
+
+				changeShopcar(catid, parseInt(document.getElementById(id).innerHTML), parseInt(document.getElementById("price" + id).innerHTML));
+			}
+		} //减少数量
+		//增加数量
+		function jia(idPrice) {
+
+			var idp = idPrice.split("_");
+			var id = idp[0];
+			var price = idp[1];
+			var catid = idp[2];
+
+			document.getElementById(id).innerHTML = parseInt(document.getElementById(id).innerHTML) + 1;
+			document.getElementById("price" + id).innerHTML = price * document.getElementById(id).innerHTML.trim();
+			changeShopcar(catid, parseInt(document.getElementById(id).innerHTML));
+
+		} //增加数量
+
+		//修改购物车
 		function changeShopcar(cartId, buyCount, goodsPrice) {
 			var sesid = localStorage.getItem("sesid");
 			rh.SesId = sesid;
-			
-			if (sesid == null || sesid == "") {
+
+			if(sesid == null || sesid == "") {
 				mui.toast("请先登录！");
 				return;
 			}
@@ -317,8 +369,6 @@ function xuanzhe(catid){
 			var rb = new Object();
 			rb.CartId = cartId;
 			rb.buy_count = buyCount;
-			rb.goods_price = goodsPrice;
-			
 			
 
 			var jn = new Object();
@@ -336,10 +386,10 @@ function xuanzhe(catid){
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
-					if (data.RespBody.succ == 0) {
+					if(data.RespBody.succ == 0) {
 						mui.toast('请重试');
 					}
-					if (data.RespBody.succ == 1) {
+					if(data.RespBody.succ == 1) {
 						mui.toast('哈利路亚');
 					}
 				},
@@ -351,7 +401,7 @@ function xuanzhe(catid){
 			}); //ajax
 
 		} //修改购物车
-		
+
 		document.getElementById("jiesuan").onclick = function() {
 
 			//打开新窗口
@@ -386,16 +436,14 @@ function xuanzhe(catid){
 			}); //openWindow
 
 		} //jiesuan
-		
+
 		//收藏
-		document.getElementById("Collection").onclick = function(){
-			
-			
-				var sesid = localStorage.getItem("sesid");
+		document.getElementById("Collection").onclick = function() {
+
+			var sesid = localStorage.getItem("sesid");
 			rh.SesId = sesid;
 			var rb = new Object();
 			rb.WorkId = workshopid;
-			
 
 			var jn = new Object();
 			jn.ReqHead = rh;
@@ -412,11 +460,11 @@ function xuanzhe(catid){
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
-					
-					if (data.RespBody.succ == 1) {
+
+					if(data.RespBody.succ == 1) {
 						document.getElementById("Collection").innerHTML = "<i class='fa fa-star' style='color:red;'></i>"
 						mui.toast('收藏成功');
-					}else if (data.RespBody.succ == 0) {
+					} else if(data.RespBody.succ == 0) {
 						document.getElementById("Collection").innerHTML = "<i class='fa fa-star-o' style='color:red;'></i>"
 						mui.toast('已经取消收藏');
 					}
@@ -426,10 +474,10 @@ function xuanzhe(catid){
 					alert(errorThrown);
 				}
 			}); //ajax
-		}//Collection
-		
+		} //Collection
+
 		//测试ceshi.html
-		document.getElementById("canting7").onclick = function(){
+		document.getElementById("canting7").onclick = function() {
 			//打开新窗口
 			mui.openWindow({
 				url: '../demo/ceshi.html', //需要打开页面的url地址 
@@ -460,7 +508,7 @@ function xuanzhe(catid){
 					}
 				}
 			}); //openWindow
-		}//测试
+		} //测试
 	</script>
 	</body>
 
