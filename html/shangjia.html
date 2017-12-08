@@ -346,13 +346,53 @@
 		function jia(idPrice) {
 
 			var idp = idPrice.split("_");
-			var id = idp[0];
+			var id = idp[0];//gooid
 			var price = idp[1];
 			var catid = idp[2];
 
 			document.getElementById(id).innerHTML = parseInt(document.getElementById(id).innerHTML) + 1;
 			document.getElementById("price" + id).innerHTML = price * document.getElementById(id).innerHTML.trim();
-			changeShopcar(catid, parseInt(document.getElementById(id).innerHTML));
+			
+			var sesid = localStorage.getItem("sesid");
+			if(sesid == null || sesid == ""){
+				mui.toast("请登录！");
+				return;
+			}
+			
+			rh.SesId = sesid;
+
+			var rb = new Object();
+			rb.goods_id = id;
+			rb.buy_count = 1;
+
+			var jn = new Object();
+			jn.ReqHead = rh;
+			jn.ReqBody = rb;
+			var sendData = JSON.stringify(jn);
+			mui.ajax(baseUrl + "zdm/AppApi/ShopCart/SaveGoods2Cart", {
+				data: sendData,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+					
+					if(data.RespBody.succ == 1) {
+						alert("添加成功");
+					} else {
+						mui.toast("请重试！");
+					}
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					console.log(type);
+				}
+
+			}); //ajax
+			
+//			changeShopcar(catid, parseInt(document.getElementById(id).innerHTML));
 
 		} //增加数量
 
@@ -365,7 +405,7 @@
 				mui.toast("请先登录！");
 				return;
 			}
-
+alert(cartId);
 			var rb = new Object();
 			rb.CartId = cartId;
 			rb.buy_count = buyCount;

@@ -548,8 +548,13 @@
 			var res = id.split(",");
 			var workshopid = res[0];
 			var goodid = res[1];
-
+			
 			var sesid = localStorage.getItem("sesid");
+			if(sesid == null || sesid == ""){
+				mui.toast("请登录！");
+				return;
+			}
+			
 			rh.SesId = sesid;
 
 			var rb = new Object();
@@ -569,6 +574,7 @@
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
+					
 					if(data.RespBody.succ == 1) {
 						//打开新窗口
 						mui.openWindow({
