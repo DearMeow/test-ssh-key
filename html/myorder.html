@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="utf-8">
 		<title>订单</title>
@@ -136,6 +135,7 @@
 				success: function(data) {
 
 					var result = data.RespBody;
+					
 					if(result.Recs.length == 0) {
 						document.getElementById("msg").innerHTML += "<div style='color:darkred;margin-top: 12rem;text-align:center;'>你还没有产生订单</div>";
 					} else {
@@ -168,7 +168,7 @@
 					}
 				},
 				error: function(xhr, type, errorThrown) {
-					document.getElementById("msg").innerHTML += "_0000错误信息00000_" + xhr + "__" + type + "____" + errorThrown;
+//					alert(type);
 				}
 			}); //ajax
 		} //dingdan
