@@ -9,11 +9,12 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
 		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/layout.css" />
 		<link rel="stylesheet" type="text/css" href="../css/font-awesome-4.7.0/css/font-awesome.min.css" />
 		<style>
 			.mdi {
-				margin-bottom: 0.3rem;
+				margin-bottom: 0.2rem;
 				background-color: #FFFFFF;
 				padding: 0.5rem 0.5rem 0.2rem 0.5rem;
 			}
@@ -41,7 +42,7 @@
 			}
 			
 			#fukuan {
-				background-color: rgb(209,37,34);
+				background-color: rgb(209, 37, 34);
 				width: 100%;
 				color: #FFFFFF;
 				font-size: 1.2rem;
@@ -69,6 +70,9 @@
 				<div class="mui-clearfix"></div>
 
 			</div>
+			<div class="mdi" id="picker" style="background-color: #CF2D28;color: #FFFFFF;">
+				配送时间: <span id="checkedData"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-calendar"></i>
+			</div>
 			<div class="mdi" id="shop">
 				<div class="mui-pull-left"></div>
 				<div class="mui-pull-left" style="margin-left: 1rem;">
@@ -83,13 +87,35 @@
 		<!--mbody-->
 	</body>
 	<script src="../js/mui.min.js"></script>
+	<script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script>
-		
+		var toDate="";
 		mui.plusReady(function() {
 			shuaxin();
+			
+			var myDate = new Date();
+
+			var year = myDate.getFullYear(); //获取完整的年份(4位,1970-????)
+			var month = myDate.getMonth()+1; //获取当前月份(0-11,0代表1月)
+			var datee = myDate.getDate()+1; //获取当前日(1-31)
+
+			var hour = myDate.getHours();
+			var min = myDate.getMinutes(); //获取当前分钟数(0-59)
+			var fulldatatime = year + "-" + month + "-" + datee + " " + hour + ":" + min;
+			toDate=fulldatatime;
+			document.getElementById("checkedData").innerHTML = fulldatatime;
+			
+			document.getElementById("picker").onclick = function() {
+				var dtPicker = new mui.DtPicker();
+				dtPicker.show(function(selectItems) {
+					toDate=selectItems;
+					document.getElementById("checkedData").innerHTML = selectItems;
+				})
+				
+			}
 		}); //plusReady
-		
+
 		window.addEventListener('querenrefresh', function() {
 			shuaxin();
 		}, false);
@@ -101,25 +127,24 @@
 		var consignee = "";
 		var mobile = "";
 		var expressamount = "";
-		var rs=new Array();
-		
+		var rs = new Array();
 
 		function shuaxin() {
 			var self = plus.webview.currentWebview(); //获得当前页面的对象
 			workid = self.workid;
-			
+
 			var sesid = localStorage.getItem("sesid");
 
 			rh.SesId = sesid;
 
 			var rb = new Object();
 			rb.workid = workid;
-			
+
 			var address = "zdm/AppApi/UserAddress/GetUserDefaultAddress";
-			var cid="";
+			var cid = "";
 			cid = localStorage.getItem("cid");
-			if(cid != ""){
-				rb.id=cid; 
+			if(cid != "") {
+				rb.id = cid;
 				address = "zdm/AppApi/UserAddress/GetAUserAddress";
 			}
 
@@ -128,7 +153,7 @@
 			jn.ReqBody = rb;
 
 			var sendData = JSON.stringify(jn);
-			
+
 			//获取默认地址
 			mui.ajax(baseUrl + address, {
 				data: sendData,
@@ -139,18 +164,18 @@
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
-					
-					if (data.RespBody==undefined) {
+
+					if(data.RespBody == undefined) {
 						document.getElementById("address").innerHTML = "<span style='color:red'>请选择地址</span>";
 						return;
 					}
 					var result = "";
-					if(cid != ""){ 
-					 result = data.RespBody;
-					}else{
-					 result = data.RespBody[0];
+					if(cid != "") {
+						result = data.RespBody;
+					} else {
+						result = data.RespBody[0];
 					}
-					
+
 					consignee = result.consignee;
 					mobile = result.mobile;
 					document.getElementById("address").innerHTML = result.address;
@@ -177,12 +202,9 @@
 					expressamount = data.RespBody.delivery_fee;
 					document.getElementById("shopName").innerHTML = data.RespBody.workship_name;
 					document.getElementById("recommend").innerHTML = data.RespBody.recommend;
-
-					//					mui.toast();
-
 				},
 				error: function(xhr, type, errorThrown) {
-					mui.toast("请重试789");
+					mui.toast("请重试");
 				}
 			}); //ajax
 			//十五、获取店家信息详细信息
@@ -197,16 +219,15 @@
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
-					
+
 					rs = data.RespBody;
 					var spp = "";
 					for(var i = 0; i < rs.length; i++) {
 						if(rs[i].work_id = workid) {
 
-							spp += "<div class='myprot'><div class='mui-pull-left'><img src='" + rs[i].FilePath + "' /></div><div class='mui-pull-left'  style='margin-left: 0.5rem;'><div class='mui-pull-left'>" + rs[i].goods_name + "<br/><span style='color:red;'>￥" + rs[i].goods_price +"&nbsp;&nbsp;&nbsp;&nbsp;" + rs[i].buy_count +"份</span></div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";
-//							spp += "<div class='myprot'><div class='mui-pull-left'><img src='" + rs[i].FilePath + "' /></div><div class='mui-pull-left'  style='margin-left: 0.5rem;'><div class='mui-pull-left'>" + rs[i].goods_name + "<br/>￥ " + rs[i].goods_price +"&nbsp;&nbsp;&nbsp;&nbsp;" + rs[i].buy_count +"份</div><div class='mui-pull-left'>" + rs[i].buy_count + "</div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";1
-							
-							
+							spp += "<div class='myprot' style='margin-bottom: 0.15rem;'><div class='mui-pull-left'><img src='" + rs[i].FilePath + "' /></div><div class='mui-pull-left'  style='margin-left: 0.5rem;'><div class='mui-pull-left'>" + rs[i].goods_name + "<br/><span style='color:red;'>￥" + rs[i].goods_price + "&nbsp;&nbsp;&nbsp;&nbsp;" + rs[i].buy_count + "份</span></div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";
+							//							spp += "<div class='myprot'><div class='mui-pull-left'><img src='" + rs[i].FilePath + "' /></div><div class='mui-pull-left'  style='margin-left: 0.5rem;'><div class='mui-pull-left'>" + rs[i].goods_name + "<br/>￥ " + rs[i].goods_price +"&nbsp;&nbsp;&nbsp;&nbsp;" + rs[i].buy_count +"份</div><div class='mui-pull-left'>" + rs[i].buy_count + "</div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";1
+
 						}
 					}
 					document.getElementById("prod").innerHTML = spp;
@@ -248,9 +269,9 @@
 			var sec = myDate.getSeconds(); //获
 			var fulldatatime = year + "-" + month + "-" + datee + "_" + hour + ":" + min + ":" + sec;
 
-			dd.booktime = fulldatatime;
+			dd.booktime = toDate.toString();
 
-			dd.detail = rs;//接口9中返回的数据   九、列出我的购物车中所有的餐品 zdm/AppApi/ShopCart/GetMyGoodsInCart
+			dd.detail = rs; //接口9中返回的数据   九、列出我的购物车中所有的餐品 zdm/AppApi/ShopCart/GetMyGoodsInCart
 
 			od.push(dd);
 
