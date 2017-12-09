@@ -59,9 +59,9 @@
 		</header>
 		<div class="mui-content">
 			<div class="mdi">
-				<div class="mui-pull-left">
+				<div class="mui-pull-left" style="line-height: 1.8rem;">
 					<div id="address"></div>
-					<span id="userName"></span>&nbsp;&nbsp;<span id="mobile"></span>
+					<span id="userName" style="color:darkblue;"></span>&nbsp;&nbsp;<span id="mobile" style="color: darkred;"></span>
 				</div>
 				<div class="mui-pull-right" id="changeAddress">
 					<i class="fa fa-angle-right fa-2x"></i>
@@ -101,7 +101,7 @@
 		var consignee = "";
 		var mobile = "";
 		var expressamount = "";
-		var gds = new Array();
+		var rs=new Array();
 		
 
 		function shuaxin() {
@@ -114,7 +114,6 @@
 
 			var rb = new Object();
 			rb.workid = workid;
-			
 			
 			var address = "zdm/AppApi/UserAddress/GetUserDefaultAddress";
 			var cid="";
@@ -188,7 +187,7 @@
 			}); //ajax
 			//十五、获取店家信息详细信息
 
-			//获取这次在这家店铺购买的商品
+			//九、列出我的购物车中所有的餐品
 			mui.ajax(baseUrl + "zdm/AppApi/ShopCart/GetMyGoodsInCart", {
 				data: sendData,
 				dataType: 'json', //服务器返回json格式数据
@@ -199,23 +198,15 @@
 				},
 				success: function(data) {
 					
-					if (data.RespBody == "") {
-						alert("kong");
-					}
-					return;
-					var rs = data.RespBody;
+					rs = data.RespBody;
 					var spp = "";
 					for(var i = 0; i < rs.length; i++) {
 						if(rs[i].work_id = workid) {
 
-							spp += "<div class='myprot'><div class='mui-pull-left'><img src='" + rs[i].FilePath + "' /></div><div class='mui-pull-left'  style='margin-left: 0.5rem;'><div class='mui-pull-left'>" + rs[i].goods_name + "<br/>￥ " + rs[i].goods_price + "</div><div class='mui-pull-left'>" + rs[i].buy_count + "</div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";
-							orderTotal += rs[i].goods_price;
-							var gd = new Object();
-							gd.buy_count = rs[i].buy_count;
-							gd.goods_id = rs[i].goods_id;
-							gd.id = 72;
-							gds.push(gd);
-
+							spp += "<div class='myprot'><div class='mui-pull-left'><img src='" + rs[i].FilePath + "' /></div><div class='mui-pull-left'  style='margin-left: 0.5rem;'><div class='mui-pull-left'>" + rs[i].goods_name + "<br/><span style='color:red;'>￥" + rs[i].goods_price +"&nbsp;&nbsp;&nbsp;&nbsp;" + rs[i].buy_count +"份</span></div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";
+//							spp += "<div class='myprot'><div class='mui-pull-left'><img src='" + rs[i].FilePath + "' /></div><div class='mui-pull-left'  style='margin-left: 0.5rem;'><div class='mui-pull-left'>" + rs[i].goods_name + "<br/>￥ " + rs[i].goods_price +"&nbsp;&nbsp;&nbsp;&nbsp;" + rs[i].buy_count +"份</div><div class='mui-pull-left'>" + rs[i].buy_count + "</div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";1
+							
+							
 						}
 					}
 					document.getElementById("prod").innerHTML = spp;
@@ -228,9 +219,6 @@
 
 		//去结算
 		document.getElementById("fukuan").onclick = function() {
-
-			//	mui.toast(fulldatatime);
-			//	return;
 
 			//生成订单
 			var sesid = localStorage.getItem("sesid");
@@ -262,16 +250,7 @@
 
 			dd.booktime = fulldatatime;
 
-			var dt = new Array();
-
-			//			var dt2 = new Object();
-			//			dt2.buy_count = parseInt(Math.random() * 10);
-			//			dt2.goods_id = "071f60fa-ae12-4248-8bc2-097f01377612";
-			//			dt2.id = 72;
-
-			//			dt.push(dt2);
-			dt = gds;
-			dd.detail = dt;
+			dd.detail = rs;//接口9中返回的数据   九、列出我的购物车中所有的餐品 zdm/AppApi/ShopCart/GetMyGoodsInCart
 
 			od.push(dd);
 
@@ -298,7 +277,7 @@
 						mui.toast('请重试');
 					}
 					if(data.RespBody.succ == 1) {
-						mui.toast('已生成订单 89');
+						mui.toast('生成订单成功 ');
 
 					} //已生成订单
 				},
