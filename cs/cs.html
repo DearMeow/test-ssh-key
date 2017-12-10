@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>餐厅</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/layout.css" />
+		<link rel="stylesheet" type="text/css" href="../css/font-awesome-4.7.0/css/font-awesome.min.css" />
+		<style>
+			.jiesao {
+				padding: 1rem 1rem 0.5rem 1rem;
+				background-color: #FFFFFF;
+			}
+			
+			.zhonglei {
+				padding: 0.5rem;
+				border-bottom: 1px solid #C0C0C0;
+			}
+			
+			#jiesuan {
+				background-color: rgb(209, 37, 34);
+				color: #FFFFFF;
+				padding-top: 1rem;
+			}
+			
+			#logo img {
+				width: 4rem;
+			}
+			
+			#xiaofenlei {
+				background-color: #FFFFFF;
+			}
+			
+			#xiaofenlei div {
+				padding: 0.9rem 0rem 0.3rem 0.3rem;
+				border-bottom: 1px solid #C0C0C0;
+				width: 5rem;
+				height: 3rem;
+				
+				overflow: hidden;
+				font-size: 0.8rem;
+			}
+			
+			.nr {
+				padding: 0rem 0.5rem 0.3rem 0.2rem;
+				margin-left: 0.1rem;
+				width: 77%;
+				background-color: #FFFFFF;
+				margin-bottom: 4rem;
+			}
+			
+			.pt05 {
+				padding-top: 0.5rem;
+			}
+			
+			.pt05 div img {
+				width: 4rem;
+			}
+			
+			.wid {
+				margin-left: 0.5rem;
+				width: 70%;
+			}
+			
+			.fc {
+				font-size: 0.8rem;
+				color: rgb(153, 153, 153);
+			}
+			
+			.xname {
+				height: 1.3rem;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background-color: darkred;color: #FFFFFF;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF;"></a>
+			<h1 class="mui-title" style="color: #FFFFFF;">餐厅</h1>
+		</header>
+		<h1>ceshi</h1>
+		</div>
+		<!--mui-content-->
+
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		var workshopid = "";
+		mui.plusReady(function() {
+
+			var sesid = localStorage.getItem("sesid");
+			rh.SesId = sesid;
+
+			var rb = new Object();
+//			rb.workid = "100";
+			rb.CatId = 1;
+			
+				rb.WorkId = "100";
+
+			var jn = new Object();
+			jn.ReqHead = rh;
+			jn.ReqBody = rb;
+
+			var sendData = JSON.stringify(jn);
+
+			//判断店铺是否收藏
+		
+			
+						mui.ajax(baseUrl + "zdm/AppApi/Merchant/BeenCollected", {
+							data: sendData,
+							dataType: 'json', //服务器返回json格式数据
+							type: 'post', //HTTP请求类型
+							timeout: 10000, //超时时间设置为10秒；
+							headers: {
+								'Content-Type': 'application/json'
+							},
+							success: function(data) {
+								
+								alert(data.RespBody);
+								
+								
+								if (data.RespBody.stat == 1) {
+									document.getElementById("Collection").innerHTML = "<i class='fa fa-star' style='color:red;'></i>"
+									mui.toast('收藏');
+								}else if (data.RespBody.stat == 0) {
+									document.getElementById("Collection").innerHTML = "<i class='fa fa-star-o' style='color:red;'></i>"
+									mui.toast('没 收藏');
+								}
+							},
+							error: function(xhr, type, errorThrown) {
+								//异常处理；
+								alert("---"+errorThrown);
+							}
+						}); //ajax
+
+		}); //plusReady
+
+		
+
+		//收藏
+		document.getElementById("Collection").onclick = function() {
+
+			var sesid = localStorage.getItem("sesid");
+			rh.SesId = sesid;
+			var rb = new Object();
+			rb.WorkId = workshopid;
+
+			var jn = new Object();
+			jn.ReqHead = rh;
+			jn.ReqBody = rb;
+
+			var sendData = JSON.stringify(jn);
+
+			mui.ajax(baseUrl + "zdm/AppApi/Merchant/CollectMerchant", {
+				data: sendData,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+
+					if(data.RespBody.succ == 1) {
+						mui.toast('收藏成功');
+					} else if(data.RespBody.succ == 0) {
+						mui.toast('已经取消收藏');
+					}
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					alert(errorThrown);
+				}
+			}); //ajax
+		} //Collection
+
+		
+	</script>
+	</body>
+
+</html>

@@ -129,6 +129,7 @@
 					if(data.RespBody.succ == 1) { //成功退出
 						localStorage.setItem("sesid", "");
 							localStorage.setItem("mob", "");
+							mui.toast("你已退出登录");
 							mui.back();
 					}
 

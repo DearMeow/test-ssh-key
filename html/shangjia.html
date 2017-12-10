@@ -36,18 +36,19 @@
 			}
 			
 			#xiaofenlei div {
-				padding: 0.3rem 0rem 0.3rem 0.3rem;
+				padding: 0.9rem 0rem 0.3rem 0.3rem;
 				border-bottom: 1px solid #C0C0C0;
 				width: 5rem;
-				height: 2rem;
+				height: 3rem;
+				
 				overflow: hidden;
 				font-size: 0.8rem;
 			}
 			
 			.nr {
 				padding: 0rem 0.5rem 0.3rem 0.2rem;
-				margin-left: 0.3rem;
-				width: 75%;
+				margin-left: 0.1rem;
+				width: 77%;
 				background-color: #FFFFFF;
 				margin-bottom: 4rem;
 			}
@@ -93,7 +94,7 @@
 				<div class="mui-clearfix"></div>
 			</div>
 			<!--jiesao-->
-			<div style="height: 1rem;"></div>
+			<div style="height: 0.1rem;"></div>
 			<div class="mui-pull-left" id="xiaofenlei"></div>
 			<!--mui-pull-left-->
 			<div class="mui-pull-left nr" id="xflneirong"></div>
@@ -140,7 +141,7 @@
 
 				},
 				error: function(xhr, type, errorThrown) {
-					mui.toast("请重试345");
+					mui.toast("请重试");
 				}
 
 			}); //ajax
@@ -205,31 +206,31 @@
 			}); //ajax
 
 			//判断店铺是否收藏
-//			rb.WorkId = workshopid;
-//			alert("---"+workshopid);
-//						mui.ajax(baseUrl + "zdm/AppApi/Merchant/BeenCollected", {
-//							data: sendData,
-//							dataType: 'json', //服务器返回json格式数据
-//							type: 'post', //HTTP请求类型
-//							timeout: 10000, //超时时间设置为10秒；
-//							headers: {
-//								'Content-Type': 'application/json'
-//							},
-//							success: function(data) {
-//								alert(data.RespBody);
-//								if (data.RespBody.stat == 1) {
-//									document.getElementById("Collection").innerHTML = "<i class='fa fa-star' style='color:red;'></i>"
-//									mui.toast('收藏');
-//								}else if (data.RespBody.stat == 0) {
-//									document.getElementById("Collection").innerHTML = "<i class='fa fa-star-o' style='color:red;'></i>"
-//									mui.toast('没 收藏');
-//								}
-//							},
-//							error: function(xhr, type, errorThrown) {
-//								//异常处理；
-//								alert("---"+errorThrown);
-//							}
-//						}); //ajax
+			rb.WorkId = workshopid;
+			alert("---"+workshopid);
+						mui.ajax(baseUrl + "zdm/AppApi/Merchant/BeenCollected", {
+							data: sendData,
+							dataType: 'json', //服务器返回json格式数据
+							type: 'post', //HTTP请求类型
+							timeout: 10000, //超时时间设置为10秒；
+							headers: {
+								'Content-Type': 'application/json'
+							},
+							success: function(data) {
+								alert(data.RespBody);
+								if (data.RespBody.stat == 1) {
+									document.getElementById("Collection").innerHTML = "<i class='fa fa-star' style='color:red;'></i>"
+									mui.toast('收藏');
+								}else if (data.RespBody.stat == 0) {
+									document.getElementById("Collection").innerHTML = "<i class='fa fa-star-o' style='color:red;'></i>"
+									mui.toast('没 收藏');
+								}
+							},
+							error: function(xhr, type, errorThrown) {
+								//异常处理；
+								alert("---"+errorThrown);
+							}
+						}); //ajax
 
 		}); //plusReady
 
@@ -309,7 +310,7 @@
 										number = shops[j].buy_count;
 									}
 								}
-								flx += "<div><div class='pt05'><div class='mui-pull-left'><img src='" + res[i].FilePath + "'/></div><div class='mui-pull-left wid'><div class='xname'>" + res[i].goodsname + "</div><div class='mui-pull-left'><span style='font-size: 0.8rem;color: rgb(209,37,34);'>￥<span id='price" + res[i].goodid + "'>" + res[i].price + "</span></span></div><div class='mui-pull-right'><span class='mui-icon mui-icon-minus' style='color: rgb(209,37,34);' onclick='jian(&quot;" + res[i].goodid + "_" + res[i].price + "_" + catid + "&quot;)' ></span><span style='font-size: 1rem;color: #000000;' id='" + res[i].goodid + "'>" + number + "</span><span class='mui-icon mui-icon-plus' style='color: rgb(209,37,34);'  onclick='jia(&quot;" + res[i].goodid + "_" + res[i].price + "_" + catid + "&quot;)'></span></div></div><div class='mui-clearfix'></div></div></div>";
+								flx += "<div><div class='pt05'><div class='mui-pull-left'><img src='" + res[i].FilePath + "'/></div><div class='mui-pull-left wid'><div class='xname'>" + res[i].goodsname + "</div><div class='mui-pull-left'><span style='font-size: 0.8rem;color: rgb(209,37,34);'>￥<span id='price" + res[i].goodid + "'>" + res[i].price + "</span></span></div><div class='mui-pull-right'><span class='mui-icon mui-icon-minus' style='color: rgb(209,37,34);' onclick='jian(&quot;" + res[i].goodid + "_" + res[i].price + "_" + catid + "&quot;)' ></span><span style='font-size: 1rem;color: #000000;' id='" + res[i].goodid + "'>" + number + "</span><span class='mui-icon mui-icon-plus' style='color: rgb(209,37,34);'  onclick='jia(&quot;" + res[i].goodid + "_" + res[i].price + "_" + catid + "&quot;)'></span></div></div><div class='mui-clearfix'></div><div style='border-top:1px solid #cccccc;'></div></div></div>";
 							}
 							document.getElementById("xflneirong").innerHTML = flx;
 						},

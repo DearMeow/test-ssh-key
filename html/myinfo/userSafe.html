@@ -45,7 +45,7 @@
 		    </div>-->
 			<div class="sz"><!-- onclick="safego('shouji')"-->
 				<div class="mui-pull-left">手机</div>
-				<div class="mui-pull-right" style="color: #8F8F94;">13100897654</div>
+				<div class="mui-pull-right" style="color: #8F8F94;" id="myMobile"></div>
 				<div class="mui-clearfix"></div>
 			</div>
 			<!--sz onclick="safego('weixin')"-->
@@ -87,6 +87,11 @@
 <script src="../../js/mui.min.js"></script>
 <script src="../../js/domain.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
+			
+			window.onload = function(){
+				document.getElementById("myMobile").innerHTML = localStorage.getItem("mob");
+			}
+			
 			function safego(page){
 				var gopage = page+".html";
 				//打开新窗口

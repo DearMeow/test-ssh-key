@@ -85,35 +85,46 @@
 	<script src="../js/mui.min.js"></script>
 	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script>
-		window.onload =  currentstats();
-		
+		window.onload = currentstats();
+
 		window.addEventListener('minerefresh', function() {
 			currentstats();
 		}, false);
-		
+
 		//获取当前状态
-		function currentstats(){
+		function currentstats() {
 			var sesid = localStorage.getItem("sesid");
-			if (sesid == null || sesid == "") {
+			if(sesid == null || sesid == "") {
 				document.getElementById("zhuangtai").innerHTML = "未登录";
-			} else{
-				document.getElementById("zhuangtai").innerHTML = "<img src='../images/shouji.png' width='10rem'/>&nbsp;"+localStorage.getItem("mob");
+			} else {
+				document.getElementById("zhuangtai").innerHTML = "<img src='../images/shouji.png' width='10rem'/>&nbsp;" + localStorage.getItem("mob");
 			}
-		}//currentstats
-		
+		} //currentstats
+
 		//打开新窗口
 		function openPage(page) {
-			
-			
+
 			var sesid = localStorage.getItem("sesid");
 
+			if("denglu" == page) {
+				if(sesid != null && sesid != "") {
+					return;
+				}
+			}
+			if("denglu" != page) {
+				if(sesid == null || sesid == "") {
+					mui.toast("请登录");
+					return;
+				}
+			}
+
 			var url = "myinfo/denglu.html";
-			
+
 			if(sesid != null && sesid != "") {
 				var goPage = page + ".html";
 				url = "myinfo/" + goPage;
 			}
-			
+
 			//打开新窗口
 			mui.openWindow({
 				url: url, //需要打开页面的url地址 

@@ -203,11 +203,13 @@
 				},
 				success: function(data) {
 
+//alert("shanchu "+data.RespBody);
+
+
 					if(data.RespBody.succ == 1){
 						mui.toast("已删除！");
 						addressList();
-					}else{
-						mui.toast("not 已删除！");
+						
 					}
 			
 				},
