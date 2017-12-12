@@ -14,7 +14,7 @@
 		<link rel="stylesheet" type="text/css" href="../css/font-awesome-4.7.0/css/font-awesome.min.css" />
 		<style>
 			.mdi {
-				margin-bottom: 0.2rem;
+				margin-bottom: 1px;
 				background-color: #FFFFFF;
 				padding: 0.5rem 0.5rem 0.2rem 0.5rem;
 			}
@@ -62,7 +62,7 @@
 			<div class="mdi">
 				<div class="mui-pull-left" style="line-height: 1.8rem;">
 					<div id="address"></div>
-					<span id="userName" style="color:darkblue;"></span>&nbsp;&nbsp;<span id="mobile" style="color: darkred;"></span>
+					<span id="userName" style="color:red;"></span>&nbsp;&nbsp;<span id="mobile" style="color: red;"></span>
 				</div>
 				<div class="mui-pull-right" id="changeAddress">
 					<i class="fa fa-angle-right fa-2x"></i>
@@ -70,7 +70,7 @@
 				<div class="mui-clearfix"></div>
 
 			</div>
-			<div class="mdi" id="picker" style="background-color: #CF2D28;color: #FFFFFF;">
+			<div class="mdi" id="picker" style="background-color: #CF2D28;color: #FFFFFF;padding: 1rem 0rem 0.8rem 0.5rem;">
 				配送时间: <span id="checkedData"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-calendar"></i>
 			</div>
 			<div class="mdi" id="shop">
@@ -225,7 +225,7 @@
 					for(var i = 0; i < rs.length; i++) {
 						if(rs[i].work_id = workid) {
 
-							spp += "<div class='myprot' style='margin-bottom: 0.15rem;'><div class='mui-pull-left'><img src='" + rs[i].FilePath + "' /></div><div class='mui-pull-left'  style='margin-left: 0.5rem;'><div class='mui-pull-left'>" + rs[i].goods_name + "<br/><span style='color:red;'>￥" + rs[i].goods_price + "&nbsp;&nbsp;&nbsp;&nbsp;" + rs[i].buy_count + "份</span></div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";
+							spp += "<div class='myprot' style='margin-bottom: 1px;'><div class='mui-pull-left'><img src='" + rs[i].FilePath + "' /></div><div class='mui-pull-left'  style='margin-left: 0.5rem;'><div class='mui-pull-left'>" + rs[i].goods_name + "<br/><span style='color:red;'>￥" + rs[i].goods_price + "&nbsp;&nbsp;&nbsp;&nbsp;" + rs[i].buy_count + "份</span></div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";
 							//							spp += "<div class='myprot'><div class='mui-pull-left'><img src='" + rs[i].FilePath + "' /></div><div class='mui-pull-left'  style='margin-left: 0.5rem;'><div class='mui-pull-left'>" + rs[i].goods_name + "<br/>￥ " + rs[i].goods_price +"&nbsp;&nbsp;&nbsp;&nbsp;" + rs[i].buy_count +"份</div><div class='mui-pull-left'>" + rs[i].buy_count + "</div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";1
 
 						}
