@@ -67,10 +67,7 @@
 			</div>-->
 		</header>
 		<div class="mui-content">
-
-			<div id="msg2"></div>
 			<div id="msg"></div>
-
 			<!--<div id="shopCar"><img src="../images/shopCar.png" /></div>-->
 		</div>
 		<!--mui-content-->
@@ -116,7 +113,7 @@
 			rb.curPage = 1;
 			rb.pageSize = 20;
 			rb.qryName = "";
-			rb.OrderStatus = 1;
+			rb.OrderStatus = "";
 
 			var jn = new Object();
 			jn.ReqHead = rh;
@@ -139,39 +136,69 @@
 					if(result.Recs.length == 0) {
 						document.getElementById("msg").innerHTML += "<div style='color:darkred;margin-top: 12rem;text-align:center;'>你还没有产生订单</div>";
 					} else {
-						var zs = result.Recs[0].state;
+//						var zs = result.Recs[0].state;
+//alert(result.Recs[1].Detail.length);
+						for(var i = 0; i < result.Recs.length; i++) {
+							var zs = result.Recs[i].state;
+						
+//						alert(zs);
+
 						var state = "";
 						switch(zs) {
-							case 1:
-								state = "<input type='button' style='margin-top:1rem;' onclick='zhifu()' value='支付'/>";
+							case 0:
+								state = "<input type='button' style='margin-top:1rem;' onclick='zhifu()' value='等待支付'/>";
 								break;
-							case 11:
-								state = "<input type='button' style='margin-top:1rem;' onclick='quxiao()' value='取消订单'/><input type='button' style='margin-top:1rem;' onclick='tuikuan()' value='申请退款'/>";
+							case 1:
+								state = "<input type='button' style='margin-top:1rem;' onclick='tuikuan()' value='申请退款'/>";
+								break;
+							case 12:
+								state = "正在打包<input type='button' style='margin-top:1rem;' onclick='tuikuan()' value='申请退款'/>";
 								break;
 							case 2:
-								state = "<input type='button' style='margin-top:1rem;' onclick='quxiao()' value='取消订单'/><input type='button' style='margin-top:1rem;' onclick='tuikuan()' value='申请退款'/>";
+								state = "待取货<input type='button' style='margin-top:1rem;' onclick='tuikuan()' value='申请退款'/>";
 								break;
-							case 3:
-								state = "<input type='button' style='margin-top:1rem;' onclick='quxiao()' value='取消订单'/><input type='button' style='margin-top:1rem;' onclick='tuikuan()' value='申请退款'/>";
+							case 21:
+								state = "正在配送<input type='button' style='margin-top:1rem;' onclick='tuikuan()' value='申请退款'/>";
+								break;
+								case 3:
+								state = "已送达<input type='button' style='margin-top:1rem;' onclick='tuikuan()' value='申请退款'/>";
 								break;
 							case 4:
-								state = "<input type='button' style='margin-top:1rem;' onclick='pingjia()' value='评价'/>";
+								state = "<input type='button' style='margin-top:1rem;' onclick='pingjia()' value='待评价'/>";
 								break;
 							case 5:
 								state = "已完成";
 								break;
+								case 50:
+								state = "你已取消订单";
+								break;
+								case 51:
+								state = "商家已取消订单";
+								break;
+								case 52:
+								state = "未接单";
+								break;
+								case 53:
+								state = "停止配送";
+								break;
+						}//switch
+						var sp = result.Recs[i].Detail;
+						var ssp="";
+						for (var i = 0; i < sp.length; i++) {
+//							sp[i].goods_name  COUNT
+//							ssp+="<div>"+sp[i].goods_name+"</div>";
+						}
 
-						}
-						for(var i = 0; i < result.Recs.length; i++) {
-							document.getElementById("msg").innerHTML += "<div class='eachOrder' onclick='orderDetail(&quot;" + result.Recs[i].Detail[0].t_order_id + "&quot;)'><div class='mui-row'><div class='mui-col-sm-9 mui-col-xs-9'><div class='mui-pull-left'><img src='../images/logo2.png'/></div><div class='mui-pull-left dianpu'><span class='workname'>" + result.Recs[i].work_name + "</span>￥" + result.Recs[i].amount + "</div></div><div class='mui-col-sm-3 mui-col-xs-3 huise'>" + state + "</div></div><div class='mui-clearfix'></div></div>";
-						}
-					}
+							document.getElementById("msg").innerHTML += "<div class='eachOrder' onclick='orderDetail(&quot;" + result.Recs[i].Detail[0].t_order_id + "&quot;)'><div class='mui-row'><div class='mui-col-sm-9 mui-col-xs-9'><div class='mui-pull-left dianpu'><span class='workname'>" + result.Recs[i].work_name + "</span>￥" + result.Recs[i].amount + "</div></div><div class='mui-col-sm-3 mui-col-xs-3 huise'>" + state + "</div></div><div class='mui-clearfix'></div></div>";
+						}//result.Recs
+					}//if
 				},
 				error: function(xhr, type, errorThrown) {
 //					alert(type);
 				}
 			}); //ajax
 		} //dingdan
+
 
 		function login() {
 			//打开新窗口
