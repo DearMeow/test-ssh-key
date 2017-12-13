@@ -12,13 +12,13 @@
 		<style>
 			.eachOrder {
 				background-color: #FFFFFF;
-				margin-bottom: 0.3rem;
-				padding: 0.5rem;
+				margin-bottom: 1px;
+				padding: 0.2rem;
 			}
 			
-			.eachOrder img {
+			/*.eachOrder img {
 				width: 4rem;
-			}
+			}*/
 			
 			.huise {
 				color: rgb(153, 153, 153);
@@ -184,12 +184,11 @@
 						}//switch
 						var sp = result.Recs[i].Detail;
 						var ssp="";
-						for (var i = 0; i < sp.length; i++) {
-//							sp[i].goods_name  COUNT
-//							ssp+="<div>"+sp[i].goods_name+"</div>";
+						for (var k = 0; k < sp.length; k++) {
+							ssp+="<div><div style='width:13rem;float:left;'>"+sp[k].goods_name+"</div><div style='float:right;'>"+sp[k].COUNT+"份</div><div style='clear:both'></div></div>";
 						}
 
-							document.getElementById("msg").innerHTML += "<div class='eachOrder' onclick='orderDetail(&quot;" + result.Recs[i].Detail[0].t_order_id + "&quot;)'><div class='mui-row'><div class='mui-col-sm-9 mui-col-xs-9'><div class='mui-pull-left dianpu'><span class='workname'>" + result.Recs[i].work_name + "</span>￥" + result.Recs[i].amount + "</div></div><div class='mui-col-sm-3 mui-col-xs-3 huise'>" + state + "</div></div><div class='mui-clearfix'></div></div>";
+							document.getElementById("msg").innerHTML += "<div class='eachOrder' onclick='orderDetail(&quot;" + result.Recs[i].Detail[0].t_order_id + "&quot;)'><div class='mui-row'><div class='mui-col-sm-9 mui-col-xs-9'><div class='mui-pull-left dianpu'><span class='workname'>" + result.Recs[i].work_name + "</span>"+ssp+"总价：￥" + result.Recs[i].amount + "</div></div><div class='mui-col-sm-3 mui-col-xs-3 huise'>" + state + "</div></div><div class='mui-clearfix'></div></div>";
 						}//result.Recs
 					}//if
 				},
