@@ -24,7 +24,7 @@ function checkCurrentUser(data){
 function denglu(){
 	//打开新窗口
 		mui.openWindow({
-			url: '/myinfo/denglu.html', //需要打开页面的url地址 
+			url: 'myinfo/denglu.html', //需要打开页面的url地址 
 			id: 'cs', //需要打开页面的url页面id
 			styles: {
 				top: '0px', //新页面顶部位置 
@@ -32,7 +32,9 @@ function denglu(){
 				//					width:newpage-width,//新页面宽度，默认为100% 
 				//					height:newpage-height,//新页面高度，默认为100% ...... 
 			},
-			extras: {},
+			extras: {
+//				nologin:'ng'nologin
+			},
 			show: { //控制打开页面的类型
 				autoShow: true,
 				//					//页面loaded事件发生后自动显示，默认为true 

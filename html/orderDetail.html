@@ -31,11 +31,7 @@
 			var orderId = self.orderId;
 			document.getElementById("ok2").innerHTML=orderId;
 
-			var sesid = localStorage.getItem("sesid");
-			
-			mui.toast(sesid);
-			
-			rh.SesId = sesid;
+			rh.SesId = checkLogin();
 
 			var rb = new Object();
 			rb.OrderId = orderId;
@@ -57,12 +53,7 @@
 				},
 				success: function(data) {
 
-					if(data.RespHead.ResponseCode == 1) { //请求失败
-						
-
-mui.toast(data.RespBody.consignee);
-
-mui.toast(data.RespBody.Detail[0].goods_name);
+					checkCurrentUser(data);
 					
 					
 						

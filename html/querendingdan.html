@@ -51,6 +51,8 @@
 				padding-bottom: 0.5rem;
 				margin-top: 1rem;
 			}
+			
+			
 		</style>
 	</head>
 
@@ -74,47 +76,51 @@
 			<div class="mdi" id="picker" style="background-color: #CF2D28;color: #FFFFFF;padding: 1rem 0rem 0.8rem 0.5rem;">
 				配送时间: <span id="checkedData"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-calendar"></i>
 			</div>
-			<div class="mdi" id="shop">
+			<!--<div class="mdi" id="shop">
 				<div class="mui-pull-left"></div>
 				<div class="mui-pull-left" style="margin-left: 1rem;">
 					<div id="shopName"></div>
 					<div id="recommend"></div>
 				</div>
 				<div class="mui-clearfix"></div>
-			</div>
+			</div>-->
 			<div class="products" id="prod"></div>
 			<div style="text-align: center;">
-			<input type="button" name="fukuan" id="fukuan" value="付&nbsp;&nbsp;&nbsp;款" /></div>
+				<input type="button" name="fukuan" id="fukuan" value="付&nbsp;&nbsp;&nbsp;款" /></div>
+				<div id="hhh">
+			
+		</div>
 		</div>
 		<!--mbody-->
+		
 	</body>
 	<script src="../js/mui.min.js"></script>
 	<script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script>
-		var toDate="";
+		var toDate = "";
 		mui.plusReady(function() {
 			shuaxin();
-			
+
 			var myDate = new Date();
 
 			var year = myDate.getFullYear(); //获取完整的年份(4位,1970-????)
-			var month = myDate.getMonth()+1; //获取当前月份(0-11,0代表1月)
-			var datee = myDate.getDate()+1; //获取当前日(1-31)
+			var month = myDate.getMonth() + 1; //获取当前月份(0-11,0代表1月)
+			var datee = myDate.getDate() + 1; //获取当前日(1-31)
 
 			var hour = myDate.getHours();
 			var min = myDate.getMinutes(); //获取当前分钟数(0-59)
 			var fulldatatime = year + "-" + month + "-" + datee + " " + hour + ":" + min;
-			toDate=fulldatatime;
+			toDate = fulldatatime;
 			document.getElementById("checkedData").innerHTML = fulldatatime;
-			
+
 			document.getElementById("picker").onclick = function() {
 				var dtPicker = new mui.DtPicker();
 				dtPicker.show(function(selectItems) {
-					toDate=selectItems;
+					toDate = selectItems;
 					document.getElementById("checkedData").innerHTML = selectItems;
 				})
-				
+
 			}
 		}); //plusReady
 
@@ -135,9 +141,7 @@
 			var self = plus.webview.currentWebview(); //获得当前页面的对象
 			workid = self.workid;
 
-			var sesid = localStorage.getItem("sesid");
-
-			rh.SesId = sesid;
+			rh.SesId = checkLogin();
 
 			var rb = new Object();
 			rb.workid = workid;
@@ -166,7 +170,7 @@
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
-
+					checkCurrentUser(data);
 					if(data.RespBody == undefined) {
 						document.getElementById("address").innerHTML = "<span style='color:red'>请选择地址</span>";
 						return;
@@ -190,25 +194,25 @@
 			}); //ajax  获取默认地址
 
 			//十五、获取店家信息详细信息
-			mui.ajax(baseUrl + "zdm/AppApi/Merchant/GetWorkshopInfo", {
-				data: sendData,
-				dataType: 'json', //服务器返回json格式数据
-				type: 'post', //HTTP请求类型
-				timeout: 10000, //超时时间设置为10秒；
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				success: function(data) {
-					workName = data.RespBody.workship_name;
-					address = data.RespBody.address;
-					expressamount = data.RespBody.delivery_fee;
-					document.getElementById("shopName").innerHTML = data.RespBody.workship_name;
-					document.getElementById("recommend").innerHTML = data.RespBody.recommend;
-				},
-				error: function(xhr, type, errorThrown) {
-					mui.toast("请重试");
-				}
-			}); //ajax
+//			mui.ajax(baseUrl + "zdm/AppApi/Merchant/GetWorkshopInfo", {
+//				data: sendData,
+//				dataType: 'json', //服务器返回json格式数据
+//				type: 'post', //HTTP请求类型
+//				timeout: 10000, //超时时间设置为10秒；
+//				headers: {
+//					'Content-Type': 'application/json'
+//				},
+//				success: function(data) {
+//					workName = data.RespBody.workship_name;
+//					address = data.RespBody.address;
+//					expressamount = data.RespBody.delivery_fee;
+//					document.getElementById("shopName").innerHTML = data.RespBody.workship_name;
+//					document.getElementById("recommend").innerHTML = data.RespBody.recommend;
+//				},
+//				error: function(xhr, type, errorThrown) {
+//					mui.toast("请重试");
+//				}
+//			}); //ajax
 			//十五、获取店家信息详细信息
 
 			//九、列出我的购物车中所有的餐品
@@ -221,18 +225,22 @@
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
+					checkCurrentUser(data);
+					
 
-					rs = data.RespBody;
-					var spp = "";
-					for(var i = 0; i < rs.length; i++) {
-						if(rs[i].work_id = workid) {
-
-							spp += "<div class='myprot' style='margin-bottom: 1px;'><div class='mui-pull-left'><img src='" + rs[i].FilePath + "' /></div><div class='mui-pull-left'  style='margin-left: 0.5rem;'><div class='mui-pull-left'>" + rs[i].goods_name + "<br/><span style='color:red;'>￥" + rs[i].goods_price + "&nbsp;&nbsp;&nbsp;&nbsp;" + rs[i].buy_count + "份</span></div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";
-							//							spp += "<div class='myprot'><div class='mui-pull-left'><img src='" + rs[i].FilePath + "' /></div><div class='mui-pull-left'  style='margin-left: 0.5rem;'><div class='mui-pull-left'>" + rs[i].goods_name + "<br/>￥ " + rs[i].goods_price +"&nbsp;&nbsp;&nbsp;&nbsp;" + rs[i].buy_count +"份</div><div class='mui-pull-left'>" + rs[i].buy_count + "</div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";1
-
-						}
-					}
-					document.getElementById("prod").innerHTML = spp;
+										rs = data.RespBody;
+										
+										var spp = "";
+										var wd = "";
+										for(var i = 0; i < rs.length; i++) {
+											if(rs[i].work_id = workid) {
+					wd+=rs[i].work_id+" = ";
+												spp += "<div class='myprot' style='margin-bottom: 1px;'><div class='mui-pull-left'><img src='" + rs[i].FilePath + "' /></div><div class='mui-pull-left'  style='margin-left: 0.5rem;'><div class='mui-pull-left'>" + rs[i].goods_name + "<br/><span style='color:red;'>￥" + rs[i].goods_price + "&nbsp;&nbsp;&nbsp;&nbsp;" + rs[i].buy_count + "份</span></div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";
+												//							spp += "<div class='myprot'><div class='mui-pull-left'><img src='" + rs[i].FilePath + "' /></div><div class='mui-pull-left'  style='margin-left: 0.5rem;'><div class='mui-pull-left'>" + rs[i].goods_name + "<br/>￥ " + rs[i].goods_price +"&nbsp;&nbsp;&nbsp;&nbsp;" + rs[i].buy_count +"份</div><div class='mui-pull-left'>" + rs[i].buy_count + "</div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";1
+					document.getElementById("hhh").innerHTML = wd;
+											}
+										}
+										document.getElementById("prod").innerHTML = spp;
 				},
 				error: function(xhr, type, errorThrown) {
 					mui.toast("请重试");
@@ -240,12 +248,12 @@
 			}); //ajax
 		} //shuaxin
 
+
 		//去结算
 		document.getElementById("fukuan").onclick = function() {
 
 			//生成订单
-			var sesid = localStorage.getItem("sesid");
-			rh.SesId = sesid;
+			rh.SesId = checkLogin();
 
 			var od = new Array();
 
@@ -260,16 +268,16 @@
 
 			dd.expressamount = expressamount;
 
-//			var myDate = new Date();
-//
-//			var year = myDate.getFullYear(); //获取完整的年份(4位,1970-????)
-//			var month = myDate.getMonth(); //获取当前月份(0-11,0代表1月)
-//			var datee = myDate.getDate(); //获取当前日(1-31)
-//
-//			var hour = myDate.getHours();
-//			var min = myDate.getMinutes(); //获取当前分钟数(0-59)
-//			var sec = myDate.getSeconds(); //获
-//			var fulldatatime = year + "-" + month + "-" + datee + "_" + hour + ":" + min + ":" + sec;
+			//			var myDate = new Date();
+			//
+			//			var year = myDate.getFullYear(); //获取完整的年份(4位,1970-????)
+			//			var month = myDate.getMonth(); //获取当前月份(0-11,0代表1月)
+			//			var datee = myDate.getDate(); //获取当前日(1-31)
+			//
+			//			var hour = myDate.getHours();
+			//			var min = myDate.getMinutes(); //获取当前分钟数(0-59)
+			//			var sec = myDate.getSeconds(); //获
+			//			var fulldatatime = year + "-" + month + "-" + datee + "_" + hour + ":" + min + ":" + sec;
 
 			dd.booktime = toDate.toString();
 
@@ -296,6 +304,7 @@
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
+					checkCurrentUser(data);
 					if(data.RespBody.succ == 0) {
 						mui.toast('请重试');
 					}

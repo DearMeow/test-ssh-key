@@ -90,10 +90,8 @@
 		mui.plusReady(function() {
 			var self = plus.webview.currentWebview(); //获得当前页面的对象
 			var orderId = self.orderId;
-//alert(orderId);
-			var sesid = localStorage.getItem("sesid");
 
-			rh.SesId = sesid;
+			rh.SesId = checkLogin();
 
 			var rb = new Object();
 			rb.OrderId = orderId;
@@ -113,7 +111,7 @@
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
-
+checkCurrentUser(data);
 					//地址
 					document.getElementById("myAddress").innerHTML = data.RespBody.address + "<br/>" + data.RespBody.consignee + "&nbsp;&nbsp;" + data.RespBody.mobile;
 					document.getElementById("workName").innerHTML = data.RespBody.work_name; //餐厅名称

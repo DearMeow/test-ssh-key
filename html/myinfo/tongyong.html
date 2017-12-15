@@ -36,7 +36,12 @@
 	<script type="text/javascript">
 
 		function qingchu() {
+			var sesid = localStorage.getItem("sesid");
+			var mob = localStorage.getItem("mob");
+			
 			plus.cache.clear();
+			localStorage.setItem("sesid", sesid);
+			localStorage.setItem("mob", mob);
 			mui.toast("缓存已清除");
 		} /*qingchu*/
 	</script>
