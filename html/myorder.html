@@ -180,7 +180,7 @@
 								ssp += "<div><div style='width:13rem;float:left;'>" + sp[k].goods_name + "</div><div style='float:right;'>" + sp[k].COUNT + "份</div><div style='clear:both'></div></div>";
 							}
 
-							document.getElementById("msg").innerHTML += "<div class='eachOrder' onclick='orderDetail(&quot;" + result.Recs[i].Detail[0].t_order_id + "&quot;)'><div class='mui-row'><div class='mui-col-sm-9 mui-col-xs-9'><div class='mui-pull-left dianpu'><span class='workname'>" + result.Recs[i].work_name + "</span>" + ssp + "<span style='color:red;'>总价：￥" + result.Recs[i].amount + "</span></div></div><div class='mui-col-sm-3 mui-col-xs-3 huise'>" + state + "</div></div><div class='mui-clearfix'></div></div>";
+							document.getElementById("msg").innerHTML += "<div class='eachOrder' onclick='orderDetail(&quot;" + result.Recs[i].Detail[0].t_order_id + "&quot;)'><div class='mui-row'><div class='mui-col-sm-9 mui-col-xs-9'><div class='mui-pull-left dianpu'><span class='workname'>" + result.Recs[i].work_name + "</span>" + ssp + "运费:"+result.Recs[i].amount+"<br/><span style='color:red;'>总价：￥" + result.Recs[i].amount + "</span></div></div><div class='mui-col-sm-3 mui-col-xs-3 huise'>" + state + "</div></div><div class='mui-clearfix'></div></div>";
 						} //result.Recs
 					} //if
 				},
