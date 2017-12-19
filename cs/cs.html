@@ -25,14 +25,18 @@
 
 		</body>
 		<script src="../js/mui.min.js"></script>
+		<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			document.getElementById("pay").onclick = function() {
 fnSubmit();
 			} //pay
 
 			function fnSubmit() {
+				
 				var channel = null;
 				var title = "zdm";
+//				mui.alert("付费失败");
+//				return;
 				mui.plusReady(function() {
 					plus.payment.getChannels(function(channels) {
 						channel = channels[0];
@@ -40,12 +44,11 @@ fnSubmit();
 						alert("获取支付通道失败：" + e.message);
 					});
 					plus.nativeUI.showWaiting();
-					mui.post(g_SrvUrl + "/zdm/Pay/Alipay/GetPayInfo", {
+					mui.post(baseUrl + "/zdm/Pay/Alipay/GetPayInfo", {
 						OrderId:80
 					}, function(data) {
 						plus.nativeUI.closeWaiting();
 						if(data) {
-							//alert(channel);
 							if(data != "repay") {
 								plus.payment.request(channel, data, function(result) {
 									console.log(JSON.stringify(result));
