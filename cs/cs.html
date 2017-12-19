@@ -41,7 +41,7 @@ fnSubmit();
 					});
 					plus.nativeUI.showWaiting();
 					mui.post(g_SrvUrl + "/zdm/Pay/Alipay/GetPayInfo", {
-						OrderId: document.getElementById("txtOrderId").value //订单号
+						OrderId:80
 					}, function(data) {
 						plus.nativeUI.closeWaiting();
 						if(data) {
