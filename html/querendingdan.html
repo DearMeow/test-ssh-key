@@ -298,6 +298,10 @@
 					}
 					if(data.RespBody.succ == 1) {
 						mui.toast('生成订单成功 ');
+						if(data.RespBody.OrderId != 0) { //订单号不等于0就是正常值
+
+							fnSubmit(data.RespBody.OrderId);
+						} //订单号不等于0就是正常值
 
 					} //已生成订单
 				},
@@ -310,6 +314,47 @@
 			return;
 
 		} //去结算
+
+		//付款
+		function fnSubmit(OrderId) {
+			var channel = null;
+			var title = "zdm";
+			mui.plusReady(function() {
+				plus.payment.getChannels(function(channels) {
+					channel = channels[0];
+				}, function(e) {
+					alert("获取支付通道失败：" + e.message);
+				});
+				plus.nativeUI.showWaiting();
+				mui.post(baseUrl + "/zdm/Pay/Alipay/GetPayInfo", {
+					OrderId: OrderId
+				}, function(data) {
+					plus.nativeUI.closeWaiting();
+					if(data) {
+						if(data != "repay") {
+							plus.payment.request(channel, data, function(result) {
+								//									console.log(JSON.stringify(result));
+								//									mui.alert(JSON.stringify(result), title);
+								//									mui.alert("付费成功", title);
+								mui.alert("付费成功");
+							}, function(e) {
+								//									console.log(JSON.stringify(e));
+								//									alert(JSON.stringify(e));
+								//									mui.alert("付费失败", title);
+								mui.alert("付费失败");
+							});
+						} else {
+							//								mui.alert("付费失败,该订单已经支付过", title);
+							mui.alert("付费失败,该订单已经支付过");
+
+						}
+					} else {
+						plus.nativeUI.alert("支付失败");
+					}
+				});
+			});
+		}
+		//付款
 
 		//更换地址
 		document.getElementById("changeAddress").onclick = function() {
