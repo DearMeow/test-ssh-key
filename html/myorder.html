@@ -128,9 +128,9 @@
 					if(result.Recs.length == 0) {
 						document.getElementById("msg").innerHTML += "<div style='color:darkred;margin-top: 12rem;text-align:center;'>你还没有产生订单</div>";
 					} else {
-//												var zs = result.Recs[0].state;
-//												var oid = result.Recs[1].id;
-//						alert(zs+"——"+oid);
+												var zs = result.Recs[4].state;
+												var oid = result.Recs[4].id;
+						alert(zs+"——"+oid);
 						for(var i = 0; i < result.Recs.length; i++) {
 							var zs = result.Recs[i].state;
 
