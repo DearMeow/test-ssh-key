@@ -329,7 +329,7 @@
 				plus.payment.getChannels(function(channels) {
 					channel = channels[0];
 				}, function(e) {
-					alert("获取支付通道失败：" + e.message);
+					mui.toast("获取支付通道失败：" + e.message);
 				});
 				plus.nativeUI.showWaiting();
 				mui.post(baseUrl + "/zdm/Pay/Alipay/GetPayInfo", {
@@ -342,7 +342,7 @@
 								//									console.log(JSON.stringify(result));
 								//									mui.alert(JSON.stringify(result), title);
 								//									mui.alert("付费成功", title);
-								mui.alert("付费成功");
+								mui.toast("付费成功");
 								//打开新窗口
 								mui.openWindow({
 									url: 'myorder.html', //需要打开页面的url地址 
@@ -379,7 +379,7 @@
 								//									console.log(JSON.stringify(e));
 								//									alert(JSON.stringify(e));
 								//									mui.alert("付费失败", title);
-								mui.alert("付费失败");
+								mui.toast("付费失败");
 								//获得列表界面的webview
 
 								//付款失败
