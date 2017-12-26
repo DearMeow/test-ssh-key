@@ -80,7 +80,7 @@
 			var self = plus.webview.currentWebview(); //获得当前页面的对象
 			var fukuan = "";
 			fukuan = self.fukuan;
-			if (fukuan != "") {
+			if(fukuan != "") {
 				dingdan();
 			}
 		});
@@ -133,35 +133,34 @@
 					checkCurrentUser(data);
 					var result = data.RespBody;
 
-
 					if(result.Recs.length == 0) {
 						document.getElementById("msg").innerHTML += "<div style='color:darkred;margin-top: 12rem;text-align:center;'>你还没有产生订单</div>";
 					} else {
-//												var zs = result.Recs[4].state;
-//												var oid = result.Recs[4].id;
-//						alert(zs+"——"+oid);
+						//												var zs = result.Recs[4].state;
+						//												var oid = result.Recs[4].id;
+						//						alert(zs+"——"+oid);
 						for(var i = 0; i < result.Recs.length; i++) {
 							var zs = result.Recs[i].state;
 
 							var state = "";
 							switch(zs) {
 								case 0:
-									state = "<input type='button' style='margin-top:1rem;' onclick='zhifu(&quot;"+result.Recs[i].id+"&quot;)' value='等待支付'/>";
+									state = "<input type='button' style='margin-top:1rem;' onclick='zhifu(&quot;" + result.Recs[i].id + "&quot;)' value='等待支付'/>";
 									break;
 								case 1:
-									state = "<input type='button' style='margin-top:1rem;' onclick='tuikuan()' value='申请退款'/>";
+									state = "<input type='button' style='margin-top:1rem;' onclick='tuikuan(&quot;" + result.Recs[i].id + "&quot;)' value='申请退款'/>";
 									break;
 								case 12:
-									state = "正在打包<input type='button' style='margin-top:1rem;' onclick='tuikuan()' value='申请退款'/>";
+									state = "正在打包<input type='button' style='margin-top:1rem;' onclick='tuikuan(&quot;" + result.Recs[i].id + "&quot;)' value='申请退款'/>";
 									break;
 								case 2:
-									state = "待取货<input type='button' style='margin-top:1rem;' onclick='tuikuan()' value='申请退款'/>";
+									state = "待取货<input type='button' style='margin-top:1rem;' onclick='tuikuan(&quot;" + result.Recs[i].id + "&quot;)' value='申请退款'/>";
 									break;
 								case 21:
-									state = "正在配送<input type='button' style='margin-top:1rem;' onclick='tuikuan()' value='申请退款'/>";
+									state = "正在配送<input type='button' style='margin-top:1rem;' onclick='tuikuan(&quot;" + result.Recs[i].id + "&quot;)' value='申请退款'/>";
 									break;
 								case 3:
-									state = "已送达<input type='button' style='margin-top:1rem;' onclick='tuikuan()' value='申请退款'/>";
+									state = "已送达<input type='button' style='margin-top:1rem;' onclick='tuikuan(&quot;" + result.Recs[i].id + "&quot;)' value='申请退款'/>";
 									break;
 								case 4:
 									state = "<input type='button' style='margin-top:1rem;' onclick='pingjia()' value='待评价'/>";
@@ -188,13 +187,13 @@
 								ssp += "<div><div style='width:13rem;float:left;'>" + sp[k].goods_name + "</div><div style='float:right;'>" + sp[k].COUNT + "份</div><div style='clear:both'></div></div>";
 							}
 							var crt = result.Recs[i].create_time;
-var shijian = crt.year+"-"+crt.month+"-"+crt.date+"&nbsp;&nbsp;&nbsp;"+crt.hours+":"+crt.minutes+":"+crt.seconds;
-							document.getElementById("msg").innerHTML += "<div class='eachOrder'><div class='mui-row'><div class='mui-col-sm-9 mui-col-xs-9'><div class='mui-pull-left dianpu'><span style='font-size:0.8rem'>订单号："+result.Recs[i].id+"&nbsp;&nbsp;&nbsp;&nbsp;"+shijian+"</span><span class='workname'>" + result.Recs[i].work_name + "</span>" + ssp + "运费:"+result.Recs[i].express_money+"<br/><span style='color:red;'>总价：￥" + result.Recs[i].amount + "</span></div></div><div class='mui-col-sm-3 mui-col-xs-3 huise'>" + state + "</div></div><div class='mui-clearfix'></div></div>";
+							var shijian = crt.year + "-" + crt.month + "-" + crt.date + "&nbsp;&nbsp;&nbsp;" + crt.hours + ":" + crt.minutes + ":" + crt.seconds;
+							document.getElementById("msg").innerHTML += "<div class='eachOrder'><div class='mui-row'><div class='mui-col-sm-9 mui-col-xs-9'><div class='mui-pull-left dianpu'><span style='font-size:0.8rem'>订单号：" + result.Recs[i].id + "&nbsp;&nbsp;&nbsp;&nbsp;" + shijian + "</span><span class='workname'>" + result.Recs[i].work_name + "</span>" + ssp + "运费:" + result.Recs[i].express_money + "<br/><span style='color:red;'>总价：￥" + result.Recs[i].amount + "</span></div></div><div class='mui-col-sm-3 mui-col-xs-3 huise'>" + state + "</div></div><div class='mui-clearfix'></div></div>";
 						} //result.Recs
 					} //if
 				},
 				error: function(xhr, type, errorThrown) {
-										alert(type);
+					alert(type);
 				}
 			}); //ajax
 		} //dingdan
@@ -212,7 +211,7 @@ var shijian = crt.year+"-"+crt.month+"-"+crt.date+"&nbsp;&nbsp;&nbsp;"+crt.hours
 		function zhifu(OrderId) {
 			fnSubmit(OrderId);
 		} //zhifu
-		
+
 		//付款
 		function fnSubmit(OrderId) {
 			var channel = null;
@@ -243,7 +242,7 @@ var shijian = crt.year+"-"+crt.month+"-"+crt.date+"&nbsp;&nbsp;&nbsp;"+crt.hours
 							});
 						} else {
 							//								mui.alert("付费失败,该订单已经支付过", title);
-mui.toast("付费失败,该订单已经支付过");
+							mui.toast("付费失败,该订单已经支付过");
 						}
 					} else {
 						plus.nativeUI.alert("支付失败");
@@ -252,6 +251,55 @@ mui.toast("付费失败,该订单已经支付过");
 			});
 		}
 		//付款
+		//退款
+		function tuikuan(OrderId) {
+
+			rh.SesId = checkLogin();
+
+			var rb = new Object();
+			rb.OrderId = OrderId;
+			rb.return_reason = "";
+			rb.photo_path = "";
+			rb.recv_case = 0;
+			rb.return_desc = "";
+
+			var jn = new Object();
+			jn.ReqHead = rh;
+			jn.ReqBody = rb;
+
+			var sendData = JSON.stringify(jn);
+
+			mui.ajax(baseUrl + "zdm/AppApi/RefundOrder/saveRefundOrder", {
+				data: sendData,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+					checkCurrentUser(data);
+
+					switch(data.RespBody.stat) {
+						case 0:
+							mui.toast("申请退款失败");
+							break;
+						case 1:
+							mui.toast("申请退款成功");
+							break;
+						case 2:
+							mui.toast("已结算，不可退款");
+							break;
+					} //switch
+
+				},
+				error: function(xhr, type, errorThrown) {
+					mui.toast("请重试"+type);
+				}
+
+			}); //ajax
+
+		} //退款
 	</script>
 
 </html>
