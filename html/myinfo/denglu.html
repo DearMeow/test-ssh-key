@@ -120,6 +120,8 @@
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
+					alert(data.RespBody.VerifyCode);
+					  console.log("--------已发送----",data.RespBody.VerifyCode);
 					var result = data.RespBody;
 					if(result.SendOk == 1) {
 						verifyCode = result.VerifyCode;
