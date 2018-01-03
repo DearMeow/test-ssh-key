@@ -16,9 +16,6 @@
 				margin-bottom: 1px;
 				padding: 0.2rem;
 			}
-			/*.eachOrder img {
-				width: 4rem;
-			}*/
 			
 			.huise {
 				color: rgb(153, 153, 153);
@@ -145,7 +142,7 @@
 							var state = "";
 							switch(zs) {
 								case 0:
-									state = "<input type='button' style='margin-top:1rem;' onclick='zhifu(&quot;" + result.Recs[i].id + "&quot;)' value='等待支付'/>";
+									state = "<input type='button' style='margin-top:1rem;' onclick='zhifu(&quot;" + result.Recs[i].id + "&quot;)' value='等待支付'/><input type='button' style='margin-top:1rem;color:red;border-color:red;' onclick='quxiao(&quot;" + result.Recs[i].id + "&quot;)' value='取消订单'/>";
 									break;
 								case 1:
 									state = "<input type='button' style='margin-top:1rem;' onclick='tuikuan(&quot;" + result.Recs[i].id + "&quot;)' value='申请退款'/>";
@@ -294,10 +291,47 @@
 
 				},
 				error: function(xhr, type, errorThrown) {
-					mui.toast("请重试"+type);
+					mui.toast("请重试" + type);
 				}
 
 			}); //ajax
+
+			//取消订单
+			function quxiao(OrderId) {
+				alert("quxiao");
+				rh.SesId = checkLogin();
+
+				var rb = new Object();
+				rb.OrderId = OrderId;
+
+				var jn = new Object();
+				jn.ReqHead = rh;
+				jn.ReqBody = rb;
+
+				var sendData = JSON.stringify(jn);
+
+				mui.ajax(baseUrl + "zdm/AppApi/ShopOrder/CancelOrder", {
+					data: sendData,
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					success: function(data) {
+						checkCurrentUser(data);
+						if(data.RespBody.succ == 1) {
+							mui.toast("订单已取消");
+						} else {
+							mui.toast("请重试");
+						}
+					},
+					error: function(xhr, type, errorThrown) {
+						mui.toast("请重试" + type);
+					}
+
+				}); //ajax
+			} //quxiao
 
 		} //退款
 	</script>

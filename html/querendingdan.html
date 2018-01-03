@@ -82,7 +82,7 @@
 				</div>
 				<div class="mui-clearfix"></div>
 			</div>
-			<div class="products" id="prod"></div>
+			<div class="products"><div id="delivery"></div><div id="prod"></div></div>
 			<div style="text-align: center;">
 				<input type="button" name="fukuan" id="fukuan" value="付&nbsp;&nbsp;&nbsp;款" /></div>
 		</div>
@@ -203,6 +203,7 @@
 					expressamount = data.RespBody.delivery_fee;
 					document.getElementById("shopName").innerHTML = data.RespBody.workship_name;
 					document.getElementById("recommend").innerHTML = data.RespBody.recommend;
+					document.getElementById("delivery").innerHTML = data.RespBody.delivery_fee;
 				},
 				error: function(xhr, type, errorThrown) {
 					mui.toast("请重试");

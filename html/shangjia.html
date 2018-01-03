@@ -11,7 +11,6 @@
 		<link rel="stylesheet" type="text/css" href="../css/layout.css" />
 		<link rel="stylesheet" type="text/css" href="../css/font-awesome-4.7.0/css/font-awesome.min.css" />
 		<style>
-	
 			.jiesao {
 				padding: 1rem 1rem 0.5rem 1rem;
 				background-color: #FFFFFF;
@@ -111,7 +110,7 @@
 			var self = plus.webview.currentWebview(); //获得当前页面的对象
 			workshopid = self.workshopid;
 
-//			gouwuche();
+			gouwuche();
 			var rb = new Object();
 			rb.workid = workshopid;
 			rb.CatId = 1;
@@ -144,29 +143,29 @@
 			xuanzhe('');
 
 			//获取分类
-			mui.ajax(baseUrl + "zdm/AppApi/Search/CategoryList", {
-				data: sendData,
-				dataType: 'json', //服务器返回json格式数据
-				type: 'post', //HTTP请求类型
-				timeout: 10000, //超时时间设置为10秒；
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				success: function(data) {
-					checkCurrentUser(data);
-
-					var res = data.RespBody;
-
-					var fl = "";
-					for(var i = 0; i < res.length; i++) {
-						fl += "<div onclick='xuanzhe(&quot;" + res[i].catid + "&quot;)'>" + res[i].catname + "</div>";
-					}
-					document.getElementById("xiaofenlei").innerHTML = fl;
-				},
-				error: function(xhr, type, errorThrown) {
-					mui.toast("请重试");
-				}
-			}); //ajax
+			//			mui.ajax(baseUrl + "zdm/AppApi/Search/CategoryList", {
+			//				data: sendData,
+			//				dataType: 'json', //服务器返回json格式数据
+			//				type: 'post', //HTTP请求类型
+			//				timeout: 10000, //超时时间设置为10秒；
+			//				headers: {
+			//					'Content-Type': 'application/json'
+			//				},
+			//				success: function(data) {
+			//					checkCurrentUser(data);
+			//
+			//					var res = data.RespBody;
+			//
+			//					var fl = "";
+			//					for(var i = 0; i < res.length; i++) {
+			//						fl += "<div onclick='xuanzhe(&quot;" + res[i].catid + "&quot;)'>" + res[i].catname + "</div>";
+			//					}
+			//					document.getElementById("xiaofenlei").innerHTML = fl;
+			//				},
+			//				error: function(xhr, type, errorThrown) {
+			//					mui.toast("请重试");
+			//				}
+			//			}); //ajax
 
 			//判断店铺是否收藏
 			var rb2 = new Object();
@@ -206,7 +205,10 @@
 		function gouwuche() {
 
 			var rb = new Object();
-			rb.CatId = 1;
+			rb.workid = workshopid;
+			rb.curPage = 1;
+			rb.pageSize = 1000;
+			rb.qryName = "";
 
 			var jn = new Object();
 
@@ -215,7 +217,7 @@
 			jn.ReqBody = rb;
 
 			var sendData = JSON.stringify(jn);
-			mui.ajax(baseUrl + "zdm/AppApi/ShopCart/GetMyGoodsInCart", {
+			mui.ajax(baseUrl + "zdm/AppApi/Search/GoodList", {
 				data: sendData,
 				dataType: 'json', //服务器返回json格式数据
 				type: 'post', //HTTP请求类型
@@ -225,16 +227,23 @@
 				},
 				success: function(data) {
 					checkCurrentUser(data);
-					shops = data.RespBody;
+					shops = data.RespBody.Recs;
+
 					var objMap = new Array();
 					for(var iTmp = 0; iTmp < shops.length; iTmp++) {
-						console.log(shops[iTmp].catid);
 						var strKey = shops[iTmp].catid;
 						if(objMap[strKey] == null) {
 							objMap[strKey] = strKey;
 						}
 					}
 
+					var rb = new Object();
+					rb.CatId = 1;
+					var jn = new Object();
+					jn.ReqHead = rh;
+					jn.ReqBody = rb;
+
+					var sendData = JSON.stringify(jn);
 					//获取分类
 					mui.ajax(baseUrl + "zdm/AppApi/Search/CategoryList", {
 						data: sendData,
@@ -246,9 +255,7 @@
 						},
 						success: function(data) {
 							checkCurrentUser(data);
-
 							var res = data.RespBody;
-
 							var fl = "";
 							for(var i = 0; i < res.length; i++) {
 								var strCurCatId = res[i].catid;
@@ -438,8 +445,8 @@
 				},
 				show: { //控制打开页面的类型
 					autoShow: true,
-					aniShow: 'zoom-fade-out', //页面显示动画，默认为”slide-in-right“；  页面出现的方式 左右上下
-					duration: '300' //页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒； 
+//					aniShow: 'zoom-fade-out', //页面显示动画，默认为”slide-in-right“；  页面出现的方式 左右上下
+//					duration: '300' //页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒； 
 				},
 				waiting: { // 控制 弹出转圈框的信息
 					autoShow: true, //自动显示等待框，默认为true 
