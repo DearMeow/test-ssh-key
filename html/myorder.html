@@ -108,7 +108,7 @@
 
 			var rb = new Object();
 			rb.curPage = 1;
-			rb.pageSize = 20;
+			rb.pageSize = 200;
 			rb.qryName = "";
 			rb.OrderStatus = "";
 
@@ -133,16 +133,16 @@
 					if(result.Recs.length == 0) {
 						document.getElementById("msg").innerHTML += "<div style='color:darkred;margin-top: 12rem;text-align:center;'>你还没有产生订单</div>";
 					} else {
-						//												var zs = result.Recs[4].state;
-						//												var oid = result.Recs[4].id;
-						//						alert(zs+"——"+oid);
+//																		var zs = result.Recs[0].state;
+//												alert(zs);
+												
 						for(var i = 0; i < result.Recs.length; i++) {
 							var zs = result.Recs[i].state;
 
 							var state = "";
 							switch(zs) {
 								case 0:
-									state = "<input type='button' style='margin-top:1rem;' onclick='zhifu(&quot;" + result.Recs[i].id + "&quot;)' value='等待支付'/><input type='button' style='margin-top:1rem;color:red;border-color:red;' onclick='qx(&quot;" + result.Recs[i].id + "&quot;)' value='取消订单'/>";
+									state = "<input type='button' style='margin-top:1rem;' onclick='zhifu(&quot;" + result.Recs[i].id + "&quot;)' value='等待支付'/><input type='button' style='margin-top:1rem;color:red;border-color:red;' onclick='qqqxx(&quot;" + result.Recs[i].id + "&quot;)' value='取消订单'/>";
 									break;
 								case 1:
 									state = "<input type='button' style='margin-top:1rem;' onclick='tuikuan(&quot;" + result.Recs[i].id + "&quot;)' value='申请退款'/>";
@@ -175,8 +175,19 @@
 									state = "未接单";
 									break;
 								case 53:
-									state = "停止配送";
+									state = "订单已取消";
 									break;
+									case 54:
+									state = "订单已取消";
+									break;
+									case 58:
+									state = "订单已取消";
+									break;
+									case 59:
+									state = "订单已取消";
+									break;
+//									OrderStatus：订单状态 0等待支付 1已支付、等待店家确认 12店家确认 2配送确认,待取货 21配送取货完成 3送货完毕 4待评价 5 已完成
+//50客户取消订单 51店家取消订单 52无人配送取消订单 53配送取货超时取消订单 54配送送货超时，取消订单 58店家超时未接单取消订单 59未支付订单超时取消
 							} //switch
 							var sp = result.Recs[i].Detail;
 							var ssp = "";
@@ -296,9 +307,10 @@
 
 			}); //ajax
 
-			//取消订单
-			function qx(OrderId) {
-				alert("quxiao");
+		} //退款
+		
+		//取消订单
+			function qqqxx(OrderId) {
 				rh.SesId = checkLogin();
 
 				var rb = new Object();
@@ -321,6 +333,7 @@
 					success: function(data) {
 						checkCurrentUser(data);
 						if(data.RespBody.succ == 1) {
+							dingdan();
 							mui.toast("订单已取消");
 						} else {
 							mui.toast("请重试");
@@ -333,7 +346,6 @@
 				}); //ajax
 			} //quxiao
 
-		} //退款
 	</script>
 
 </html>
