@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/layout.css" />
+		<style type="text/css">
+			.dz {
+				background-color: #FFFFFF;
+				padding: 1rem;
+			}
+			
+			.dz h5 {
+				margin-top: 1rem;
+			}
+			
+			.jiange {
+				height: 0.2rem;
+			}
+			
+			#jia {
+				border: 1px solid goldenrod;
+				color: goldenrod;
+				padding: 0rem 0.5rem 0rem 0.5rem;
+				border-radius: 0.3rem;
+				font-size: 0.7rem;
+			}
+			
+			#gongsi {
+				border: 1px solid dodgerblue;
+				color: dodgerblue;
+				padding: 0rem 0.5rem 0rem 0.5rem;
+				border-radius: 0.3rem;
+				font-size: 0.7rem;
+			}
+			
+			#xinzeng {
+				background-color: rgb(209,37,34);
+				color: #FFFFFF;
+				padding-top: 0.7rem;
+			}
+			
+			#sure {
+				padding-top: 0.8rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background-color: darkred;color: #FFFFFF;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF;"></a>
+			<h1 class="mui-title" style="color: #FFFFFF;">退款列表</h1>
+			<div class="mui-pull-right" id="sure"></div>
+		</header>
+		<div class="mui-content" id="address">
+			
+
+		</div>
+		<div id="msgg"></div>
+		
+	</body>
+	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/domain.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		
+		mui.plusReady(function() {
+			myrefund();
+		}); //plusRead
+		//显示退款列表
+		function myrefund(){
+			if(ca == 1) {
+				document.getElementById("sure").innerHTML = "确定";
+			}else{
+				document.getElementById("sure").innerHTML = "删除";
+			}
+			
+			var sesid = localStorage.getItem("sesid");
+
+			rh.SesId = sesid;
+
+			var rb = new Object();
+
+			var jn = new Object();
+			jn.ReqHead = rh;
+			jn.ReqBody = rb;
+
+			var sendData = JSON.stringify(jn);
+
+			mui.ajax(baseUrl + "zdm/AppApi/UserAddress/GetUserAllAddress", {
+				data: sendData,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+
+					var ads = data.RespBody;
+					var con = "";
+					
+					for(var i = 0; i < ads.length; i++) {
+							con += "<div class='dz'><input type='radio' name='adress' value='" + ads[i].id + "'/>&nbsp;<span onclick='xiugai(&quot;" + ads[i].id + "&quot;)'>" + ads[i].address + "</span><h5>" + ads[i].consignee + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + ads[i].mobile + "</h5></div><div class='jiange'></div>";
+						} //for
+					document.getElementById("address").innerHTML = con;
+				},
+				error: function(xhr, type, errorThrown) {
+					mui.toast("请重试");
+				}
+			}); //ajax
+		}//addressList
+		
+		
+		
+
+		
+	</script>
+
+</html>
