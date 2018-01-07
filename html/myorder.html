@@ -60,13 +60,9 @@
 	<body>
 		<header class="mui-bar mui-bar-nav" style="background-color: darkred;color: #FFFFFF;">
 			<h1 class="mui-title" style="color: #FFFFFF;">我的订单</h1>
-			<!--<div id="" class="mui-text-right" style="font-size: 0.8rem;padding-top: 0.7rem;">
-				全部订单
-			</div>-->
 		</header>
 		<div class="mui-content">
 			<div id="msg"></div>
-			<!--<div id="shopCar"><img src="../images/shopCar.png" /></div>-->
 		</div>
 		<!--mui-content-->
 	</body>
@@ -160,13 +156,13 @@
 									state = "已送达<input type='button' style='margin-top:1rem;' onclick='tuikuan(&quot;" + result.Recs[i].id + "&quot;)' value='申请退款'/>";
 									break;
 								case 4:
-									state = "<input type='button' style='margin-top:1rem;' onclick='pingjia()' value='待评价'/>";
+									state = "<input type='button' style='margin-top:1rem;' onclick='pingjia(&quot;" + result.Recs[i].id + "&quot;)' value='待评价'/>";
 									break;
 								case 5:
 									state = "已完成";
 									break;
 								case 50:
-									state = "你已取消订单";
+									state = "你已取消订单50";
 									break;
 								case 51:
 									state = "商家已取消订单";
@@ -175,16 +171,16 @@
 									state = "未接单";
 									break;
 								case 53:
-									state = "订单已取消";
+									state = "订单已取消53";
 									break;
 									case 54:
-									state = "订单已取消";
+									state = "订单已取消54";
 									break;
-									case 58:
-									state = "订单已取消";
+									case 58://ceshi-----------------------
+									state = "订单已取消58<input type='button' style='margin-top:1rem;' onclick='pingjia(&quot;" + result.Recs[i].id + "&quot;)' value='待评价'/>";
 									break;
 									case 59:
-									state = "订单已取消";
+									state = "订单已取消59";
 									break;
 //									OrderStatus：订单状态 0等待支付 1已支付、等待店家确认 12店家确认 2配送确认,待取货 21配送取货完成 3送货完毕 4待评价 5 已完成
 //50客户取消订单 51店家取消订单 52无人配送取消订单 53配送取货超时取消订单 54配送送货超时，取消订单 58店家超时未接单取消订单 59未支付订单超时取消
@@ -349,6 +345,24 @@
 
 				}); //ajax
 			} //quxiao
+
+			//评价
+			function pingjia(OrderId) {
+				
+				//打开新窗口
+					mui.openWindow({
+						url: 'pingjia.html', //需要打开页面的url地址 
+						id: 'pingjia', //需要打开页面的url页面id
+						styles: {
+							top: '0px', //新页面顶部位置 
+							bottom: '0px', //新页面底部位置 
+						},
+						extras: {
+							OrderId: OrderId
+						}
+					}); //openWindow
+			} //pingjia
+
 
 	</script>
 

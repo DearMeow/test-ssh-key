@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>订单</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/layout.css" />
+		<style>
+			.eachOrder {
+				background-color: #FFFFFF;
+				margin-bottom: 1px;
+				padding: 0.2rem;
+			}
+			
+			.huise {
+				color: rgb(153, 153, 153);
+				font-size: 0.8rem;
+			}
+			
+			.dianpu {
+				line-height: 2rem;
+				margin-left: 0.5rem;
+				font-size: 1.1rem;
+			}
+			
+			.workname {
+				display: block;
+				width: 6rem;
+				height: 2rem;
+				overflow: hidden;
+				font-weight: bold;
+			}
+			
+			#shopCar {
+				position: absolute;
+				right: 0.5rem;
+				bottom: 1rem;
+				width: 1.6rem;
+				height: 1.6rem;
+			}
+			
+			#shopCar img {
+				width: 1.6rem;
+				height: 1.6rem;
+			}
+			
+			#nologin {
+				text-align: center;
+				margin-top: 12rem;
+				padding: 3rem 0rem 3rem 0rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background-color: darkred;color: #FFFFFF;">
+			<h1 class="mui-title" style="color: #FFFFFF;">评价</h1>
+		</header>
+		<div class="mui-content" style="padding-left: 0.5rem;">
+			<div style="margin-top: 2rem;">
+				<b>订单号：</b><span id="OrderId"></span>
+			</div>
+			<div style="margin-top: 1rem;">
+				<b>商家服务：</b>
+				<label>好评&nbsp;</label>
+	<input name="evalutework" type="radio" style="transform: scale(1.5,1.5);" value="好评">
+	<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;差评&nbsp;</label>
+	<input name="evalutework" type="radio" style="transform: scale(1.5,1.5);" value="差评">
+			</div>
+			<div style="margin-top: 1rem;">
+				<b>评价内容：</b>
+				<div style="text-align: center;">
+					<textarea name="evaluteworkdesc" id="evaluteworkdesc" rows="3" cols="3" style="width: 95%;"></textarea>
+				</div>
+			</div>
+			
+			<div style="margin-top: 2rem;">
+				<b>配送服务：</b>
+				<label>好评&nbsp;</label>
+	<input name="evalutedev" type="radio" style="transform: scale(1.5,1.5);" value="好评">
+	<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;差评&nbsp;</label>
+	<input name="evalutedev" type="radio" style="transform: scale(1.5,1.5);" value="差评">
+			</div>
+			<div style="margin-top: 1rem;">
+				<b>评价内容：</b>
+				<div style="text-align: center;">
+					<textarea name="evalutedevdesc" id="evalutedevdesc" rows="3" cols="3" style="width: 95%;"></textarea>
+				</div>
+			</div>
+			<div style="text-align: center;">
+				<input type="button" id="okBtn" value="发布" style="border: none;width: 95%;color: #FFFFFF;background-color: darkred;padding-top: 0.7rem;padding-bottom: 0.7rem;"/>
+			</div>
+			
+		</div>
+		<!--mui-content-->
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		var OrderId = "";
+		mui.plusReady(function() {
+			var self = plus.webview.currentWebview(); //获得当前页面的对象
+		 OrderId = self.OrderId;
+			document.getElementById("OrderId").innerHTML = OrderId;
+		});//plusReady
+		
+		document.getElementById("okBtn").onclick = function(){
+			rh.SesId = checkLogin();
+
+var evalutework = "";
+var radio1 = document.getElementsByName("evalutework");  
+    for (var i=0; i<radio1.length; i++) {  
+        if (radio1[i].checked) {  
+            evalutework = radio1[i].value;
+        }  
+    }  
+   if (evalutework == "") {
+   	mui.toast("请对商家服务评价");
+   	return;
+   }
+   
+   var evaluteworkdesc = document.getElementById("evaluteworkdesc").value;
+   if (evaluteworkdesc == "") {
+   		mui.toast("请填写商家评价内容");
+   	return;
+   }
+    var evalutedev = "";
+var radio2 = document.getElementsByName("evalutedev");  
+    for (var i=0; i<radio2.length; i++) {  
+        if (radio2[i].checked) {  
+            evalutedev = radio2[i].value;
+        }  
+    } 
+      if (evalutedev == "") {
+   	mui.toast("请对配送服务评价");
+   	return;
+   }
+     var evalutedevdesc = document.getElementById("evalutedevdesc").value;
+   if (evalutedevdesc == "") {
+   		mui.toast("请填写配送评价内容");
+   	return;
+   }
+ 
+			var rb = new Object();
+			rb.orderid = OrderId;
+			rb.evalutework = evalutework;
+			rb.evaluteworkdesc = evaluteworkdesc;
+			rb.evalutedev = evalutedev;
+			rb.evalutedevdesc = evalutedevdesc;
+			
+
+			var jn = new Object();
+			jn.ReqHead = rh;
+			jn.ReqBody = rb;
+
+			var sendData = JSON.stringify(jn);
+
+			mui.ajax(baseUrl + "zdm/AppApi/ShopOrder/updateOrderCritic", {
+				data: sendData,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+					checkCurrentUser(data);
+					var result = data.RespBody;
+					
+					alert(result.succ);
+					
+				},
+				error: function(xhr, type, errorThrown) {
+					alert(type);
+				}
+			}); //ajax
+		}//okBtn
+		
+
+
+	</script>
+
+</html>
