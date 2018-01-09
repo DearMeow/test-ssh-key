@@ -99,9 +99,7 @@
 				document.getElementById("sure").innerHTML = "删除";
 			}
 			
-			var sesid = localStorage.getItem("sesid");
-
-			rh.SesId = sesid;
+			rh.SesId = checkLogin();
 
 			var rb = new Object();
 

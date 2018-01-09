@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/layout.css" />
+		<style type="text/css">
+			.loglist{border-bottom: 1px solid #777777;padding: 0.5rem 0rem 0.5rem 1rem;line-height: 1.5rem;}
+			.loglist span{color:#00008B;}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background-color: darkred;color: #FFFFFF;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav" style="color: #FFFFFF;"></a>
+			<h1 class="mui-title" style="color: #FFFFFF;">订单日志</h1>
+		</header>
+		<div class="mui-content" id="loglist">
+			
+			
+			
+
+
+		</div>
+		<!--mui-content-->
+		
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		
+		
+		mui.plusReady(function() {
+			
+			var self = plus.webview.currentWebview(); //获得当前页面的对象
+			var orderid = self.orderid;
+			
+			rh.SesId = checkLogin();
+
+			var rb = new Object();
+			rb.orderid = orderid;
+
+			var jn = new Object();
+			jn.ReqHead = rh;
+			jn.ReqBody = rb;
+
+			var sendData = JSON.stringify(jn);
+
+			mui.ajax(baseUrl + "zdm/AppApi/ShopOrder/getOrderLogs", {
+				data: sendData,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+
+					var ads = data.RespBody;
+					if (ads.length == 0) {
+						document.getElementById("loglist").innerHTML = '<div class="mui-text-center" style="margin-top: 45%;">没有日志</div>';
+						return;
+					}
+					var con = "";
+					
+					for(var i = 0; i < ads.length; i++) {
+						var mon = ads.optime.month;
+						if (mon>12) {
+							mon-=12;
+						}
+						ads.optime = ads.optime.year+1900+"-"+mon+"-"+ads.optime.day+" "+ads.optime.hours+":"+ads.optime.minutes+":"+ads.optime.seconds;
+							con += "<div class='loglist'><span>"+ads.optime +"&nbsp;&nbsp;"+ads.orderstatus+"</span><br/>"+ads.statdesc+"</div>";
+						} //for
+					document.getElementById("loglist").innerHTML = con;
+				},
+				error: function(xhr, type, errorThrown) {
+					mui.toast("请重试");
+				}
+			}); //ajax
+			
+		}); //plusRead
+		
+	</script>
+
+</html>
