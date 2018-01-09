@@ -98,7 +98,19 @@
 					var con = "";
 					
 					for(var i = 0; i < ads.length; i++) {
-							con += "<div class='dz' onclick='orderDetail(&quot;" + ads[i].order_id + "&quot;)'><span>退款状态：" + ads[i].return_state + "</span><h5>订单号：" + ads[i].order_id + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;退款金额：￥" + ads[i].money + "</h5></div><div class='jiange'></div>";
+							var state = "";
+						switch (ads[i].return_state){
+							case 0:
+							state = "审核中";
+								break;
+							case 1:
+							state = "通过";
+								break;
+								case 2:
+							state = "驳回";
+								break;
+						}//switch
+							con += "<div class='dz' onclick='orderDetail(&quot;" + ads[i].order_id + "&quot;)'><span>退款状态：" + state + "</span><h5>订单号：" + ads[i].order_id + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;退款金额：￥" + ads[i].money + "</h5></div><div class='jiange'></div>";
 						} //for
 					document.getElementById("address").innerHTML = con;
 				},
