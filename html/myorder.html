@@ -129,9 +129,9 @@
 					if(result.Recs.length == 0) {
 						document.getElementById("msg").innerHTML += "<div style='color:darkred;margin-top: 12rem;text-align:center;'>你还没有产生订单</div>";
 					} else {
-//																		var zs = result.Recs[0].state;
-//												alert(zs);
-												
+						//																		var zs = result.Recs[0].state;
+						//												alert(zs);
+
 						for(var i = 0; i < result.Recs.length; i++) {
 							var zs = result.Recs[i].state;
 
@@ -173,17 +173,17 @@
 								case 53:
 									state = "订单已取消53";
 									break;
-									case 54:
+								case 54:
 									state = "订单已取消54";
 									break;
-									case 58://ceshi-----------------------
+								case 58: //ceshi-----------------------
 									state = "订单已取消58<input type='button' style='margin-top:1rem;' onclick='pingjia(&quot;" + result.Recs[i].id + "&quot;)' value='待评价'/>";
 									break;
-									case 59:
+								case 59:
 									state = "订单已取消59";
 									break;
-//									OrderStatus：订单状态 0等待支付 1已支付、等待店家确认 12店家确认 2配送确认,待取货 21配送取货完成 3送货完毕 4待评价 5 已完成
-//50客户取消订单 51店家取消订单 52无人配送取消订单 53配送取货超时取消订单 54配送送货超时，取消订单 58店家超时未接单取消订单 59未支付订单超时取消
+									//									OrderStatus：订单状态 0等待支付 1已支付、等待店家确认 12店家确认 2配送确认,待取货 21配送取货完成 3送货完毕 4待评价 5 已完成
+									//50客户取消订单 51店家取消订单 52无人配送取消订单 53配送取货超时取消订单 54配送送货超时，取消订单 58店家超时未接单取消订单 59未支付订单超时取消
 							} //switch
 							var sp = result.Recs[i].Detail;
 							var ssp = "";
@@ -191,11 +191,11 @@
 								ssp += "<div><div style='width:13rem;float:left;'>" + sp[k].goods_name + "</div><div style='float:right;'>" + sp[k].COUNT + "份</div><div style='clear:both'></div></div>";
 							}
 							var crt = result.Recs[i].create_time;
-							var yuefen = crt.month+1;
-							if (yuefen > 12) {
-								yuefen -=12;
+							var yuefen = crt.month + 1;
+							if(yuefen > 12) {
+								yuefen -= 12;
 							}
-							var shijian = crt.year+1900 + "-" + yuefen + "-" + crt.date + "&nbsp;&nbsp;&nbsp;" + crt.hours + ":" + crt.minutes + ":" + crt.seconds;
+							var shijian = crt.year + 1900 + "-" + yuefen + "-" + crt.date + "&nbsp;&nbsp;&nbsp;" + crt.hours + ":" + crt.minutes + ":" + crt.seconds;
 							document.getElementById("msg").innerHTML += "<div class='eachOrder'><div class='mui-row'><div class='mui-col-sm-9 mui-col-xs-9'><div class='mui-pull-left dianpu'><span style='font-size:0.8rem'>订单号：" + result.Recs[i].id + "&nbsp;&nbsp;&nbsp;&nbsp;" + shijian + "</span><span class='workname'>" + result.Recs[i].work_name + "</span>" + ssp + "运费:" + result.Recs[i].expressamount + "<br/><span style='color:red;'>总价：￥" + result.Recs[i].amount + "</span></div></div><div class='mui-col-sm-3 mui-col-xs-3 huise'>" + state + "</div></div><div class='mui-clearfix'></div></div>";
 						} //result.Recs
 					} //if
@@ -262,14 +262,65 @@
 		//退款
 		function tuikuan(OrderId) {
 
+			mui.prompt('退款原因', '请输入退款原因', '退款', ['取消', '确定'], function(e) {
+				if(e.index == 1) { //点击确认按钮
+
+					rh.SesId = checkLogin();
+
+					var rb = new Object();
+					rb.OrderId = OrderId;
+					rb.return_reason = e.value;
+					rb.photo_path = "";
+					rb.recv_case = 0;
+					rb.return_desc = "";
+
+					var jn = new Object();
+					jn.ReqHead = rh;
+					jn.ReqBody = rb;
+
+					var sendData = JSON.stringify(jn);
+
+					mui.ajax(baseUrl + "zdm/AppApi/RefundOrder/saveRefundOrder", {
+						data: sendData,
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						success: function(data) {
+							checkCurrentUser(data);
+
+							switch(data.RespBody.stat) {
+								case 0:
+									mui.toast("申请退款失败");
+									break;
+								case 1:
+									mui.toast("申请退款成功");
+									break;
+								case 2:
+									mui.toast("已结算，不可退款");
+									break;
+							} //switch
+
+						},
+						error: function(xhr, type, errorThrown) {
+							mui.toast("请重试" + type);
+						}
+
+					}); //ajax
+				} //if
+
+			}, 'div'); //prompt
+
+		} //退款
+
+		//取消订单
+		function qqqxx(OrderId) {
 			rh.SesId = checkLogin();
 
 			var rb = new Object();
 			rb.OrderId = OrderId;
-			rb.return_reason = "";
-			rb.photo_path = "";
-			rb.recv_case = 0;
-			rb.return_desc = "";
 
 			var jn = new Object();
 			jn.ReqHead = rh;
@@ -277,7 +328,7 @@
 
 			var sendData = JSON.stringify(jn);
 
-			mui.ajax(baseUrl + "zdm/AppApi/RefundOrder/saveRefundOrder", {
+			mui.ajax(baseUrl + "zdm/AppApi/ShopOrder/CancelOrder", {
 				data: sendData,
 				dataType: 'json', //服务器返回json格式数据
 				type: 'post', //HTTP请求类型
@@ -287,83 +338,36 @@
 				},
 				success: function(data) {
 					checkCurrentUser(data);
-
-					switch(data.RespBody.stat) {
-						case 0:
-							mui.toast("申请退款失败");
-							break;
-						case 1:
-							mui.toast("申请退款成功");
-							break;
-						case 2:
-							mui.toast("已结算，不可退款");
-							break;
-					} //switch
-
+					if(data.RespBody.succ == 1) {
+						dingdan();
+						mui.toast("订单已取消");
+					} else {
+						mui.toast("请重试");
+					}
 				},
 				error: function(xhr, type, errorThrown) {
 					mui.toast("请重试" + type);
 				}
 
 			}); //ajax
+		} //quxiao
 
-		} //退款
-		
-		//取消订单
-			function qqqxx(OrderId) {
-				rh.SesId = checkLogin();
+		//评价
+		function pingjia(OrderId) {
 
-				var rb = new Object();
-				rb.OrderId = OrderId;
-
-				var jn = new Object();
-				jn.ReqHead = rh;
-				jn.ReqBody = rb;
-
-				var sendData = JSON.stringify(jn);
-
-				mui.ajax(baseUrl + "zdm/AppApi/ShopOrder/CancelOrder", {
-					data: sendData,
-					dataType: 'json', //服务器返回json格式数据
-					type: 'post', //HTTP请求类型
-					timeout: 10000, //超时时间设置为10秒；
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					success: function(data) {
-						checkCurrentUser(data);
-						if(data.RespBody.succ == 1) {
-							dingdan();
-							mui.toast("订单已取消");
-						} else {
-							mui.toast("请重试");
-						}
-					},
-					error: function(xhr, type, errorThrown) {
-						mui.toast("请重试" + type);
-					}
-
-				}); //ajax
-			} //quxiao
-
-			//评价
-			function pingjia(OrderId) {
-				
-				//打开新窗口
-					mui.openWindow({
-						url: 'pingjia.html', //需要打开页面的url地址 
-						id: 'pingjia', //需要打开页面的url页面id
-						styles: {
-							top: '0px', //新页面顶部位置 
-							bottom: '0px', //新页面底部位置 
-						},
-						extras: {
-							OrderId: OrderId
-						}
-					}); //openWindow
-			} //pingjia
-
-
+			//打开新窗口
+			mui.openWindow({
+				url: 'pingjia.html', //需要打开页面的url地址 
+				id: 'pingjia', //需要打开页面的url页面id
+				styles: {
+					top: '0px', //新页面顶部位置 
+					bottom: '0px', //新页面底部位置 
+				},
+				extras: {
+					OrderId: OrderId
+				}
+			}); //openWindow
+		} //pingjia
 	</script>
 
 </html>
