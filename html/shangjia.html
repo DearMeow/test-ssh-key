@@ -132,7 +132,7 @@
 				success: function(data) {
 					checkCurrentUser(data);
 					document.getElementById("dmingcheng").innerHTML = data.RespBody.workship_name;
-					document.getElementById("logo").innerHTML = "<img src='" + data.RespBody.workship_name + "'/>";
+					document.getElementById("logo").innerHTML = "<img src='" + data.RespBody.FilePath + "'/>";
 				},
 				error: function(xhr, type, errorThrown) {
 					mui.toast("请重试");
