@@ -83,7 +83,7 @@
 				<div class="mui-clearfix"></div>
 			</div>
 			<div class="products" id="prod" style="width:100%;"></div>
-			<div style="clear:both;"></div>
+			<div id='delivery' style='background-color: #FFFFFF;padding-left: 0.5rem;padding-bottom: 0.5rem;'></div>
 			<div style="text-align: center;">
 				<input type="button" name="fukuan" id="fukuan" value="付&nbsp;&nbsp;&nbsp;款" /></div>
 		</div>
@@ -132,6 +132,7 @@
 		var mobile = "";
 		var expressamount = "";
 		var rs2 = new Array();
+	
 
 		function shuaxin() {
 			var self = plus.webview.currentWebview(); //获得当前页面的对象
@@ -206,14 +207,8 @@
 					document.getElementById("shopName").innerHTML = data.RespBody.workship_name;
 					document.getElementById("recommend").innerHTML = data.RespBody.recommend;
 					document.getElementById("delivery").innerHTML = "运费: ￥"+data.RespBody.delivery_fee;
-				},
-				error: function(xhr, type, errorThrown) {
-					mui.toast("请重试");
-				}
-			}); //ajax
-			//十五、获取店家信息详细信息
-
-			//九、列出我的购物车中所有的餐品
+					var delivery_fee = data.RespBody.delivery_fee;
+					//九、列出我的购物车中所有的餐品
 			mui.ajax(baseUrl + "zdm/AppApi/ShopCart/GetMyGoodsInCart", {
 				data: sendData,
 				dataType: 'json', //服务器返回json格式数据
@@ -224,7 +219,7 @@
 				},
 				success: function(data) {
 					checkCurrentUser(data);
-
+					
 					var rs = data.RespBody;
 					var spp = "";
 					var zongjia = 0;
@@ -235,12 +230,22 @@
 							spp += "<div class='myprot' style='margin-bottom: 1px;'><div class='mui-pull-left'><img src='" + rs[i].FilePath + "' /></div><div class='mui-pull-left'  style='margin-left: 0.5rem;'><div class='mui-pull-left'>" + rs[i].goods_name + "<br/><span style='color:red;'>￥" + rs[i].goods_price + "&nbsp;&nbsp;&nbsp;&nbsp;" + rs[i].buy_count + "份</span></div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";
 						}
 					}
-					document.getElementById("prod").innerHTML = spp + "<div><div style='background-color:#ffffff;padding:0.8rem 0rem 0.8rem 0.5rem;float:left;width:100%;'>总价：￥" + zongjia + "<div id='delivery' style='float:right;padding-right:1rem;'></div></div></div>";
+					document.getElementById("prod").innerHTML = spp + "<div style='background-color:#ffffff;padding:0.8rem 0rem 0.8rem 0.5rem;'>总价：￥" + parseFloat(zongjia+delivery_fee) + "</div>";
 				},
 				error: function(xhr, type, errorThrown) {
 					mui.toast("请重试");
 				}
 			}); //ajax
+					
+					
+				},
+				error: function(xhr, type, errorThrown) {
+					mui.toast("请重试");
+				}
+			}); //ajax
+			//十五、获取店家信息详细信息
+
+			
 		} //shuaxin
 
 		//去结算
