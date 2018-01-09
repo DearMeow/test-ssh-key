@@ -230,7 +230,25 @@
 							spp += "<div class='myprot' style='margin-bottom: 1px;'><div class='mui-pull-left'><img src='" + rs[i].FilePath + "' /></div><div class='mui-pull-left'  style='margin-left: 0.5rem;'><div class='mui-pull-left'>" + rs[i].goods_name + "<br/><span style='color:red;'>￥" + rs[i].goods_price + "&nbsp;&nbsp;&nbsp;&nbsp;" + rs[i].buy_count + "份</span></div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";
 						}
 					}
-					document.getElementById("prod").innerHTML = spp + "<div style='background-color:#ffffff;padding:0.8rem 0rem 0.8rem 0.5rem;'>总价：￥" + parseFloat(zongjia+delivery_fee) + "</div>";
+					var v11 = zongjia+delivery_fee;
+					if(v11 > 9) {
+						v11 = v11.toString()
+						if(v11.length > 5) {
+							v11 = v11.substring(0, 5);
+						}
+					} else if(v11 > 99){
+						v11 = v11.toString()
+						if(v11.length > 6) {
+							v11 = v11.substring(0, 6);
+						}
+					}else {
+						v11 = v11.toString()
+						if(v11.length > 4) {
+							v11 = v11.substring(0, 4);
+						}
+					}
+					
+					document.getElementById("prod").innerHTML = spp + "<div style='background-color:#ffffff;padding:0.8rem 0rem 0.8rem 0.5rem;'>总价：￥" + v11 + "</div>";
 				},
 				error: function(xhr, type, errorThrown) {
 					mui.toast("请重试");
