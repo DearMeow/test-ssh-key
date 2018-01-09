@@ -39,7 +39,7 @@
 		mui.plusReady(function() {
 			
 			var self = plus.webview.currentWebview(); //获得当前页面的对象
-			var orderid = self.orderid;
+			var orderid = self.OrderId;
 			
 			rh.SesId = checkLogin();
 
@@ -70,12 +70,12 @@
 					var con = "";
 					
 					for(var i = 0; i < ads.length; i++) {
-						var mon = ads.optime.month;
+						var mon = ads[i].optime.month;
 						if (mon>12) {
 							mon=1;
 						}
-						ads.optime = ads.optime.year+1900+"-"+mon+"-"+ads.optime.date+" "+ads.optime.hours+":"+ads.optime.minutes+":"+ads.optime.seconds;
-							con += "<div class='loglist'><span>"+ads.optime +"&nbsp;&nbsp;"+ads.orderstatus+"</span><br/>"+ads.statdesc+"</div>";
+						var optime = ads[i].optime.year+1900+"-"+mon+"-"+ads[i].optime.date+" "+ads[i].optime.hours+":"+ads[i].optime.minutes+":"+ads[i].optime.seconds;
+							con += "<div class='loglist'><span>"+optime +"&nbsp;&nbsp;"+ads[i].orderstatus+"</span><br/>"+ads[i].statdesc+"</div>";
 						} //for
 					document.getElementById("loglist").innerHTML = con;
 				},
