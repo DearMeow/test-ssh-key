@@ -74,7 +74,7 @@
 						if (mon>12) {
 							mon=1;
 						}
-						ads.optime = ads.optime.year+1900+"-"+mon+"-"+ads.optime.day+" "+ads.optime.hours+":"+ads.optime.minutes+":"+ads.optime.seconds;
+						ads.optime = ads.optime.year+1900+"-"+mon+"-"+ads.optime.date+" "+ads.optime.hours+":"+ads.optime.minutes+":"+ads.optime.seconds;
 							con += "<div class='loglist'><span>"+ads.optime +"&nbsp;&nbsp;"+ads.orderstatus+"</span><br/>"+ads.statdesc+"</div>";
 						} //for
 					document.getElementById("loglist").innerHTML = con;
