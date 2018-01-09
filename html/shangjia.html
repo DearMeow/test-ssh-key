@@ -349,9 +349,17 @@
 				document.getElementById(id).innerHTML -= 1;
 				if(document.getElementById(id).innerHTML > 0) {
 					var v11 = price * document.getElementById(id).innerHTML.trim();
-						if (v11.length > 5) {
-							v11 = v11.substring(0,5);
+					if(v11 > 9) {
+						v11 = v11.toString()
+						if(v11.length > 5) {
+							v11 = v11.substring(0, 5);
 						}
+					} else {
+						v11 = v11.toString()
+						if(v11.length > 4) {
+							v11 = v11.substring(0, 4);
+						}
+					}
 					document.getElementById("price" + id).innerHTML = v11;
 				}
 
@@ -398,13 +406,22 @@
 			var catid = idp[2];
 
 			document.getElementById(id).innerHTML = parseInt(document.getElementById(id).innerHTML) + 1;
-			
+
 			var v11 = price * document.getElementById(id).innerHTML.trim();
-						if (v11.length > 5) {
-							v11 = v11.substring(0,5);
-						}
-					document.getElementById("price" + id).innerHTML = v11;
-					
+			if(v11 > 9) {
+				v11 = v11.toString()
+				if(v11.length > 5) {
+					v11 = v11.substring(0, 5);
+				}
+			} else {
+				v11 = v11.toString()
+				if(v11.length > 4) {
+					v11 = v11.substring(0, 4);
+				}
+			}
+
+			document.getElementById("price" + id).innerHTML = v11;
+
 			rh.SesId = checkLogin();
 
 			var rb = new Object();
