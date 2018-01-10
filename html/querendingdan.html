@@ -95,6 +95,11 @@
 	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		var toDate = "";
+		
+		window.addEventListener('querenrefresh', function() {
+			shuaxin();
+		}, false);
+		
 		mui.plusReady(function() {
 			shuaxin();
 
@@ -120,9 +125,7 @@
 			}
 		}); //plusReady
 
-		window.addEventListener('querenrefresh', function() {
-			shuaxin();
-		}, false);
+		
 
 		var workid = "";
 		var orderTotal = 0;
@@ -247,6 +250,7 @@
 							v11 = v11.substring(0, 4);
 						}
 					}
+					document.getElementById("prod").innerHTML = "";
 					
 					document.getElementById("prod").innerHTML = spp + "<div style='background-color:#ffffff;padding:0.8rem 0rem 0.8rem 0.5rem;'>总价：￥" + v11 + "</div>";
 				},
