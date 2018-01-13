@@ -254,7 +254,7 @@
 						if(rs[i].work_id == workid) {
 							rs2.push(rs[i]);
 							zongjia += parseFloat(rs[i].goods_price) * parseFloat(rs[i].buy_count);
-							spp += "<div class='myprot' style='margin-bottom: 1px;'><div class='mui-pull-left'><img src='" + rs[i].FilePath + "' /></div><div class='mui-pull-left'  style='margin-left: 0.5rem;'><div class='mui-pull-left'>" + rs[i].goods_name + "<br/><span style='color:red;'>￥" + rs[i].goods_price + "&nbsp;&nbsp;&nbsp;&nbsp;" + rs[i].buy_count + "份</span></div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";
+							spp += "<div class='myprot' style='margin-bottom: 1px;'><div class='mui-pull-left'><img src='" + rs[i].FilePath + "' style='width:3rem;height:3rem;'/></div><div class='mui-pull-left'  style='margin-left: 0.5rem;'><div class='mui-pull-left'>" + rs[i].goods_name + "<br/><span style='color:red;'>￥" + rs[i].goods_price + "&nbsp;&nbsp;&nbsp;&nbsp;" + rs[i].buy_count + "份</span></div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";
 						}
 					}
 					var v11 = zongjia+delivery_fee;
