@@ -12,7 +12,7 @@
 		<link rel="stylesheet" type="text/css" href="../css/layout.css" />
 		<style type="text/css">
 			.loglist{border-bottom: 1px solid #777777;padding: 0.5rem 0rem 0.5rem 1rem;line-height: 1.5rem;}
-			.loglist span{color:#00008B;}
+			
 		</style>
 	</head>
 
@@ -68,14 +68,63 @@
 						return;
 					}
 					var con = "";
-					
 					for(var i = 0; i < ads.length; i++) {
-						var mon = ads[i].optime.month;
+						var mon = ads[i].optime.month+1;
 						if (mon>12) {
 							mon=1;
 						}
 						var optime = ads[i].optime.year+1900+"-"+mon+"-"+ads[i].optime.date+" "+ads[i].optime.hours+":"+ads[i].optime.minutes+":"+ads[i].optime.seconds;
-							con += "<div class='loglist'><span>"+optime +"&nbsp;&nbsp;"+ads[i].orderstatus+"</span><br/>"+ads[i].statdesc+"</div>";
+							var state = "";
+							switch(ads[i].orderstatus) {
+								case 0:
+									state = "等待支付";
+									break;
+								case 1:
+									state = "已支付,等待店家确认";
+									break;
+								case 12:
+									state = "店家确认";
+									break;
+								case 2:
+									state = "配送确认,待取货";
+									break;
+								case 21:
+									state = "配送取货完成";
+									break;
+								case 3:
+									state = "送货完毕 ";
+									break;
+								case 4:
+									state = "待评价";
+									break;
+								case 5:
+									state = "已完成";
+									break;
+								case 50:
+									state = "你已取消订单";
+									break;
+								case 51:
+									state = "商家已取消订单";
+									break;
+								case 52:
+									state = "无人配送取消订单";
+									break;
+								case 53:
+									state = "配送取货超时取消订单";
+									break;
+								case 54:
+									state = "配送送货超时，取消订单 ";
+									break;
+								case 58: 
+									state = "店家超时未接单取消订单 ";
+									break;
+								case 59:
+									state = "未支付订单超时取消";
+									break;
+									//									OrderStatus：订单状态 0等待支付 1已支付、等待店家确认 12店家确认 2配送确认,待取货 21配送取货完成 3送货完毕 4待评价 5 已完成
+									//50客户取消订单 51店家取消订单 52无人配送取消订单 53配送取货超时取消订单 54配送送货超时，取消订单 58店家超时未接单取消订单 59未支付订单超时取消
+							} //switch
+							con += "<div class='loglist'><span style='color:#00008B;'>"+optime +"</span>&nbsp;&nbsp;<span style='color:red;'>"+state+"</span><br/>"+ads[i].statdesc+"</div>";
 						} //for
 					document.getElementById("loglist").innerHTML = con;
 				},
