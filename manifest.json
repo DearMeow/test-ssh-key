@@ -97,7 +97,19 @@
 				"password": "",/*iOS应用打包个人证书导入密码*/
 				"p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
 				"devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
-				"frameworks": []
+				"frameworks": [],
+				"plistcmds": [
+				"Set :NSLocationAlwaysUsageDescription 准点猫将获取你的位置信息来给你配送订单",
+          "Set :NSLocationWhenInUseUsageDescription 准点猫将获取你的位置信息来给你配送订单"
+          /*"Set :NSContactsUsageDescription 说明读取用户通讯录的原因",
+          "Set :NSMicrophoneUsageDescription 说明使用麦克风的原因",
+          "Set :NSPhotoLibraryUsageDescription 说明读取用户相册的原因",
+          "Set :NSCameraUsageDescription 说明使用用户相机的原因",
+          "Set :NSPhotoLibraryAddUsageDescription 说明向用户相册添加图片的原因",
+          "Set :NSLocationAlwaysUsageDescription 说明持续获取用户地理位置的原因",
+          "Set :NSLocationWhenInUseUsageDescription 说明使用用户地理位置的原因"*/
+        ]
+      }
 			},
 			"google": {
 				"packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/
