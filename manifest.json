@@ -109,7 +109,6 @@
           "Set :NSLocationAlwaysUsageDescription 说明持续获取用户地理位置的原因",
           "Set :NSLocationWhenInUseUsageDescription 说明使用用户地理位置的原因"*/
         ]
-      }
 			},
 			"google": {
 				"packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/
