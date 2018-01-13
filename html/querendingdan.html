@@ -112,14 +112,38 @@
 			var hour = myDate.getHours();
 			var min = myDate.getMinutes(); //获取当前分钟数(0-59)
 			var fulldatatime = year + "-" + month + "-" + datee + " " + hour + ":" + min;
-			toDate = fulldatatime;
+//			toDate = fulldatatime;
 			document.getElementById("checkedData").innerHTML = fulldatatime;
 
 			document.getElementById("picker").onclick = function() {
 				var dtPicker = new mui.DtPicker();
 				dtPicker.show(function(selectItems) {
+					  console.log(selectItems.y);//{text: "2016",value: 2016} 
+        console.log(selectItems.m);//{text: "05",value: "05"} 
+					alert(selectItems.y.value+"_"+selectItems.m.value+"_"+selectItems.d.value);
+					if (selectItems.y.value != year ) {
+						mui.toast("您选择的 年份有误");
+						return;
+					}
+					if (selectItems.m.value < month ) {
+						mui.toast("您选择的 月份有误");
+						return;
+					}
+					if (selectItems.m.value == month) {
+						if (selectItems.d.value == datee) {
+							if (selectItems.h.value - hour < 1) {
+							mui.toast("配送时间至少在当前时间一小时后");
+							return;
+							}
+						}else{
+							mui.toast("您选择的日期有误");
+							return;
+						}
+					}
+					
 					toDate = selectItems;
 					document.getElementById("checkedData").innerHTML = selectItems;
+					
 				})
 
 			}
@@ -273,6 +297,11 @@
 
 		//去结算
 		document.getElementById("fukuan").onclick = function() {
+			
+			if (toDate == "") {
+				mui.toast("请选择日期");
+				return;
+			}
 			
 			//生成订单
 			rh.SesId = checkLogin();
