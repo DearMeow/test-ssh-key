@@ -66,7 +66,25 @@
 		<header class="mui-bar mui-bar-nav" style="background-color: darkred;color: #FFFFFF;">
 			<h1 class="mui-title" style="color: #FFFFFF;">购物车</h1>
 		</header>
-		<div class="mui-content" id="bodydiv"></div>
+		<div class="mui-content" id="bodydiv">
+			
+			
+			
+			
+			<!--<div class='mt'>
+				<div class='mui-pull-left ml pt1'>蔡林记热干面</div>
+				<div class='mui-pull-right  pt1' style='width:10rem;border:1px solid red;'>
+					<span style='color:darkgoldenrod;'>数量:</span>
+					<span class='redprice'>125&nbsp;&nbsp;&nbsp;&nbsp;￥569.32</span>
+				</div>
+				<div class='mui-clearfix'></div>
+				<div style='border-bottom:1px solid #cccccc;height:1rem;'></div>
+			</div>
+			-->
+			
+			
+			
+		</div>
 	</body>
 	<script src="../js/mui.min.js"></script>
 	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
@@ -116,7 +134,7 @@
 						var pds="";
 						for(var i=0;i< products.length;i++)
 						{
-							pds+="<div class='mt'><div class='mui-pull-left ml pt1'>" + products[i].goods_name + "</div><div class='mui-pull-right rig pt1' style='width:9rem;'><span style='color:darkgoldenrod;'>数量:</span><span class='redprice'>" + products[i].buy_count + "&nbsp;&nbsp;&nbsp;&nbsp;￥" + products[i].goods_price + "</span></div><div class='mui-clearfix'></div><div style='border-bottom:1px solid #cccccc;height:1rem;'></div></div>";
+							pds+="<div class='mt'><div class='mui-pull-left ml pt1'>" + products[i].goods_name + "</div><div class='mui-pull-right rig pt1' style='width:10rem;'><span style='color:darkgoldenrod;'>数量:</span><span class='redprice'>" + products[i].buy_count + "&nbsp;&nbsp;&nbsp;&nbsp;￥" + products[i].goods_price + "</span></div><div class='mui-clearfix'></div><div style='border-bottom:1px solid #cccccc;height:1rem;'></div></div>";
 						}
 						document.getElementById("bodydiv").innerHTML += "<div class='dianpu'><div class='fw'>" + objOrders[j].work_name + "</div>"+pds+"<div class='mt' style='margin-top:1rem;padding-left:0.5rem'><div class='mui-pull-left'>运费</div><div class='mui-pull-right rig'><span class='redprice'>￥" + objOrders[j].expressamount + "</span></div><div class='mui-clearfix'></div></div><div class='mui-text-right jiesuan'><input type='button' name='jiesuanbtn' onclick='qujiesuan(&quot;" + objOrders[j].work_id + "&quot;)' value='去结算'/></div></div>";
 //					document.getElementById("bodydiv").innerHTML += "<div class='dianpu'><div class='fw'>" + objOrders[j].work_name + "</div>"+pds+"<div class='mt'><div class='mui-pull-left'>餐盒</div><div class='mui-pull-right rig'><span class='redprice'>￥" + objOrders[j].express_money + "</span></div><div class='mui-clearfix'></div></div><div class='mui-text-right jiesuan'><input type='button' name='jiesuanbtn' onclick='qujiesuan(&quot;" + objOrders[j].work_id + "&quot;)' value='去结算'/></div></div>";
