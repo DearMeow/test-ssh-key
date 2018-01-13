@@ -39,10 +39,6 @@
 				font-size: 1.2rem;
 			}
 			
-			.headbgc {
-				background-color: rgb(209, 37, 34);
-				padding: 1rem 0rem 0rem 0rem;
-			}
 			
 			#mySearch {
 				width: 100%;
@@ -56,9 +52,7 @@
 			
 			#searchbtn {
 				background-color: rgb(209, 37, 34);
-				border: none;
-				color: #FFFFFFF;
-				margin-top: 0.2rem;
+				margin-top: 0.5rem;color: #FFFFFF;border:1px solid #FFFFFF;height: 1.8rem;
 			}
 			
 			.mui-segmented-control {
@@ -81,21 +75,12 @@
 	</head>
 
 	<body>
-
+<header class="mui-bar mui-bar-nav" style="background-color: rgb(209, 37, 34);box-shadow: none;">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF;"></a>
+    <input type="text" class="mui-pull-left" name="soushuo" id="mySearch" style="color: red;width: 73%;margin-top: 0.4rem;">
+    <input type="button" class="mui-pull-right" id="searchbtn" value="搜索"/>
+</header>
 		<div class="mui-content">
-			<div class="headbgc">
-				<div class="mui-pull-left" style="padding-top: 0.1rem;">
-					<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF;"></a>
-				</div>
-				<div class="mui-pull-left">
-					<input type="text" name="soushuo" id="mySearch" style="color: #FFFFFF;">
-				</div>
-				<div class="mui-pull-right">
-					<input type="button" id="searchbtn" value="搜索" style="color: #FFFFFF;border:1px solid #FFFFFF;height: 1.8rem;" />
-				</div>
-				<div class="mui-clearfix"></div>
-			</div>
-
 			<div class="mui-slider">
 				<!--选项卡标题区-->
 				<!--<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">-->
