@@ -13,12 +13,6 @@
 		<style>
 			.jiesao {
 				padding: 1rem 1rem 0.5rem 1rem;
-				background-color: #FFFFFF;
-			}
-			
-			.zhonglei {
-				padding: 0.5rem;
-				border-bottom: 1px solid #C0C0C0;
 			}
 			
 			#jiesuan {
@@ -29,10 +23,7 @@
 			
 			#logo img {
 				width: 4rem;
-			}
-			
-			#xiaofenlei {
-				background-color: #FFFFFF;
+				height: 4rem;
 			}
 			
 			#xiaofenlei div {
@@ -45,10 +36,10 @@
 			}
 			
 			.nr {
-				padding: 0rem 0.5rem 0.3rem 0.2rem;
-				margin-left: 0.1rem;
-				width: 77%;
-				background-color: #FFFFFF;
+				/*padding: 0rem 0rem 0.3rem 0.2rem;*/
+				/*margin-left: 0.1rem;*/
+				/*padding-left: 0.2rem;*/
+				width: 17.5rem;
 				margin-bottom: 4rem;
 			}
 			
@@ -57,12 +48,12 @@
 			}
 			
 			.pt05 div img {
-				width: 4rem;
+				width: 4rem;height: 4rem;
 			}
 			
 			.wid {
 				margin-left: 0.5rem;
-				width: 70%;
+				width: 75%;
 			}
 			
 			.fc {
@@ -74,6 +65,13 @@
 				height: 1.3rem;
 				overflow: hidden;
 			}
+			
+			html,
+			body,
+			.mui-content {
+				font-family: "微软雅黑";
+				background-color: #FFFFFF;
+			}
 		</style>
 	</head>
 
@@ -84,17 +82,17 @@
 		</header>
 		<div class="mui-content">
 			<div class="jiesao">
-				<div class="mui-pull-left" id="logo"><img src='../images/moren.png'/></div>
+				<div class="mui-pull-left" id="logo"><img src='../images/moren.png' /></div>
 				<div class="mui-pull-left" style="margin-left: 1rem;">
 					<span id="dmingcheng" style="font-size: 1.2rem;"></span>
 					<span id="Collection"></span><br/><span style="font-size: 0.8rem;color:rgb(153,153,153);">欢迎光临，用餐高峰请提前下单。</span></div>
 				<div class="mui-clearfix"></div>
 			</div>
 			<!--jiesao-->
-			<div style="height: 0.1rem;"></div>
+<div style="border-top: 1px solid #C7C7CC;height: 1rem;"></div>
 			<div class="mui-pull-left" id="xiaofenlei"></div>
 			<!--mui-pull-left-->
-			<div class="mui-pull-right nr" id="xflneirong"></div>
+			<div class="mui-pull-left nr" id="xflneirong"></div>
 			<nav class="mui-bar mui-bar-tab mui-text-center" id="jiesuan">
 				<span style="font-size: 1.5rem;">结算</span></nav>
 		</div>
@@ -132,11 +130,11 @@
 				success: function(data) {
 					checkCurrentUser(data);
 					document.getElementById("dmingcheng").innerHTML = data.RespBody.workship_name;
-					
-					if ( data.RespBody.FilePath != "") {
+
+					if(data.RespBody.FilePath != "") {
 						document.getElementById("logo").innerHTML = "<img src='" + data.RespBody.FilePath + "'/>";
 					}
-					
+
 				},
 				error: function(xhr, type, errorThrown) {
 					mui.toast("请重试");
@@ -512,9 +510,8 @@
 				}
 			}); //ajax
 		} //Collection
-		
-		
-		document.getElementById("logo").onclick = function(){
+
+		document.getElementById("logo").onclick = function() {
 			//打开新窗口
 			mui.openWindow({
 				url: 'jieshao.html', //需要打开页面的url地址 
@@ -527,7 +524,7 @@
 					workid: workshopid
 				}
 			}); //openWindow
-		}//jieshao
+		} //jieshao
 	</script>
 
 </html>

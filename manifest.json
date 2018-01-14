@@ -200,9 +200,9 @@
 			"splashscreen": {
 				"ios": {
 					"iphone": {
-						"default": "","iphonex":"C:/Users/cunli/Downloads/2436-1125等2项_teambition/1125-2436.png","iphonexl":"C:/Users/cunli/Downloads/2436-1125等2项_teambition/2436-1125.png","retina55":"C:/Users/cunli/Downloads/2048-1496等16项_teambition/1242-2208.png","retina47":"C:/Users/cunli/Downloads/2048-1496等16项_teambition/750-1334.png","retina40":"C:/Users/cunli/Downloads/2048-1496等16项_teambition/640-1136.png","retina35":"C:/Users/cunli/Downloads/2048-1496等16项_teambition/640-960.png","retina55l":"C:/Users/cunli/Downloads/2048-1496等16项_teambition/2208-1242.png"
+						"default": "","iphonex":"C:/Users/cunli/Pictures/启动图片/1125-2436.png","iphonexl":"C:/Users/cunli/Pictures/启动图片/2436-1125.png","retina55":"C:/Users/cunli/Pictures/启动图片/1242-2208.png","retina47":"C:/Users/cunli/Pictures/启动图片/750-1334.png","retina40":"C:/Users/cunli/Pictures/启动图片/640-1136.png","retina35":"C:/Users/cunli/Pictures/启动图片/640-960.png","retina55l":"C:/Users/cunli/Pictures/启动图片/2208-1242.png"
 					},
-					"ipad": {"portrait":"C:/Users/cunli/Downloads/2048-1496等16项_teambition/768-1004.png","portrait7":"C:/Users/cunli/Downloads/2048-1496等16项_teambition/768-1024.png","landscape":"C:/Users/cunli/Downloads/2048-1496等16项_teambition/1024-748.png","landscape7":"C:/Users/cunli/Downloads/2048-1496等16项_teambition/1024-768.png","portrait-retina":"C:/Users/cunli/Downloads/2048-1496等16项_teambition/1536-2008.png","portrait-retina7":"C:/Users/cunli/Downloads/2048-1496等16项_teambition/1536-2048.png","landscape-retina":"C:/Users/cunli/Downloads/2048-1496等16项_teambition/2048-1496.png","landscape-retina7":"C:/Users/cunli/Downloads/2048-1496等16项_teambition/2048-1536.png"
+					"ipad": {"portrait":"C:/Users/cunli/Pictures/启动图片/768-1004.png","portrait7":"C:/Users/cunli/Pictures/启动图片/768-1024.png","landscape":"C:/Users/cunli/Pictures/启动图片/1024-748.png","landscape7":"C:/Users/cunli/Pictures/启动图片/1024-768.png","portrait-retina":"C:/Users/cunli/Pictures/启动图片/1536-2008.png","portrait-retina7":"C:/Users/cunli/Pictures/启动图片/1536-2048.png","landscape-retina":"C:/Users/cunli/Pictures/启动图片/2048-1496.png","landscape-retina7":"C:/Users/cunli/Pictures/启动图片/2048-1536.png"
 						 /*iPad竖屏启动图片，分辨率：768x1004*/
 						/*iPad高分屏竖屏图片，分辨率：1536x2008*/
 						 /*iPad横屏启动图片，分辨率：1024x748*/
@@ -216,9 +216,9 @@
 				"android": {
 					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
 					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
-					"hdpi": "C:/Users/cunli/Downloads/2048-1496等16项_teambition/480-762.png", /*高分屏启动图片，分辨率：480x762*/
-					"xhdpi": "C:/Users/cunli/Downloads/2048-1496等16项_teambition/720-1242.png",
-					"xxhdpi": "C:/Users/cunli/Downloads/2048-1496等16项_teambition/1080-1882.png"
+					"hdpi": "C:/Users/cunli/Pictures/启动图片/480-762.png", /*高分屏启动图片，分辨率：480x762*/
+					"xhdpi": "C:/Users/cunli/Pictures/启动图片/720-1242.png",
+					"xxhdpi": "C:/Users/cunli/Pictures/启动图片/1080-1882.png"
 				}
 			}
 		}
