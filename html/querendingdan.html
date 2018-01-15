@@ -118,9 +118,6 @@
 			document.getElementById("picker").onclick = function() {
 				var dtPicker = new mui.DtPicker();
 				dtPicker.show(function(selectItems) {
-					  console.log(selectItems.y);//{text: "2016",value: 2016} 
-        console.log(selectItems.m);//{text: "05",value: "05"} 
-					alert(selectItems.y.value+"_"+selectItems.m.value+"_"+selectItems.d.value);
 					if (selectItems.y.value != year ) {
 						mui.toast("您选择的 年份有误");
 						return;
@@ -135,12 +132,11 @@
 							mui.toast("配送时间至少在当前时间一小时后");
 							return;
 							}
-						}else{
+						}else if(selectItems.d.value < datee){
 							mui.toast("您选择的日期有误");
 							return;
 						}
 					}
-					
 					toDate = selectItems;
 					document.getElementById("checkedData").innerHTML = selectItems;
 					
