@@ -144,7 +144,10 @@
 							    var leave2=leave1%(3600*1000);        //计算小时数后剩余的毫秒数  
 							    var minutes=Math.floor(leave2/(60*1000));
 							    if (minutes < 30) {
+							    	document.getElementById("checkedData").innerHTML = "<b>请选择送餐时间</b>";
 							    	mui.toast("配送时间至少在当前时间30分钟后");
+							    }else{
+							    	toDate = selectItems;
 							    }
 							
 						}else if(selectItems.d.value < datee){
@@ -152,8 +155,10 @@
 							return;
 						}
 					}
-					toDate = selectItems;
-					document.getElementById("checkedData").innerHTML = selectItems;
+					if(toDate != ""){
+						document.getElementById("checkedData").innerHTML = toDate;
+						toDate="";
+					}
 					
 				})
 
