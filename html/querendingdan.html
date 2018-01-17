@@ -127,15 +127,12 @@
 						mui.toast("您选择的 年份有误");
 						return;
 					}
-					if (selectItems.m.value < month ) {
+					if (selectItems.m.value < month || selectItems.m.value - month > 1) {
 						mui.toast("您选择的 月份有误");
 						return;
 					}
-					if (selectItems.m.value == month) {
-						
-						if (selectItems.d.value == datee) {
-							
-							var date1= selectItems.y.value+"/"+selectItems.m.value+"/"+selectItems.d.value+" "+selectItems.h.value+":"+selectItems.i.value+":00";  //开始时间  
+
+						var date1= selectItems.y.value+"/"+selectItems.m.value+"/"+selectItems.d.value+" "+selectItems.h.value+":"+selectItems.i.value+":00";  //开始时间  
 						    var date2 = new Date();    //结束时间  
 						    var date3 = new Date(date1).getTime() - date2.getTime();   //时间差的毫秒数       
 							
@@ -144,22 +141,12 @@
 							    var leave2=leave1%(3600*1000);        //计算小时数后剩余的毫秒数  
 							    var minutes=Math.floor(leave2/(60*1000));
 							    if (minutes < 30) {
-							    	document.getElementById("checkedData").innerHTML = "<b>请选择送餐时间</b>";
 							    	mui.toast("配送时间至少在当前时间30分钟后");
 							    }else{
 							    	toDate = selectItems;
+							    	document.getElementById("checkedData").innerHTML = selectItems;
 							    }
-							
-						}else if(selectItems.d.value < datee){
-							mui.toast("您选择的日期有误");
-							return;
-						}
-					}
-					if(toDate != ""){
-						document.getElementById("checkedData").innerHTML = toDate;
-						toDate="";
-					}
-					
+
 				})
 
 			}
