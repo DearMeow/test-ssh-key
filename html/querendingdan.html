@@ -111,7 +111,7 @@
 
 			var hour = myDate.getHours();
 			var min = myDate.getMinutes(); //获取当前分钟数(0-59)
-			var fulldatatime = year + "-" + month + "-" + datee + " " + hour + ":" + min;
+			var fulldatatime = year + "-" + month + "-" + datee + " " + hour + ":" + parseInt(min+30);
 //			toDate = fulldatatime;
 			document.getElementById("checkedData").innerHTML = fulldatatime;
 
