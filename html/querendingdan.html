@@ -116,8 +116,13 @@
 				hour+=1;
 				min-=60;
 			}
-			var fulldatatime = year + "-" + month + "-" + datee + " " + hour + ":" + min;
-//			toDate = fulldatatime;
+			
+			var mm=":";
+			if (min < 10) {
+				mm=":0";
+			}
+			var fulldatatime = year + "-" + month + "-" + datee + " " + hour + mm + min;
+			toDate = fulldatatime;
 			document.getElementById("checkedData").innerHTML = fulldatatime;
 
 			document.getElementById("picker").onclick = function() {
@@ -131,7 +136,7 @@
 						mui.toast("您选择的 月份有误");
 						return;
 					}
-
+			
 						var date1= selectItems.y.value+"/"+selectItems.m.value+"/"+selectItems.d.value+" "+selectItems.h.value+":"+selectItems.i.value+":00";  //开始时间  
 						    var date2 = new Date();    //结束时间  
 						    var date3 = new Date(date1).getTime() - date2.getTime();   //时间差的毫秒数       
@@ -311,6 +316,7 @@
 				mui.toast("请选择日期");
 				return;
 			}
+			
 			//生成订单
 			rh.SesId = checkLogin();
 
