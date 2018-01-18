@@ -292,7 +292,9 @@
 					"images/shopCar.png"
 				],
 				"refer": [
-					"html/xiaofenlei.html"
+					"html/xiaofenlei.html",
+					"html/myinfo/denglu.html",
+					"html/pingjia.html"
 				],
 				"priority": 0
 			},
@@ -342,7 +344,10 @@
 					"fonts/mui.ttf",
 					"css/layout.css"
 				],
-				"priority": 3
+				"priority": 3,
+				"refer": [
+					"html/myinfo/denglu.html"
+				]
 			},
 			"index.html": {
 				"href": "index.html",

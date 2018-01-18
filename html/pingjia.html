@@ -171,13 +171,14 @@ var radio2 = document.getElementsByName("evalutedev");
 				},
 				success: function(data) {
 					checkCurrentUser(data);
-					var result = data.RespBody;
 					if(data.RespBody.succ == 1){
 						mui.toast("评价已发布");
+					}else{
+						mui.toast("评价遇到问题，请稍后再试");
 					}
 				},
 				error: function(xhr, type, errorThrown) {
-					alert(type);
+					console(type);
 				}
 			}); //ajax
 		}//okBtn

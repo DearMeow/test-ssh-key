@@ -59,7 +59,7 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav" style="background-color: darkred;color: #FFFFFF;">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF;"></a>
+			<div id="fukuan"></div>
 			<h1 class="mui-title" style="color: #FFFFFF;">我的订单</h1>
 		</header>
 		<div class="mui-content">
@@ -74,8 +74,9 @@
 			var self = plus.webview.currentWebview(); //获得当前页面的对象
 			var fukuan = "";
 			fukuan = self.fukuan;
-			if(fukuan != "") {
+			if(fukuan == "fk") {
 				dingdan();
+				document.getElementById("fukuan").innerHTML = '<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF;"></a>';
 			}
 		});
 		window.addEventListener('myorderrefresh', function() {
