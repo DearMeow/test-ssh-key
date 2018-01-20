@@ -188,5 +188,15 @@
 			"html/myinfo/denglu.html"
 		],
 		"priority": 0
+	},
+	"html/shangjia.html": {
+		"refer": [
+			"html/querendingdan.html"
+		]
+	},
+	"html/querendingdan.html": {
+		"refer": [
+			"html/myinfo/dizhi.html"
+		]
 	}
 }

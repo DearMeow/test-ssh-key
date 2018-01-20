@@ -364,6 +364,20 @@
 					"html/shopcar.html"
 				],
 				"priority": 0
+			},
+			"html/shangjia.html": {
+				"resources": [],
+				"refer": [
+					"html/querendingdan.html"
+				],
+				"priority": 0
+			},
+			"html/querendingdan.html": {
+				"resources": [],
+				"refer": [
+					"html/myinfo/dizhi.html"
+				],
+				"priority": 0
 			}
 		},
 		"idle": {
