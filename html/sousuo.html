@@ -39,7 +39,6 @@
 				font-size: 1.2rem;
 			}
 			
-			
 			#mySearch {
 				width: 100%;
 				border-radius: 1.5rem;
@@ -51,8 +50,10 @@
 			}
 			
 			#searchbtn {
-				background-color:#8f0009;
-				margin-top: 0.4rem;color: #FFFFFF;border:1px solid #FFFFFF;
+				background-color: #8f0009;
+				margin-top: 0.4rem;
+				color: #FFFFFF;
+				border: 1px solid #FFFFFF;
 			}
 			
 			.mui-segmented-control {
@@ -75,11 +76,11 @@
 	</head>
 
 	<body>
-<header class="mui-bar mui-bar-nav" style="background-color:#8f0009;box-shadow: none;">
-    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF;"></a>
-    <input type="text" class="mui-pull-left" name="soushuo" id="mySearch" style="color: red;width: 73%;margin-top: 0.4rem;">
-    <input type="button" class="mui-pull-right" id="searchbtn" value="搜索"/>
-</header>
+		<header class="mui-bar mui-bar-nav" style="background-color:#8f0009;box-shadow: none;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF;"></a>
+			<input type="text" class="mui-pull-left" name="soushuo" id="mySearch" style="color: red;width: 73%;margin-top: 0.4rem;">
+			<input type="button" class="mui-pull-right" id="searchbtn" value="搜索" />
+		</header>
 		<div class="mui-content">
 			<div class="mui-slider">
 				<!--选项卡标题区-->
@@ -158,16 +159,13 @@
 			sumPage = 0,
 			pageSize = 8;
 		mui.plusReady(function() {
+			dingwei(); //定位 获取gps
 			var self = plus.webview.currentWebview(); //获得当前页面的对象
 			catid = self.catid;
 
 			zonghepaixu = 1;
 			xiaoliangpaixu = 0;
 			julipaixu = 0;
-
-			zonghe(1, 0);
-
-			dingwei();
 
 			var item2Show = false,
 				item3Show = false; //子选项卡是否显示标志
@@ -194,19 +192,46 @@
 					item3Show = true;
 				}
 			}); //querySelector
-
+zonghe(1, 0);
 		}); //plusReady
+
+		function dingwei() {
+			var map = new AMap.Map('', {
+				resizeEnable: true
+			});
+			map.plugin('AMap.Geolocation', function() {
+				geolocation = new AMap.Geolocation({
+					enableHighAccuracy: true, //是否使用高精度定位，默认:true
+					timeout: 10000, //超过10秒后停止定位，默认：无穷大
+					buttonOffset: new AMap.Pixel(10, 20), //定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+					zoomToAccuracy: true, //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+					buttonPosition: 'RB'
+				});
+				map.addControl(geolocation);
+				geolocation.getCurrentPosition();
+				AMap.event.addListener(geolocation, 'complete', onComplete); //返回定位信息
+				AMap.event.addListener(geolocation, 'error', onError); //返回定位出错信息
+			});
+		}
+		//解析定位结果
+		function onComplete(data) {
+			Jd = data.position.getLng();
+			Wd = data.position.getLat();
+		}
+		//解析定位错误信息
+		function onError(data) {
+			mui.toast("为了获取您附近的商家，请开启GPS和网络");
+		}
 
 		//综合排序
 		function zonghe(curPage, shangla) {
-
 			var rb = new Object();
 			rb.curPage = curPage;
 			rb.pageSize = pageSize;
 			rb.qryName = "";
 			rb.CatId = catid;
-			rb.Jd = "";
-			rb.Wd = "";
+			rb.Jd = Jd;
+			rb.Wd = Wd;
 			rb.SortField = "";
 			rb.SortDirct = "";
 
@@ -258,7 +283,6 @@
 				error: function(xhr, type, errorThrown) {
 					//异常处理；
 					console.log(type);
-					alert(type);
 				}
 			}); //ajax
 		} //zonghe
@@ -271,8 +295,8 @@
 			rb.pageSize = pageSize;
 			rb.qryName = qryName;
 			rb.CatId = catid;
-			rb.Jd = "";
-			rb.Wd = "";
+			rb.Jd = Jd;
+			rb.Wd = Wd;
 			rb.SortField = "g.sales_volume";
 			rb.SortDirct = "desc";
 
@@ -322,7 +346,6 @@
 				error: function(xhr, type, errorThrown) {
 					//异常处理；
 					console.log(type);
-					alert(type);
 				}
 			}); //ajax
 		} //xiaoliang
@@ -386,7 +409,6 @@
 				error: function(xhr, type, errorThrown) {
 					//异常处理；
 					console.log(type);
-					alert(type);
 				}
 			}); //ajax
 		} //juli
@@ -536,14 +558,13 @@
 				error: function(xhr, type, errorThrown) {
 					//异常处理；
 					console.log(type);
-					alert(type);
 				}
 			}); //ajax
 		} //sousuo
 
 		//点击商品 先加入购物车，再去详情页
 		function goDetailPage(id) {
-			
+
 			var res = id.split(",");
 			var workshopid = res[0];
 			var goodid = res[1];
@@ -596,31 +617,6 @@
 			}); //ajax
 
 		} //点击去详情页
-		
-		function dingwei() {
-			var map = new AMap.Map('', {
-				resizeEnable: true
-			});
-			map.plugin('AMap.Geolocation', function() {
-				geolocation = new AMap.Geolocation({
-					enableHighAccuracy: true, //是否使用高精度定位，默认:true
-					timeout: 10000, //超过10秒后停止定位，默认：无穷大
-					buttonOffset: new AMap.Pixel(10, 20), //定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
-					zoomToAccuracy: true, //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
-					buttonPosition: 'RB'
-				});
-				map.addControl(geolocation);
-				geolocation.getCurrentPosition();
-				AMap.event.addListener(geolocation, 'complete', onComplete); //返回定位信息
-//				AMap.event.addListener(geolocation, 'error', onError); //返回定位出错信息
-			});
-		}
-//解析定位结果
-		function onComplete(data) {
-				Jd = data.position.getLng();
-				Wd = data.position.getLat();
-		}
-
 	</script>
 
 </html>

@@ -109,7 +109,8 @@
 			"css/layout.css"
 		],
 		"refer": [
-			"html/xiangqing.html"
+			"html/xiangqing.html",
+			"html/shangjia.html"
 		],
 		"priority": 0
 	},
