@@ -185,7 +185,8 @@
 			"css/layout.css"
 		],
 		"refer": [
-			"html/myinfo/denglu.html"
+			"html/myinfo/denglu.html",
+			"html/querendingdan.html"
 		],
 		"priority": 0
 	},
@@ -196,7 +197,8 @@
 	},
 	"html/querendingdan.html": {
 		"refer": [
-			"html/myinfo/dizhi.html"
+			"html/myinfo/dizhi.html",
+			"html/myinfo/denglu.html"
 		]
 	}
 }

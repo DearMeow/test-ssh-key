@@ -347,7 +347,8 @@
 				],
 				"priority": 3,
 				"refer": [
-					"html/myinfo/denglu.html"
+					"html/myinfo/denglu.html",
+					"html/querendingdan.html"
 				]
 			},
 			"index.html": {
@@ -375,7 +376,8 @@
 			"html/querendingdan.html": {
 				"resources": [],
 				"refer": [
-					"html/myinfo/dizhi.html"
+					"html/myinfo/dizhi.html",
+					"html/myinfo/denglu.html"
 				],
 				"priority": 0
 			}

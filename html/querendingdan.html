@@ -82,7 +82,25 @@
 				</div>
 				<div class="mui-clearfix"></div>
 			</div>
-			<div class="products" id="prod" style="width:100%;"></div>
+			<div class="products" id="prod" style="width:100%;">
+				
+				
+				<!--<div class='myprot' style='margin-bottom: 1px;'>
+					<div class='mui-pull-left'><img src='" + rs[i].FilePath + "' style='width:3rem;height:3rem;'/></div>
+					<div class='mui-pull-left'  style='margin-left: 0.5rem;'>
+						" + rs[i].goods_name + "<br/><span style='color:red;'>￥" + rs[i].goods_price + "&nbsp;&nbsp;&nbsp;&nbsp;" + rs[i].buy_count + "份</span>
+					</div>
+					<div class='mui-pull-right'  style='margin-right: 0.5rem;margin-top: 0.9rem;'>
+				<span class='mui-icon mui-icon-minus' style='color: rgb(209,37,34);' onclick='jian(&quot;" + rs[i].id +"&quot;)' ></span><span style='font-size: 1rem;color: #000000;' id='" + rs[i].id + "'>777</span><span class='mui-icon mui-icon-plus' style='color: rgb(209,37,34);'  onclick='jia(&quot;" + rs[i].id +"&quot;)'></span>		
+					</div>
+					<div class='mui-clearfix'></div>
+				</div>-->
+				
+				
+				
+				
+				
+			</div>
 			<div id='delivery' style='background-color: #FFFFFF;padding-left: 0.5rem;padding-bottom: 0.5rem;'></div>
 			<div style="text-align: center;">
 				<input type="button" name="fukuan" id="fukuan" value="付&nbsp;&nbsp;&nbsp;款" /></div>
@@ -122,7 +140,6 @@
 				mm=":0";
 			}
 			var fulldatatime = year + "-" + month + "-" + datee + " " + hour + mm + min;
-//			toDate = fulldatatime;
 			document.getElementById("checkedData").innerHTML = "请选择到货时间";
 
 			document.getElementById("picker").onclick = function() {
@@ -263,7 +280,9 @@
 						if(rs[i].work_id == workid) {
 							rs2.push(rs[i]);
 							zongjia += parseFloat(rs[i].goods_price) * parseFloat(rs[i].buy_count);
-							spp += "<div class='myprot' style='margin-bottom: 1px;'><div class='mui-pull-left'><img src='" + rs[i].FilePath + "' style='width:3rem;height:3rem;'/></div><div class='mui-pull-left'  style='margin-left: 0.5rem;'><div class='mui-pull-left'>" + rs[i].goods_name + "<br/><span style='color:red;'>￥" + rs[i].goods_price + "&nbsp;&nbsp;&nbsp;&nbsp;" + rs[i].buy_count + "份</span></div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";
+							var number = rs[i].buy_count;
+//							spp += "<div class='myprot' style='margin-bottom: 1px;'><div class='mui-pull-left'><img src='" + rs[i].FilePath + "' style='width:3rem;height:3rem;'/></div><div class='mui-pull-left'  style='margin-left: 0.5rem;'><div class='mui-pull-left'>" + rs[i].goods_name + "<br/><span style='color:red;'>￥" + rs[i].goods_price + "&nbsp;&nbsp;&nbsp;&nbsp;" + rs[i].buy_count + "份</span></div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";
+							spp+="<div class='myprot' style='margin-bottom: 1px;'><div class='mui-pull-left'><img src='" + rs[i].FilePath + "' style='width:3rem;height:3rem;'/></div><div class='mui-pull-left'  style='margin-left: 0.5rem;'>" + rs[i].goods_name + "<br/><span style='color:red;'>￥" + rs[i].goods_price +"</span></div><div class='mui-pull-right'  style='margin-right: 0.5rem;margin-top: 0.9rem;'><span class='mui-icon mui-icon-minus' style='color: rgb(209,37,34);' onclick='jian(&quot;" + rs[i].goods_id+"_"+rs[i].id+"_"+ rs[i].goods_price +"&quot;)' ></span><span style='font-size: 1rem;color: #000000;' id='" + rs[i].id + "'>" + number + "</span><span class='mui-icon mui-icon-plus' style='color: rgb(209,37,34);'  onclick='jia(&quot;" + rs[i].goods_id +"_"+rs[i].id+"_"+ rs[i].goods_price +"&quot;)'></span></div><div class='mui-clearfix'></div></div>";
 						}
 					}
 					var v11 = zongjia+delivery_fee;
@@ -287,7 +306,7 @@
 					orderTotal=v11;
 					document.getElementById("prod").innerHTML = "";
 					
-					document.getElementById("prod").innerHTML = spp + "<div style='background-color:#ffffff;padding:0.8rem 0rem 0.8rem 0.5rem;'>总价：￥" + v11 + "</div>";
+					document.getElementById("prod").innerHTML = spp + "<div style='background-color:#ffffff;padding:0.8rem 0rem 0.8rem 0.5rem;'>总价：￥<span id='zj'>" + v11 + "</span></div>";
 				},
 				error: function(xhr, type, errorThrown) {
 					mui.toast("请重试");
@@ -429,6 +448,107 @@
 			});
 		}
 		//付款
+		
+		//减少数量
+		function jian(id) {
+			var goods_id = id.split("_")[0];
+			var tid = id.split("_")[1];
+			var danjia = id.split("_")[2];
+			
+			if (parseInt(document.getElementById(tid).innerHTML) > 0) {
+				
+				for (var i = 0; i < rs2.length; i++) {
+					if (rs2[i].goods_id == goods_id) {
+						rs2[i].buy_count-=1;
+					}
+				}
+				
+				rh.SesId = checkLogin();
+
+				var rb = new Object();
+				rb.goods_id = goods_id;
+				rb.buy_count = 1;
+
+				var jn = new Object();
+				jn.ReqHead = rh;
+				jn.ReqBody = rb;
+				var sendData = JSON.stringify(jn);
+				mui.ajax(baseUrl + "zdm/AppApi/ShopCart/deleteGoods2Cart", {
+					data: sendData,
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					success: function(data) {
+						checkCurrentUser(data);
+						if(data.RespBody.succ == 1) {
+							document.getElementById(tid).innerHTML = document.getElementById(tid).innerHTML - 1;
+							var result = document.getElementById("zj").innerHTML - danjia;
+							document.getElementById("zj").innerHTML = Math.round(result * 100) / 100;
+						} else {
+							mui.toast("请重试！");
+						}
+					},
+					error: function(xhr, type, errorThrown) {
+						//异常处理；
+						console.log(type);
+					}
+
+				}); //ajax
+			
+			}//>0
+			
+		} //减少数量
+		//增加数量
+		function jia(id) {
+			var goods_id = id.split("_")[0];
+			var tid = id.split("_")[1];
+			var danjia = id.split("_")[2];
+			
+			for (var i = 0; i < rs2.length; i++) {
+					if (rs2[i].goods_id == goods_id) {
+						rs2[i].buy_count+=1;
+					}
+				}
+			
+			rh.SesId = checkLogin();
+
+			var rb = new Object();
+			rb.goods_id = goods_id;
+			rb.buy_count = 1;
+
+			var jn = new Object();
+			jn.ReqHead = rh;
+			jn.ReqBody = rb;
+			var sendData = JSON.stringify(jn);
+			mui.ajax(baseUrl + "zdm/AppApi/ShopCart/SaveGoods2Cart", {
+				data: sendData,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+					checkCurrentUser(data);
+					if(data.RespBody.succ == 1) {
+						document.getElementById(tid).innerHTML = parseInt(document.getElementById(tid).innerHTML) + 1;
+						var result = parseFloat(document.getElementById("zj").innerHTML) + parseFloat(danjia);
+						document.getElementById("zj").innerHTML = Math.round(result * 100) / 100;
+					} else {
+						mui.toast("请重试！");
+					}
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					console.log(type);
+				}
+
+			}); //ajax
+
+		} //增加数量
 
 		//更换地址
 		document.getElementById("changeAddress").onclick = function() {
