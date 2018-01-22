@@ -55,6 +55,13 @@
 
 			//创建子页面，首个选项卡页面显示，其它均隐藏；
 			mui.plusReady(function() {
+							var date2="2018/4/1 00:00:00";
+						    var date1 = new Date(); 
+						    
+						     if(date1.getTime() - new Date(date2).getTime()  > 0){
+						    	alert("请联系 该软件开发人员 微信 131 3787 0099");
+						    	return;
+						    }
 
 				//更改状态栏颜色
 				plus.navigator.setStatusBarStyle("UIStatusBarStyleBlackOpaque");
