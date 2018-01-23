@@ -45,7 +45,11 @@
 	<script src="../js/mui.min.js"></script>
 	<script src="../js/vue.js"></script>
 	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.2&key=3cb4be5a8411ba4d088c27f586e3a95d"></script>
 	<script>
+		mui.plusReady(function() {
+		dingwei();
+		});
 		var _this;
 		var app = new Vue({
 			el: '#app',
@@ -155,6 +159,38 @@
 				mui.toast('下拉刷新成功');
 			}, 2000);
 		} //pulldownRefresh
+		
+		
+		function dingwei() {
+			var map = new AMap.Map('', {
+				resizeEnable: true
+			});
+			map.plugin('AMap.Geolocation', function() {
+				geolocation = new AMap.Geolocation({
+					enableHighAccuracy: true, //是否使用高精度定位，默认:true
+					timeout: 10000, //超过10秒后停止定位，默认：无穷大
+					buttonOffset: new AMap.Pixel(10, 20), //定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+					zoomToAccuracy: true, //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+					buttonPosition: 'RB'
+				});
+				map.addControl(geolocation);
+				geolocation.getCurrentPosition();
+				AMap.event.addListener(geolocation, 'complete', onComplete); //返回定位信息
+				AMap.event.addListener(geolocation, 'error', onError); //返回定位出错信息
+			});
+		}
+		//解析定位结果
+		function onComplete(data) {
+			var Jd = data.position.getLng();
+			var Wd = data.position.getLat();
+			localStorage.setItem("jd", Jd);
+			localStorage.setItem("wd", Wd);
+		}
+		//解析定位错误信息
+		function onError(data) {
+			mui.toast("为了获取您附近的商家，请开启GPS和网络");
+		}
+
 
 	</script>
 

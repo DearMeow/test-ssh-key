@@ -109,7 +109,8 @@
 			"css/layout.css"
 		],
 		"refer": [
-			"html/xiangqing.html"
+			"html/xiangqing.html",
+			"html/shangjia.html"
 		],
 		"priority": 0
 	},
@@ -184,8 +185,20 @@
 			"css/layout.css"
 		],
 		"refer": [
-			"html/myinfo/denglu.html"
+			"html/myinfo/denglu.html",
+			"html/querendingdan.html"
 		],
 		"priority": 0
+	},
+	"html/shangjia.html": {
+		"refer": [
+			"html/querendingdan.html"
+		]
+	},
+	"html/querendingdan.html": {
+		"refer": [
+			"html/myinfo/dizhi.html",
+			"html/myinfo/denglu.html"
+		]
 	}
 }

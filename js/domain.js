@@ -1,4 +1,4 @@
-var baseUrl = "http://123.207.88.84/";
+var baseUrl = "http://39.104.106.73/";
 
 var rh = new Object();
 rh.ReqId = "ls123";
