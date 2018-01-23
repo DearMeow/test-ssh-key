@@ -152,10 +152,10 @@
 									state = "正在配送<input type='button' style='margin-top:1rem;' onclick='tuikuan(&quot;" + result.Recs[i].id + "&quot;)' value='申请退款'/>";
 									break;
 								case 3:
-									state = "已送达<input type='button' style='margin-top:1rem;' onclick='tuikuan(&quot;" + result.Recs[i].id + "&quot;)' value='申请退款'/>";
+									state = "已送达<input type='button' style='margin-top:1rem;' onclick='tuikuan(&quot;" + result.Recs[i].id + "&quot;)' value='申请退款'/><input type='button' style='margin-top:1rem;' onclick='pingjia(&quot;" + result.Recs[i].id + "&quot;)' value='待评价'/>";
 									break;
 								case 4:
-									state = "<input type='button' style='margin-top:1rem;' onclick='pingjia(&quot;" + result.Recs[i].id + "&quot;)' value='待评价'/>";
+									state = "商家待评价";
 									break;
 								case 5:
 									state = "已完成";
