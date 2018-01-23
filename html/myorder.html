@@ -131,9 +131,6 @@
 					if(result.Recs.length == 0) {
 						document.getElementById("msg").innerHTML += "<div style='color:darkred;margin-top: 12rem;text-align:center;'>你还没有产生订单</div>";
 					} else {
-						//																		var zs = result.Recs[0].state;
-						//												alert(zs);
-
 						for(var i = 0; i < result.Recs.length; i++) {
 							var zs = result.Recs[i].state;
 
@@ -179,7 +176,7 @@
 									state = "订单已取消";
 									break;
 								case 58: 
-									state = "订单已取消<input type='button' style='margin-top:1rem;' onclick='pingjia(&quot;" + result.Recs[i].id + "&quot;)' value='待评价'/>";
+									state = "订单已取消";
 									break;
 								case 59:
 									state = "订单已取消";
