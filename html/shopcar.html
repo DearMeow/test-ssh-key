@@ -69,18 +69,49 @@
 		<div class="mui-content" id="bodydiv">
 			
 			
-			
-			
-			<!--<div class='mt'>
-				<div class='mui-pull-left ml pt1'>蔡林记热干面</div>
-				<div class='mui-pull-right  pt1' style='width:10rem;border:1px solid red;'>
+			<!--<ul id="menulist" class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<div class="mui-slider-right mui-disabled">
+							<a class="mui-btn mui-btn-red">删除</a>
+						</div>
+						<div class="mui-slider-handle">
+							
+							<div class='mt'>
+				<div class='mui-pull-left pt1' style="width: 10rem;overflow: hidden;border:1px solid red;">goods_namegoods_name</div>
+				<div class='mui-pull-right  pt1' style='width:10rem;'>
 					<span style='color:darkgoldenrod;'>数量:</span>
-					<span class='redprice'>125&nbsp;&nbsp;&nbsp;&nbsp;￥569.32</span>
-				</div>
-				<div class='mui-clearfix'></div>
-				<div style='border-bottom:1px solid #cccccc;height:1rem;'></div>
-			</div>
-			-->
+					<span class='redprice'>200&nbsp;&nbsp;&nbsp;&nbsp;￥39998</span>
+				</div><div class='mui-clearfix'></div>
+				</div><div style='border-bottom:1px solid #cccccc;height:1rem;'></div>
+				
+				
+				
+							
+						</div>
+					 </li>
+				</ul>-->
+				
+				
+				<!--<ul class="mui-table-view"><li class="mui-table-view-cell"><div class="mui-slider-right mui-disabled"><a class="mui-btn mui-btn-red">删除</a></div><div class="mui-slider-handle">
+							
+							<div class='mt'>
+				<div class='mui-pull-left pt1' style="width: 10rem;overflow: hidden;border:1px solid red;">goods_namegoods_name</div>
+				<div class='mui-pull-right  pt1' style='width:10rem;'>
+					<span style='color:darkgoldenrod;'>数量:</span>
+					<span class='redprice'>200&nbsp;&nbsp;&nbsp;&nbsp;￥39998</span>
+				</div><div class='mui-clearfix'></div>
+				</div><div style='border-bottom:1px solid #cccccc;height:1rem;'></div>
+				
+				
+				
+							
+						</div></li></ul>-->
+			
+			
+			
+			
+			
+			
 			
 			
 			
@@ -134,7 +165,7 @@
 						var pds="";
 						for(var i=0;i< products.length;i++)
 						{
-							pds+="<div class='mt'><div class='mui-pull-left ml pt1'>" + products[i].goods_name + "</div><div class='mui-pull-right rig pt1' style='width:10rem;'><span style='color:darkgoldenrod;'>数量:</span><span class='redprice'>" + products[i].buy_count + "&nbsp;&nbsp;&nbsp;&nbsp;￥" + products[i].goods_price + "</span></div><div class='mui-clearfix'></div><div style='border-bottom:1px solid #cccccc;height:1rem;'></div></div>";
+							pds+="<ul class='mui-table-view'><li class='mui-table-view-cell' id='"+products[i].goods_id+"'><div class='mui-slider-right mui-disabled'><a class='mui-btn mui-btn-red' onclick='deleteOne(&quot;" + products[i].goods_id + "&quot;)'>删除</a></div><div class='mui-slider-handle'><div class='mt'><div class='mui-pull-left pt1' style='width:10rem;overflow: hidden;'>" + products[i].goods_name + "</div><div class='mui-pull-right pt1' style='width:10rem;'><span style='color:darkgoldenrod;'>数量:</span><span class='redprice'>" + products[i].buy_count + "&nbsp;&nbsp;&nbsp;&nbsp;￥" + products[i].goods_price + "</span></div><div class='mui-clearfix'></div></div></div></li></ul>";
 						}
 						document.getElementById("bodydiv").innerHTML += "<div class='dianpu'><div class='fw'>" + objOrders[j].work_name + "</div>"+pds+"<div class='mt' style='margin-top:1rem;padding-left:0.5rem'><div class='mui-pull-left'>运费</div><div class='mui-pull-right rig'><span class='redprice'>￥" + objOrders[j].expressamount + "</span></div><div class='mui-clearfix'></div></div><div class='mui-text-right jiesuan'><input type='button' name='jiesuanbtn' onclick='qujiesuan(&quot;" + objOrders[j].work_id + "&quot;)' value='去结算'/></div></div>";
 //					document.getElementById("bodydiv").innerHTML += "<div class='dianpu'><div class='fw'>" + objOrders[j].work_name + "</div>"+pds+"<div class='mt'><div class='mui-pull-left'>餐盒</div><div class='mui-pull-right rig'><span class='redprice'>￥" + objOrders[j].express_money + "</span></div><div class='mui-clearfix'></div></div><div class='mui-text-right jiesuan'><input type='button' name='jiesuanbtn' onclick='qujiesuan(&quot;" + objOrders[j].work_id + "&quot;)' value='去结算'/></div></div>";
@@ -149,6 +180,54 @@
 			}); //ajax
 
 		} //shuaxin
+		
+		//删除购物车中的商品
+		function deleteOne(id){
+//			alert("oi"+id);
+			
+			 mui.confirm('确认删除？', "准点猫", ["取消","确定"], function(e) 
+	  	  	  {
+					if (e.index == 1) 
+					{
+						
+			rh.SesId = checkLogin();
+
+			var rb = new Object();
+			rb.CartId = id;
+
+			var jn = new Object();
+			jn.ReqHead = rh;
+			jn.ReqBody = rb;
+
+			var sendData = JSON.stringify(jn);
+
+			mui.ajax(baseUrl + "zdm/AppApi/ShopCart/DelCart", {
+				data: sendData,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+					checkCurrentUser(data);
+					if(succ == 1){
+						document.getElementById(id).style.display="none";
+					}
+				},
+				error: function(xhr, type, errorThrown) {
+					mui.toast("请重试"+type);
+					console.log("-------------"+errorThrown);
+				}
+			}); //ajax
+						
+						
+						
+
+					}//if
+				});//confirm
+				
+		}//deleteOne
 		
 		function getWorkData(p_data)
 		{
