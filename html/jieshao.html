@@ -110,7 +110,8 @@ document.getElementById("vid").innerHTML = "<video width='100%' controls='contro
 
 				},
 				error: function(xhr, type, errorThrown) {
-					alert(type);
+					mui.toast("请稍候重试");
+					
 				}
 			}); //ajax
 			

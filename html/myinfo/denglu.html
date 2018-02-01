@@ -137,9 +137,7 @@
 					}
 				},
 				error: function(xhr, type, errorThrown) {
-					//异常处理；
-					console.log(type);
-					alert(type);
+					mui.toast("请稍候重试");
 				}
 			});
 
@@ -226,9 +224,7 @@
 
 				},
 				error: function(xhr, type, errorThrown) {
-					//异常处理；
-					console.log(type);
-					alert("err_" + errorThrown);
+					mui.toast("请稍候重试");
 				}
 			});
 		}

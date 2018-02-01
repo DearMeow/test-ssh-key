@@ -391,8 +391,7 @@
 					} //已生成订单
 				},
 				error: function(xhr, type, errorThrown) {
-					//异常处理；
-					alert(type);
+					mui.toast("请稍候重试");
 				}
 			}); //ajax
 

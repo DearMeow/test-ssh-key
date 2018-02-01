@@ -229,7 +229,7 @@
 					} //if
 				},
 				error: function(xhr, type, errorThrown) {
-					alert(type);
+					mui.toast("请稍候重试");
 				}
 			}); //ajax
 		} //dingdan
@@ -256,7 +256,8 @@
 				plus.payment.getChannels(function(channels) {
 					channel = channels[0];
 				}, function(e) {
-					mui.toast("获取支付通道失败：" + e.message);
+					// mui.toast("获取支付通道失败：" + e.message);
+					mui.toast("获取支付通道失败");
 				});
 				plus.nativeUI.showWaiting();
 				mui.post(baseUrl + "/zdm/Pay/Alipay/GetPayInfo", {
@@ -333,7 +334,7 @@
 
 						},
 						error: function(xhr, type, errorThrown) {
-							mui.toast("请重试" + type);
+							mui.toast("请稍候重试");
 						}
 
 					}); //ajax
@@ -374,7 +375,7 @@
 					}
 				},
 				error: function(xhr, type, errorThrown) {
-					mui.toast("请重试" + type);
+					mui.toast("请稍候重试");
 				}
 
 			}); //ajax

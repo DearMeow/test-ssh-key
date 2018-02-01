@@ -208,16 +208,13 @@
 					}
 				},
 				error: function(xhr, type, errorThrown) {
-					mui.toast("请重试"+type);
-					console.log("-------------"+errorThrown);
+					mui.toast("请稍候重试");
 				}
 			}); //ajax
 			}});
 		}//emptyCart
 		//删除购物车中的商品
 		function deleteOne(id){
-//			alert("oi"+id);
-			
 			 mui.confirm('确认删除？', "准点猫", ["取消","确定"], function(e) 
 	  	  	  {
 					if (e.index == 1) 
@@ -249,8 +246,7 @@
 					}
 				},
 				error: function(xhr, type, errorThrown) {
-					mui.toast("请重试"+type);
-					console.log("-------------"+errorThrown);
+					mui.toast("请稍候重试");
 				}
 			}); //ajax
 						

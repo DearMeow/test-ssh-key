@@ -192,7 +192,7 @@
 			
 				},
 				error: function(xhr, type, errorThrown) {
-					mui.toast("请重试"+type);
+					mui.toast("请稍候重试");
 				}
 			}); //ajax
 						
@@ -211,8 +211,6 @@
 		
 		//修改地址
 		function xiugai(id){
-//			alert("ceshi"+id);
-							//打开新窗口
 			mui.openWindow({
 				url: 'xinzeng.html', //需要打开页面的url地址 
 				id: 'xinzeng', //需要打开页面的url页面id
