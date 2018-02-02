@@ -101,8 +101,11 @@
 		//获取当前状态
 		function currentstats() {
 			checkLogin();
-			
-				document.getElementById("zhuangtai").innerHTML = "<img src='../images/shouji.png' width='10rem'/>&nbsp;" + localStorage.getItem("mob");
+			var mob = "";
+			if(null != localStorage.getItem("mob") && "" != ocalStorage.getItem("mob")){
+				mob = ocalStorage.getItem("mob");
+			}
+				document.getElementById("zhuangtai").innerHTML = "<img src='../images/shouji.png' width='10rem'/>&nbsp;" +mob;
 			
 		} //currentstats
 
