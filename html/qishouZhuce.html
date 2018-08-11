@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>商家注册</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+	<link rel="stylesheet" href="../css/mui.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/layout.css" />
+	<style>
+
+	</style>
+</head>
+
+<body>
+	<header class="mui-bar mui-bar-nav" style="background-color: darkred;color: #FFFFFF;">
+		<a class="mui-action-back mui-icon mui-icon-left-nav" style="color: #FFFFFF;"></a>
+		<h1 class="mui-title" style="color: #FFFFFF;">快递注册</h1>
+	</header>
+	<div class="mui-content" id="qs">
+		<form class="mui-input-group">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					手机号
+					<input type="text" class="mui-input-clear" style="width:76%;" v-model="mobile" placeholder="请输入手机号">
+				</li>
+				<li class="mui-table-view-cell">验证码
+					<input type="text" class="mui-input-clear" v-model="checkCode" style="width:11rem;" placeholder="请输入手机号">
+					<input type="button" style="width:5.2rem;float: right;background-color:#409EFF;color:#FFFFFF;border:none;border-radius:0.3rem;padding:0.5rem;"
+					    @click="sendCode" value="获取验证码" />
+				</li>
+				<li class="mui-table-view-cell">&nbsp;&nbsp;&nbsp;&nbsp;姓名
+					<input type="text" class="mui-input-clear" style="width:76%;" v-model="realName" placeholder="请输入姓名">
+				</li>
+				<li class="mui-table-view-cell">身份证
+					<input type="text" class="mui-input-clear" style="width:76%;" v-model="idcard" placeholder="请输入身份证号码">
+				</li>
+				<div class="mui-input-row mui-radio">
+					<label>男</label>
+					<input name="sex" type="radio" value="男" checked="checked">
+				</div>
+				<div class="mui-input-row mui-radio">
+					<label>女</label>
+					<input name="sex" type="radio" value="女">
+				</div>
+			</ul>
+			<li class="mui-table-view-cell">
+				<div class="mui-button-row">
+					<button type="button" class="mui-btn mui-btn-primary" v-on:click="ok">确认</button>
+				</div>
+			</li>
+		</form>
+	</div>
+	<!--mui-content-->
+
+</body>
+<script src="../js/mui.min.js"></script>
+<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/vue.js"></script>
+<script>
+	var _this;
+	var qs = new Vue({
+		el: "#qs",
+		data: {
+			mobile: '',
+			checkCode: '',
+			realName: "",
+			idcard: ""
+
+		},
+		created() {
+			_this = this;
+		},
+		methods: {
+			ok: function () {
+				if (this.mobile == "") {
+					mui.toast('请输入手机号', {
+						duration: 'long',
+						type: 'div'
+					});
+					return;
+				}
+				if (this.checkCode == "") {
+					mui.toast('请输入验证码', {
+						duration: 'long',
+						type: 'div'
+					});
+					return;
+				}
+				if (this.realName == "") {
+					mui.toast('请输入姓名', {
+						duration: 'long',
+						type: 'div'
+					});
+					return;
+				}
+				if (this.idcard == "") {
+					mui.toast('请输入身份证号码', {
+						duration: 'long',
+						type: 'div'
+					});
+					return;
+				}
+				let sex = "";
+				let sexArray = document.getElementsByName("sex");
+				for (var i = 0; i < sexArray.length; i++) {
+					if (sexArray[i].checked) {
+						sex = sexArray[i].value;
+						break;
+					}
+				}
+
+				rh.SesId = checkLogin();
+				var rb = new Object();
+				rb.Mobile = this.mobile;
+				rb.VerifyCode = this.checkCode;
+				rb.sex = sex;
+				rb.nickname = this.realName;
+				rb.idcard = this.idcard;
+
+				var jn = new Object();
+				jn.ReqHead = rh;
+				jn.ReqBody = rb;
+				var sendData = JSON.stringify(jn);
+
+				mui.ajax(baseUrl + "zdm/AppApi/UserAuth/DevUserReg", {
+					data: sendData,
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					success: function (data) {
+						checkCurrentUser(data);
+						switch (data.RespBody.VerifyStat) {
+							case 1:
+								mui.openWindow({
+									url: 'myinfo/denglu.html', //需要打开页面的url地址 
+									id: 'denglu', //需要打开页面的url页面id
+									styles: {
+										top: '0px', //新页面顶部位置 
+										bottom: '0px', //新页面底部位置 
+									}
+								}); //openWindow
+								break;
+							case 0:
+								mui.toast('验证码不正确', {
+									duration: 'long',
+									type: 'div'
+								});
+								break;
+							case 2:
+								mui.toast('验证码过期，有效期10分钟', {
+									duration: 'long',
+									type: 'div'
+								});
+								break;
+							case 3:
+								break;
+							case 4:
+								mui.toast('手机号已经注册过', {
+									duration: 'long',
+									type: 'div'
+								});
+								break;
+						} //switch
+
+
+
+					},
+					error: function (xhr, type, errorThrown) {
+						mui.toast('请稍候重试', {
+							duration: 'long',
+							type: 'div'
+						});
+					}
+				}); //ajax
+
+
+			},
+			sendCode() {
+				if (this.mobile == "") {
+					mui.toast('请输入手机号', {
+						duration: 'long',
+						type: 'div'
+					});
+					return;
+				}
+				var rb = new Object();
+				rb.Mobile = this.mobile;
+				var jn = new Object();
+				jn.ReqHead = rh;
+				jn.ReqBody = rb;
+				var sendData = JSON.stringify(jn);
+
+				mui.ajax(baseUrl + "zdm/AppApi/UserAuth/senDevRegSms", {
+					data: sendData,
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					success: function (data) {
+						checkCurrentUser(data);
+						switch (data.RespBody.SendOk) {
+							case 0:
+								mui.toast('请重试', {
+									duration: 'long',
+									type: 'div'
+								});
+								break;
+							case 1:
+								time(event.target);
+								mui.toast('已发送', {
+									duration: 'long',
+									type: 'div'
+								});
+								break;
+							case 2:
+								mui.toast('该手机号已注册，请登录', {
+									duration: 'long',
+									type: 'div'
+								});
+								break;
+						} //switch
+
+
+
+					},
+					error: function (xhr, type, errorThrown) {
+						mui.toast('请稍候重试', {
+							duration: 'long',
+							type: 'div'
+						});
+					}
+				}); //ajax
+
+
+			}
+
+
+		} //methods
+	}); //vue
+
+	var wait = 60;
+
+	function time(o) {
+		if (wait == 0) {
+			o.removeAttribute("disabled");
+			o.style.backgroundColor = "#409EFF";
+			o.value = "免费获取验证码";
+			wait = 60;
+		} else {
+			o.setAttribute("disabled", true);
+			o.style.backgroundColor = "#5BAFFF";
+			o.value = "重新发送(" + wait + ")";
+			wait--;
+			setTimeout(function () {
+				time(o);
+			}, 1000);
+		}
+	} //time
+</script>
+</body>
+
+</html>

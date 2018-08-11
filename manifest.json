@@ -7,7 +7,7 @@
 	"id": "H573ECBC6",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "准点猫",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.0.0",/*应用版本名称*/
+		"name": "1.1.0",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -162,9 +162,9 @@
 			"splashscreen": {
 				"ios": {
 					"iphone": {
-						"default": "","iphonex":"C:/Users/65764/Pictures/2436-1125等18项_teambition/1125-2436.png","iphonexl":"C:/Users/65764/Pictures/2436-1125等18项_teambition/2436-1125.png","retina55":"C:/Users/65764/Pictures/2436-1125等18项_teambition/1242-2208.png","retina47":"C:/Users/65764/Pictures/2436-1125等18项_teambition/750-1334.png","retina40":"C:/Users/65764/Pictures/2436-1125等18项_teambition/640-1136.png","retina35":"C:/Users/65764/Pictures/2436-1125等18项_teambition/640-960.png","retina55l":"C:/Users/65764/Pictures/2436-1125等18项_teambition/2208-1242.png"
+						"default": "","iphonex":"C:/Users/cixu/Desktop/thankyoulord/家/图片/2436-1125等18项_teambition/1125-2436.png","iphonexl":"C:/Users/cixu/Desktop/thankyoulord/家/图片/2436-1125等18项_teambition/2436-1125.png","retina55":"C:/Users/cixu/Desktop/thankyoulord/家/图片/2436-1125等18项_teambition/1242-2208.png","retina47":"C:/Users/cixu/Desktop/thankyoulord/家/图片/2436-1125等18项_teambition/750-1334.png","retina40":"C:/Users/cixu/Desktop/thankyoulord/家/图片/2436-1125等18项_teambition/640-1136.png","retina35":"C:/Users/cixu/Desktop/thankyoulord/家/图片/2436-1125等18项_teambition/640-960.png","retina55l":"C:/Users/cixu/Desktop/thankyoulord/家/图片/2436-1125等18项_teambition/2208-1242.png"
 					},
-					"ipad": {"portrait":"C:/Users/65764/Pictures/2436-1125等18项_teambition/768-1004.png","portrait7":"C:/Users/65764/Pictures/2436-1125等18项_teambition/768-1024.png","landscape":"C:/Users/65764/Pictures/2436-1125等18项_teambition/1024-748.png","landscape7":"C:/Users/65764/Pictures/2436-1125等18项_teambition/1024-768.png","portrait-retina":"C:/Users/65764/Pictures/2436-1125等18项_teambition/1536-2008.png","portrait-retina7":"C:/Users/65764/Pictures/2436-1125等18项_teambition/1536-2048.png","landscape-retina":"C:/Users/65764/Pictures/2436-1125等18项_teambition/2048-1496.png","landscape-retina7":"C:/Users/65764/Pictures/2436-1125等18项_teambition/2048-1536.png"
+					"ipad": {"portrait":"C:/Users/cixu/Desktop/thankyoulord/家/图片/2436-1125等18项_teambition/768-1004.png","portrait7":"C:/Users/cixu/Desktop/thankyoulord/家/图片/2436-1125等18项_teambition/768-1024.png","landscape":"C:/Users/cixu/Desktop/thankyoulord/家/图片/2436-1125等18项_teambition/1024-748.png","landscape7":"C:/Users/cixu/Desktop/thankyoulord/家/图片/2436-1125等18项_teambition/1024-768.png","portrait-retina":"C:/Users/cixu/Desktop/thankyoulord/家/图片/2436-1125等18项_teambition/1536-2008.png","portrait-retina7":"C:/Users/cixu/Desktop/thankyoulord/家/图片/2436-1125等18项_teambition/1536-2048.png","landscape-retina":"C:/Users/cixu/Desktop/thankyoulord/家/图片/2436-1125等18项_teambition/2048-1496.png","landscape-retina7":"C:/Users/cixu/Desktop/thankyoulord/家/图片/2436-1125等18项_teambition/2048-1536.png"
 						 /*iPad竖屏启动图片，分辨率：768x1004*/
 						/*iPad高分屏竖屏图片，分辨率：1536x2008*/
 						 /*iPad横屏启动图片，分辨率：1024x748*/
@@ -178,12 +178,12 @@
 				"android": {
 					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
 					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
-					"hdpi": "C:/Users/65764/Pictures/2436-1125等18项_teambition/480-762.png", /*高分屏启动图片，分辨率：480x762*/
-					"xhdpi": "C:/Users/65764/Pictures/2436-1125等18项_teambition/720-1242.png",
-					"xxhdpi": "C:/Users/65764/Pictures/2436-1125等18项_teambition/1080-1882.png"
+					"hdpi": "C:/Users/cixu/Desktop/thankyoulord/家/图片/2436-1125等18项_teambition/480-762.png", /*高分屏启动图片，分辨率：480x762*/
+					"xhdpi": "C:/Users/cixu/Desktop/thankyoulord/家/图片/2436-1125等18项_teambition/720-1242.png",
+					"xxhdpi": "C:/Users/cixu/Desktop/thankyoulord/家/图片/2436-1125等18项_teambition/1080-1882.png"
 				}
 			}
-		},"ads":{"rp":false,"splash":false,"push":false,"spot":false},"adid":""
+		},"ads":{"rp":false,"splash":false,"push":false,"spot":false}
 	},
 	"dependencies": {
 		"pages": {

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>商家注册</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/layout.css" />
+		<style>
+			
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background-color: darkred;color: #FFFFFF;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav" style="color: #FFFFFF;"></a>
+			<h1 class="mui-title" style="color: #FFFFFF;">商家注册</h1>
+		</header>
+		<div class="mui-content">
+			<form class="mui-input-group">
+    <div class="mui-input-row">
+        <label>餐厅名称</label>
+    <input type="text" id="workname" placeholder="请输入餐厅名称">
+    </div>
+    <div class="mui-input-row">
+    	<label>负责人名称</label>
+    <input type="text" class="mui-input-clear" id="ceoname" placeholder="请输入负责人名称">
+    </div>
+	<div class="mui-input-row">
+		<label>联系电话</label>
+	<input type="text" class="mui-input-clear" id="phonenum" placeholder="请输入联系电话">
+	</div>
+	<div class="mui-input-row">
+		<label>餐厅地址</label>
+	<input type="text" class="mui-input-clear" id="address" placeholder="请输入餐厅地址">
+	</div>
+    <div class="mui-button-row">
+        <button type="button" class="mui-btn mui-btn-primary" onclick="ok()">确认</button>
+    </div>
+</form>
+		</div>
+		<!--mui-content-->
+
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		
+function ok(){
+	let workname = document.getElementById("workname").value.trim();
+	if (workname == "") {
+		 mui.toast('请输入餐厅名称',{ duration:'long', type:'div' });
+		 return;
+	}
+	let ceoname = document.getElementById("ceoname").value.trim();
+	if (ceoname == "") {
+		mui.toast('请输入负责人名称',{ duration:'long', type:'div' });
+		return;
+	}
+	let phonenum = document.getElementById("phonenum").value.trim();
+	if (phonenum == "") {
+		mui.toast('请输入联系电话',{ duration:'long', type:'div' });
+		return;
+	}
+	let address = document.getElementById("address").value.trim();
+	if (address == "") {
+		 mui.toast('请输入餐厅地址',{ duration:'long', type:'div' });
+		 return;
+	}
+	
+	
+	console.log(workname);
+	console.log(ceoname);
+	console.log(phonenum);
+	console.log(address);
+	
+
+	
+				rh.SesId = checkLogin();
+	
+				var rb = new Object();
+				rb.workname = workname;
+				rb.ceoname = ceoname;
+				rb.enttype = 2;
+				rb.phonenum = phonenum;
+				rb.address = address;
+	
+				var jn = new Object();
+				jn.ReqHead = rh;
+				jn.ReqBody = rb;
+	
+				var sendData = JSON.stringify(jn);
+	
+				mui.ajax(baseUrl + "zdm/AppApi/Merchant/insertMerchant", {
+					data: sendData,
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					success: function(data) {
+						checkCurrentUser(data);
+						var entid = data.RespBody.entid;
+						console.log("-------entid-----",entid);
+						mui.toast('注册成功',{ duration:'long', type:'div' });
+					},
+					error: function(xhr, type, errorThrown) {
+						mui.toast('请稍候重试',{ duration:'long', type:'div' });
+					}
+				}); //ajax
+	
+	
+}//ok
+		
+
+		
+	</script>
+	</body>
+
+</html>
