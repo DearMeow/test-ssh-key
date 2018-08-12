@@ -376,13 +376,14 @@
 				},
 				success: function(data) {
 					checkCurrentUser(data);
+					console.log("-------11111111------"+data.RespBody.succ);
 					if(data.RespBody.succ == 0) {
 						mui.toast('请重试');
 					}
 					if(data.RespBody.succ == 1) {
-						//						mui.toast('生成订单成功 ');
+												mui.toast('生成订单成功 ');
 						if(data.RespBody.OrderId != 0) { //订单号不等于0就是正常值
-
+console.log("-------fukuan---生成订单成功-----付款------");
 							fnSubmit(data.RespBody.OrderId);
 						} //订单号不等于0就是正常值
 
@@ -399,7 +400,7 @@
 
 		//付款
 		function fnSubmit(OrderId) {
-			
+			console.log("---------------付款------");
 			var channel = null;
 			var title = "zdm";
 			mui.plusReady(function() {

@@ -102,8 +102,8 @@
 		function currentstats() {
 			checkLogin();
 			var mob = "";
-			if(null != localStorage.getItem("mob") && "" != ocalStorage.getItem("mob")){
-				mob = ocalStorage.getItem("mob");
+			if(null != localStorage.getItem("mob") && "" != localStorage.getItem("mob")){
+				mob = localStorage.getItem("mob");
 			}
 				document.getElementById("zhuangtai").innerHTML = "<img src='../images/shouji.png' width='10rem'/>&nbsp;" +mob;
 			
