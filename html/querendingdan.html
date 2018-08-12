@@ -83,8 +83,7 @@
 				<div class="mui-clearfix"></div>
 			</div>
 			<div class="products" id="prod" style="width:100%;">
-				
-				
+
 				<!--<div class='myprot' style='margin-bottom: 1px;'>
 					<div class='mui-pull-left'><img src='" + rs[i].FilePath + "' style='width:3rem;height:3rem;'/></div>
 					<div class='mui-pull-left'  style='margin-left: 0.5rem;'>
@@ -95,11 +94,7 @@
 					</div>
 					<div class='mui-clearfix'></div>
 				</div>-->
-				
-				
-				
-				
-				
+
 			</div>
 			<div id='delivery' style='background-color: #FFFFFF;padding-left: 0.5rem;padding-bottom: 0.5rem;'></div>
 			<div style="text-align: center;">
@@ -113,11 +108,11 @@
 	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		var toDate = "";
-		
+
 		window.addEventListener('querenrefresh', function() {
 			shuaxin();
 		}, false);
-		
+
 		mui.plusReady(function() {
 			shuaxin();
 
@@ -129,15 +124,15 @@
 
 			var hour = myDate.getHours();
 			var min = myDate.getMinutes(); //获取当前分钟数(0-59)
-			min = parseInt(min+30);
-			if (min>=60) {
-				hour+=1;
-				min-=60;
+			min = parseInt(min + 30);
+			if(min >= 60) {
+				hour += 1;
+				min -= 60;
 			}
-			
-			var mm=":";
-			if (min < 10) {
-				mm=":0";
+
+			var mm = ":";
+			if(min < 10) {
+				mm = ":0";
 			}
 			var fulldatatime = year + "-" + month + "-" + datee + " " + hour + mm + min;
 			document.getElementById("checkedData").innerHTML = "请选择到货时间";
@@ -145,34 +140,41 @@
 			document.getElementById("picker").onclick = function() {
 				var dtPicker = new mui.DtPicker();
 				dtPicker.show(function(selectItems) {
-					if (selectItems.y.value != year ) {
-						mui.toast("您选择的 年份有误");
+					if(selectItems.y.value != year) {
+						mui.toast('您选择的 年份有误', {
+							duration: 'long',
+							type: 'div'
+						});
 						return;
 					}
-					if (selectItems.m.value < month || selectItems.m.value - month > 1) {
-						mui.toast("您选择的 月份有误");
+					if(selectItems.m.value < month || selectItems.m.value - month > 1) {
+						mui.toast('您选择的 月份有误', {
+							duration: 'long',
+							type: 'div'
+						});
 						return;
 					}
-			
-						var date1= selectItems.y.value+"/"+selectItems.m.value+"/"+selectItems.d.value+" "+selectItems.h.value+":"+selectItems.i.value+":00";  //开始时间  
-						    var date2 = new Date();    //结束时间  
-						    var date3 = new Date(date1).getTime() - date2.getTime();   //时间差的毫秒数       
-							
-							  //计算相差分钟数  
-							    var minutes=Math.round(date3/1000/60);
-							    if (minutes < 30) {
-							    	mui.toast("配送时间至少在当前时间30分钟后");
-							    }else{
-							    	toDate = selectItems;
-							    	document.getElementById("checkedData").innerHTML = selectItems;
-							    }
+
+					var date1 = selectItems.y.value + "/" + selectItems.m.value + "/" + selectItems.d.value + " " + selectItems.h.value + ":" + selectItems.i.value + ":00"; //开始时间  
+					var date2 = new Date(); //结束时间  
+					var date3 = new Date(date1).getTime() - date2.getTime(); //时间差的毫秒数       
+
+					//计算相差分钟数  
+					var minutes = Math.round(date3 / 1000 / 60);
+					if(minutes < 30) {
+						mui.toast('配送时间至少在当前时间30分钟后', {
+							duration: 'long',
+							type: 'div'
+						});
+					} else {
+						toDate = selectItems;
+						document.getElementById("checkedData").innerHTML = selectItems;
+					}
 
 				})
 
 			}
 		}); //plusReady
-
-		
 
 		var workid = "";
 		var orderTotal = 0;
@@ -182,7 +184,6 @@
 		var mobile = "";
 		var expressamount = "";
 		var rs2 = new Array();
-	
 
 		function shuaxin() {
 			var self = plus.webview.currentWebview(); //获得当前页面的对象
@@ -228,16 +229,19 @@
 					} else {
 						result = data.RespBody[0];
 					}
-					dizhi=result.address;
+					dizhi = result.address;
 					consignee = result.consignee;
 					mobile = result.mobile;
-					
+
 					document.getElementById("address").innerHTML = result.address;
 					document.getElementById("userName").innerHTML = result.consignee;
 					document.getElementById("mobile").innerHTML = result.mobile;
 				},
 				error: function(xhr, type, errorThrown) {
-					mui.toast("请重试");
+					mui.toast('请重试！', {
+						duration: 'long',
+						type: 'div'
+					});
 				}
 			}); //ajax  获取默认地址
 
@@ -256,84 +260,91 @@
 					expressamount = data.RespBody.delivery_fee;
 					document.getElementById("shopName").innerHTML = data.RespBody.workship_name;
 					document.getElementById("recommend").innerHTML = data.RespBody.recommend;
-					document.getElementById("delivery").innerHTML = "运费: ￥"+data.RespBody.delivery_fee;
+					document.getElementById("delivery").innerHTML = "运费: ￥" + data.RespBody.delivery_fee;
 					var delivery_fee = data.RespBody.delivery_fee;
 					//九、列出我的购物车中所有的餐品
-			mui.ajax(baseUrl + "zdm/AppApi/ShopCart/GetMyGoodsInCart", {
-				data: sendData,
-				dataType: 'json', //服务器返回json格式数据
-				type: 'post', //HTTP请求类型
-				timeout: 10000, //超时时间设置为10秒；
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				success: function(data) {
-					checkCurrentUser(data);
-					
-					var rs = data.RespBody;
-					var spp = "";
-					var zongjia = 0;
-					rs2 = new Array();
-					for(var i = 0; i < rs.length; i++) {
-						if(rs[i].work_id == workid) {
-							rs2.push(rs[i]);
-							zongjia += parseFloat(rs[i].goods_price) * parseFloat(rs[i].buy_count);
-							var number = rs[i].buy_count;
-//							spp += "<div class='myprot' style='margin-bottom: 1px;'><div class='mui-pull-left'><img src='" + rs[i].FilePath + "' style='width:3rem;height:3rem;'/></div><div class='mui-pull-left'  style='margin-left: 0.5rem;'><div class='mui-pull-left'>" + rs[i].goods_name + "<br/><span style='color:red;'>￥" + rs[i].goods_price + "&nbsp;&nbsp;&nbsp;&nbsp;" + rs[i].buy_count + "份</span></div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";
-							spp+="<div class='myprot' style='margin-bottom: 1px;'><div class='mui-pull-left'><img src='" + rs[i].FilePath + "' style='width:3rem;height:3rem;'/></div><div class='mui-pull-left'  style='margin-left: 0.5rem;'>" + rs[i].goods_name + "<br/><span style='color:red;'>￥" + rs[i].goods_price +"</span></div><div class='mui-pull-right'  style='margin-right: 0.5rem;margin-top: 0.9rem;'><span class='mui-icon mui-icon-minus' style='color: rgb(209,37,34);' onclick='jian(&quot;" + rs[i].goods_id+"_"+rs[i].id+"_"+ rs[i].goods_price +"&quot;)' ></span><span style='font-size: 1rem;color: #000000;' id='" + rs[i].id + "'>" + number + "</span><span class='mui-icon mui-icon-plus' style='color: rgb(209,37,34);'  onclick='jia(&quot;" + rs[i].goods_id +"_"+rs[i].id+"_"+ rs[i].goods_price +"&quot;)'></span></div><div class='mui-clearfix'></div></div>";
+					mui.ajax(baseUrl + "zdm/AppApi/ShopCart/GetMyGoodsInCart", {
+						data: sendData,
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						success: function(data) {
+							checkCurrentUser(data);
+
+							var rs = data.RespBody;
+							var spp = "";
+							var zongjia = 0;
+							rs2 = new Array();
+							for(var i = 0; i < rs.length; i++) {
+								if(rs[i].work_id == workid) {
+									rs2.push(rs[i]);
+									zongjia += parseFloat(rs[i].goods_price) * parseFloat(rs[i].buy_count);
+									var number = rs[i].buy_count;
+									//							spp += "<div class='myprot' style='margin-bottom: 1px;'><div class='mui-pull-left'><img src='" + rs[i].FilePath + "' style='width:3rem;height:3rem;'/></div><div class='mui-pull-left'  style='margin-left: 0.5rem;'><div class='mui-pull-left'>" + rs[i].goods_name + "<br/><span style='color:red;'>￥" + rs[i].goods_price + "&nbsp;&nbsp;&nbsp;&nbsp;" + rs[i].buy_count + "份</span></div><div class='mui-clearfix'></div></div><div class='mui-clearfix'></div></div>";
+									spp += "<div class='myprot' style='margin-bottom: 1px;'><div class='mui-pull-left'><img src='" + rs[i].FilePath + "' style='width:3rem;height:3rem;'/></div><div class='mui-pull-left'  style='margin-left: 0.5rem;'>" + rs[i].goods_name + "<br/><span style='color:red;'>￥" + rs[i].goods_price + "</span></div><div class='mui-pull-right'  style='margin-right: 0.5rem;margin-top: 0.9rem;'><span class='mui-icon mui-icon-minus' style='color: rgb(209,37,34);' onclick='jian(&quot;" + rs[i].goods_id + "_" + rs[i].id + "_" + rs[i].goods_price + "&quot;)' ></span><span style='font-size: 1rem;color: #000000;' id='" + rs[i].id + "'>" + number + "</span><span class='mui-icon mui-icon-plus' style='color: rgb(209,37,34);'  onclick='jia(&quot;" + rs[i].goods_id + "_" + rs[i].id + "_" + rs[i].goods_price + "&quot;)'></span></div><div class='mui-clearfix'></div></div>";
+								}
+							}
+							var v11 = zongjia + delivery_fee;
+							if(v11 > 9) {
+								v11 = v11.toString()
+								if(v11.length > 5) {
+									v11 = v11.substring(0, 5);
+								}
+							} else if(v11 > 99) {
+								v11 = v11.toString()
+								if(v11.length > 6) {
+									v11 = v11.substring(0, 6);
+								}
+							} else {
+								v11 = v11.toString()
+								if(v11.length > 4) {
+									v11 = v11.substring(0, 4);
+								}
+							}
+							orderTotal = 0;
+							orderTotal = v11;
+							document.getElementById("prod").innerHTML = "";
+
+							document.getElementById("prod").innerHTML = spp + "<div style='background-color:#ffffff;padding:0.8rem 0rem 0.8rem 0.5rem;'>总价：￥<span id='zj'>" + v11 + "</span></div>";
+						},
+						error: function(xhr, type, errorThrown) {
+							mui.toast('"请重试', {duration: 'long',type: 'div'});
 						}
-					}
-					var v11 = zongjia+delivery_fee;
-					if(v11 > 9) {
-						v11 = v11.toString()
-						if(v11.length > 5) {
-							v11 = v11.substring(0, 5);
-						}
-					} else if(v11 > 99){
-						v11 = v11.toString()
-						if(v11.length > 6) {
-							v11 = v11.substring(0, 6);
-						}
-					}else {
-						v11 = v11.toString()
-						if(v11.length > 4) {
-							v11 = v11.substring(0, 4);
-						}
-					}
-					orderTotal=0;
-					orderTotal=v11;
-					document.getElementById("prod").innerHTML = "";
-					
-					document.getElementById("prod").innerHTML = spp + "<div style='background-color:#ffffff;padding:0.8rem 0rem 0.8rem 0.5rem;'>总价：￥<span id='zj'>" + v11 + "</span></div>";
+					}); //ajax
+
 				},
 				error: function(xhr, type, errorThrown) {
-					mui.toast("请重试");
-				}
-			}); //ajax
-					
-					
-				},
-				error: function(xhr, type, errorThrown) {
-					mui.toast("请重试");
+					mui.toast('"请重试', {
+						duration: 'long',
+						type: 'div'
+					});
 				}
 			}); //ajax
 			//十五、获取店家信息详细信息
 
-			
 		} //shuaxin
 
 		//去结算
 		document.getElementById("fukuan").onclick = function() {
-			
-			if (document.getElementById("address").innerHTML == "<span style=\"color:red\">请选择地址</span>") {
-				mui.toast("请选择地址");
+
+			if(document.getElementById("address").innerHTML == "<span style=\"color:red\">请选择地址</span>") {
+				mui.toast('请选择地址', {
+					duration: 'long',
+					type: 'div'
+				});
 				return;
 			}
-			if (toDate == "") {
-				mui.toast("请选择日期");
+			if(toDate == "") {
+				mui.toast('请选择日期', {
+					duration: 'long',
+					type: 'div'
+				});
 				return;
 			}
-			
+
 			//生成订单
 			rh.SesId = checkLogin();
 
@@ -347,7 +358,7 @@
 			dd.address = dizhi;
 			dd.consignee = consignee;
 			dd.mobile = mobile;
-			
+
 			dd.expressamount = expressamount;
 
 			dd.booktime = toDate.toString();
@@ -376,25 +387,26 @@
 				},
 				success: function(data) {
 					checkCurrentUser(data);
-					console.log("-------11111111------"+data.RespBody.succ);
 					if(data.RespBody.succ == 0) {
-						mui.toast('请重试');
+						mui.toast('请重试', {
+							duration: 'long',
+							type: 'div'
+						});
 					}
 					if(data.RespBody.succ == 1) {
-												mui.toast('生成订单成功 ');
 						if(data.RespBody.OrderId != 0) { //订单号不等于0就是正常值
-console.log("-------fukuan---生成订单成功-----付款------");
 							fnSubmit(data.RespBody.OrderId);
 						} //订单号不等于0就是正常值
 
 					} //已生成订单
 				},
 				error: function(xhr, type, errorThrown) {
-					mui.toast("请稍候重试");
+					mui.toast('请重试', {
+						duration: 'long',
+						type: 'div'
+					});
 				}
 			}); //ajax
-
-			
 
 		} //去结算
 
@@ -407,7 +419,11 @@ console.log("-------fukuan---生成订单成功-----付款------");
 				plus.payment.getChannels(function(channels) {
 					channel = channels[0];
 				}, function(e) {
-					mui.toast("获取支付通道失败：" + e.message);
+					console.log(e.message);
+					mui.toast('获取支付通道失败', {
+						duration: 'long',
+						type: 'div'
+					});
 				});
 				plus.nativeUI.showWaiting();
 				mui.post(baseUrl + "/zdm/Pay/Alipay/GetPayInfo", {
@@ -417,7 +433,10 @@ console.log("-------fukuan---生成订单成功-----付款------");
 					if(data) {
 						if(data != "repay") {
 							plus.payment.request(channel, data, function(result) {
-								mui.toast("付费成功");
+								mui.toast('付费成功', {
+									duration: 'long',
+									type: 'div'
+								});
 								//打开新窗口
 								mui.openWindow({
 									url: 'myorder.html', //需要打开页面的url地址 
@@ -432,13 +451,16 @@ console.log("-------fukuan---生成订单成功-----付款------");
 								}); //openWindow
 								//付费成功
 							}, function(e) {
-								mui.toast("付费失败");
+								mui.toast('付费失败', {
+									duration: 'long',
+									type: 'div'
+								});
 							});
 						} else {
 							//								mui.alert("付费失败,该订单已经支付过", title);
 							mui.alert("付费失败,该订单已经支付过");
 						}
-						
+
 					} else {
 						plus.nativeUI.alert("支付失败");
 					}
@@ -446,21 +468,21 @@ console.log("-------fukuan---生成订单成功-----付款------");
 			});
 		}
 		//付款
-		
+
 		//减少数量
 		function jian(id) {
 			var goods_id = id.split("_")[0];
 			var tid = id.split("_")[1];
 			var danjia = id.split("_")[2];
-			
-			if (parseInt(document.getElementById(tid).innerHTML) > 0) {
-				
-				for (var i = 0; i < rs2.length; i++) {
-					if (rs2[i].goods_id == goods_id) {
-						rs2[i].buy_count-=1;
+
+			if(parseInt(document.getElementById(tid).innerHTML) > 0) {
+
+				for(var i = 0; i < rs2.length; i++) {
+					if(rs2[i].goods_id == goods_id) {
+						rs2[i].buy_count -= 1;
 					}
 				}
-				
+
 				rh.SesId = checkLogin();
 
 				var rb = new Object();
@@ -486,7 +508,10 @@ console.log("-------fukuan---生成订单成功-----付款------");
 							var result = document.getElementById("zj").innerHTML - danjia;
 							document.getElementById("zj").innerHTML = Math.round(result * 100) / 100;
 						} else {
-							mui.toast("请重试！");
+							mui.toast('请重试！', {
+								duration: 'long',
+								type: 'div'
+							});
 						}
 					},
 					error: function(xhr, type, errorThrown) {
@@ -495,22 +520,22 @@ console.log("-------fukuan---生成订单成功-----付款------");
 					}
 
 				}); //ajax
-			
-			}//>0
-			
+
+			} //>0
+
 		} //减少数量
 		//增加数量
 		function jia(id) {
 			var goods_id = id.split("_")[0];
 			var tid = id.split("_")[1];
 			var danjia = id.split("_")[2];
-			
-			for (var i = 0; i < rs2.length; i++) {
-					if (rs2[i].goods_id == goods_id) {
-						rs2[i].buy_count+=1;
-					}
+
+			for(var i = 0; i < rs2.length; i++) {
+				if(rs2[i].goods_id == goods_id) {
+					rs2[i].buy_count += 1;
 				}
-			
+			}
+
 			rh.SesId = checkLogin();
 
 			var rb = new Object();
@@ -536,7 +561,10 @@ console.log("-------fukuan---生成订单成功-----付款------");
 						var result = parseFloat(document.getElementById("zj").innerHTML) + parseFloat(danjia);
 						document.getElementById("zj").innerHTML = Math.round(result * 100) / 100;
 					} else {
-						mui.toast("请重试！");
+						mui.toast('请重试！', {
+							duration: 'long',
+							type: 'div'
+						});
 					}
 				},
 				error: function(xhr, type, errorThrown) {

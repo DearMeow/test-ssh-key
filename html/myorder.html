@@ -116,7 +116,7 @@
 					zg++;
 					dingdan(zg, 1);
 				} else {
-					mui.toast("没有更多了！");
+					mui.toast("没有更多了！", {duration: 'long',type: 'div'});
 				}
 			this.endPullupToRefresh(false);
 		}//pullupfresh
@@ -229,7 +229,7 @@
 					} //if
 				},
 				error: function(xhr, type, errorThrown) {
-					mui.toast("请稍候重试");
+					mui.toast("请稍候重试", {duration: 'long',type: 'div'});
 				}
 			}); //ajax
 		} //dingdan
@@ -240,7 +240,7 @@
 				document.getElementById("msg").innerHTML = "";
 				dingdan(1,0);
 				mui('#msg').pullRefresh().endPulldownToRefresh(); //这行代码会隐藏掉 正在加载... 容器
-				mui.toast('下拉刷新成功');
+				mui.toast('下拉刷新成功', {duration: 'long',type: 'div'});
 			}, 1000);
 		} //pulldownRefresh
 
@@ -257,7 +257,7 @@
 					channel = channels[0];
 				}, function(e) {
 					// mui.toast("获取支付通道失败：" + e.message);
-					mui.toast("获取支付通道失败");
+					mui.toast("获取支付通道失败", {duration: 'long',type: 'div'});
 				});
 				plus.nativeUI.showWaiting();
 				mui.post(baseUrl + "/zdm/Pay/Alipay/GetPayInfo", {
@@ -270,16 +270,16 @@
 								//									console.log(JSON.stringify(result));
 								//									mui.alert(JSON.stringify(result), title);
 								//									mui.alert("付费成功", title);
-								mui.toast("付费成功");
+								mui.toast("付费成功", {duration: 'long',type: 'div'});
 							}, function(e) {
 								//									console.log(JSON.stringify(e));
 								//									alert(JSON.stringify(e));
 								//									mui.alert("付费失败", title);
-								mui.toast("付费失败");
+								mui.toast("付费失败", {duration: 'long',type: 'div'});
 							});
 						} else {
 							//								mui.alert("付费失败,该订单已经支付过", title);
-							mui.toast("付费失败,该订单已经支付过");
+							mui.toast("付费失败,该订单已经支付过", {duration: 'long',type: 'div'});
 						}
 					} else {
 						plus.nativeUI.alert("支付失败");
@@ -322,19 +322,19 @@
 
 							switch(data.RespBody.stat) {
 								case 0:
-									mui.toast("申请退款失败");
+									mui.toast("申请退款失败", {duration: 'long',type: 'div'});
 									break;
 								case 1:
-									mui.toast("申请退款成功");
+									mui.toast("申请退款成功", {duration: 'long',type: 'div'});
 									break;
 								case 2:
-									mui.toast("已结算，不可退款");
+									mui.toast("已结算，不可退款", {duration: 'long',type: 'div'});
 									break;
 							} //switch
 
 						},
 						error: function(xhr, type, errorThrown) {
-							mui.toast("请稍候重试");
+							mui.toast("请稍候重试", {duration: 'long',type: 'div'});
 						}
 
 					}); //ajax
@@ -369,13 +369,13 @@
 					checkCurrentUser(data);
 					if(data.RespBody.succ == 1) {
 						dingdan();
-						mui.toast("订单已取消");
+						mui.toast("订单已取消", {duration: 'long',type: 'div'});
 					} else {
-						mui.toast("请重试");
+						mui.toast("请重试", {duration: 'long',type: 'div'});
 					}
 				},
 				error: function(xhr, type, errorThrown) {
-					mui.toast("请稍候重试");
+					mui.toast("请稍候重试", {duration: 'long',type: 'div'});
 				}
 
 			}); //ajax
