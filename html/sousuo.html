@@ -126,6 +126,10 @@
 	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.2&key=3cb4be5a8411ba4d088c27f586e3a95d"></script>
 	<script>
+		mui.plusReady(function() {
+			var slider = mui('.mui-slider').slider();
+			slider.stopped = true; //关闭滑动切换
+		});
 		mui.init({
 			swipeBack: true, //启用右滑关闭功能
 			pullRefresh: {
@@ -230,8 +234,8 @@ zonghe(1, 0);
 			rb.pageSize = pageSize;
 			rb.qryName = "";
 			rb.CatId = catid;
-			rb.Jd = localStorage.getItem("jd");
-			rb.Wd = localStorage.getItem("wd");
+// 			rb.Jd = localStorage.getItem("jd");
+// 			rb.Wd = localStorage.getItem("wd");
 			rb.SortField = "";
 			rb.SortDirct = "";
 
