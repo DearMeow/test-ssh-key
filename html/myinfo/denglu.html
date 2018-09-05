@@ -98,7 +98,7 @@
 
 			var mobile = document.getElementById("mobile").value.replace(/\s+/g, "");
 			if(mobile == "") {
-				mui.toast("你忘了 输入手机号码");
+				mui.toast("你忘了 输入手机号码", {duration: 'long',type: 'div'});
 				return;
 			}
 			time(t);
@@ -137,7 +137,7 @@
 					}
 				},
 				error: function(xhr, type, errorThrown) {
-					mui.toast("请稍候重试");
+					mui.toast("请稍候重试", {duration: 'long',type: 'div'});
 				}
 			});
 
@@ -147,7 +147,7 @@
 		document.getElementById("loginBtn").onclick = function() {
 
 			if(verifyCode != document.getElementById("checkCode").value.replace(/\s+/g, "")) {
-				mui.toast("验证码不正确");
+				mui.toast("验证码不正确", {duration: 'long',type: 'div'});
 				return;
 			}
 			
@@ -224,7 +224,7 @@
 
 				},
 				error: function(xhr, type, errorThrown) {
-					mui.toast("请稍候重试");
+					mui.toast("请稍候重试", {duration: 'long',type: 'div'});
 				}
 			});
 		}
