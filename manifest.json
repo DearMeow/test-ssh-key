@@ -280,7 +280,12 @@
 					"images/touxiang.png",
 					"images/shouji.png"
 				],
-				"priority": 1
+				"priority": 1,
+				"refer": [
+					"html/myinfo/denglu.html",
+					"html/myinfo/tuikuan.html",
+					"html/myinfo/kefu.html"
+				]
 			},
 			"html/shouye.html": {
 				"href": "html/shouye.html",
