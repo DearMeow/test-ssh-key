@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>设置</title>
+		<title>用户登录</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -16,44 +16,51 @@
 				padding-right: 1rem;
 				margin-top: 1rem;
 			}
+			html,body {
+				width: 100%;
+				height: 100%;
+	            margin: 0;
+	            padding: 0;
+	            background-color: white;
+        }
+			input::-webkit-input-placeholder {
+	        color: #aab2bd;
+	        font-size: 6;
+	         text-align: left;
+	     }
 		</style>
 	</head>
 
 	<body>
-
-		<header class="mui-bar mui-bar-nav" style="background-color: darkred;color: #FFFFFF;">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF;"></a>
-			<h1 class="mui-title" style="color: #FFFFFF;">登录</h1>
-		</header>
-		<div class="mui-content">
-			<div class="mui-row white">
+		<div>
+			<img src="../../images/header.png" width="100%" height="100%"/>
+		</div>
+		<div class="mui-row white" >
+			<div class="mui-row white" style="margin-left: 10%;margin-right: 10%;">
 				<div class="mui-col-sm-8 mui-col-xs-8">
-					<input type="text" id="mobile" placeholder="请输入手机号码" style="margin-top: 1rem;border: none;font-weight: bold;font-size: 1.2rem;" />
+					<input type="text" id="mobile" placeholder="请输入手机号码" maxlength="11" style="margin-top: 1rem;border: none; border-bottom: solid 1px #929292;font-weight: bold;" />
 				</div>
 				<div class="mui-col-sm-4 mui-col-xs-4">
-					<input type="button" id="getCheckCode" value="获取验证码" style="margin-top: 1.1rem;background-color: rgb(192,0,2);color: #FFFFFF;" />
+					<input type="button" id="getCheckCode" value="获取验证码" style="border-radius:15px; margin-top: 1.3rem;background-color: rgb(192,0,2);color: white;" />
 				</div>
 			</div>
 			<!--mui-row-->
-			<div class="mui-row white" style="margin-top: 0.1rem;">
+			<div class="mui-row white" style="margin-top: 0.1rem; margin-left: 10%;margin-right: 10%;">
 				<div class="mui-col-sm-12 mui-col-xs-12">
-					<input type="text" id="checkCode" placeholder="请输入验证码" style="margin-top: 1rem;border:none;font-weight: bold;font-size: 1.2rem;" />
+					<input type="text" id="checkCode" placeholder="请输入验证码" maxlength="6"  style="margin-top: 1rem;border:none;border-bottom: solid 1px #929292; font-weight: bold;" />
+				<span style="font-size: small;color: #929292;">未注册的手机号验证后自动创建准点猫账户</span>
 				</div>
 			</div>
-			<!--mui-row-->
-			<div class="mui-row">
+			<div class="mui-row  white"  style="margin-left: 10%;margin-right: 10%;">
 				<div class="mui-col-sm-12 mui-col-xs-12 juzhong">
-					<p>温馨提示：</p>
-					<p>未注册准点猫的手机号，登陆时自动注册，并且代表您已同意<span id="zhucexieyi" style="color:cornflowerblue;">《用户注册协议》</span></p>
+					<input type="button" id="loginBtn" value="登录" style="border-radius:60px;width: 100%;height: 3rem;background-color: rgb(192,0,2);color: #FFFFFF;font-size: 1.2rem;" />
 				</div>
 			</div>
 			<!--mui-row-->
-			<div class="mui-row">
-				<div class="mui-col-sm-12 mui-col-xs-12 juzhong">
-					<input type="button" id="loginBtn" value="登录" style="width: 100%;height: 3rem;background-color: rgb(192,0,2);color: #FFFFFF;font-size: 1.2rem;" />
-				</div>
+			<div align="center" style="margin-left: 10%;margin-right: 10%; margin-top: 40%;" class="mui-row  white">
+				<font size="2" color="#929292">登录代表您已同意</font><span id="zhucexieyi" style="color:blue; font-size: small;">《准点猫用户注册协议》</span></p>
 			</div>
-			<!--mui-row-->
+			
 		</div>
 	</body>
 	<script src="../../js/mui.min.js"></script>
@@ -80,7 +87,7 @@
 			} else {
 
 				o.setAttribute("disabled", true);
-				o.value = "重新发送(" + wait + ")";
+				o.value = "获取验证码(" + wait + ")";
 				wait--;
 				setTimeout(function() {
 						time(o)
@@ -98,7 +105,7 @@
 
 			var mobile = document.getElementById("mobile").value.replace(/\s+/g, "");
 			if(mobile == "") {
-				mui.toast("你忘了 输入手机号码", {duration: 'long',type: 'div'});
+				mui.toast("你忘了 输入手机号码");
 				return;
 			}
 			time(t);
@@ -137,7 +144,7 @@
 					}
 				},
 				error: function(xhr, type, errorThrown) {
-					mui.toast("请稍候重试", {duration: 'long',type: 'div'});
+					mui.toast("请稍候重试");
 				}
 			});
 
@@ -147,7 +154,7 @@
 		document.getElementById("loginBtn").onclick = function() {
 
 			if(verifyCode != document.getElementById("checkCode").value.replace(/\s+/g, "")) {
-				mui.toast("验证码不正确", {duration: 'long',type: 'div'});
+				mui.toast("验证码不正确");
 				return;
 			}
 			
@@ -224,7 +231,7 @@
 
 				},
 				error: function(xhr, type, errorThrown) {
-					mui.toast("请稍候重试", {duration: 'long',type: 'div'});
+					mui.toast("请稍候重试");
 				}
 			});
 		}

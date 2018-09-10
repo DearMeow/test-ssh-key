@@ -161,7 +161,8 @@
 		"refer": [
 			"html/myinfo/denglu.html",
 			"html/myinfo/tuikuan.html",
-			"html/myinfo/kefu.html"
+			"html/myinfo/kefu.html",
+			"html/myinfo/shezhi.html"
 		],
 		"priority": 0
 	},
