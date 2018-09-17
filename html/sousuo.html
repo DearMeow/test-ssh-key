@@ -72,6 +72,9 @@
 				background-color: #8f0009;
 				border: none;
 			}
+			 .btndiv{
+        text-align:center;background-color: white;margin-top: 15%;
+    }
 		</style>
 	</head>
 
@@ -234,8 +237,8 @@ zonghe(1, 0);
 			rb.pageSize = pageSize;
 			rb.qryName = "";
 			rb.CatId = catid;
-// 			rb.Jd = localStorage.getItem("jd");
-// 			rb.Wd = localStorage.getItem("wd");
+   			rb.Jd = localStorage.getItem("jd");
+   			rb.Wd = localStorage.getItem("wd");
 			rb.SortField = "";
 			rb.SortDirct = "";
 
@@ -283,13 +286,13 @@ zonghe(1, 0);
 						document.getElementById("item1").innerHTML = content;
 					}
 					if (content == "") {
-						let ct = "<div style='text-align:center;padding-top:40%;line-height:3rem;font-size:1.2rem;'><a href='javascript:zhuce1()' style='color:blue;'>商家注册</a><br/><a href='javascript:zhuce2()' style='color:blue;'>快递注册</a></div>";
+						let ct = "<div style='padding-top: 1rem;padding-bottom: 75%;height:100%;text-align:center;background-color: white;'><span style='font-size:0.75rem'>非常遗憾！附近没有搜到商铺服务！</span><br/><span style='font-size:0.75rem'>我们会加紧完善...</span><div style='margin-top: 8%;'><img src='../images/img1.jpg' style='width:20%;height:20%;'/></div><div class='btndiv'><input type='button' class='btnCus' value='代理商咨询' style='border-radius:50px;color: #FFFFFF;font-size: 1rem;background-color: deepskyblue;' onclick='zhuce2()'/><br/><input type='button' class='btnCus' value='商户入驻 '  style='border-radius:50px;color: #FFFFFF;font-size: 1rem;background-color:red;margin-top: 1rem;padding-left:1.25rem;padding-right:1.25rem;' onclick='zhuce1()'/></div></div>";
 						document.getElementById("item1").innerHTML = ct;
 					}
 				},
 				error: function(xhr, type, errorThrown) {
-					let ct = "<div style='text-align:center;padding-top:40%;line-height:3rem;font-size:1.2rem;'><a href='javascript:zhuce1()' style='color:blue;'>商家注册</a><br/><a href='javascript:zhuce2()' style='color:blue;'>快递注册</a></div>";
-					document.getElementById("item1").innerHTML = ct;
+					let ct = "<div style='padding-top: 1rem;padding-bottom: 75%;height:100%;text-align:center;background-color: white;'><span style='font-size:0.75rem'>非常遗憾！附近没有搜到商铺服务！</span><br/><span style='font-size:0.75rem'>我们会加紧完善...</span><div style='margin-top: 8%;'><img src='../images/img1.jpg' style='width:20%;height:20%;'/></div><div class='btndiv'><input type='button' value='代理商咨询' style='background-color: deepskyblue;' onclick='zhuce2()'/><input type='button' value='商户入驻 '  style='background-color:red;margin-left: 1rem;' onclick='zhuce1()'/></div></div>";
+						document.getElementById("item1").innerHTML = ct;
 					//异常处理；
 					console.log("------综合排序 出现错误------",type);
 				}

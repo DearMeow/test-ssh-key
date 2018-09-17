@@ -33,36 +33,30 @@
 		<div class="mui-content">
 			<img src="../images/index.png" width="100%"/>
 			<div class="mui-row catagory" id="app">
-				<div class="mui-col-sm-4 mui-col-xs-4" v-for="dlm in daleimu">
-					<li class="mui-table-view-cell" v-on:click="detail(dlm.catid,dlm.catname)">
+				<!--<div class="mui-col-sm-4 mui-col-xs-4" v-for="dlm in daleimu">
+					<li class="mui-table-view-cell" onClick="detail(dlm.catid,dlm.catname)">
 						<img :src="dlm.FilePath" style="width: 4rem;" />
-						<div v-cloak>{{dlm.catname}}</div>
+						<div>{{dlm.catname}}</div>
 					</li>
-				</div>
+				</div>-->
+				
+				
+				
+				
+				
 			</div>
 			<!--mui-row-->
 		</div>
 	</body>
 	<script src="../js/mui.min.js"></script>
-	<script src="../js/vue.js"></script>
 	<script src="../js/domain.js" type="text/javascript" charset="utf-8"></script>
-	
 	<script>
 		mui.plusReady(function() {
 		dingwei();
+		initListData();
 		});
-		var _this;
-		var app = new Vue({
-			el: '#app',
-			data: {
-				daleimu: []
-			},
-			created() {
-				this.initListData();
-				_this = this;
-			},
-			methods: {
-				initListData() {
+		
+		function initListData() {
 
 					var rb = new Object();
 					rb.CatId = "00001";
@@ -82,8 +76,12 @@
 							'Content-Type': 'application/json'
 						},
 						success: function(data) {
-							_this.daleimu = data.RespBody;
-
+ 						let respBody = data.RespBody;
+ 						let bd="";
+ 						for (var i = 0; i < respBody.length; i++) {
+ 							bd+="<div class='mui-col-sm-4 mui-col-xs-4'><li class='mui-table-view-cell' onclick='detail(&quot;"+respBody[i].catid+"&quot,&quot"+respBody[i].catname+"&quot;)'><img src='"+respBody[i].FilePath+"' style='width: 4rem;' /><div>"+respBody[i].catname+"</div></li></div>";
+ 						}
+						document.getElementById("app").innerHTML=bd;
 						},
 						error: function(xhr, type, errorThrown) {
 							//异常处理；
@@ -91,8 +89,9 @@
 						}
 					}); //ajax
 
-				}, //initListData
-				detail: function(catid, catname) { //跳转到小分类页面
+				} //initListData
+				
+				function detail(catid, catname) { //跳转到小分类页面
 					//打开新窗口
 					mui.openWindow({
 						url: 'xiaofenlei.html', //需要打开页面的url地址 
@@ -108,8 +107,6 @@
 					}); //openWindow
 				} //detail
 
-			} //methods
-		}); //vue
 
 		mui.init({
 			swipeBack: true, //启用右滑关闭功能
