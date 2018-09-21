@@ -475,7 +475,7 @@
 			var tid = id.split("_")[1];
 			var danjia = id.split("_")[2];
 
-			if(parseInt(document.getElementById(tid).innerHTML) > 0) {
+			if(parseInt(document.getElementById(tid).innerHTML) > 1) {
 
 				for(var i = 0; i < rs2.length; i++) {
 					if(rs2[i].goods_id == goods_id) {
@@ -521,7 +521,7 @@
 
 				}); //ajax
 
-			} //>0
+			} //>1
 
 		} //减少数量
 		//增加数量
